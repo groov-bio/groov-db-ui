@@ -1,7 +1,6 @@
 # GroovDB Web Interface
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Node.js CI](https://github.com/your-org/groov-db-ui/workflows/Node.js%20CI/badge.svg)](https://github.com/your-org/groov-db-ui/actions)
 
 The web interface for [GroovDB](https://groov.bio) - a comprehensive database of genetic biosensors for synthetic biology applications.
 
