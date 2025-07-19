@@ -213,4 +213,4 @@ GroovDB is committed to legal protection for security researchers:
 
 **Note**: This security policy is inspired by industry best practices and may be updated as our security posture evolves. Check back regularly for updates.
 
-Last updated: [Current Date]
+Last updated: 7/19/25
