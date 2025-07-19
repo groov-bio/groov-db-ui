@@ -1,0 +1,43 @@
+{
+  "query": "CC1=C(C(=CC(=C1)CCCC(C)C)O)C(C)",
+  "threshold": 0.2,
+  "results": [
+    {
+      "ligandId": "LIG00214",
+      "sensorId": "A0A0D5A3S5",
+      "similarity": 0.6486486486486487,
+      "name": "2,5-Dialkylresorcinol"
+    },
+    {
+      "ligandId": "LIG00211",
+      "sensorId": "S4WDM1",
+      "similarity": 0.3958333333333333,
+      "name": "Photopyrone D"
+    },
+    {
+      "ligandId": "LIG00286",
+      "sensorId": "Q7CPY9",
+      "similarity": 0.2682926829268293,
+      "name": "Dopamine"
+    },
+    {
+      "ligandId": "LIG00226",
+      "sensorId": "Q93PU6",
+      "similarity": 0.24390243902439024,
+      "name": "3-Ethylphenol"
+    },
+    {
+      "ligandId": "LIG00279",
+      "sensorId": "Q2FVA7",
+      "similarity": 0.23076923076923078,
+      "name": "Methylhydroquinone"
+    },
+    {
+      "ligandId": "LIG00161",
+      "sensorId": "A0A1H5FMT9",
+      "similarity": 0.22,
+      "name": "Olivetolic acid"
+    }
+  ],
+  "message": "Results include chemical names"
+}

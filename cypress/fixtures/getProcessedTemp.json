@@ -1,0 +1,176 @@
+{
+  "uniprotID": "Q82H41",
+  "organism": "Streptomyces avermitilis (strain ATCC 31267 / DSM 46492 / JCM 5070 / NBRC 14893 / NCIMB 12804 / NRRL 8165 / MA-4680)",
+  "keggID": "sma:SAVERM_3705",
+  "name": "avaR1",
+  "organismID": 227882,
+  "alias": "AvaR1",
+  "about": "Regulates the expression of genes responsible for the biosynthesis of avermectin.",
+  "sequence": "MARQERAIRTRQTILVAAAEVFDEVGYEAATISDVLKRSGVTKGALYFHFTSKQELAQAVLAEQVASLPRVPEQELKLQQSLDEALLLAHLLREGTGDPIVQGSVRLTVDQGSPRDHLNRRVPMQAWTEHTQSLFEEARAKGEILPHADVEALAKLFVGAFTGVQVLSRIMTGRADLAERVADLYRHLMPSFAMPGILVRLDFSPERGSRVYEAAMKQRESAAASTTDAARTLE",
+  "accession": "WP_010985136.1",
+  "family": "TETR",
+  "regulationType": "Apo-repressor",
+  "ligands": [
+    {
+      "name": "Avenolide",
+      "fullDOI": {
+        "journal": "eLife",
+        "title": "Biochemical basis for the regulation of biosynthesis of antiparasitics by bacterial hormones",
+        "year": 2020,
+        "url": "http://dx.doi.org/10.7554/eLife.57824",
+        "authors": [
+          {
+            "lastName": "Kapoor",
+            "firstName": "Iti"
+          },
+          {
+            "lastName": "Olivares",
+            "firstName": "Philip"
+          },
+          {
+            "lastName": "Nair",
+            "firstName": "Satish K"
+          }
+        ],
+        "doi": "10.7554/elife.57824"
+      },
+      "SMILES": "CC[C@](C)(C(=O)CCCC[C@H]1C=CC(=O)O1)O",
+      "ref_figure": "Figure 1E",
+      "method": "Isothermal titration calorimetry",
+      "doi": "10.7554/eLife.57824"
+    }
+  ],
+  "operators": [
+    {
+      "sequence": "GCAAGATACGTACTAGTACGTATCTTGC",
+      "fullDOI": {
+        "journal": "eLife",
+        "title": "Biochemical basis for the regulation of biosynthesis of antiparasitics by bacterial hormones",
+        "year": 2020,
+        "url": "http://dx.doi.org/10.7554/eLife.57824",
+        "authors": [
+          {
+            "lastName": "Kapoor",
+            "firstName": "Iti"
+          },
+          {
+            "lastName": "Olivares",
+            "firstName": "Philip"
+          },
+          {
+            "lastName": "Nair",
+            "firstName": "Satish K"
+          }
+        ],
+        "doi": "10.7554/elife.57824"
+      },
+      "ref_figure": "Figure 3",
+      "method": "Crystal structure",
+      "doi": "10.7554/eLife.57824"
+    }
+  ],
+  "newOperon": {
+    "operon": [
+      {
+        "alias": "SAVERM_RS45585",
+        "description": "helix-turn-helix domain-containing protein",
+        "link": "WP_010985134.1",
+        "direction": "-",
+        "start": 4582127,
+        "stop": 4582990
+      },
+      {
+        "alias": "SAVERM_RS19110",
+        "description": "cytochrome P450 family protein",
+        "link": "WP_037645123.1",
+        "direction": "-",
+        "start": 4583057,
+        "stop": 4584283
+      },
+      {
+        "alias": "SAVERM_RS19115",
+        "description": "ScbR family autoregulator-binding transcription factor",
+        "link": "WP_010985136.1",
+        "direction": "-",
+        "start": 4584571,
+        "stop": 4585275
+      },
+      {
+        "alias": "SAVERM_RS19120",
+        "description": "acyl-CoA dehydrogenase",
+        "link": "WP_010985137.1",
+        "direction": "+",
+        "start": 4585720,
+        "stop": 4587741
+      },
+      {
+        "alias": "SAVERM_RS19125",
+        "description": "zinc-dependent alcohol dehydrogenase family protein",
+        "link": "WP_010985138.1",
+        "direction": "+",
+        "start": 4588309,
+        "stop": 4589343
+      },
+      {
+        "alias": "SAVERM_RS19135",
+        "description": "hypothetical protein",
+        "link": "WP_037644772.1",
+        "direction": "+",
+        "start": 4590262,
+        "stop": 4590483
+      }
+    ],
+    "regIndex": 2,
+    "genome": "NC_003155.5"
+  },
+  "structures": null,
+  "references": [
+    {
+      "doi": "10.7554/eLife.57824",
+      "figure": "Figure 1E",
+      "interaction": "Ligand",
+      "method": "Isothermal titration calorimetry"
+    },
+    {
+      "doi": "10.7554/eLife.57824",
+      "figure": "Figure 3",
+      "interaction": "Operator",
+      "method": "Crystal structure"
+    }
+  ],
+  "fullReferences": [
+    {
+      "title": "Biochemical basis for the regulation of biosynthesis of antiparasitics by bacterial hormones",
+      "authors": [
+        {
+          "lastName": "Kapoor",
+          "firstName": "Iti"
+        },
+        {
+          "lastName": "Olivares",
+          "firstName": "Philip"
+        },
+        {
+          "lastName": "Nair",
+          "firstName": "Satish K"
+        }
+      ],
+      "year": 2020,
+      "journal": "eLife",
+      "doi": "10.7554/elife.57824",
+      "url": "http://dx.doi.org/10.7554/eLife.57824",
+      "interaction": [
+        {
+          "figure": "Figure 1E",
+          "type": "Ligand",
+          "method": "Isothermal titration calorimetry"
+        },
+        {
+          "figure": null,
+          "type": "Operator",
+          "method": "Crystal structure"
+        }
+      ]
+    }
+  ]
+}

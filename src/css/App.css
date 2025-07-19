@@ -1,0 +1,44 @@
+body {
+  margin: 0;
+  overflow-x: hidden;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+/* Background component */
+
+.mechanism {
+  border: 2px solid #a3a3a3;
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 30px;
+}
+
+#downloadTemplateButton {
+  border: 2px solid black;
+  border-radius: 5px;
+  background-color: #f0f0f0;
+  padding: 12px;
+  width: max-content;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+#downloadTemplateButton:hover {
+  background-color: #d9d9d9;
+}
+
+#retna {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
+#retna a {
+  text-decoration: none;
+  color: #9003fc;
+  font-family: Roboto;
+}

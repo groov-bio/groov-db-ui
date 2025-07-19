@@ -1,0 +1,92 @@
+{
+  "name": "groov-db",
+  "version": "1.0.0",
+  "private": true,
+  "description": "GroovDB is a database of genetic biosensors.",
+  "main": "index.js",
+  "scripts": {
+    "cy:open": "npx cypress open",
+    "cy:run": "npx cypress run",
+    "start": "cross-env GENERATE_SOURCEMAP=false react-scripts start",
+    "build": "cross-env react-scripts build",
+    "build:fast": "cross-env GENERATE_SOURCEMAP=false DISABLE_ESLINT_PLUGIN=true react-scripts build",
+    "prettier:fix": "prettier --write --ignore-path ./.prettierignore --config ./.prettierrc \"**/*.js\" \"**/*.yml\" \"**/*.md\" \"**/*.json\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "groov-db"
+  },
+  "author": "Simon dOelsnitz",
+  "dependencies": {
+    "@aws-amplify/ui-react": "^4.3.2",
+    "@emotion/react": "^11.10.0",
+    "@emotion/styled": "^11.10.0",
+    "@fontsource/roboto": "^4.5.7",
+    "@marsidev/react-turnstile": "^1.1.0",
+    "@mui/icons-material": "^5.8.4",
+    "@mui/material": "^5.9.3",
+    "@mui/x-data-grid": "^5.15.1",
+    "@nightingale-elements/nightingale-structure": "^5.6.1",
+    "aws-amplify": "^5.0.8",
+    "biomsa": "^0.2.4",
+    "citation-js": "^0.6.3",
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.0.1",
+    "file-loader": "^6.2.0",
+    "formik": "^2.4.6",
+    "immer": "^10.0.2",
+    "konva": "^8.3.11",
+    "litemol": "^2.4.2",
+    "lodash": "^4.17.21",
+    "logojs-react": "^2.1.1",
+    "molstar": "^3.31.2",
+    "notistack": "^2.0.8",
+    "prettier": "^2.7.1",
+    "react": "^18.1.0",
+    "react-bootstrap": "^2.4.0",
+    "react-dom": "^18.1.0",
+    "react-hook-form": "^7.39.1",
+    "react-konva": "^18.2.1",
+    "react-router-dom": "^6.23.1",
+    "react-scripts": "^5.0.1",
+    "smiles-drawer": "^2.0.3",
+    "source-map-explorer": "^2.5.3",
+    "url-loader": "^4.1.1",
+    "yup": "^1.6.1",
+    "zustand": "^4.3.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.18.2",
+    "@babel/preset-env": "^7.18.2",
+    "@babel/preset-react": "^7.17.12",
+    "aws-sdk": "^2.1361.0",
+    "babel-loader": "^8.2.5",
+    "css-loader": "^6.7.1",
+    "cypress": "^14.4.0",
+    "html-webpack-plugin": "^5.5.0",
+    "style-loader": "^3.3.1",
+    "wait-on": "^8.0.3",
+    "webpack": "^5.72.1",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.9.0"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

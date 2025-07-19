@@ -1,0 +1,78 @@
+[
+  {
+    "timeSubmit": 1744465325850,
+    "about": {
+      "about": "Regulates the expression of the multidrug efflux pump AmvA, which transports polyamines",
+      "alias": "AmvR",
+      "accession": "WP_000323807.1",
+      "mechanism": "Apo-repressor"
+    },
+    "user": "test",
+    "SK": "A0A0D5YGI2",
+    "family": "TETR",
+    "operator": {
+      "data": [
+        {
+          "sequence": "CCTGACTGAATTCGACACAAATTACATTAAAA",
+          "ref_figure": "Figure 2",
+          "method": "DNase footprinting",
+          "doi": "https://doi.org/10.1128/mbio.00081-25"
+        },
+        {
+          "sequence": "ATAATAACCATGATTTGAACACATGTCCAAGT",
+          "ref_figure": "Figure 2",
+          "method": "DNase footprinting",
+          "doi": "https://doi.org/10.1128/mbio.00081-25"
+        }
+      ]
+    },
+    "PK": "TEMP",
+    "ligands": {
+      "data": [
+        {
+          "name": "Spermidine",
+          "SMILES": "C(CCNCCCN)CN",
+          "ref_figure": "Figure 3",
+          "method": "Isothermal titration calorimetry",
+          "doi": "https://doi.org/10.1128/mbio.00081-25"
+        }
+      ]
+    },
+    "uniProtID": "A0A0D5YGI2"
+  },
+  {
+    "timeSubmit": 1742043842364,
+    "about": {
+      "about": "Regulates the expression of genes responsible for the biosynthesis of avermectin.",
+      "alias": "AvaR1",
+      "accession": "WP_010985136.1",
+      "mechanism": "Apo-repressor"
+    },
+    "user": "test",
+    "SK": "Q82H41",
+    "family": "TETR",
+    "operator": {
+      "data": [
+        {
+          "sequence": "GCAAGATACGTACTAGTACGTATCTTGC",
+          "ref_figure": "Figure 3",
+          "method": "Crystal structure",
+          "doi": "10.7554/eLife.57824"
+        }
+      ]
+    },
+    "PK": "TEMP",
+    "ligands": {
+      "data": [
+        {
+          "name": "Avenolide",
+          "SMILES": "CC[C@](C)(C(=O)CCCC[C@H]1C=CC(=O)O1)O",
+          "ref_figure": "Figure 1E",
+          "method": "Isothermal titration calorimetry",
+          "doi": "10.7554/eLife.57824"
+        }
+      ]
+    },
+    "uniProtID": "Q82H41"
+  }
+]

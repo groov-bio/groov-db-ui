@@ -1,0 +1,26 @@
+{
+  "short_name": "GroovDB",
+  "name": "GroovDB",
+  "icons": [
+    {
+      "src": "GroovDB_Favicon.png",
+      "type": "image/png",
+      "sizes": "591x591"
+    }
+  ],
+  "start_url": "/",
+  "shortcuts": [
+    {
+      "name": "Go to Database",
+      "short_name": "Database",
+      "description": "Go right to the database",
+      "url": "/database"
+    },
+    {
+      "name": "Contact authors",
+      "short_name": "Contact",
+      "description": "Get in touch with GroovDB's authors",
+      "url": "/contact"
+    }
+  ]
+}

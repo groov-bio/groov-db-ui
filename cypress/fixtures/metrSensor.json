@@ -1,0 +1,257 @@
+{
+  "uniprotID": "Q8DTU8",
+  "organism": "Streptococcus mutans serotype c (strain ATCC 700610 / UA159)",
+  "keggID": "smu:SMU_1225",
+  "name": "cpsY",
+  "organismID": 210007,
+  "alias": "MetR",
+  "about": "Activates the expression of genes responsible for methionine biosynthesis (MetEF and Smu.1487) and uptake (AtmBDE) in the presence of l-homocysteine",
+  "sequence": "MRIQQLHYIIKIVETGSMNEAAKQLFITQPSLSNAVRDLEREMGIEIFIRNPKGITLTKDGVEFLSYARQVVEQTALLEERYKSQGHTRELFSVSAQHYAFVVNAFVSLLKETDMTRYELFLRETRTYEIIDDVKNFRSEIGVLFLNSYNHDVLTKMFDDNHLTYTSLFKAHPHIFVSKDNPLAKHQSVSLSDLEDFPYLSYDQGIHNSFYFSEEIMSQISHKKSIVVSDRATLFNLMIGLDGYTIATGILNSNLNGDNIVSIPLEVDDEIDIIYLKHEKANLSKMGEKFIDYLLEEVKFDK",
+  "accession": "NP_721604.1",
+  "family": "LysR",
+  "regulationType": "Co-Activator",
+  "ligands": [
+    {
+      "name": "L-Homocysteine",
+      "fullDOI": {
+        "journal": "J Bacteriol",
+        "title": "Control of Methionine Synthesis and Uptake by MetR and Homocysteine in\n            <i>Streptococcus mutans</i>",
+        "year": 2007,
+        "url": "http://dx.doi.org/10.1128/JB.00703-07",
+        "authors": [
+          {
+            "lastName": "Sperandio",
+            "firstName": "Brice"
+          },
+          {
+            "lastName": "Gautier",
+            "firstName": "Céline"
+          },
+          {
+            "lastName": "McGovern",
+            "firstName": "Stephen"
+          },
+          {
+            "lastName": "Ehrlich",
+            "firstName": "Dusko S."
+          },
+          {
+            "lastName": "Renault",
+            "firstName": "Pierre"
+          },
+          {
+            "lastName": "Martin-Verstraete",
+            "firstName": "Isabelle"
+          },
+          {
+            "lastName": "Guédon",
+            "firstName": "Eric"
+          }
+        ],
+        "doi": "10.1128/jb.00703-07"
+      },
+      "SMILES": "C(CS)[C@@H](C(=O)O)N",
+      "ref_figure": "Figure 7",
+      "method": "EMSA",
+      "doi": "10.1128/JB.00703-07"
+    }
+  ],
+  "operators": [
+    {
+      "sequence": "TATAGTTTAAAACTATA",
+      "fullDOI": {
+        "journal": "J Bacteriol",
+        "title": "Control of Methionine Synthesis and Uptake by MetR and Homocysteine in\n            <i>Streptococcus mutans</i>",
+        "year": 2007,
+        "url": "http://dx.doi.org/10.1128/JB.00703-07",
+        "authors": [
+          {
+            "lastName": "Sperandio",
+            "firstName": "Brice"
+          },
+          {
+            "lastName": "Gautier",
+            "firstName": "Céline"
+          },
+          {
+            "lastName": "McGovern",
+            "firstName": "Stephen"
+          },
+          {
+            "lastName": "Ehrlich",
+            "firstName": "Dusko S."
+          },
+          {
+            "lastName": "Renault",
+            "firstName": "Pierre"
+          },
+          {
+            "lastName": "Martin-Verstraete",
+            "firstName": "Isabelle"
+          },
+          {
+            "lastName": "Guédon",
+            "firstName": "Eric"
+          }
+        ],
+        "doi": "10.1128/jb.00703-07"
+      },
+      "ref_figure": "Figure 4",
+      "method": "EMSA",
+      "doi": "10.1128/JB.00703-07"
+    }
+  ],
+  "newOperon": {
+    "regIndex": 8,
+    "genome": "NC_004350.2",
+    "operon": [
+      {
+        "link": "WP_002263273.1",
+        "start": 1159043,
+        "alias": "SMU_RS05610",
+        "description": "transporter substrate-binding domain-containing protein",
+        "stop": 1159894,
+        "direction": "-"
+      },
+      {
+        "link": "WP_002263274.1",
+        "start": 1160009,
+        "alias": "SMU_RS05615",
+        "description": "amidase",
+        "stop": 1161451,
+        "direction": "-"
+      },
+      {
+        "link": "WP_002263275.1",
+        "start": 1161511,
+        "alias": "SMU_RS05620",
+        "description": "MmcQ/YjbR family DNA-binding protein",
+        "stop": 1161852,
+        "direction": "-"
+      },
+      {
+        "link": "WP_002263276.1",
+        "start": 1162026,
+        "alias": "SMU_RS05625",
+        "description": "YbhB/YbcL family Raf kinase inhibitor-like protein",
+        "stop": 1162526,
+        "direction": "-"
+      },
+      {
+        "link": "WP_002263221.1",
+        "start": 1162858,
+        "alias": "SMU_RS05630",
+        "description": "orotate phosphoribosyltransferase",
+        "stop": 1163487,
+        "direction": "-"
+      },
+      {
+        "link": "WP_002263220.1",
+        "start": 1163588,
+        "alias": "SMU_RS05635",
+        "description": "orotidine-5-phosphate decarboxylase",
+        "stop": 1164280,
+        "direction": "-"
+      },
+      {
+        "link": "WP_002263219.1",
+        "start": 1164273,
+        "alias": "SMU_RS05640",
+        "description": "dihydroorotate dehydrogenase",
+        "stop": 1165202,
+        "direction": "-"
+      },
+      {
+        "link": "WP_002263218.1",
+        "start": 1165212,
+        "alias": "SMU_RS05645",
+        "description": "dihydroorotate dehydrogenase electron transfer subunit",
+        "stop": 1165988,
+        "direction": "-"
+      },
+      {
+        "link": "WP_002263217.1",
+        "start": 1166241,
+        "alias": "SMU_RS05650",
+        "description": "LysR family transcriptional regulator",
+        "stop": 1167149,
+        "direction": "+"
+      },
+      {
+        "link": "WP_011074601.1",
+        "start": 1167215,
+        "alias": "SMU_RS05655",
+        "description": "hypothetical protein",
+        "stop": 1167982,
+        "direction": "-"
+      }
+    ]
+  },
+  "operon": [],
+  "structures": null,
+  "references": [
+    {
+      "doi": "10.1128/JB.00703-07",
+      "figure": "Figure 7",
+      "interaction": "Ligand",
+      "method": "EMSA"
+    },
+    {
+      "doi": "10.1128/JB.00703-07",
+      "figure": "Figure 4",
+      "interaction": "Operator",
+      "method": "EMSA"
+    }
+  ],
+  "fullReferences": [
+    {
+      "title": "Control of Methionine Synthesis and Uptake by MetR and Homocysteine in\n            <i>Streptococcus mutans</i>",
+      "authors": [
+        {
+          "lastName": "Sperandio",
+          "firstName": "Brice"
+        },
+        {
+          "lastName": "Gautier",
+          "firstName": "Céline"
+        },
+        {
+          "lastName": "McGovern",
+          "firstName": "Stephen"
+        },
+        {
+          "lastName": "Ehrlich",
+          "firstName": "Dusko S."
+        },
+        {
+          "lastName": "Renault",
+          "firstName": "Pierre"
+        },
+        {
+          "lastName": "Martin-Verstraete",
+          "firstName": "Isabelle"
+        },
+        {
+          "lastName": "Guédon",
+          "firstName": "Eric"
+        }
+      ],
+      "year": 2007,
+      "journal": "J Bacteriol",
+      "doi": "10.1128/jb.00703-07",
+      "url": "http://dx.doi.org/10.1128/JB.00703-07",
+      "interaction": [
+        {
+          "figure": "Figure 7",
+          "type": "Ligand",
+          "method": "EMSA"
+        },
+        {
+          "figure": "Figure 4",
+          "type": "Operator",
+          "method": "EMSA"
+        }
+      ]
+    }
+  ]
+}
