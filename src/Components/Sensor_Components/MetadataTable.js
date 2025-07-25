@@ -36,9 +36,9 @@ export default function MetadataTable({ tableData }) {
       {Object.keys(tableData).map((key, index) => {
         if (tableData[key].link) {
           return (
-            <Grid item xs={12} sm={6} key={index} mb={1}>
+            <Grid size={{xs:12, sm:6}} key={index} mb={1}>
               <Grid container>
-                <Grid item xs={6} textAlign="right">
+                <Grid size={6} textAlign="right">
                   <Typography
                     component="span"
                     width="100px"
@@ -52,7 +52,7 @@ export default function MetadataTable({ tableData }) {
                   </Typography>
                 </Grid>
 
-                <Grid item xs={5} textAlign="left" ml={'15px'}>
+                <Grid size={5} textAlign="left" ml={'15px'}>
                   {tableData[key].link.url ===
                   'https://www.genome.jp/dbget-bin/www_bget?null' ? (
                     <Typography
@@ -83,9 +83,9 @@ export default function MetadataTable({ tableData }) {
           );
         } else {
           return (
-            <Grid item xs={12} sm={6} key={index} mb={1}>
+            <Grid size={{xs:12, sm:6}} key={index} mb={1}>
               <Grid container>
-                <Grid item xs={6} textAlign="right">
+                <Grid size={6} textAlign="right">
                   <Typography
                     component="span"
                     width="100px"
@@ -99,7 +99,7 @@ export default function MetadataTable({ tableData }) {
                   </Typography>
                 </Grid>
 
-                <Grid item xs={5} textAlign="left" ml={'15px'}>
+                <Grid size={5} textAlign="left" ml={'15px'}>
                   <Typography
                     component="span"
                     width="100px"

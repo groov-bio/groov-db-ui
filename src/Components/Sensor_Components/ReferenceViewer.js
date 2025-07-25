@@ -44,7 +44,7 @@ export default function ReferenceViewer(props) {
                 }}
                 mb={2}
               >
-                <Grid item xs={12}>
+                <Grid size={12}>
                   <Typography
                     component="div"
                     sx={{ fontSize: { xs: 14, sm: 16 } }}
@@ -56,7 +56,7 @@ export default function ReferenceViewer(props) {
                     }}
                   ></Typography>
                 </Grid>
-                <Grid item xs={12}>
+                <Grid size={12}>
                   <Typography
                     component="div"
                     ml={4}
@@ -104,8 +104,7 @@ export default function ReferenceViewer(props) {
         {/* Component Title */}
 
         <Grid
-          item
-          xs={12}
+          size={12}
           sx={{ paddingBottom: '2px', borderBottom: '1px solid #a9aaab' }}
         >
           <Typography
@@ -118,7 +117,7 @@ export default function ReferenceViewer(props) {
 
         {/* Reference List */}
 
-        <Grid item xs={12} mb={3}>
+        <Grid size={12} mb={3}>
           <Paper elevation={0} sx={{ padding: 3 }}>
             {refs}
           </Paper>

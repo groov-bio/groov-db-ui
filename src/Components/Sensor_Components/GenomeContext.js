@@ -10,11 +10,9 @@ import {
   Link,
   useMediaQuery,
   useTheme,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableRow,
+  Chip,
+  Stack,
+  rgbToHex
 } from '@mui/material';
 
 import { generateGraphic } from '../../lib/FormatOperon';
@@ -140,21 +138,21 @@ export default function GenomeContext({ sensor, alias }) {
       <Grid container style={{ width: '100%' }}>
         {/* Component Title */}
 
-        <Grid item xs={12}>
+        <Grid size={12}>
           <Typography
             component="div"
             sx={{ ml: { xs: '5%', sm: '2.5%' }, fontSize: 28, fontWeight: 300 }}
           >
-            Context
+            Genome Context
           </Typography>
         </Grid>
 
         {/* Operon */}
 
-        <Grid item xs={12} mt={1}>
+        <Grid size={12} mt={1}>
           <Paper elevation={0} sx={{ padding: 3, border: '1px solid #c7c7c7' }}>
             <Grid container spacing={5} columns={12}>
-              <Grid item xs={12} align="center" mb={5}>
+              <Grid size={12} align="center">
                 <Stage width={operonWidth} height={50}>
                   <Layer>{operon}</Layer>
                 </Stage>
@@ -162,108 +160,30 @@ export default function GenomeContext({ sensor, alias }) {
 
               {/* Color-coded Legend */}
 
-              <Grid container columns={12}>
-                <Grid item xs={0.75} md={3.5}></Grid>
-                <Grid item xs={2} md={1}>
-                  <Typography
-                    textAlign="center"
-                    pt={1}
-                    pb={1}
-                    sx={{
-                      fontSize: { xs: 10, sm: 12, md: 14 },
-                      width: '90%',
-                      display: 'inline-block',
-                      backgroundColor: 'red',
-                      borderRadius: '10px',
-                      color: 'white',
-                    }}
-                  >
-                    Enzyme
-                  </Typography>
-                </Grid>
-                <Grid item xs={2.5} md={1.5}>
-                  <Typography
-                    textAlign="center"
-                    pt={1}
-                    pb={1}
-                    sx={{
-                      fontSize: { xs: 10, sm: 12, md: 14 },
-                      width: '90%',
-                      display: 'inline-block',
-                      backgroundColor: 'yellow',
-                      borderRadius: '10px',
-                      color: 'black',
-                    }}
-                  >
-                    Transporter
-                  </Typography>
-                </Grid>
-                <Grid item xs={2.5} md={1.5}>
-                  <Typography
-                    textAlign="center"
-                    pt={1}
-                    pb={1}
-                    sx={{
-                      fontSize: { xs: 10, sm: 12, md: 14 },
-                      width: '90%',
-                      display: 'inline-block',
-                      backgroundColor: 'blue',
-                      borderRadius: '10px',
-                      color: 'white',
-                    }}
-                  >
-                    Regulator
-                  </Typography>
-                </Grid>
-                <Grid item xs={2} md={1}>
-                  <Typography
-                    textAlign="center"
-                    pt={1}
-                    pb={1}
-                    sx={{
-                      fontSize: { xs: 10, sm: 12, md: 14 },
-                      width: '90%',
-                      display: 'inline-block',
-                      backgroundColor: 'black',
-                      borderRadius: '10px',
-                      color: 'white',
-                    }}
-                  >
-                    Other
-                  </Typography>
-                </Grid>
-                <Grid item xs={2} md={1}>
-                  <Typography
-                    textAlign="center"
-                    pt={1}
-                    pb={1}
-                    sx={{
-                      fontSize: { xs: 10, sm: 12, md: 14 },
-                      width: '90%',
-                      display: 'inline-block',
-                      backgroundColor: 'green',
-                      borderRadius: '10px',
-                      color: 'white',
-                    }}
-                  >
-                    {alias}
-                  </Typography>
-                </Grid>
+              <Grid container columns={12} justifyContent="center" size={12}>
+
+                <Stack direction="row" spacing={{xs:1,sm:3}}>
+                  <Chip label="Enzyme" sx={{backgroundColor: '#ff3021', color: "white", fontSize: {xs:10,sm:16}}}/>
+                  <Chip label="Transporter" sx={{backgroundColor: "yellow", color: "black", fontSize: {xs:10,sm:16}}}/>
+                  <Chip label="Regulator" sx={{backgroundColor: "#3030fc", color: "white", fontSize: {xs:10,sm:16}}}/>
+                  <Chip label="Other" sx={{backgroundColor: "#3d3d3d", color: "white", fontSize: {xs:10,sm:16}}}/>
+                  <Chip label={alias} sx={{backgroundColor: "#008c02", color: "white", fontSize: {xs:10,sm:16}}}/>
+                </Stack>
+
               </Grid>
 
               {/* Gene Annotation Table */}
 
               <Grid
-                item
-                xs={12}
+                size={12}
                 mb={3}
                 align="left"
                 style={{ height: 100, textAlign: 'center' }}
               >
                 {geneFocus != undefined ? (
-                  <Grid item xs={12} mt={3}>
+                  <Grid size={12} mt={3}>
                     <Grid container>
-                      <Grid item xs={3} sm={2} md={2} textAlign="right">
+                      <Grid size={{xs:3, sm:2, md:2}} textAlign="right">
                         <Typography
                           component="span"
                           width="100px"
@@ -278,10 +198,7 @@ export default function GenomeContext({ sensor, alias }) {
                       </Grid>
 
                       <Grid
-                        item
-                        xs={8}
-                        sm={3}
-                        md={2}
+                        size={{xs:8, sm:3, md:2}}
                         textAlign="left"
                         ml={'15px'}
                       >
@@ -303,7 +220,7 @@ export default function GenomeContext({ sensor, alias }) {
                         </Link>
                       </Grid>
 
-                      <Grid item xs={3} sm={2} md={2} textAlign="right">
+                      <Grid size={{xs:3, sm:2, md:2}} textAlign="right">
                         <Typography
                           component="span"
                           width="100px"
@@ -318,10 +235,7 @@ export default function GenomeContext({ sensor, alias }) {
                       </Grid>
 
                       <Grid
-                        item
-                        xs={8}
-                        sm={4}
-                        md={5}
+                        size={{xs:8, sm:4, md:5}}
                         textAlign="left"
                         ml={'15px'}
                       >

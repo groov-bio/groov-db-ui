@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, Routes, Route } from 'react-router-dom';
 
 import SensorPage from './Sensor_Components/SensorPage.js';
@@ -7,10 +7,20 @@ import {
   Box,
   Grid,
   Typography,
-  CircularProgress,
   Skeleton,
+  Tooltip,
+  Badge
 } from '@mui/material';
-import { DataGrid } from '@mui/x-data-grid';
+
+import ViewColumnIcon from '@mui/icons-material/ViewColumn';
+import FilterListIcon from '@mui/icons-material/FilterList';
+import {
+  DataGrid,
+  Toolbar,
+  ToolbarButton,
+  ColumnsPanelTrigger,
+  FilterPanelTrigger,
+} from '@mui/x-data-grid';
 
 import useSensorStore from '../zustand/sensor.store.js';
 
@@ -27,7 +37,8 @@ export default function SensorTable(props) {
     (context) => context.sensorTable[props.family.toLowerCase()]
   );
 
-  const scrollRef = useRef(null);
+
+  // const scrollRef = useRef(null);
 
   useEffect(() => {
     // Only fetch if the data isn't already loaded in the zustand store
@@ -56,32 +67,34 @@ export default function SensorTable(props) {
   }, [props.family]);
 
   /* scroll function */
-  const executeScroll = () => {
-    if (!scrollRef) return;
-    // Get element coords from Ref
-    const element =
-      scrollRef.current.getBoundingClientRect().top + window.scrollY;
+  // const executeScroll = () => {
+  //   if (!scrollRef) return;
+  //   // Get element coords from Ref
+  //   const element =
+  //     scrollRef.current.getBoundingClientRect().top + window.scrollY;
 
-    window.scroll({
-      top: element,
-      behavior: 'smooth',
-    });
-  };
+  //   window.scroll({
+  //     top: element,
+  //     behavior: 'smooth',
+  //   });
+  // };
 
   const columns = [
     { field: 'id', headerName: 'Index', width: 100 },
     {
-      field: 'alias',
-      headerName: 'Alias',
-      width: 100,
+      field: 'uniprot',
+      headerName: 'Uniprot',
+      width: 130,
       renderCell: (params) => (
-        <Link to={params.value} onClick={executeScroll}>
+        <Link 
+          to={`/entry/${props.family}/${params.value}`} 
+        >
           {params.value}
         </Link>
       ),
     },
     { field: 'ligand', headerName: 'Ligand', width: 200 },
-    { field: 'uniprot', headerName: 'Uniprot', width: 120 },
+    { field: 'alias', headerName: 'Alias', width: 120 },
     { field: 'accession', headerName: 'Accession', width: 150 },
     { field: 'organism', headerName: 'Organism', width: 200 },
   ];
@@ -90,7 +103,7 @@ export default function SensorTable(props) {
     return (
       <Box>
         <Grid container spacing={4} columns={12} mt={8} justifyContent="center">
-          <Grid item xs={10} mb={6}>
+          <Grid size={10} mb={6}>
             <Typography
               sx={{ fontSize: { xs: 22, md: 24 }, textAlign: 'center' }}
             >
@@ -124,7 +137,7 @@ export default function SensorTable(props) {
         sensorRouteList.push(
           <Route
             key={counter}
-            path={sensorTable[reg].alias}
+            path={`/entry/${props.family}/${sensorTable[reg].uniprotID}`}
             element={
               <SensorPage
                 sensorID={sensorTable[reg].uniprotID}
@@ -142,6 +155,42 @@ export default function SensorTable(props) {
       setSensorRouteList(sensorRouteList);
     }
   }, [sensorTable]);
+
+
+
+
+
+
+  function CustomToolbar() {
+  
+    return (
+      <Toolbar>
+  
+        <Tooltip title="Columns">
+          <ColumnsPanelTrigger render={<ToolbarButton />}>
+            <ViewColumnIcon />
+          </ColumnsPanelTrigger>
+        </Tooltip>
+  
+        <Tooltip title="Filters">
+          <FilterPanelTrigger
+            render={(props, state) => (
+              <ToolbarButton {...props} color="default">
+                <Badge badgeContent={state.filterCount} color="primary" variant="dot">
+                  <FilterListIcon />
+                </Badge>
+              </ToolbarButton>
+            )}
+          />
+        </Tooltip>
+      </Toolbar>
+    );
+  }
+
+
+
+
+
 
   return (
     // Container
@@ -170,7 +219,6 @@ export default function SensorTable(props) {
         sx={{
           height: 460,
           width: { xs: '90%', sm: '80%', md: '60%' },
-          mt: 2,
         }}
       >
         {loading ? (
@@ -184,9 +232,22 @@ export default function SensorTable(props) {
           <DataGrid
             rows={rows}
             columns={columns}
-            autoPageSize
-            rowsPerPageOptions={[10]}
+            autoHeight={true}
+            pageSizeOptions={[10, 20, 30]}
             density="compact"
+            sx={{fontSize: {xs:12, sm: 14}, paddingLeft:2 }}
+
+            initialState={{
+              pagination: { paginationModel: { pageSize: 10 } },
+              columns: {
+                columnVisibilityModel: {
+                  // Hide these columns
+                  id: false,
+                },
+              },
+            }}
+            slots={{ toolbar: CustomToolbar }}
+            showToolbar
           />
         )}
       </Box>
@@ -197,7 +258,7 @@ export default function SensorTable(props) {
           width: '95%',
           mt: 2,
         }}
-        ref={scrollRef}
+        // ref={scrollRef}
       >
         <Routes>
           <Route path="/" element={selectionPrompt()} />

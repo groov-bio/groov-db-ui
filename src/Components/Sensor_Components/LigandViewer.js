@@ -81,7 +81,7 @@ export default function LigandViewer({ ligand, placement }) {
     <Box sx={{ flexGrow: 1 }} mt={placement.ligMT} mb={placement.ligMB}>
       <Grid container style={{ width: '100%' }}>
         {/* Component Title */}
-        <Grid item xs={12}>
+        <Grid size={12}>
           <Typography
             component="div"
             style={{ marginLeft: '5%', fontSize: 28, fontWeight: 300 }}
@@ -91,7 +91,7 @@ export default function LigandViewer({ ligand, placement }) {
         </Grid>
 
         {/* Chemical Structure and Name */}
-        <Grid item xs={12}>
+        <Grid size={12}>
           <Paper
             elevation={0}
             sx={{
@@ -128,7 +128,7 @@ export default function LigandViewer({ ligand, placement }) {
         </Grid>
 
         {/* Pagination */}
-        <Grid item xs={12} mb={3} mt={7}>
+        <Grid size={12} mb={3} mt={7}>
           <Stack spacing={2} alignItems="center">
             <Pagination
               count={ligand.length}
@@ -141,9 +141,9 @@ export default function LigandViewer({ ligand, placement }) {
 
         {/* Reference */}
 
-        <Grid item xs={12} mt={1}>
+        <Grid size={12} mt={1}>
           <Grid container>
-            <Grid item xs={5} textAlign="right">
+            <Grid size={5} textAlign="right">
               <Typography
                 component="span"
                 width="100px"
@@ -157,7 +157,7 @@ export default function LigandViewer({ ligand, placement }) {
               </Typography>
             </Grid>
 
-            <Grid item xs={6} textAlign="left" ml={'15px'}>
+            <Grid size={6} textAlign="left" ml={'15px'}>
               <Link
                 href={'https://doi.org/' + ligand[ligandNumber - 1]['doi']}
                 target="_blank"
@@ -177,9 +177,9 @@ export default function LigandViewer({ ligand, placement }) {
 
         {/* Method */}
 
-        <Grid item xs={12} mt={1}>
+        <Grid size={12} mt={1}>
           <Grid container>
-            <Grid item xs={5} textAlign="right">
+            <Grid size={5} textAlign="right">
               <Typography
                 component="span"
                 width="100px"
@@ -193,7 +193,7 @@ export default function LigandViewer({ ligand, placement }) {
               </Typography>
             </Grid>
 
-            <Grid item xs={6} textAlign="left" ml={'15px'}>
+            <Grid size={6} textAlign="left" ml={'15px'}>
               <Link
                 href={'https://www.groov.bio/about/about-groovdb'}
                 style={{ textDecoration: 'None', color: '#243fab' }}

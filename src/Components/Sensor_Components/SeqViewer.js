@@ -17,7 +17,7 @@ export default function SeqViewer(props) {
     <Box sx={{ flexGrow: 1 }}>
       <Grid container style={{ width: '100%' }}>
         {/* Component Title */}
-        <Grid item xs={12}>
+        <Grid size={12}>
           <Typography
             component="div"
             sx={{ ml: { xs: '5%', sm: '2.5%' }, fontSize: 28, fontWeight: 300 }}
@@ -26,7 +26,7 @@ export default function SeqViewer(props) {
           </Typography>
         </Grid>
 
-        <Grid item xs={12} mt={1}>
+        <Grid size={12} mt={1}>
           <Paper
             elevation={0}
             sx={{
@@ -37,9 +37,9 @@ export default function SeqViewer(props) {
           >
             {/* Protein length indicator */}
 
-            <Grid item xs={6} sm={10} md={6} mb={3}>
+            <Grid size={{xs:6, sm:10, md:6}} mb={3}>
               <Grid container>
-                <Grid item xs={5} sm={2} textAlign="right">
+                <Grid size={{xs:5, sm:2}} textAlign="right">
                   <Typography
                     component="span"
                     width="100px"
@@ -53,7 +53,7 @@ export default function SeqViewer(props) {
                   </Typography>
                 </Grid>
 
-                <Grid item xs={5} sm={4} textAlign="left" ml={'15px'}>
+                <Grid size={{xs:5, sm:4}} textAlign="left" ml={'15px'}>
                   <Typography
                     component="span"
                     width="100px"
@@ -84,12 +84,6 @@ export default function SeqViewer(props) {
                 </Typography>
               </Box>
             ))}
-            {/* <Typography
-              component="div"
-              sx={{ fontSize: { xs: 16, sm: 22 }, overflowWrap: 'anywhere' }}
-            >
-              {props.sequence}
-            </Typography> */}
           </Paper>
         </Grid>
       </Grid>

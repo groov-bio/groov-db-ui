@@ -5,6 +5,7 @@ import AddSensor from './Components/addSensor/AddSensor.js';
 import EditSensor from './Components/EditSensor.js';
 import Home from './Components/Home.js';
 import RegFamilyTiles from './Components/RegFamilyTiles.js';
+import SensorPage from './Components/Sensor_Components/SensorPage.js';
 import Account from './Components/About/Account/Account.js';
 import Admin from './Components/About/Admin/Admin.js';
 import About from './Components/About/About.js';
@@ -55,6 +56,7 @@ export default function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/" element={<Home />} />
           <Route path="/database/*" element={<RegFamilyTiles />} />
+          <Route path="/entry/:family/:uniprotID" element={<SensorPage />} />
           <Route path="/account" element={<Account />} />
           <Route path="/account/" element={<Account />} />
           <Route

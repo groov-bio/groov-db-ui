@@ -185,7 +185,7 @@ export default function AdvancedSearch() {
         <Collapse in={configExpanded}>
           <Divider sx={{ my: 1 }} />
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
+            <Grid size={{xs:12, sm:6}}>
               <Typography variant="body2">
                 Similarity Threshold: {threshold}
               </Typography>
@@ -208,7 +208,7 @@ export default function AdvancedSearch() {
               </Tooltip>
             </Grid>
 
-            <Grid item xs={12} sm={6}>
+            <Grid size={{xs:12, sm:6}}>
               <Typography variant="body2">Max Results: {maxResults}</Typography>
               <Tooltip title="Maximum number of results to return">
                 <Slider

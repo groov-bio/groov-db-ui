@@ -42,26 +42,18 @@ export default function RegFamilyTiles() {
     return (
       <Box>
         <Grid container spacing={4} columns={12} mt={8} justifyContent="center">
-          <Grid item xs={10} mb={6} position="relative">
+          <Grid size={10} mb={6} position="relative">
             <Typography
               sx={{ fontSize: { xs: 22, md: 24 }, textAlign: 'center' }}
             >
               Please select a sensor family
             </Typography>
 
-            {/* <Box sx={{ 
-              display: { xs: 'flex', sm: 'none' }, 
-              justifyContent: 'center', 
-              mt: 2 
-            }}>
-               <DownloadAllSensors /> 
-            </Box> */}
           </Grid>
 
           {/* “Download all sensors” pushed to the right */}
           <Grid
-            item
-            xs={5}
+            size={5}
             container // make this a flex container
             justifyContent="flex-end" // push children to the right
             alignItems="center" // vertically center if you want
@@ -73,9 +65,8 @@ export default function RegFamilyTiles() {
 
           {/* “Add a sensor” stays on the left */}
           <Grid
-            item
+            size={5}
             ml={5}
-            xs={5}
             container // also a flex container
             justifyContent="flex-start" // push children to the left
             alignItems="center"
@@ -106,7 +97,7 @@ export default function RegFamilyTiles() {
       >
         {torender.map((item) => (
           <Paper key={item.family} elevation={4}>
-            <Link to={item.family}>
+            <Link to={`/database/${item.family}`}>
               <Box
                 component="img"
                 sx={{
