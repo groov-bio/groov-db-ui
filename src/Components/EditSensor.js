@@ -7,6 +7,7 @@ import LigandSensorTab from './addSensor/tabViews/LigandSensorTab';
 import Preview from './addSensor/Preview';
 import AddSensorFooter from './addSensor/AddSensorFooter';
 import AddSensorStepper from './addSensor/AddSensorStepper';
+import _ from 'lodash';
 
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -242,6 +243,13 @@ export default function EditSensor() {
   };
 
   const handleSubmit = async (values, { resetForm }) => {
+    if (_.isEqual(values, initialValues)) {
+      enqueueSnackbar('No changes detected. Please modify the form before submitting.', {
+        variant: 'info',
+      });
+      return;
+    }
+
     const copiedValues = JSON.parse(JSON.stringify(values));
 
     const formData = {
@@ -287,7 +295,7 @@ export default function EditSensor() {
       });
 
       if (resp.ok) {
-        enqueueSnackbar(`Successfully updated ${copiedValues.about.alias}!`, {
+        enqueueSnackbar(`Successfully requested updated of sensor ${copiedValues.about.alias}! Please check back in a few days.`, {
           variant: 'success',
         });
         navigate(`/database/${family}/${copiedValues.about.alias}`);

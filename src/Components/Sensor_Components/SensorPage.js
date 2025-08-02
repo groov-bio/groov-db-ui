@@ -37,7 +37,17 @@ export default function SensorPage({ family, sensorID, isAdmin, user }) {
     if (sensorData === undefined) {
       if (family && sensorID) {
         fetch(
-          `https://groov-api.com/sensors/${family.toLowerCase()}/${sensorID.toUpperCase()}.json`
+          isAdmin
+            ? `https://api.groov.bio/getProcessedTemp?family=${family?.toUpperCase()}&sensorID=${sensorID}`
+            : `https://groov-api.com/sensors/${family.toLowerCase()}/${sensorID.toUpperCase()}.json`,
+          {
+            headers: {
+              Accept: 'application/json',
+              Authorization: isAdmin
+                ? user.cognitoUser.getSignInUserSession().getIdToken().getJwtToken()
+                : null,
+            },
+          }
         )
           .then((res) => res.json())
           .then((data) => {
