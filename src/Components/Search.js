@@ -50,7 +50,7 @@ export default function Search() {
           const processedData = processIndexData(indexData);
           setData(generateLabels(processedData));
           setRawData(processedData);
-          setStats(processedData.stats);
+          setStats(indexData.stats);
         });
     }
   }, []);
