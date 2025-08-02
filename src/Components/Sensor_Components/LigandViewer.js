@@ -84,7 +84,7 @@ export default function LigandViewer({ ligand, placement }) {
         <Grid size={12}>
           <Typography
             component="div"
-            style={{ marginLeft: '5%', fontSize: 28, fontWeight: 300 }}
+            sx={{ marginLeft: '5%', fontSize: {xs:24, sm:28}, fontWeight: 300 }}
           >
             Ligand
           </Typography>
@@ -97,6 +97,8 @@ export default function LigandViewer({ ligand, placement }) {
             sx={{
               border: '1px solid #c7c7c7',
               height: { xs: '300px', sm: '500px' },
+              marginLeft: {xs:2, sm:0},
+              marginRight: {xs:2, sm:0}
             }}
           >
             <Box
@@ -120,7 +122,7 @@ export default function LigandViewer({ ligand, placement }) {
             </Box>
             <Typography
               component="div"
-              sx={{ textAlign: 'center', fontSize: 24, fontWeight: 400 }}
+              sx={{ textAlign: 'center', fontSize: {xs:18, sm:24}, fontWeight: 400 }}
             >
               {ligandName}
             </Typography>

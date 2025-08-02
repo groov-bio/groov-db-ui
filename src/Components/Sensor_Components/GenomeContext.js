@@ -141,7 +141,7 @@ export default function GenomeContext({ sensor, alias }) {
         <Grid size={12}>
           <Typography
             component="div"
-            sx={{ ml: { xs: '5%', sm: '2.5%' }, fontSize: 28, fontWeight: 300 }}
+            sx={{ ml: { xs: '5%', sm: '2.5%' }, fontSize: {xs:24,sm:28}, fontWeight: 300 }}
           >
             Genome Context
           </Typography>
@@ -150,7 +150,14 @@ export default function GenomeContext({ sensor, alias }) {
         {/* Operon */}
 
         <Grid size={12} mt={1}>
-          <Paper elevation={0} sx={{ padding: 3, border: '1px solid #c7c7c7' }}>
+          <Paper 
+            elevation={0} 
+            sx={{ 
+              padding: 3, 
+              border: '1px solid #c7c7c7',
+              marginLeft: {xs:1,sm:0},
+              marginRight: {xs:1,sm:0} }}
+            >
             <Grid container spacing={5} columns={12}>
               <Grid size={12} align="center">
                 <Stage width={operonWidth} height={50}>
@@ -253,7 +260,7 @@ export default function GenomeContext({ sensor, alias }) {
                   <Typography
                     component="div"
                     align="center"
-                    sx={{ height: 160, fontSize: 24 }}
+                    sx={{ height: 160, fontSize: {xs:18,sm:22, md: 24} }}
                   >
                     Please select a gene
                   </Typography>

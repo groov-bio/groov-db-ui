@@ -56,7 +56,7 @@ export default function ProteinStructure(props) {
         <Grid size={12}>
           <Typography
             component="div"
-            style={{ marginLeft: '5%', fontSize: 28, fontWeight: 300 }}
+            sx={{ marginLeft: '5%', fontSize: {xs:24,sm:28}, fontWeight: 300 }}
           >
             Structure
           </Typography>
@@ -97,7 +97,7 @@ export default function ProteinStructure(props) {
 
             <Typography
               component="div"
-              sx={{ textAlign: 'center', fontSize: 24, fontWeight: 400 }}
+              sx={{ textAlign: 'center', fontSize: {xs:18,sm:24}, fontWeight: 400 }}
             >
               {typeof structureIDs[structureIndex - 1] !== 'undefined'
                 ? structureIDs[structureIndex - 1]

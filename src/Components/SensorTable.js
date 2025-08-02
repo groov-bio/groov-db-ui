@@ -84,7 +84,7 @@ export default function SensorTable(props) {
     {
       field: 'uniprot',
       headerName: 'Uniprot',
-      width: 130,
+      width: 110,
       renderCell: (params) => (
         <Link 
           to={`/entry/${props.family}/${params.value}`} 
@@ -93,8 +93,8 @@ export default function SensorTable(props) {
         </Link>
       ),
     },
+    { field: 'alias', headerName: 'Alias', width: 110 },
     { field: 'ligand', headerName: 'Ligand', width: 200 },
-    { field: 'alias', headerName: 'Alias', width: 120 },
     { field: 'accession', headerName: 'Accession', width: 150 },
     { field: 'organism', headerName: 'Organism', width: 200 },
   ];

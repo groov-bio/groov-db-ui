@@ -58,7 +58,7 @@ export default function MetadataTable({ tableData }) {
                     <Typography
                       component="span"
                       width="100px"
-                      sx={{ fontSize: { xs: 14, sm: 16, md: 16 } }}
+                      sx={{ fontSize: { xs: 14, sm: 16 } }}
                     >
                       {tableData[key].name}
                     </Typography>
@@ -71,7 +71,7 @@ export default function MetadataTable({ tableData }) {
                       <Typography
                         component="span"
                         width="100px"
-                        sx={{ fontSize: { xs: 14, sm: 16, md: 16 } }}
+                        sx={{ fontSize: { xs: 14, sm: 16 } }}
                       >
                         {tableData[key].name}
                       </Typography>

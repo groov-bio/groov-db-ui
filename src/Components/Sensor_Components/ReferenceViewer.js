@@ -105,11 +105,16 @@ export default function ReferenceViewer(props) {
 
         <Grid
           size={12}
-          sx={{ paddingBottom: '2px', borderBottom: '1px solid #a9aaab' }}
+          sx={{ 
+            paddingBottom: '2px', 
+            borderBottom: '1px solid #a9aaab',
+            marginLeft: {xs:1,sm:0},
+            marginRight: {xs:1,sm:0}
+           }}
         >
           <Typography
             component="div"
-            sx={{ ml: { xs: '5%', sm: '2.5%' }, fontSize: 28, fontWeight: 300 }}
+            sx={{ ml: { xs: '5%', sm: '2.5%' }, fontSize: {xs:24,sm:28}, fontWeight: 300 }}
           >
             References
           </Typography>
@@ -118,7 +123,11 @@ export default function ReferenceViewer(props) {
         {/* Reference List */}
 
         <Grid size={12} mb={3}>
-          <Paper elevation={0} sx={{ padding: 3 }}>
+          <Paper 
+          elevation={0} 
+          sx={{ 
+            padding: 3,
+             }}>
             {refs}
           </Paper>
         </Grid>

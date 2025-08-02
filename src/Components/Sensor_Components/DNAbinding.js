@@ -118,14 +118,20 @@ export default function DNAbinding({ operator_data }) {
           <Typography
             component="div"
             variant="h5"
-            sx={{ ml: { xs: '5%', sm: '2.5%' }, fontSize: 28, fontWeight: 300 }}
+            sx={{ ml: { xs: '5%', sm: '2.5%' }, fontSize: {xs:24,sm:28}, fontWeight: 300 }}
           >
             DNA Binding
           </Typography>
         </Grid>
         <Grid size={12} mt={1}>
           {/* Container */}
-          <Paper elevation={0} sx={{ padding: 3, border: '1px solid #c7c7c7' }}>
+          <Paper 
+            elevation={0} 
+            sx={{ 
+            padding: 3, 
+            border: '1px solid #c7c7c7',
+            marginLeft: {xs:1,sm:0},
+            marginRight: {xs:1,sm:0} }}>
             <Grid container>
               {/* Operator Logo */}
               <Grid size={{xs:12, md:12}} sx={{ overflow: 'scroll' }}>

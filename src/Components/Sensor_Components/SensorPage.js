@@ -88,7 +88,7 @@ export default function SensorPage({ isAdmin, user }) {
       <Grid
         container
         spacing={3}
-        sx={{ minHeight: '100vh', mt: 2 }}
+        sx={{ minHeight: '100vh', mt: 5 }}
         justifyContent="center"
       >
         {/* Alias with Edit Button */}
@@ -171,11 +171,14 @@ export default function SensorPage({ isAdmin, user }) {
 
         {/* About  */}
         <Grid size={3} />
-        <Grid size={{xs:12, sm:6}} alignItems="center" sx={{ mb: 2 }}>
+        <Grid size={{xs:12, sm:6}} alignItems="center" sx={{ mb: {xs:0,sm:2} }}>
           <Typography
             component="div"
             gutterBottom
-            sx={{ fontSize: { xs: 16, sm: 18, md: 20 }, textAlign: 'center' }}
+            sx={{ fontSize: { xs: 14, sm: 18 }, textAlign: 'center',
+            pl: {xs:3,sm:0},
+            pr: {xs:3,sm:0}
+                     }}
           >
             {sensorData === undefined ? (
               <Box sx={{ textAlign: 'center' }}>
@@ -203,7 +206,7 @@ export default function SensorPage({ isAdmin, user }) {
 
         {/* Metadata Table */}
         <Grid size={{xs:0, md:3}} />
-        <Grid size={{xs:12, md:6}} mb={4}>
+        <Grid size={{xs:12, md:6}} mb={{xs:0, sm:3}}>
           {sensorData === undefined ? (
             <Box sx={{ width: '100%' }}>
               {Array.from({ length: 5 }).map((_, index) => (

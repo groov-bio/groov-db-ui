@@ -20,7 +20,7 @@ export default function SeqViewer(props) {
         <Grid size={12}>
           <Typography
             component="div"
-            sx={{ ml: { xs: '5%', sm: '2.5%' }, fontSize: 28, fontWeight: 300 }}
+            sx={{ ml: { xs: '5%', sm: '2.5%' }, fontSize: {xs:24,sm:28}, fontWeight: 300 }}
           >
             Protein Sequence
           </Typography>
@@ -33,6 +33,8 @@ export default function SeqViewer(props) {
               padding: 3,
               border: '1px solid #c7c7c7',
               background: '#f2f2f2',
+              marginLeft: {xs:1,sm:0},
+              marginRight: {xs:1,sm:0}
             }}
           >
             {/* Protein length indicator */}
