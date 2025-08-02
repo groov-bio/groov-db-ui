@@ -41,7 +41,7 @@
     "lodash": "^4.17.21",
     "logojs-react": "^2.1.1",
     "molstar": "^3.31.2",
-    "notistack": "^2.0.8",
+    "notistack": "^3.0.2",
     "prettier": "^2.7.1",
     "react": "^18.1.0",
     "react-bootstrap": "^2.4.0",

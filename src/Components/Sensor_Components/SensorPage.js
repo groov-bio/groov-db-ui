@@ -44,8 +44,8 @@ export default function SensorPage({ isAdmin, user }) {
       if (family && uniprotID) {
         fetch(
           isAdmin
-            ? `https://api.groov.bio/getProcessedTemp?family=${family?.toUpperCase()}&sensorID=${sensorID}`
-            : `https://groov-api.com/sensors/${family.toLowerCase()}/${sensorID.toUpperCase()}.json`,
+            ? `https://api.groov.bio/getProcessedTemp?family=${family?.toUpperCase()}&sensorID=${uniprotID}`
+            : `https://groov-api.com/sensors/${family.toLowerCase()}/${uniprotID.toUpperCase()}.json`,
           {
             headers: {
               Accept: 'application/json',
