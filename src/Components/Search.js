@@ -80,6 +80,7 @@ export default function Search() {
         }
 
         result[sensorId] = {
+          uniprot: sensorId || '',
           alias: sensor.alias || '',
           family: sensor.family || '',
           ligands: sensor.ligands || [],
@@ -112,7 +113,7 @@ export default function Search() {
           let temp = `${value.ligands[i]} (${value.alias}/${value.family})`;
           tempLabels.push({
             label: temp,
-            link: `/database/${value.family}/${value.alias}`,
+            link: `/entry/${value.family}/${value.uniprot}`,
           });
         }
       }

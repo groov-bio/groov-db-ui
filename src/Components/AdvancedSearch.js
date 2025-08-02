@@ -73,14 +73,14 @@ export default function AdvancedSearch() {
       if (data.results && data.results.length > 0) {
         const formattedResults = data.results.map((result) => {
           const family = rawData[result.sensorId].family;
-          const alias = rawData[result.sensorId].alias;
+          const uniprot = rawData[result.sensorId].uniprot;
 
           return {
             sensorId: result.sensorId,
             ligandId: result.ligandId,
             name: result.name || result.ligandId,
             similarity: result.similarity,
-            link: `/database/${family}/${alias}`,
+            link: `/entry/${family}/${uniprot}`,
             label: `${result.name || result.ligandId}`,
           };
         });
@@ -286,7 +286,7 @@ export default function AdvancedSearch() {
                   secondary={
                     <>
                       <Typography component="span" variant="body2">
-                        Sensor ID: {result.sensorId}
+                        Uniprot ID: {result.sensorId}
                       </Typography>
                       <br />
                       <Typography
