@@ -2,24 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { Link, Routes, Route } from 'react-router-dom';
 
 import SensorPage from './Sensor_Components/SensorPage.js';
+import { useAllSensors } from '../queries/sensors.js';
 
 import {
   Box,
   Grid,
   Typography,
   Skeleton,
-  Tooltip,
-  Badge
+  Button
 } from '@mui/material';
-
-import ViewColumnIcon from '@mui/icons-material/ViewColumn';
-import FilterListIcon from '@mui/icons-material/FilterList';
 import {
   DataGrid,
-  Toolbar,
-  ToolbarButton,
-  ColumnsPanelTrigger,
-  FilterPanelTrigger,
 } from '@mui/x-data-grid';
 
 import useSensorStore from '../zustand/sensor.store.js';
@@ -30,9 +23,11 @@ export default function SensorTable(props) {
   const [rows, setRows] = useState([]);
   const [sensorRouteList, setSensorRouteList] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [allSensorsData, setAllSensorsData] = useState([]);
 
   const isAllSensors = props.family === 'all';
+
+  // Use React Query for all sensors data
+  const { data: allSensorsData = [], isLoading: allSensorsLoading } = useAllSensors();
 
   // access data from zustand store
   const setSensorTable = useSensorStore((context) => context.setSensorTable);
@@ -44,27 +39,7 @@ export default function SensorTable(props) {
   // const scrollRef = useRef(null);
 
   useEffect(() => {
-    if (isAllSensors) {
-      // Fetch all sensors data
-      if (allSensorsData.length === 0) {
-        setLoading(true);
-        fetch('https://groov-api.com/all-sensors.json', {
-          headers: {
-            Accept: 'application/json',
-          },
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            setAllSensorsData(data.sensors || []);
-          })
-          .catch((error) => {
-            console.error('Error fetching all sensors data:', error);
-          })
-          .finally(() => {
-            setLoading(false);
-          });
-      }
-    } else {
+    if (!isAllSensors) {
       // Only fetch if the data isn't already loaded in the zustand store
       if (sensorTable.length === 0) {
         setLoading(true);
@@ -80,7 +55,7 @@ export default function SensorTable(props) {
           .then((sensorData) => {
             setSensorTable(props.family.toLowerCase(), sensorData['data']);
           })
-          .catch((error) => {
+          .catch(() => {
             console.error('Error fetching sensor data');
           })
           .finally(() => {
@@ -227,33 +202,6 @@ export default function SensorTable(props) {
 
 
 
-  function CustomToolbar() {
-  
-    return (
-      <Toolbar>
-  
-        <Tooltip title="Columns">
-          <ColumnsPanelTrigger render={<ToolbarButton />}>
-            <ViewColumnIcon />
-          </ColumnsPanelTrigger>
-        </Tooltip>
-  
-        <Tooltip title="Filters">
-          <FilterPanelTrigger
-            render={(props, state) => (
-              <ToolbarButton {...props} color="default">
-                <Badge badgeContent={state.filterCount} color="primary" variant="dot">
-                  <FilterListIcon />
-                </Badge>
-              </ToolbarButton>
-            )}
-          />
-        </Tooltip>
-      </Toolbar>
-    );
-  }
-
-
 
 
 
@@ -268,6 +216,20 @@ export default function SensorTable(props) {
       justify="center"
       sx={{ minHeight: '100vh', mt: 5 }}
     >
+      {/* Back to All Sensors Button - only show for family-specific views */}
+      {!isAllSensors && (
+        <Box sx={{ alignSelf: 'flex-start', mb: 2, ml: 2 }}>
+          <Button 
+            component={Link} 
+            to="/database" 
+            variant="outlined" 
+            size="small"
+          >
+            ← Back to All Sensors
+          </Button>
+        </Box>
+      )}
+
       {/* Family Name  */}
       <Typography
         component="div"
@@ -283,25 +245,26 @@ export default function SensorTable(props) {
       {/* Regulator Table  */}
       <Box
         sx={{
-          height: 460,
-          width: { xs: '90%', sm: '80%', md: isAllSensors ? '80%' : '60%' },
+          height: 400,
+          width: { xs: '90%', sm: '75%', md: '60%' },
         }}
       >
-        {loading ? (
+        {(loading || (isAllSensors && allSensorsLoading)) ? (
           <Skeleton
             variant="rectangular"
             width="100%"
-            height={460}
+            height={400}
             animation="pulse"
           />
         ) : (
           <DataGrid
+            key={isAllSensors ? 'all-sensors' : props.family}
             rows={rows}
             columns={getColumns()}
-            autoHeight={true}
             pageSizeOptions={[10, 20, 30]}
             density="compact"
             sx={{fontSize: {xs:12, sm: 14}, paddingLeft:2 }}
+            disableRowSelectionOnClick
 
             initialState={{
               pagination: { paginationModel: { pageSize: 10 } },
@@ -312,8 +275,13 @@ export default function SensorTable(props) {
                 },
               },
             }}
-            slots={{ toolbar: CustomToolbar }}
             showToolbar
+            slotProps={{
+              toolbar: {
+                printOptions: { disableToolbarButton: true },
+                csvOptions: { disableToolbarButton: true },
+              },
+            }}
           />
         )}
       </Box>

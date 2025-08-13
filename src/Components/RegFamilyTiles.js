@@ -41,8 +41,8 @@ export default function RegFamilyTiles() {
   const allSensorsView = () => {
     return (
       <Box>
-        <Grid container spacing={4} columns={12} mt={8} justifyContent="center">
-          <Grid size={10} mb={6} position="relative">
+        <Grid container spacing={2} columns={12} mt={4} justifyContent="center">
+          <Grid size={12} mb={2}>
             <Typography
               sx={{ fontSize: { xs: 22, md: 24 }, textAlign: 'center' }}
             >
@@ -50,29 +50,25 @@ export default function RegFamilyTiles() {
             </Typography>
           </Grid>
 
-          {/* "Download all sensors" pushed to the right */}
+          {/* Buttons in a more compact layout */}
           <Grid
-            size={5}
+            size={12}
             container
-            justifyContent="flex-end"
+            spacing={2}
+            justifyContent="center"
             alignItems="center"
+            mb={2}
           >
-            <Button variant="outlined" href="/about/programmatic-access">
-              Download all sensors
-            </Button>
-          </Grid>
-
-          {/* "Add a sensor" stays on the left */}
-          <Grid
-            size={5}
-            ml={5}
-            container
-            justifyContent="flex-start"
-            alignItems="center"
-          >
-            <Button variant="outlined" href="/addSensor">
-              Add a sensor
-            </Button>
+            <Grid size="auto">
+              <Button variant="outlined" href="/about/programmatic-access">
+                Download all sensors
+              </Button>
+            </Grid>
+            <Grid size="auto">
+              <Button variant="outlined" href="/addSensor">
+                Add a sensor
+              </Button>
+            </Grid>
           </Grid>
         </Grid>
         
