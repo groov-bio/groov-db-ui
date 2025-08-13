@@ -94,6 +94,15 @@ export default function ChangeLog() {
           </Typography>
         </Box>
 
+        <Box id="v1.16" sx={{ gridColumn: 'span 12' }}>
+          <Box>
+            {getHeader('13 August, 2025', '1.16', 'Feature')}
+            {createList([
+              `All-in-one browsing ... like having a buffet of sensors at your fingertips`,
+              `New all-sensors table lets you browse the entire database in one place. Plus a mobile-friendly sidebar layout and faster downloads via smart caching.`,
+            ])}
+          </Box>
+        </Box>
         <Box id="v1.15" sx={{ gridColumn: 'span 12' }}>
           <Box>
             {getHeader('13 July, 2025', '1.15', 'Feature')}
