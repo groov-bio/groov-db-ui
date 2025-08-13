@@ -38,7 +38,7 @@ export default function RegFamilyTiles() {
     { image: '/Other-family.png', family: 'Other' },
   ];
 
-  const selectionPrompt = () => {
+  const allSensorsView = () => {
     return (
       <Box>
         <Grid container spacing={4} columns={12} mt={8} justifyContent="center">
@@ -46,29 +46,28 @@ export default function RegFamilyTiles() {
             <Typography
               sx={{ fontSize: { xs: 22, md: 24 }, textAlign: 'center' }}
             >
-              Please select a sensor family
+              Browse all sensors or select a family below
             </Typography>
-
           </Grid>
 
-          {/* “Download all sensors” pushed to the right */}
+          {/* "Download all sensors" pushed to the right */}
           <Grid
             size={5}
-            container // make this a flex container
-            justifyContent="flex-end" // push children to the right
-            alignItems="center" // vertically center if you want
+            container
+            justifyContent="flex-end"
+            alignItems="center"
           >
             <Button variant="outlined" href="/about/programmatic-access">
               Download all sensors
             </Button>
           </Grid>
 
-          {/* “Add a sensor” stays on the left */}
+          {/* "Add a sensor" stays on the left */}
           <Grid
             size={5}
             ml={5}
-            container // also a flex container
-            justifyContent="flex-start" // push children to the left
+            container
+            justifyContent="flex-start"
             alignItems="center"
           >
             <Button variant="outlined" href="/addSensor">
@@ -76,6 +75,8 @@ export default function RegFamilyTiles() {
             </Button>
           </Grid>
         </Grid>
+        
+        <SensorTable family="all" dimensions={dimensions} />
       </Box>
     );
   };
@@ -111,7 +112,7 @@ export default function RegFamilyTiles() {
       </Box>
 
       <Routes>
-        <Route path="/" element={selectionPrompt()} />
+        <Route path="/" element={allSensorsView()} />
 
         {torender.map((item) => (
           <Route

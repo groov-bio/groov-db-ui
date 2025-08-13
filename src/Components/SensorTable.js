@@ -30,41 +30,65 @@ export default function SensorTable(props) {
   const [rows, setRows] = useState([]);
   const [sensorRouteList, setSensorRouteList] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [allSensorsData, setAllSensorsData] = useState([]);
+
+  const isAllSensors = props.family === 'all';
 
   // access data from zustand store
   const setSensorTable = useSensorStore((context) => context.setSensorTable);
   const sensorTable = useSensorStore(
-    (context) => context.sensorTable[props.family.toLowerCase()]
+    (context) => isAllSensors ? [] : context.sensorTable[props.family.toLowerCase()]
   );
 
 
   // const scrollRef = useRef(null);
 
   useEffect(() => {
-    // Only fetch if the data isn't already loaded in the zustand store
-    if (sensorTable.length === 0) {
-      setLoading(true);
-      fetch(
-        'https://groov-api.com/indexes/' + props.family.toLowerCase() + '.json',
-
-        {
+    if (isAllSensors) {
+      // Fetch all sensors data
+      if (allSensorsData.length === 0) {
+        setLoading(true);
+        fetch('https://groov-api.com/all-sensors.json', {
           headers: {
             Accept: 'application/json',
           },
-        }
-      )
-        .then((res) => res.json())
-        .then((sensorData) => {
-          setSensorTable(props.family.toLowerCase(), sensorData['data']);
         })
-        .catch((error) => {
-          console.error('Error fetching sensor data');
-        })
-        .finally(() => {
-          setLoading(false);
-        });
+          .then((res) => res.json())
+          .then((data) => {
+            setAllSensorsData(data.sensors || []);
+          })
+          .catch((error) => {
+            console.error('Error fetching all sensors data:', error);
+          })
+          .finally(() => {
+            setLoading(false);
+          });
+      }
+    } else {
+      // Only fetch if the data isn't already loaded in the zustand store
+      if (sensorTable.length === 0) {
+        setLoading(true);
+        fetch(
+          'https://groov-api.com/indexes/' + props.family.toLowerCase() + '.json',
+          {
+            headers: {
+              Accept: 'application/json',
+            },
+          }
+        )
+          .then((res) => res.json())
+          .then((sensorData) => {
+            setSensorTable(props.family.toLowerCase(), sensorData['data']);
+          })
+          .catch((error) => {
+            console.error('Error fetching sensor data');
+          })
+          .finally(() => {
+            setLoading(false);
+          });
+      }
     }
-  }, [props.family]);
+  }, [props.family, isAllSensors]);
 
   /* scroll function */
   // const executeScroll = () => {
@@ -79,25 +103,36 @@ export default function SensorTable(props) {
   //   });
   // };
 
-  const columns = [
-    { field: 'id', headerName: 'Index', width: 100 },
-    {
-      field: 'uniprot',
-      headerName: 'Uniprot',
-      width: 110,
-      renderCell: (params) => (
-        <Link 
-          to={`/entry/${props.family}/${params.value}`} 
-        >
-          {params.value}
-        </Link>
-      ),
-    },
-    { field: 'alias', headerName: 'Alias', width: 110 },
-    { field: 'ligand', headerName: 'Ligand', width: 200 },
-    { field: 'accession', headerName: 'Accession', width: 150 },
-    { field: 'organism', headerName: 'Organism', width: 200 },
-  ];
+  const getColumns = () => {
+    const baseColumns = [
+      { field: 'id', headerName: 'Index', width: 100 },
+      {
+        field: 'uniprot',
+        headerName: 'Uniprot',
+        width: 110,
+        renderCell: (params) => (
+          <Link 
+            to={`/entry/${isAllSensors ? params.row.family : props.family}/${params.value}`} 
+          >
+            {params.value}
+          </Link>
+        ),
+      },
+      { field: 'alias', headerName: 'Alias', width: 110 },
+    ];
+
+    if (isAllSensors) {
+      baseColumns.push({ field: 'family', headerName: 'Family', width: 100 });
+    }
+
+    baseColumns.push(
+      { field: 'ligand', headerName: 'Ligand', width: 200 },
+      { field: 'accession', headerName: 'Accession', width: 150 },
+      { field: 'organism', headerName: 'Organism', width: 200 }
+    );
+
+    return baseColumns;
+  };
 
   const selectionPrompt = () => {
     return (
@@ -119,7 +154,37 @@ export default function SensorTable(props) {
     const rowsToAdd = [];
     const sensorRouteList = [];
 
-    if (typeof sensorTable !== 'undefined') {
+    if (isAllSensors && allSensorsData.length > 0) {
+      allSensorsData.forEach((sensor, index) => {
+        const entry = {
+          id: index,
+          alias: sensor.alias,
+          accession: sensor.accession,
+          uniprot: sensor.uniprotID,
+          organism: getFirstTwoWords(sensor.organism),
+          ligand: sensor.ligands && sensor.ligands.length > 0
+            ? sensor.ligands[0].name
+            : 'None submitted',
+          family: sensor.family,
+        };
+        rowsToAdd.push(entry);
+
+        sensorRouteList.push(
+          <Route
+            key={index}
+            path={`/entry/${sensor.family}/${sensor.uniprotID}`}
+            element={
+              <SensorPage
+                sensorID={sensor.uniprotID}
+                family={sensor.family}
+                dimensions={props.dimensions}
+                temp={false}
+              />
+            }
+          />
+        );
+      });
+    } else if (!isAllSensors && typeof sensorTable !== 'undefined') {
       let counter = 0;
       for (var reg in sensorTable) {
         var entry = {
@@ -151,10 +216,11 @@ export default function SensorTable(props) {
 
         counter += 1;
       }
-      setRows(rowsToAdd);
-      setSensorRouteList(sensorRouteList);
     }
-  }, [sensorTable]);
+    
+    setRows(rowsToAdd);
+    setSensorRouteList(sensorRouteList);
+  }, [sensorTable, allSensorsData, isAllSensors]);
 
 
 
@@ -211,14 +277,14 @@ export default function SensorTable(props) {
           fontWeight: 300,
         }}
       >
-        {props.family}
+        {isAllSensors ? 'All Sensors' : props.family}
       </Typography>
 
       {/* Regulator Table  */}
       <Box
         sx={{
           height: 460,
-          width: { xs: '90%', sm: '80%', md: '60%' },
+          width: { xs: '90%', sm: '80%', md: isAllSensors ? '80%' : '60%' },
         }}
       >
         {loading ? (
@@ -231,7 +297,7 @@ export default function SensorTable(props) {
         ) : (
           <DataGrid
             rows={rows}
-            columns={columns}
+            columns={getColumns()}
             autoHeight={true}
             pageSizeOptions={[10, 20, 30]}
             density="compact"
