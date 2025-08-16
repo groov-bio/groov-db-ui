@@ -36,10 +36,7 @@ export default function Home() {
       }}
     >
       <Grid
-        item
-        xs={12}
-        sm={12}
-        md={6}
+        size={{sm:12, md:6 }}
         sx={{ position: { xs: 'absolute', sm: 'absolute', md: 'relative' } }}
       >
         <Box
@@ -56,10 +53,10 @@ export default function Home() {
       </Grid>
 
       {/* Spacer for mobile format */}
-      <Grid item xs={1} sx={{ display: { sm: 'block', md: 'none' } }}></Grid>
+      <Grid size={1} sx={{ display: { sm: 'block', md: 'none' } }}></Grid>
 
       {/* Text and search bar */}
-      <Grid item xs={10} sm={10} md={4}>
+      <Grid size={{xs:10, sm:10, md:4}}>
         <Typography
           sx={{
             fontSize: { xs: 40, md: 50 },

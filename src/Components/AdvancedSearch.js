@@ -73,14 +73,14 @@ export default function AdvancedSearch() {
       if (data.results && data.results.length > 0) {
         const formattedResults = data.results.map((result) => {
           const family = rawData[result.sensorId].family;
-          const alias = rawData[result.sensorId].alias;
+          const uniprot = rawData[result.sensorId].uniprot;
 
           return {
             sensorId: result.sensorId,
             ligandId: result.ligandId,
             name: result.name || result.ligandId,
             similarity: result.similarity,
-            link: `/database/${family}/${alias}`,
+            link: `/entry/${family}/${uniprot}`,
             label: `${result.name || result.ligandId}`,
           };
         });
@@ -185,7 +185,7 @@ export default function AdvancedSearch() {
         <Collapse in={configExpanded}>
           <Divider sx={{ my: 1 }} />
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
+            <Grid size={{xs:12, sm:6}}>
               <Typography variant="body2">
                 Similarity Threshold: {threshold}
               </Typography>
@@ -208,7 +208,7 @@ export default function AdvancedSearch() {
               </Tooltip>
             </Grid>
 
-            <Grid item xs={12} sm={6}>
+            <Grid size={{xs:12, sm:6}}>
               <Typography variant="body2">Max Results: {maxResults}</Typography>
               <Tooltip title="Maximum number of results to return">
                 <Slider
@@ -286,7 +286,7 @@ export default function AdvancedSearch() {
                   secondary={
                     <>
                       <Typography component="span" variant="body2">
-                        Sensor ID: {result.sensorId}
+                        Uniprot ID: {result.sensorId}
                       </Typography>
                       <br />
                       <Typography

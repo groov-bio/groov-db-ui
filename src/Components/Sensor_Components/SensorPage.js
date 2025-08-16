@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, useParams } from 'react-router-dom';
 
 import GenomeContext from './GenomeContext.js';
 import LigandViewer from './LigandViewer.js';
@@ -17,12 +17,15 @@ import useUserStore from '../../zustand/user.store.js';
 
 import { getFirstTwoWords } from '../../lib/utils.js';
 
-export default function SensorPage({ family, sensorID, isAdmin, user }) {
+export default function SensorPage({ isAdmin, user }) {
+  
+  const {family, uniprotID } = useParams();
+  
   const navigate = useNavigate();
   const location = useLocation();
   // access data from zustand store
   const setSensorData = useSensorStore((context) => context.setSensorData);
-  const sensorData = useSensorStore((context) => context.sensorData[sensorID]);
+  const sensorData = useSensorStore((context) => context.sensorData[uniprotID]);
   const currentUser = useUserStore((context) => context.user);
 
   const isAdminPath = location.pathname.startsWith('/admin');
@@ -34,12 +37,15 @@ export default function SensorPage({ family, sensorID, isAdmin, user }) {
 
   useEffect(() => {
     // Only fetch if the data isn't already loaded in the zustand store
+
+
+
     if (sensorData === undefined) {
-      if (family && sensorID) {
+      if (family && uniprotID) {
         fetch(
           isAdmin
-            ? `https://api.groov.bio/getProcessedTemp?family=${family?.toUpperCase()}&sensorID=${sensorID}`
-            : `https://groov-api.com/sensors/${family.toLowerCase()}/${sensorID.toUpperCase()}.json`,
+            ? `https://api.groov.bio/getProcessedTemp?family=${family?.toUpperCase()}&sensorID=${uniprotID}`
+            : `https://groov-api.com/sensors/${family.toLowerCase()}/${uniprotID.toUpperCase()}.json`,
           {
             headers: {
               Accept: 'application/json',
@@ -55,7 +61,7 @@ export default function SensorPage({ family, sensorID, isAdmin, user }) {
           });
       }
     }
-  }, [sensorID]);
+  }, [uniprotID]);
 
   const MissingDataComponent = ({ title, message }) => {
     return (
@@ -92,11 +98,11 @@ export default function SensorPage({ family, sensorID, isAdmin, user }) {
       <Grid
         container
         spacing={3}
-        sx={{ minHeight: '100vh', mt: 2 }}
+        sx={{ minHeight: '100vh', mt: 5 }}
         justifyContent="center"
       >
         {/* Alias with Edit Button */}
-        <Grid item xs={12}>
+        <Grid item size={12}>
           <Box
             sx={{
               display: 'flex',
@@ -133,7 +139,7 @@ export default function SensorPage({ family, sensorID, isAdmin, user }) {
                 onClick={() =>
                   navigate(
                     currentUser
-                      ? `/editSensor/${family}/${sensorID}`
+                      ? `/editSensor/${family}/${uniprotID}`
                       : '/account?reason=editSensor'
                   )
                 }
@@ -162,7 +168,7 @@ export default function SensorPage({ family, sensorID, isAdmin, user }) {
                 onClick={() =>
                   navigate(
                     currentUser
-                      ? `/editSensor/${family}/${sensorID}`
+                      ? `/editSensor/${family}/${uniprotID}`
                       : '/account?reason=editSensor'
                   )
                 }
@@ -174,12 +180,15 @@ export default function SensorPage({ family, sensorID, isAdmin, user }) {
         </Grid>
 
         {/* About  */}
-        <Grid item xs={3} />
-        <Grid item xs={12} sm={6} alignItems="center" sx={{ mb: 2 }}>
+        <Grid size={3} />
+        <Grid size={{xs:12, sm:6}} alignItems="center" sx={{ mb: {xs:0,sm:2} }}>
           <Typography
             component="div"
             gutterBottom
-            sx={{ fontSize: { xs: 16, sm: 18, md: 20 }, textAlign: 'center' }}
+            sx={{ fontSize: { xs: 14, sm: 18 }, textAlign: 'center',
+            pl: {xs:3,sm:0},
+            pr: {xs:3,sm:0}
+                     }}
           >
             {sensorData === undefined ? (
               <Box sx={{ textAlign: 'center' }}>
@@ -203,11 +212,11 @@ export default function SensorPage({ family, sensorID, isAdmin, user }) {
             )}
           </Typography>
         </Grid>
-        <Grid item xs={3} />
+        <Grid size={3} />
 
         {/* Metadata Table */}
-        <Grid item xs={0} md={3} />
-        <Grid item xs={12} md={6} mb={4}>
+        <Grid size={{xs:0, md:3}} />
+        <Grid size={{xs:12, md:6}} mb={{xs:0, sm:3}}>
           {sensorData === undefined ? (
             <Box sx={{ width: '100%' }}>
               {Array.from({ length: 5 }).map((_, index) => (
@@ -273,10 +282,10 @@ export default function SensorPage({ family, sensorID, isAdmin, user }) {
             />
           )}
         </Grid>
-        <Grid item xs={3} />
+        <Grid size={3} />
 
         {/* Ligands  */}
-        <Grid item xs={12} sm={10} md={5} lg={4} mb={5}>
+        <Grid size={{xs:12, sm:10, md:5, lg:4}} mb={5}>
           {sensorData === undefined ? (
             <Box sx={{ textAlign: 'center' }}>
               <Skeleton
@@ -308,7 +317,7 @@ export default function SensorPage({ family, sensorID, isAdmin, user }) {
         </Grid>
 
         {/* Structure  */}
-        <Grid item xs={10} sm={10} md={5} lg={4} mb={5}>
+        <Grid size={{xs:10, sm:10, md:5, lg:4}} mb={5}>
           {sensorData === undefined ? (
             <Box sx={{ textAlign: 'center' }}>
               <Skeleton
@@ -338,7 +347,7 @@ export default function SensorPage({ family, sensorID, isAdmin, user }) {
         </Grid>
 
         {/* Sequence  */}
-        <Grid item xs={12} sm={10} md={10} lg={8} mb={5}>
+        <Grid size={{xs:12, sm:10, md:10, lg:8}} mb={5}>
           {sensorData === undefined ? (
             <Box>
               <Skeleton
@@ -361,7 +370,7 @@ export default function SensorPage({ family, sensorID, isAdmin, user }) {
         </Grid>
 
         {/* Operator */}
-        <Grid item xs={12} sm={10} md={10} lg={8} mb={5}>
+        <Grid size={{xs:12, sm:10, md:10, lg:8}} mb={5}>
           {sensorData === undefined ? (
             <Box>
               <Skeleton
@@ -389,7 +398,7 @@ export default function SensorPage({ family, sensorID, isAdmin, user }) {
         </Grid>
 
         {/* Genome Context  */}
-        <Grid item xs={12} sm={10} md={10} lg={8} mb={5}>
+        <Grid size={{xs:12, sm:10, md:10, lg:8}} mb={5}>
           {sensorData === undefined ? (
             <Box>
               <Skeleton
@@ -416,7 +425,7 @@ export default function SensorPage({ family, sensorID, isAdmin, user }) {
         </Grid>
 
         {/* References */}
-        <Grid item xs={12} sm={10} md={10} lg={8}>
+        <Grid size={{xs:12, sm:10, md:10, lg:8}}>
           {sensorData === undefined ? (
             <Box>
               <Skeleton

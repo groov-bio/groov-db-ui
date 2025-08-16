@@ -35,7 +35,7 @@ export default function TempSensor(props) {
 
   return (
     <Grid container spacing={4} columns={12} mt={1} justifyContent="center">
-      <Grid item xs={10} mb={1}>
+      <Grid size={10} mb={1}>
         <TableContainer component={Paper} elevation={3}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
@@ -80,7 +80,7 @@ export default function TempSensor(props) {
           </Table>
         </TableContainer>
 
-        <Grid item md={10} mt={4}>
+        <Grid size={10} mt={4}>
           <Typography variant="div" sx={{ display: 'block' }}>
             <b>About</b>
           </Typography>
@@ -90,7 +90,7 @@ export default function TempSensor(props) {
         </Grid>
       </Grid>
 
-      <Grid item xs={12} sm={6} mb={3}>
+      <Grid size={{xs:12, sm:6}} mb={3}>
         {ligands ? (
           <LigandViewer
             ligand={ligands}
@@ -112,7 +112,7 @@ export default function TempSensor(props) {
         )}
       </Grid>
 
-      <Grid item xs={12} sm={6} mb={3}>
+      <Grid size={{xs:12, sm:6}} mb={3}>
         {operators ? (
           <OperatorViewer
             uniprotID={uniprotID}

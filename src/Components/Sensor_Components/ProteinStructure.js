@@ -53,17 +53,17 @@ export default function ProteinStructure(props) {
     <Box sx={{ flexGrow: 1 }}>
       <Grid container style={{ width: '100%' }}>
         {/* Component Title */}
-        <Grid item xs={12}>
+        <Grid size={12}>
           <Typography
             component="div"
-            style={{ marginLeft: '5%', fontSize: 28, fontWeight: 300 }}
+            sx={{ marginLeft: '5%', fontSize: {xs:24,sm:28}, fontWeight: 300 }}
           >
             Structure
           </Typography>
         </Grid>
 
         {/* Protein Structure */}
-        <Grid item xs={12}>
+        <Grid size={12}>
           <Paper elevation={0} sx={{ height: '500px' }}>
             {typeof structureIDs[structureIndex - 1] !== 'undefined' ? (
               isLoading ? (
@@ -97,7 +97,7 @@ export default function ProteinStructure(props) {
 
             <Typography
               component="div"
-              sx={{ textAlign: 'center', fontSize: 24, fontWeight: 400 }}
+              sx={{ textAlign: 'center', fontSize: {xs:18,sm:24}, fontWeight: 400 }}
             >
               {typeof structureIDs[structureIndex - 1] !== 'undefined'
                 ? structureIDs[structureIndex - 1]
@@ -107,7 +107,7 @@ export default function ProteinStructure(props) {
         </Grid>
 
         {/* Pagination */}
-        <Grid item xs={12} mt={7} mb={3}>
+        <Grid size={12} mt={7} mb={3}>
           <Stack spacing={2} alignItems="center">
             <Pagination
               count={props.structureIDs.length}
@@ -120,9 +120,9 @@ export default function ProteinStructure(props) {
 
         {/* Reference */}
 
-        <Grid item xs={12} mt={1}>
+        <Grid size={12} mt={1}>
           <Grid container>
-            <Grid item xs={5} textAlign="right">
+            <Grid size={5} textAlign="right">
               <Typography
                 component="span"
                 width="100px"
@@ -136,7 +136,7 @@ export default function ProteinStructure(props) {
               </Typography>
             </Grid>
 
-            <Grid item xs={6} textAlign="left" ml={'15px'}>
+            <Grid size={6} textAlign="left" ml={'15px'}>
               {typeof structureIDs[structureIndex - 1] !== 'undefined' ? (
                 structureIDs[structureIndex - 1].length == 4 ? (
                   <Link
@@ -187,9 +187,9 @@ export default function ProteinStructure(props) {
 
         {/* Method */}
 
-        <Grid item xs={12} mt={1}>
+        <Grid size={12} mt={1}>
           <Grid container>
-            <Grid item xs={5} textAlign="right">
+            <Grid size={5} textAlign="right">
               <Typography
                 component="span"
                 width="100px"
@@ -203,7 +203,7 @@ export default function ProteinStructure(props) {
               </Typography>
             </Grid>
 
-            <Grid item xs={6} textAlign="left" ml={'15px'}>
+            <Grid size={6} textAlign="left" ml={'15px'}>
               <Typography
                 component="span"
                 width="100px"

@@ -17,7 +17,7 @@ export default function Tools() {
         alignItems="center"
         justifyContent="center"
       >
-        <Grid item xs={12} mb={5}>
+        <Grid size={12} mb={5}>
           <Typography
             sx={{ fontSize: { xs: 32, sm: 32 } }}
             textAlign="center"
@@ -28,8 +28,8 @@ export default function Tools() {
           </Typography>
         </Grid>
 
-        <Grid item xs={0} md={2} />
-        <Grid item xs={12} sm={6} md={4}>
+        <Grid size={{xs:0, md:2}} />
+        <Grid size={{xs:12, sm:6, md:4}}>
           <a href="https://snowprint.groov.bio" target="__blank__">
             <img
               src="Snowprint_Logo.png"
@@ -55,7 +55,7 @@ export default function Tools() {
           </Typography>
         </Grid>
 
-        <Grid item xs={12} sm={6} md={4} sx={{ mt: { xs: 7, sm: 0 } }}>
+        <Grid size={{xs:12, sm:6, md:4}} sx={{ mt: { xs: 7, sm: 0 } }}>
           <a href="https://ligify.groov.bio" target="__blank__">
             <img
               src="Ligify_Logo.png"
@@ -80,7 +80,7 @@ export default function Tools() {
             </a>
           </Typography>
         </Grid>
-        <Grid item xs={0} md={2} />
+        <Grid size={{xs:0, md:2}} />
       </Grid>
     </Box>
   );

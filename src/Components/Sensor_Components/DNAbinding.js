@@ -114,21 +114,27 @@ export default function DNAbinding({ operator_data }) {
     <Box sx={{ flexGrow: 1 }}>
       <Grid container style={{ width: '100%' }}>
         {/* Component Title */}
-        <Grid item xs={12}>
+        <Grid size={12}>
           <Typography
             component="div"
             variant="h5"
-            sx={{ ml: { xs: '5%', sm: '2.5%' }, fontSize: 28, fontWeight: 300 }}
+            sx={{ ml: { xs: '5%', sm: '2.5%' }, fontSize: {xs:24,sm:28}, fontWeight: 300 }}
           >
             DNA Binding
           </Typography>
         </Grid>
-        <Grid item xs={12} mt={1}>
+        <Grid size={12} mt={1}>
           {/* Container */}
-          <Paper elevation={0} sx={{ padding: 3, border: '1px solid #c7c7c7' }}>
+          <Paper 
+            elevation={0} 
+            sx={{ 
+            padding: 3, 
+            border: '1px solid #c7c7c7',
+            marginLeft: {xs:1,sm:0},
+            marginRight: {xs:1,sm:0} }}>
             <Grid container>
               {/* Operator Logo */}
-              <Grid item xs={12} md={12} sx={{ overflow: 'scroll' }}>
+              <Grid size={{xs:12, md:12}} sx={{ overflow: 'scroll' }}>
                 {isSmallScreen && logoMatrix ? (
                   <DNALogo ppm={logoMatrix} height="90px" yAxisMax={2.5} />
                 ) : (
@@ -144,9 +150,7 @@ export default function DNAbinding({ operator_data }) {
 
               {/* Operator data table */}
               <Grid
-                item
-                xs={12}
-                md={12}
+                size={12}
                 sx={{ height: '200px', pl: { xs: 0, md: 4 } }}
               >
                 <DataGrid
