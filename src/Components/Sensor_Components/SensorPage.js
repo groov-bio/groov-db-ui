@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation, useParams } from 'react-router-dom';
 
 import GenomeContext from './GenomeContext.js';
@@ -9,8 +9,28 @@ import DNAbinding from './DNAbinding.js';
 import MetadataTable from './MetadataTable.js';
 import ProteinStructure from './ProteinStructure';
 
-import { Box, Grid, Typography, Button, Skeleton } from '@mui/material';
+import { 
+  Box, 
+  Grid, 
+  Typography, 
+  Button, 
+  Skeleton, 
+  Container, 
+  Card, 
+  CardContent, 
+  Stack, 
+  Paper,
+  Chip,
+  Tab,
+  Tabs,
+  useMediaQuery,
+  useTheme
+} from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
+import InfoIcon from '@mui/icons-material/Info';
+import DnaIcon from '@mui/icons-material/Biotech';
+import AccountTreeIcon from '@mui/icons-material/AccountTree';
+import SourceIcon from '@mui/icons-material/Source';
 
 import useSensorStore from '../../zustand/sensor.store.js';
 import useUserStore from '../../zustand/user.store.js';
@@ -23,12 +43,20 @@ export default function SensorPage({ isAdmin, user }) {
   
   const navigate = useNavigate();
   const location = useLocation();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  
   // access data from zustand store
   const setSensorData = useSensorStore((context) => context.setSensorData);
   const sensorData = useSensorStore((context) => context.sensorData[uniprotID]);
   const currentUser = useUserStore((context) => context.user);
 
   const isAdminPath = location.pathname.startsWith('/admin');
+  const [activeTab, setActiveTab] = useState(0);
+
+  const handleTabChange = (_, newValue) => {
+    setActiveTab(newValue);
+  };
 
   const placement = {
     ligMT: 0,
@@ -65,76 +93,138 @@ export default function SensorPage({ isAdmin, user }) {
 
   const MissingDataComponent = ({ title, message }) => {
     return (
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          gap: '24px',
-        }}
-      >
-        <Typography
-          component="div"
-          style={{ marginLeft: '5%', fontSize: 28, fontWeight: 300 }}
-        >
-          {title}
-        </Typography>
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <Typography>{message}</Typography>
-        </Box>
-      </Box>
+      <Card sx={{ height: '100%', display: 'flex', alignItems: 'center' }}>
+        <CardContent sx={{ textAlign: 'center', width: '100%' }}>
+          <Typography variant="h6" gutterBottom sx={{ fontWeight: 300 }}>
+            {title}
+          </Typography>
+          <Typography color="text.secondary">
+            {message}
+          </Typography>
+        </CardContent>
+      </Card>
     );
   };
 
+  const SectionCard = ({ children, title, icon, dense = false }) => {
+    return (
+      <Card sx={{ height: '100%', borderRadius: 2 }}>
+        <CardContent sx={{ p: dense ? 2 : 3, '&:last-child': { pb: dense ? 2 : 3 } }}>
+          {title && (
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2 }}>
+              {icon}
+              <Typography variant="h6" sx={{ fontWeight: 600 }}>
+                {title}
+              </Typography>
+            </Box>
+          )}
+          {children}
+        </CardContent>
+      </Card>
+    );
+  };
+
+  const MetadataChip = ({ label, value, link }) => {
+    const content = (
+      <Chip
+        label={`${label}: ${value}`}
+        variant="outlined"
+        size="medium"
+        sx={{ 
+          m: 0.5, 
+          cursor: link ? 'pointer' : 'default',
+          '&:hover': link ? { backgroundColor: 'action.hover' } : {}
+        }}
+      />
+    );
+    
+    return link ? (
+      <Box component="a" href={link.url} target="_blank" rel="noopener" sx={{ textDecoration: 'none' }}>
+        {content}
+      </Box>
+    ) : content;
+  };
+
+  const TabPanel = ({ children, value, index }) => {
+    return (
+      <div hidden={value !== index}>
+        {value === index && <Box sx={{ pt: 2 }}>{children}</Box>}
+      </div>
+    );
+  };
+
+  if (sensorData === undefined) {
+    return (
+      <Container maxWidth="xl" sx={{ py: 4 }}>
+        <Stack spacing={3}>
+          <Skeleton variant="rectangular" height={80} sx={{ borderRadius: 2 }} />
+          <Grid container spacing={3}>
+            <Grid size={{ xs: 12, md: 8 }}>
+              <Skeleton variant="rectangular" height={400} sx={{ borderRadius: 2 }} />
+            </Grid>
+            <Grid size={{ xs: 12, md: 4 }}>
+              <Skeleton variant="rectangular" height={400} sx={{ borderRadius: 2 }} />
+            </Grid>
+          </Grid>
+        </Stack>
+      </Container>
+    );
+  }
+
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <Grid
-        container
-        spacing={3}
-        sx={{ minHeight: '100vh', mt: 5 }}
-        justifyContent="center"
-      >
-        {/* Alias with Edit Button */}
-        <Grid item size={12}>
-          <Box
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: 2,
-            }}
-          >
-            <Typography
-              component="div"
-              gutterBottom
-              sx={{
-                fontSize: { xs: 30, sm: 55 },
-                textAlign: 'center',
-                fontWeight: 300,
-              }}
-            >
-              {sensorData === undefined ? (
-                <Skeleton
-                  variant="text"
-                  width={200}
-                  height={80}
-                  animation="pulse"
+    <Container maxWidth="xl" sx={{ py: 3 }}>
+      <Stack spacing={3}>
+        {/* Header Section */}
+        <Paper sx={{ p: 3, borderRadius: 2, background: 'linear-gradient(135deg, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.05) 100%)' }}>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 2 }}>
+            <Box sx={{ flex: 1, minWidth: 0 }}>
+              <Typography
+                variant="h3"
+                component="h1"
+                sx={{
+                  fontSize: { xs: '1.75rem', sm: '2.5rem', md: '3rem' },
+                  fontWeight: 700,
+                  mb: 1,
+                  background: 'linear-gradient(45deg, #1976d2, #42a5f5)',
+                  backgroundClip: 'text',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                }}
+              >
+                {sensorData.alias}
+              </Typography>
+              <Typography 
+                variant="body1" 
+                color="text.secondary"
+                sx={{ mb: 2, lineHeight: 1.6 }}
+              >
+                {sensorData.about}
+              </Typography>
+              
+              {/* Quick Metadata Chips */}
+              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mt: 2 }}>
+                <MetadataChip 
+                  label="Family" 
+                  value={family?.toUpperCase()} 
                 />
-              ) : (
-                sensorData.alias
-              )}
-            </Typography>
-            {sensorData && !isAdminPath && (
+                <MetadataChip 
+                  label="Type" 
+                  value={sensorData.regulationType || 'Unknown'} 
+                />
+                <MetadataChip 
+                  label="Organism" 
+                  value={getFirstTwoWords(sensorData.organism)} 
+                  link={{
+                    url: `https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?lvl=0&id=${sensorData.organismID}`
+                  }}
+                />
+              </Box>
+            </Box>
+            
+            {!isAdminPath && (
               <Button
-                variant="outlined"
-                size="small"
+                variant="contained"
+                size="large"
                 startIcon={<EditIcon />}
                 onClick={() =>
                   navigate(
@@ -143,323 +233,198 @@ export default function SensorPage({ isAdmin, user }) {
                       : '/account?reason=editSensor'
                   )
                 }
-                sx={{
-                  ml: 2,
-                  display: { xs: 'none', sm: 'flex' },
-                }}
+                sx={{ borderRadius: 2 }}
               >
-                Edit
+                Edit Sensor
               </Button>
             )}
           </Box>
-          {/* Mobile edit button */}
-          {sensorData && !isAdminPath && (
-            <Box
-              sx={{
-                display: { xs: 'flex', sm: 'none' },
-                justifyContent: 'center',
-                mt: 1,
-              }}
-            >
-              <Button
-                variant="outlined"
-                size="small"
-                startIcon={<EditIcon />}
-                onClick={() =>
-                  navigate(
-                    currentUser
-                      ? `/editSensor/${family}/${uniprotID}`
-                      : '/account?reason=editSensor'
-                  )
-                }
-              >
-                Edit
-              </Button>
-            </Box>
-          )}
-        </Grid>
+        </Paper>
 
-        {/* About  */}
-        <Grid size={3} />
-        <Grid size={{xs:12, sm:6}} alignItems="center" sx={{ mb: {xs:0,sm:2} }}>
-          <Typography
-            component="div"
-            gutterBottom
-            sx={{ fontSize: { xs: 14, sm: 18 }, textAlign: 'center',
-            pl: {xs:3,sm:0},
-            pr: {xs:3,sm:0}
-                     }}
-          >
-            {sensorData === undefined ? (
-              <Box sx={{ textAlign: 'center' }}>
-                <Skeleton
-                  variant="text"
-                  width="80%"
-                  height={30}
-                  sx={{ mx: 'auto', mb: 1 }}
-                  animation="pulse"
-                />
-                <Skeleton
-                  variant="text"
-                  width="60%"
-                  height={30}
-                  sx={{ mx: 'auto' }}
-                  animation="pulse"
-                />
-              </Box>
-            ) : (
-              sensorData.about
-            )}
-          </Typography>
-        </Grid>
-        <Grid size={3} />
-
-        {/* Metadata Table */}
-        <Grid size={{xs:0, md:3}} />
-        <Grid size={{xs:12, md:6}} mb={{xs:0, sm:3}}>
-          {sensorData === undefined ? (
-            <Box sx={{ width: '100%' }}>
-              {Array.from({ length: 5 }).map((_, index) => (
-                <Box
-                  key={index}
-                  sx={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    mb: 2,
-                    p: 1,
-                  }}
+        {/* Main Content Area */}
+        <Grid container spacing={3}>
+          {/* Left Column - Primary Data */}
+          <Grid size={{ xs: 12, lg: 8 }}>
+            <Stack spacing={3}>
+              
+              {/* Navigation Tabs */}
+              <Paper sx={{ borderRadius: 2 }}>
+                <Tabs 
+                  value={activeTab} 
+                  onChange={handleTabChange}
+                  variant={isMobile ? 'scrollable' : 'fullWidth'}
+                  scrollButtons="auto"
+                  sx={{ borderBottom: 1, borderColor: 'divider' }}
                 >
-                  <Skeleton
-                    variant="text"
-                    width={120}
-                    height={30}
-                    animation="pulse"
-                  />
-                  <Skeleton
-                    variant="text"
-                    width={180}
-                    height={30}
-                    animation="pulse"
-                  />
-                </Box>
-              ))}
-            </Box>
-          ) : (
-            <MetadataTable
-              tableData={{
-                'Regulation Type': {
-                  name: sensorData.regulationType.length
-                    ? sensorData.regulationType
-                    : 'Unavailable',
-                },
-                'Uniprot ID': {
-                  name: sensorData.uniprotID,
-                  link: {
-                    url: `https://www.uniprot.org/uniprot/${sensorData.uniprotID}`,
-                  },
-                },
-                'RefSeq ID': {
-                  name: sensorData.accession,
-                  link: {
-                    url: `https://www.ncbi.nlm.nih.gov/protein/${sensorData.accession}`,
-                  },
-                },
-                'KEGG ID': {
-                  name: sensorData.keggID ? sensorData.keggID : 'None',
-                  ...(sensorData.keggID !== 'None' && {
-                    link: {
-                      url: `https://www.genome.jp/dbget-bin/www_bget?${sensorData.keggID}`,
+                  <Tab icon={<DnaIcon />} label="Structure & Sequence" />
+                  <Tab icon={<AccountTreeIcon />} label="Genome Context" />
+                  <Tab icon={<SourceIcon />} label="References" />
+                </Tabs>
+                
+                <TabPanel value={activeTab} index={0}>
+                  <Grid container spacing={3}>
+                    {/* Ligands */}
+                    <Grid size={{ xs: 12, md: 6 }}>
+                      {sensorData.ligands ? (
+                        <SectionCard title="Ligands" icon={<InfoIcon color="primary" />} dense>
+                          <LigandViewer
+                            ligand={sensorData.ligands}
+                            key={new Date().getTime()}
+                            placement={placement}
+                          />
+                        </SectionCard>
+                      ) : (
+                        <MissingDataComponent
+                          title="Ligands"
+                          message="No ligands submitted"
+                        />
+                      )}
+                    </Grid>
+                    
+                    {/* Protein Structure */}
+                    <Grid size={{ xs: 12, md: 6 }}>
+                      <SectionCard title="Protein Structure" icon={<DnaIcon color="primary" />} dense>
+                        <ProteinStructure
+                          key={new Date().getTime()}
+                          structureIDs={[
+                            ...(sensorData.structures ? sensorData.structures : []),
+                            `AF-${sensorData.uniprotID}-F1`,
+                          ]}
+                          uniprotID={sensorData.uniprotID}
+                        />
+                      </SectionCard>
+                    </Grid>
+                    
+                    {/* Sequence */}
+                    <Grid size={12}>
+                      <SectionCard title="Protein Sequence" icon={<DnaIcon color="primary" />}>
+                        <SeqViewer sequence={sensorData.sequence} />
+                      </SectionCard>
+                    </Grid>
+                    
+                    {/* DNA Binding Operators */}
+                    <Grid size={12}>
+                      {sensorData.operators ? (
+                        <SectionCard title="DNA Binding Operators" icon={<AccountTreeIcon color="primary" />}>
+                          <DNAbinding operator_data={sensorData.operators} />
+                        </SectionCard>
+                      ) : (
+                        <MissingDataComponent
+                          title="DNA Binding Operators"
+                          message="No operators submitted"
+                        />
+                      )}
+                    </Grid>
+                  </Grid>
+                </TabPanel>
+                
+                <TabPanel value={activeTab} index={1}>
+                  <SectionCard title="Genome Context" icon={<AccountTreeIcon color="primary" />}>
+                    <GenomeContext
+                      sensor={sensorData}
+                      key={new Date().getTime()}
+                      alias={sensorData.alias}
+                    />
+                  </SectionCard>
+                </TabPanel>
+                
+                <TabPanel value={activeTab} index={2}>
+                  <SectionCard title="References" icon={<SourceIcon color="primary" />}>
+                    <ReferenceViewer
+                      references={sensorData.fullReferences}
+                      key={new Date().getTime()}
+                    />
+                  </SectionCard>
+                </TabPanel>
+              </Paper>
+            </Stack>
+          </Grid>
+
+          {/* Right Sidebar - Metadata & Links */}
+          <Grid size={{ xs: 12, lg: 4 }}>
+            <Stack spacing={3}>
+              
+              {/* Detailed Metadata */}
+              <SectionCard title="Sensor Information" icon={<InfoIcon color="primary" />}>
+                <MetadataTable
+                  tableData={{
+                    'Regulation Type': {
+                      name: sensorData.regulationType.length
+                        ? sensorData.regulationType
+                        : 'Unavailable',
                     },
-                  }),
-                },
-                Organism: {
-                  name: getFirstTwoWords(sensorData.organism),
-                  link: {
-                    url: `https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?lvl=0&id=${sensorData.organismID}`,
-                  },
-                },
-              }}
-            />
-          )}
-        </Grid>
-        <Grid size={3} />
-
-        {/* Ligands  */}
-        <Grid size={{xs:12, sm:10, md:5, lg:4}} mb={5}>
-          {sensorData === undefined ? (
-            <Box sx={{ textAlign: 'center' }}>
-              <Skeleton
-                variant="text"
-                width={100}
-                height={40}
-                sx={{ mx: 'auto', mb: 2 }}
-                animation="pulse"
-              />
-              <Skeleton
-                variant="rectangular"
-                width="100%"
-                height={200}
-                animation="pulse"
-              />
-            </Box>
-          ) : sensorData.ligands ? (
-            <LigandViewer
-              ligand={sensorData.ligands}
-              key={new Date().getTime()}
-              placement={placement}
-            />
-          ) : (
-            <MissingDataComponent
-              title="Ligands"
-              message="No ligands submitted"
-            />
-          )}
-        </Grid>
-
-        {/* Structure  */}
-        <Grid size={{xs:10, sm:10, md:5, lg:4}} mb={5}>
-          {sensorData === undefined ? (
-            <Box sx={{ textAlign: 'center' }}>
-              <Skeleton
-                variant="text"
-                width={120}
-                height={40}
-                sx={{ mx: 'auto', mb: 2 }}
-                animation="pulse"
-              />
-              <Skeleton
-                variant="rectangular"
-                width="100%"
-                height={300}
-                animation="pulse"
-              />
-            </Box>
-          ) : (
-            <ProteinStructure
-              key={new Date().getTime()}
-              structureIDs={[
-                ...(sensorData.structures ? sensorData.structures : []),
-                `AF-${sensorData.uniprotID}-F1`,
-              ]}
-              uniprotID={sensorData.uniprotID}
-            />
-          )}
+                    'Uniprot ID': {
+                      name: sensorData.uniprotID,
+                      link: {
+                        url: `https://www.uniprot.org/uniprot/${sensorData.uniprotID}`,
+                      },
+                    },
+                    'RefSeq ID': {
+                      name: sensorData.accession,
+                      link: {
+                        url: `https://www.ncbi.nlm.nih.gov/protein/${sensorData.accession}`,
+                      },
+                    },
+                    'KEGG ID': {
+                      name: sensorData.keggID ? sensorData.keggID : 'None',
+                      ...(sensorData.keggID !== 'None' && {
+                        link: {
+                          url: `https://www.genome.jp/dbget-bin/www_bget?${sensorData.keggID}`,
+                        },
+                      }),
+                    },
+                    Organism: {
+                      name: getFirstTwoWords(sensorData.organism),
+                      link: {
+                        url: `https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?lvl=0&id=${sensorData.organismID}`,
+                      },
+                    },
+                  }}
+                />
+              </SectionCard>
+              
+              {/* Quick Actions */}
+              <Paper sx={{ p: 2, borderRadius: 2 }}>
+                <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>
+                  Quick Actions
+                </Typography>
+                <Stack spacing={1}>
+                  <Button 
+                    variant="outlined" 
+                    fullWidth 
+                    href={`https://www.uniprot.org/uniprot/${sensorData.uniprotID}`}
+                    target="_blank"
+                    sx={{ justifyContent: 'flex-start' }}
+                  >
+                    View in UniProt
+                  </Button>
+                  <Button 
+                    variant="outlined" 
+                    fullWidth 
+                    href={`https://www.ncbi.nlm.nih.gov/protein/${sensorData.accession}`}
+                    target="_blank"
+                    sx={{ justifyContent: 'flex-start' }}
+                  >
+                    View in NCBI
+                  </Button>
+                  {sensorData.keggID && sensorData.keggID !== 'None' && (
+                    <Button 
+                      variant="outlined" 
+                      fullWidth 
+                      href={`https://www.genome.jp/dbget-bin/www_bget?${sensorData.keggID}`}
+                      target="_blank"
+                      sx={{ justifyContent: 'flex-start' }}
+                    >
+                      View in KEGG
+                    </Button>
+                  )}
+                </Stack>
+              </Paper>
+            </Stack>
+          </Grid>
         </Grid>
 
-        {/* Sequence  */}
-        <Grid size={{xs:12, sm:10, md:10, lg:8}} mb={5}>
-          {sensorData === undefined ? (
-            <Box>
-              <Skeleton
-                variant="text"
-                width={120}
-                height={40}
-                sx={{ mb: 2 }}
-                animation="pulse"
-              />
-              <Skeleton
-                variant="rectangular"
-                width="100%"
-                height={150}
-                animation="pulse"
-              />
-            </Box>
-          ) : (
-            <SeqViewer sequence={sensorData.sequence} />
-          )}
-        </Grid>
-
-        {/* Operator */}
-        <Grid size={{xs:12, sm:10, md:10, lg:8}} mb={5}>
-          {sensorData === undefined ? (
-            <Box>
-              <Skeleton
-                variant="text"
-                width={120}
-                height={40}
-                sx={{ mb: 2 }}
-                animation="pulse"
-              />
-              <Skeleton
-                variant="rectangular"
-                width="100%"
-                height={120}
-                animation="pulse"
-              />
-            </Box>
-          ) : sensorData.operators ? (
-            <DNAbinding operator_data={sensorData.operators} />
-          ) : (
-            <MissingDataComponent
-              title="Operators"
-              message="No operators submitted"
-            />
-          )}
-        </Grid>
-
-        {/* Genome Context  */}
-        <Grid size={{xs:12, sm:10, md:10, lg:8}} mb={5}>
-          {sensorData === undefined ? (
-            <Box>
-              <Skeleton
-                variant="text"
-                width={150}
-                height={40}
-                sx={{ mb: 2 }}
-                animation="pulse"
-              />
-              <Skeleton
-                variant="rectangular"
-                width="100%"
-                height={200}
-                animation="pulse"
-              />
-            </Box>
-          ) : (
-            <GenomeContext
-              sensor={sensorData}
-              key={new Date().getTime()}
-              alias={sensorData.alias}
-            />
-          )}
-        </Grid>
-
-        {/* References */}
-        <Grid size={{xs:12, sm:10, md:10, lg:8}}>
-          {sensorData === undefined ? (
-            <Box>
-              <Skeleton
-                variant="text"
-                width={120}
-                height={40}
-                sx={{ mb: 2 }}
-                animation="pulse"
-              />
-              {Array.from({ length: 3 }).map((_, index) => (
-                <Box key={index} sx={{ mb: 2 }}>
-                  <Skeleton
-                    variant="text"
-                    width="90%"
-                    height={25}
-                    animation="pulse"
-                  />
-                  <Skeleton
-                    variant="text"
-                    width="70%"
-                    height={20}
-                    animation="pulse"
-                  />
-                </Box>
-              ))}
-            </Box>
-          ) : (
-            <ReferenceViewer
-              references={sensorData.fullReferences}
-              key={new Date().getTime()}
-            />
-          )}
-        </Grid>
-      </Grid>
-    </Box>
+      </Stack>
+    </Container>
   );
 }

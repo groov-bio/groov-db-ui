@@ -27,12 +27,15 @@ import CloseIcon from '@mui/icons-material/Close';
 import Person from '@mui/icons-material/Person';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import LightModeIcon from '@mui/icons-material/LightMode';
 
 import { Auth } from 'aws-amplify';
 import '@aws-amplify/ui-react/styles.css';
 
 import useUserStore from '../zustand/user.store';
 import { checkAuthStatus, signOutUser, signIn } from '../utils/auth';
+import { useThemeMode } from '../contexts/ThemeContext';
 
 const navItems = ['Browse', 'Tools', 'About'];
 const linkItems = ['/database', '/tools', '/about/about-groovdb'];
@@ -91,6 +94,7 @@ export default function NavigationBar(props) {
 
   const user = useUserStore((context) => context.user);
   const setUser = useUserStore((context) => context.setUser);
+  const { isDarkMode, toggleTheme } = useThemeMode();
 
   // Check authentication status on component mount
   useEffect(() => {
@@ -126,7 +130,7 @@ export default function NavigationBar(props) {
       <AppBar
         component="nav"
         sx={{
-          backgroundColor: 'black',
+          backgroundColor: (theme) => theme.palette.mode === 'dark' ? '#000' : '#000',
           alignItems: { xs: 'left', sm: 'center' },
         }}
         id="top_menu_bar"
@@ -209,6 +213,21 @@ export default function NavigationBar(props) {
           </Box>
         </Toolbar>
 
+        {/* Dark mode toggle for desktop */}
+        <IconButton
+          onClick={toggleTheme}
+          sx={{ 
+            position: 'absolute', 
+            top: '8px', 
+            right: '80px',
+            display: { xs: 'none', sm: 'flex' },
+            color: 'white'
+          }}
+          title={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+        >
+          {isDarkMode ? <LightModeIcon /> : <DarkModeIcon />}
+        </IconButton>
+
         <IconButton
           onClick={handleAvatarClick}
           sx={{ position: 'absolute', top: '2px', right: '10px' }}
@@ -229,7 +248,7 @@ export default function NavigationBar(props) {
                   <Link
                     key={'account'}
                     to={'/account'}
-                    style={{ color: 'black', textDecoration: 'none' }}
+                    style={{ color: 'inherit', textDecoration: 'none' }}
                   >
                     <MenuItem>Account</MenuItem>
                   </Link>
@@ -237,7 +256,7 @@ export default function NavigationBar(props) {
                   <Link
                     key={'signout'}
                     to="#"
-                    style={{ color: 'black', textDecoration: 'none' }}
+                    style={{ color: 'inherit', textDecoration: 'none' }}
                     onClick={handleSignOut}
                   >
                     <MenuItem>Sign Out</MenuItem>
@@ -249,7 +268,7 @@ export default function NavigationBar(props) {
                   <Link
                     key={'signIn'}
                     to={'#'}
-                    style={{ color: 'black', textDecoration: 'none' }}
+                    style={{ color: 'inherit', textDecoration: 'none' }}
                     onClick={handleSignIn}
                   >
                     <MenuItem>Sign In</MenuItem>
@@ -264,13 +283,14 @@ export default function NavigationBar(props) {
       {/* This is the white box that flips out from the top */}
       {mobileOpen ? (
         <List
-          style={{
-            backgroundColor: 'white',
+          sx={{
+            backgroundColor: 'background.paper',
             position: 'fixed',
             width: '100%',
             paddingTop: '70px',
             zIndex: 1000,
-            borderBottom: '1px solid black',
+            borderBottom: 1,
+            borderColor: 'divider',
           }}
         >
           {indexes.map((index) => (
@@ -303,7 +323,7 @@ export default function NavigationBar(props) {
                           onClick={handleDrawerToggle}
                           key={subIndex}
                           style={{
-                            color: 'black',
+                            color: 'inherit',
                             textDecoration: 'none',
                             textTransform: 'none',
                             width: '100vw',
@@ -334,7 +354,7 @@ export default function NavigationBar(props) {
                     <ListItemButton>
                       <ListItemText>
                         <Typography
-                          sx={{ fontSize: 20, fontWeight: 300, color: 'black' }}
+                          sx={{ fontSize: 20, fontWeight: 300, color: 'text.primary' }}
                         >
                           {navItems[index]}
                         </Typography>
@@ -345,6 +365,18 @@ export default function NavigationBar(props) {
               )}
             </React.Fragment>
           ))}
+          
+          {/* Dark mode toggle for mobile */}
+          <ListItem disablePadding>
+            <ListItemButton onClick={toggleTheme}>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                {isDarkMode ? <LightModeIcon /> : <DarkModeIcon />}
+                <Typography sx={{ fontSize: 20, fontWeight: 300, color: 'text.primary' }}>
+                  {isDarkMode ? 'Light Mode' : 'Dark Mode'}
+                </Typography>
+              </Box>
+            </ListItemButton>
+          </ListItem>
         </List>
       ) : null}
     </>
