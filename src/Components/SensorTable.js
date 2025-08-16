@@ -112,7 +112,7 @@ export default function SensorTable(props) {
   const selectionPrompt = () => {
     return (
       <Box>
-        <Grid container spacing={4} columns={12} mt={8} justifyContent="center">
+        <Grid container spacing={4} columns={12} mt={3} justifyContent="center">
           <Grid size={10} mb={6}>
             <Typography
               sx={{ fontSize: { xs: 22, md: 24 }, textAlign: 'center' }}
@@ -214,11 +214,11 @@ export default function SensorTable(props) {
       direction="column"
       alignItems="center"
       justify="center"
-      sx={{ minHeight: '100vh', mt: 5 }}
+      sx={{ minHeight: '100vh', mt: 4 }}
     >
       {/* Back to All Sensors Button - only show for family-specific views */}
-      {!isAllSensors && (
-        <Box sx={{ alignSelf: 'flex-start', mb: 2, ml: 2 }}>
+      {/* {!isAllSensors && (
+        <Box sx={{ mb: 3 }}>
           <Button 
             component={Link} 
             to="/database" 
@@ -228,10 +228,10 @@ export default function SensorTable(props) {
             ← Back to All Sensors
           </Button>
         </Box>
-      )}
+      )} */}
 
       {/* Family Name  */}
-      <Typography
+      {/* <Typography
         component="div"
         gutterBottom
         sx={{
@@ -240,12 +240,12 @@ export default function SensorTable(props) {
         }}
       >
         {isAllSensors ? 'All Sensors' : props.family}
-      </Typography>
+      </Typography> */}
 
       {/* Regulator Table  */}
       <Box
         sx={{
-          height: 400,
+          height: {xs:500, md:600},
           width: { xs: '90%', sm: '75%', md: '60%' },
         }}
       >
@@ -267,7 +267,7 @@ export default function SensorTable(props) {
             disableRowSelectionOnClick
 
             initialState={{
-              pagination: { paginationModel: { pageSize: 10 } },
+              pagination: { paginationModel: { pageSize: 20 } },
               columns: {
                 columnVisibilityModel: {
                   // Hide these columns

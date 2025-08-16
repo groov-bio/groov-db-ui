@@ -31,6 +31,7 @@ export default function RegFamilyTiles() {
   });
 
   const torender = [
+    { image: '/All-families.png', family: '' },
     { image: '/TetR-family.png', family: 'TetR' },
     { image: '/LysR-family.png', family: 'LysR' },
     { image: '/AraC-family.png', family: 'AraC' },
@@ -55,10 +56,11 @@ export default function RegFamilyTiles() {
             sx={{ 
               fontSize: { xs: 24, sm: 28, md: 32 }, 
               fontWeight: 300,
-              mb: 3 
+              mb: 3,
+              mt:3, 
             }}
           >
-            {family === "all" ? "Sensor Database" : `${family} Family Sensors`}
+            {family === "all" ? "All Sensor Families" : `${family} Family Sensors`}
           </Typography>
           <Typography
             variant="body1"
@@ -90,7 +92,7 @@ export default function RegFamilyTiles() {
             <Button 
               variant="contained" 
               href="/addSensor"
-              size={isMobile ? 'medium' : 'large'}
+              size="medium"
               sx={{ minWidth: { xs: 200, sm: 'auto' } }}
             >
               Add a sensor
@@ -121,7 +123,7 @@ export default function RegFamilyTiles() {
       <Typography
         variant="h6"
         sx={{ 
-          textAlign: { xs: 'center', md: 'left' },
+          textAlign:'center',
           mb: 3,
           fontSize: { xs: 18, md: 16 },
           fontWeight: 600,
@@ -154,7 +156,7 @@ export default function RegFamilyTiles() {
                     alt={`${item.family} family`}
                     sx={{
                       width: '100%',
-                      height: 80,
+                      height: 75,
                       objectFit: 'contain',
                     }}
                   />
@@ -187,7 +189,7 @@ export default function RegFamilyTiles() {
             <CardActionArea 
               component={Link} 
               to={`/database/${item.family}`}
-              sx={{ p: 2 }}
+              sx={{ p: 1 }}
             >
               <Box
                 component="img"
@@ -195,7 +197,7 @@ export default function RegFamilyTiles() {
                 alt={`${item.family} family`}
                 sx={{
                   width: '100%',
-                  height: 90,
+                  height: 120,
                   objectFit: 'contain',
                   filter: 'contrast(1.1) brightness(1.05)',
                 }}
