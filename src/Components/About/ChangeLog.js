@@ -93,7 +93,15 @@ export default function ChangeLog() {
             have any suggestions, please <Link href="contact">contact us</Link>.
           </Typography>
         </Box>
-
+        <Box id="v1.17" sx={{ gridColumn: 'span 12' }}>
+          <Box>
+            {getHeader('30 August, 2025', '1.17', 'Feature')}
+            {createList([
+              `Let there be - dark?`,
+              `We've added dark mode and a variety of UX improvements such as a new tab view on the sensor page.`,
+            ])}
+          </Box>
+        </Box>
         <Box id="v1.16" sx={{ gridColumn: 'span 12' }}>
           <Box>
             {getHeader('13 August, 2025', '1.16', 'Feature')}
