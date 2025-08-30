@@ -135,6 +135,7 @@ export default function AdvancedSearch() {
           disabled={!isDataLoaded}
           size={isMobile ? 'small' : 'small'}
           sx={{ my: 1 }}
+          id="ligand-search-input"
         />
 
         <Box
@@ -155,6 +156,7 @@ export default function AdvancedSearch() {
               fontSize: { xs: '0.65rem', sm: '0.9rem' },
             }}
             disabled={!isDataLoaded}
+            id="use-example-smiles"
           >
             Use Example SMILES
           </Button>
@@ -238,6 +240,7 @@ export default function AdvancedSearch() {
           sx={{ mt: 2 }}
           fullWidth
           size="small"
+          id="search-button"
         >
           {loading ? <CircularProgress size={24} /> : 'Search'}
         </Button>
@@ -256,7 +259,7 @@ export default function AdvancedSearch() {
             zIndex: 10,
           }}
         >
-          <Typography variant="h6" sx={{ p: 2, pb: 1 }}>
+          <Typography variant="h6" sx={{ p: 2, pb: 1 }} id="results-total">
             Results ({searchResults.length})
           </Typography>
 
@@ -282,6 +285,7 @@ export default function AdvancedSearch() {
               >
                 <ListItemText
                   primary={result.label}
+                  id={`${result.sensorId} - ${result.ligandId}`}
                   secondary={
                     <>
                       <Typography component="span" variant="body2">
@@ -293,6 +297,7 @@ export default function AdvancedSearch() {
                         variant="body2"
                         color="primary"
                         fontWeight="bold"
+                        id={`${result.sensorId} - ${result.ligandId} - score`}
                       >
                         Similarity Score: {Math.round(result.similarity * 100)}%
                       </Typography>

@@ -69,6 +69,7 @@ export default function Home() {
           }}
           component="div"
           textAlign="center"
+          id="home-page-header"
         >
           Find your sensor
         </Typography>
