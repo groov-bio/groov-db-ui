@@ -11,21 +11,21 @@ describe('Tools spec', () => {
 
     cy.visit('http://localhost:3000');
     /* ==== Generated with Cypress Studio ==== */
-    cy.get(':nth-child(2) > a').click();
+    cy.get('#Tools').click();
     cy.get('[href="https://snowprint.groov.bio"] > img').should('be.visible');
     cy.get('[href="https://ligify.groov.bio"] > img').should('be.visible');
-    cy.get('.css-11l5t4l-MuiGrid-root > .MuiTypography-root').should(
+    cy.get('#snowprint-desc').should(
       'be.visible'
     );
-    cy.get('.css-14k4ick-MuiGrid-root > .MuiTypography-root').should(
+    cy.get('#ligify-desc').should(
       'be.visible'
     );
-    cy.get('.css-11l5t4l-MuiGrid-root > .MuiTypography-root > a').should(
+    cy.get('#snowprint-link').should(
       'have.attr',
       'href',
       'https://doi.org/10.1038/s42003-024-05849-8'
     );
-    cy.get('.css-14k4ick-MuiGrid-root > .MuiTypography-root > a').should(
+    cy.get('#ligify-link').should(
       'have.attr',
       'href',
       'https://www.biorxiv.org/content/10.1101/2024.02.20.581298v1'

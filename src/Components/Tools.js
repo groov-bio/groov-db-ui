@@ -41,6 +41,7 @@ export default function Tools() {
             fontWeight="400"
             pl={10}
             pr={10}
+            id="snowprint-desc"
           >
             Snowprint uses phylogenetic information to predict DNA sequences
             bound by an input transcription factor. Details of the method can be
@@ -49,6 +50,7 @@ export default function Tools() {
               href="https://doi.org/10.1038/s42003-024-05849-8"
               target="__blank"
               style={{ textDecoration: 'None' }}
+              id="snowprint-link"
             >
               this publication.
             </a>
@@ -67,6 +69,7 @@ export default function Tools() {
             fontWeight="400"
             pl={10}
             pr={10}
+            id="ligify-desc"
           >
             Ligify uses enzyme reaction data to predict transcription factors
             responsive to an input chemical. Details of the method can be found
@@ -75,6 +78,7 @@ export default function Tools() {
               href="https://www.biorxiv.org/content/10.1101/2024.02.20.581298v1"
               target="__blank"
               style={{ textDecoration: 'None' }}
+              id="ligify-link"
             >
               this publication.
             </a>
