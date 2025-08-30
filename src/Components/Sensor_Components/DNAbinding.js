@@ -153,6 +153,7 @@ export default function DNAbinding({ operator_data }) {
                 <DataGrid
                   rows={rows}
                   columns={columns}
+                  getRowId={(row) => row.sequence || `row-${row.id}`}
                   autoPageSize
                   height="400px"
                   rowsPerPageOptions={[5]}

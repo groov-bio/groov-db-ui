@@ -117,6 +117,7 @@ export default function LigandViewer({ ligand, placement }) {
             <Typography
               component="div"
               sx={{ textAlign: 'center', fontSize: {xs:18, sm:24}, fontWeight: 400 }}
+              id="sensor-ligand-name"
             >
               {ligandName}
             </Typography>
@@ -163,6 +164,7 @@ export default function LigandViewer({ ligand, placement }) {
                   component="span"
                   width="100px"
                   sx={{ fontSize: { xs: 14, sm: 16, md: 16 } }}
+                  id="sensor-ligand-figure"
                 >
                   {ligand[ligandNumber - 1]['ref_figure']}
                 </Typography>
@@ -198,6 +200,7 @@ export default function LigandViewer({ ligand, placement }) {
                   component="span"
                   width="100px"
                   sx={{ fontSize: { xs: 14, sm: 16, md: 16 } }}
+                  id="sensor-ligand-method"
                 >
                   {ligand[ligandNumber - 1]['method']}
                 </Typography>

@@ -132,12 +132,13 @@ export default function SensorPage({ isAdmin, user, family: propFamily, uniprotI
     );
   };
 
-  const MetadataChip = ({ label, value, link }) => {
+  const MetadataChip = ({ label, value, link, id }) => {
     const content = (
       <Chip
         label={`${label}: ${value}`}
         variant="outlined"
         size="medium"
+        id={id}
         sx={{ 
           m: 0.5, 
           cursor: link ? 'pointer' : 'default',
@@ -205,6 +206,7 @@ export default function SensorPage({ isAdmin, user, family: propFamily, uniprotI
                 variant="body1" 
                 color="text.secondary"
                 sx={{ mb: 2, lineHeight: 1.6 }}
+                id="sensor-about"
               >
                 {sensorData.about}
               </Typography>
@@ -214,10 +216,12 @@ export default function SensorPage({ isAdmin, user, family: propFamily, uniprotI
                 <MetadataChip 
                   label="Family" 
                   value={family?.toUpperCase()} 
+                  id={'sensor-metadata-family'}
                 />
                 <MetadataChip 
                   label="Type" 
                   value={sensorData.regulationType || 'Unknown'} 
+                  id="sensor-metadata-type"
                 />
                 <MetadataChip 
                   label="Organism" 
@@ -225,6 +229,7 @@ export default function SensorPage({ isAdmin, user, family: propFamily, uniprotI
                   link={{
                     url: `https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?lvl=0&id=${sensorData.organismID}`
                   }}
+                  id="sensor-metadata-organism"
                 />
               </Box>
             </Box>
@@ -273,11 +278,11 @@ export default function SensorPage({ isAdmin, user, family: propFamily, uniprotI
               scrollButtons="auto"
               sx={{ borderBottom: 1, borderColor: 'divider' }}
             >
-              <Tab icon={<InfoIcon />} label="Overview" />
-              <Tab icon={<DnaIcon />} label="Structure & Ligands" />
-              <Tab icon={<SourceIcon />} label="Sequence & Operators" />
-              <Tab icon={<AccountTreeIcon />} label="Genome Context" />
-              <Tab icon={<MenuBookIcon />} label="References" />
+              <Tab icon={<InfoIcon />} label="Overview" id="sensor-overview-tab"/>
+              <Tab icon={<DnaIcon />} label="Structure & Ligands" id="sensor-ligands-tab"/>
+              <Tab icon={<SourceIcon />} label="Sequence & Operators" id="sensor-operators-tab"/>
+              <Tab icon={<AccountTreeIcon />} label="Genome Context" id="sensor-genomes-tab"/>
+              <Tab icon={<MenuBookIcon />} label="References" id="sensor-refs-tab"/>
             </Tabs>
           
           {/* Tab 0: Overview - Sensor Information & Quick Actions */}

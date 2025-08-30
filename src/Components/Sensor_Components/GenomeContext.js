@@ -206,26 +206,31 @@ export default function GenomeContext({ sensor, alias }) {
                 >
                   <Chip 
                     label="Enzyme" 
+                    id="enzyme-chip"
                     size={isSmallScreen ? "small" : "medium"}
                     sx={{backgroundColor: '#ff3021', color: "white", fontSize: {xs:10,sm:16}}}
                   />
                   <Chip 
                     label="Transporter" 
+                    id="transporter-chip"
                     size={isSmallScreen ? "small" : "medium"}
                     sx={{backgroundColor: "yellow", color: "black", fontSize: {xs:10,sm:16}}}
                   />
                   <Chip 
                     label="Regulator" 
+                    id="regulator-chip"
                     size={isSmallScreen ? "small" : "medium"}
                     sx={{backgroundColor: "#3030fc", color: "white", fontSize: {xs:10,sm:16}}}
                   />
                   <Chip 
                     label="Other" 
+                    id="other-chip"
                     size={isSmallScreen ? "small" : "medium"}
                     sx={{backgroundColor: "#3d3d3d", color: "white", fontSize: {xs:10,sm:16}}}
                   />
                   <Chip 
                     label={alias} 
+                    id="alias-chip"
                     size={isSmallScreen ? "small" : "medium"}
                     sx={{backgroundColor: "#008c02", color: "white", fontSize: {xs:10,sm:16}}}
                   />
