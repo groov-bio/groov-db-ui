@@ -8,6 +8,7 @@ import SeqViewer from './SeqViewer.js';
 import DNAbinding from './DNAbinding.js';
 import MetadataTable from './MetadataTable.js';
 import ProteinStructure from './ProteinStructure';
+import SinglePageView from './SinglePageView.js';
 
 import { 
   Box, 
@@ -23,6 +24,8 @@ import {
   Chip,
   Tab,
   Tabs,
+  Switch,
+  FormControlLabel,
   useMediaQuery,
   useTheme
 } from '@mui/material';
@@ -57,6 +60,7 @@ export default function SensorPage({ isAdmin, user, family: propFamily, uniprotI
   const isAdminPath = location.pathname.startsWith('/admin');
   const [activeTab, setActiveTab] = useState(0);
   const [isNightingaleLoaded, setIsNightingaleLoaded] = useState(false);
+  const [isTabView, setIsTabView] = useState(true);
 
   const handleTabChange = (_, newValue) => {
     setActiveTab(newValue);
@@ -225,41 +229,56 @@ export default function SensorPage({ isAdmin, user, family: propFamily, uniprotI
               </Box>
             </Box>
             
-            {!isAdminPath && (
-              <Button
-                variant="contained"
-                size="large"
-                startIcon={<EditIcon />}
-                onClick={() =>
-                  navigate(
-                    currentUser
-                      ? `/editSensor/${family}/${uniprotID}`
-                      : '/account?reason=editSensor'
-                  )
+            <Box sx={{ display: 'flex', gap: 2, alignItems: 'center', flexWrap: 'wrap' }}>
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={isTabView}
+                    onChange={(e) => setIsTabView(e.target.checked)}
+                    color="primary"
+                  />
                 }
-                sx={{ borderRadius: 2 }}
-              >
-                Edit Sensor
-              </Button>
-            )}
+                label={isTabView ? "Tab View" : "Single Page"}
+                sx={{ m: 0 }}
+              />
+              
+              {!isAdminPath && (
+                <Button
+                  variant="contained"
+                  size="large"
+                  startIcon={<EditIcon />}
+                  onClick={() =>
+                    navigate(
+                      currentUser
+                        ? `/editSensor/${family}/${uniprotID}`
+                        : '/account?reason=editSensor'
+                    )
+                  }
+                  sx={{ borderRadius: 2 }}
+                >
+                  Edit Sensor
+                </Button>
+              )}
+            </Box>
           </Box>
         </Paper>
 
-        {/* Full Width Tabs */}
-        <Paper sx={{ borderRadius: 2 }}>
-          <Tabs 
-            value={activeTab} 
-            onChange={handleTabChange}
-            variant={isMobile ? 'scrollable' : 'fullWidth'}
-            scrollButtons="auto"
-            sx={{ borderBottom: 1, borderColor: 'divider' }}
-          >
-            <Tab icon={<InfoIcon />} label="Overview" />
-            <Tab icon={<DnaIcon />} label="Structure & Ligands" />
-            <Tab icon={<SourceIcon />} label="Sequence & Operators" />
-            <Tab icon={<AccountTreeIcon />} label="Genome Context" />
-            <Tab icon={<MenuBookIcon />} label="References" />
-          </Tabs>
+        {/* Conditional View Rendering */}
+        {isTabView ? (
+          <Paper sx={{ borderRadius: 2 }}>
+            <Tabs 
+              value={activeTab} 
+              onChange={handleTabChange}
+              variant={isMobile ? 'scrollable' : 'fullWidth'}
+              scrollButtons="auto"
+              sx={{ borderBottom: 1, borderColor: 'divider' }}
+            >
+              <Tab icon={<InfoIcon />} label="Overview" />
+              <Tab icon={<DnaIcon />} label="Structure & Ligands" />
+              <Tab icon={<SourceIcon />} label="Sequence & Operators" />
+              <Tab icon={<AccountTreeIcon />} label="Genome Context" />
+              <Tab icon={<MenuBookIcon />} label="References" />
+            </Tabs>
           
           {/* Tab 0: Overview - Sensor Information & Quick Actions */}
           <TabPanel value={activeTab} index={0}>
@@ -438,8 +457,16 @@ export default function SensorPage({ isAdmin, user, family: propFamily, uniprotI
               </SectionCard>
             </Container>
           </TabPanel>
-        </Paper>
-
+          </Paper>
+        ) : (
+          <SinglePageView
+            sensorData={sensorData}
+            family={family}
+            isNightingaleLoaded={isNightingaleLoaded}
+            setIsNightingaleLoaded={setIsNightingaleLoaded}
+            placement={placement}
+          />
+        )}
 
       </Stack>
     </Container>
