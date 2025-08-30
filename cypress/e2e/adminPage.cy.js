@@ -19,26 +19,13 @@ describe('Admin page spec', () => {
 
     cy.setupAdminAuth();
     cy.visit('http://localhost:3000/admin/');
+
     /* ==== Generated with Cypress Studio ==== */
-    cy.get('.MuiGrid-grid-xs-10 > .MuiTypography-root').should(
-      'have.text',
-      ' Administrator page'
-    );
-    cy.get('.MuiDataGrid-row > [data-field="family"]').should(
-      'have.text',
-      'TETR'
-    );
-    cy.get('.MuiDataGrid-row > [data-field="uniProtID"]').should(
-      'have.text',
-      'Q82H41'
-    );
-    cy.get('[data-id="0"] > [data-field="alias"]').should(
-      'have.text',
-      'A0A0D5YGI2'
-    );
-    cy.get(
-      ':nth-child(5) > .MuiDataGrid-root > .MuiDataGrid-main > [style="overflow: visible; height: 0px; width: 0px;"] > .MuiDataGrid-virtualScroller > .MuiDataGrid-virtualScrollerContent > .MuiDataGrid-virtualScrollerRenderZone > .MuiDataGrid-row--lastVisible > [data-field="alias"]'
-    ).should('have.text', 'Q82H41');
+    cy.get('.MuiDataGrid-row > [data-field="family"]').should('have.text', 'TETR');
+    cy.get('.css-1yjvs5a > .MuiBox-root > .MuiDataGrid-root > .MuiDataGrid-mainContent > .MuiDataGrid-main > .MuiDataGrid-virtualScroller > .MuiDataGrid-virtualScrollerContent > .MuiDataGrid-virtualScrollerRenderZone > .MuiDataGrid-row > [data-field="alias"]').should('have.text', 'AvaR1');
+    cy.get('.MuiDataGrid-row > [data-field="uniProtID"]').should('have.text', 'Q82H41');
+    cy.get('.MuiDataGrid-row--firstVisible > [data-field="alias"] > .MuiButtonBase-root').should('have.text', 'A0A0D5YGI2');
+    cy.get('.MuiDataGrid-row--lastVisible > [data-field="alias"] > .MuiButtonBase-root').should('have.text', 'Q82H41');
     /* ==== End Cypress Studio ==== */
   });
 
@@ -93,42 +80,19 @@ describe('Admin page spec', () => {
 
     /* ==== Generated with Cypress Studio ==== */
     cy.get('[data-field="view"] > .MuiButtonBase-root').click();
-    cy.get(
-      ':nth-child(3) > .MuiGrid-container > .MuiGrid-grid-xs-5 > .MuiTypography-inherit > .MuiTypography-root'
-    ).should('have.text', 'WP_010985136.1');
-    cy.get(
-      ':nth-child(2) > .MuiGrid-container > .MuiGrid-grid-xs-5 > .MuiTypography-inherit > .MuiTypography-root'
-    ).should('have.text', 'Q82H41');
-    cy.get(
-      ':nth-child(5) > .MuiGrid-container > .MuiGrid-grid-xs-5 > .MuiTypography-inherit > .MuiTypography-root'
-    ).should('have.text', 'Streptomyces avermitilis');
-    cy.get(
-      '.MuiGrid-grid-xs-10 > .MuiBox-root > [style="width: 100%;"] > :nth-child(5) > .MuiGrid-container > .MuiGrid-grid-xs-6 > .MuiTypography-root'
-    ).should('have.text', 'Predicted');
-    cy.get(
-      '.css-t5dqux > [style="width: 100%;"] > :nth-child(4) > .MuiGrid-container > .MuiGrid-grid-xs-6 > .MuiTypography-inherit > .MuiTypography-root'
-    ).should('have.text', 'Figure 1E');
-    cy.get(
-      ':nth-child(10) > .css-i9gxme > [style="width: 100%;"] > .css-ox9j43-MuiGrid-root > .MuiPaper-root'
-    ).should(
-      'have.text',
-      'Length234MARQERAIRTRQTILVAAAEVFDEVGYEAATISDVLKRSGVTKGALYFHFTSKQELAQAVLAEQVASLPRVPEQELKLQQSLDEALLLAHLLREGTGDPIVQGSVRLTVDQGSPRDHLNRRVPMQAWTEHTQSLFEEARAKGEILPHADVEALAKLFVGAFTGVQVLSRIMTGRADLAERVADLYRHLMPSFAMPGILVRLDFSPERGSRVYEAAMKQRESAAASTTDAARTLE'
-    );
-    cy.get('[data-field="sequence"] > .MuiDataGrid-cellContent').should(
-      'have.text',
-      'GCAAGATACGTACTAGTACGTATCTTGC'
-    );
-    cy.get('.MuiDataGrid-cell--withRenderer > .MuiTypography-root').should(
-      'have.attr',
-      'href',
-      'https://doi.org/10.7554/eLife.57824'
-    );
-    cy.get(
-      '.MuiPaper-root > .MuiGrid-container > :nth-child(1) > .MuiTypography-root'
-    ).should(
-      'have.text',
-      '1. Biochemical basis for the regulation of biosynthesis of antiparasitics by bacterial hormones'
-    );
+    cy.get('.MuiTypography-h3').should('have.text', 'AvaR1');
+    cy.get('#sensor-metadata-family > .MuiChip-label').should('have.text', 'Family: TETR');
+    cy.get(':nth-child(1) > .MuiGrid-container > .css-15vo6f1-MuiGrid-root > .MuiTypography-root').should('have.text', 'Apo-repressor');
+    cy.get('#sensor-ligands-tab').click();
+    cy.get('.css-t5dqux > [style="width: 100%;"]').click();
+    cy.get('#sensor-ligand-name').should('have.text', 'Avenolide');
+    cy.get('.css-i9gxme > [style="width: 100%;"] > .css-yqiqnf-MuiGrid-root > .MuiPaper-root > .MuiTypography-root').should('have.text', 'AF-Q82H41-F1');
+    cy.get('#sensor-operators-tab').click();
+    cy.get(':nth-child(1) > .MuiCardContent-root > .css-i9gxme > [style="width: 100%;"] > .MuiGrid-grid-xs-12 > .MuiPaper-root').should('have.text', 'Length234MARQERAIRTRQTILVAAAEVFDEVGYEAATISDVLKRSGVTKGALYFHFTSKQELAQAVLAEQVASLPRVPEQELKLQQSLDEALLLAHLLREGTGDPIVQGSVRLTVDQGSPRDHLNRRVPMQAWTEHTQSLFEEARAKGEILPHADVEALAKLFVGAFTGVQVLSRIMTGRADLAERVADLYRHLMPSFAMPGILVRLDFSPERGSRVYEAAMKQRESAAASTTDAARTLE');
+    cy.get('.MuiDataGrid-row > [data-field="sequence"]').should('have.text', 'GCAAGATACGTACTAGTACGTATCTTGC');
+    cy.get('#sensor-genomes-tab').click();
+    cy.get('#sensor-refs-tab').click();
+    cy.get('.MuiGrid-container > :nth-child(1) > .MuiTypography-root').should('have.text', '1. Biochemical basis for the regulation of biosynthesis of antiparasitics by bacterial hormones');
     /* ==== End Cypress Studio ==== */
   });
 });

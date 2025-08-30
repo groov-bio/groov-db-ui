@@ -118,6 +118,7 @@ export default function Admin() {
             mb: 6,
             mt: 4
           }}
+          id="admin-page-header"
         >
           Administrator page
         </Typography>

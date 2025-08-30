@@ -25,10 +25,10 @@ export default function AddSensor() {
 
   const [stepValue, setStepValue] = useState(0);
 
-  const TabPanel = ({ children, value, index }) => {
+  const TabPanel = ({ children, value, index, id }) => {
     return (
       <Box role="tabpanel" hidden={value !== index}>
-        {value === index && <Box>{children}</Box>}
+        {value === index && <Box id={id}>{children}</Box>}
       </Box>
     );
   };
@@ -175,13 +175,13 @@ export default function AddSensor() {
             {formikValues.errors.form}
           </Box>
         )}
-        <TabPanel value={stepValue} index={0}>
+        <TabPanel value={stepValue} index={0} id="new-about-sensor-tab">
           <AboutSensorTab />
         </TabPanel>
-        <TabPanel value={stepValue} index={1}>
+        <TabPanel value={stepValue} index={1} id="new-ligand-sensor-tab">
           <LigandSensorTab />
         </TabPanel>
-        <TabPanel value={stepValue} index={2}>
+        <TabPanel value={stepValue} index={2} id="new-operator-sensor-tab">
           <OperatorSensorTab />
         </TabPanel>
         <AddSensorFooter stepValue={stepValue} setStepValue={setStepValue} />
