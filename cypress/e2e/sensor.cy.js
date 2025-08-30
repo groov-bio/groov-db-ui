@@ -28,7 +28,7 @@ describe('Sensor Page', () => {
     cy.visit('http://localhost:3000');
     /* ==== Generated with Cypress Studio ==== */
     cy.get('#Browse').click();
-    cy.get('#database-link-TetR').click();
+    cy.get('#database-link-TetR').click({force: true});
     cy.get('[data-id="U2Y8G0"] [data-field="uniprot"] a').click();
     cy.get('#sensor-about').should(
       'have.text',

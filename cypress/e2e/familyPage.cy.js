@@ -10,9 +10,9 @@ describe('Family Page', () => {
     }).as('googleAnalytics');
 
     // Mock family-specific API call
-    cy.intercept('GET', 'https://groov-api.com/indexes/lysr.json', {
-      fixture: 'lysrFamilyPages.json',
-    }).as('lysr-search');
+    cy.intercept('GET', 'https://groov-api.com/indexes/tetr.json', {
+      fixture: 'tetrFamilyPages.json',
+    }).as('tetr-search');
 
     cy.visit('http://localhost:3000');
     /* ==== Generated with Cypress Studio ==== */
