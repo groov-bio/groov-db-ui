@@ -134,7 +134,7 @@ export default function Contact() {
           </Form>
         )}
       </Formik>
-      {status && <Typography sx={{ mt: 2 }}>{status}</Typography>}
+      {status && <Typography sx={{ mt: 2 }} id="contact-message-status">{status}</Typography>}
     </Box>
   );
 }

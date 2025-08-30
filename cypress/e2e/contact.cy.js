@@ -17,15 +17,14 @@ describe('Contact form spec', () => {
 
     cy.visit('http://localhost:3000');
     /* ==== Generated with Cypress Studio ==== */
-    cy.get(':nth-child(3) > a').click();
+    cy.get('#About').click();
     cy.get(
-      '[href="/about/contact"] > .MuiListItemText-root > .MuiTypography-root'
+      "#contact-about-route"
     ).click();
-    cy.get('.css-1isinvg > .MuiTypography-root').should(
+    cy.get('#about-contact-us-header').should(
       'have.text',
       'Contact Us'
     );
-    cy.get('.css-1ebprri > .MuiBox-root').click();
     /* ==== End Cypress Studio ==== */
   });
   it('Should show success message when form is submitted', () => {
@@ -46,22 +45,20 @@ describe('Contact form spec', () => {
     }).as('contact-form-success');
     cy.visit('http://localhost:3000');
     /* ==== Generated with Cypress Studio ==== */
-    cy.get(':nth-child(3) > a').click();
+    cy.get('#About').click();
     cy.get(
-      '[href="/about/contact"] > .MuiListItemText-root > .MuiTypography-root'
+      "#contact-about-route"
     ).click();
-    cy.get('#\\:r2\\:').clear('j');
-    cy.get('#\\:r2\\:').type('josh test');
-    cy.get('#\\:r3\\:').clear('j');
-    cy.get('#\\:r3\\:').type('josh@test.com');
-    cy.get('#\\:r4\\:').click();
-    cy.get('#\\:r4\\:').type('some test message');
-    cy.get('form > .MuiButtonBase-root').click();
-    cy.get('.css-ix1f03-MuiTypography-root').should(
+    cy.get('#contact-form-name').type('josh test');
+    cy.get('#contact-form-email').type('josh@test.com');
+    cy.get('#contact-form-message').click();
+    cy.get('#contact-form-message').type('some test message');
+    cy.get('#contact-send-button').click();
+    cy.get('#contact-message-status').should(
       'have.text',
       'Message sent successfully!'
     );
-    cy.get('.css-ix1f03-MuiTypography-root').should('be.visible');
+    cy.get('#contact-message-status').should('be.visible');
     /* ==== End Cypress Studio ==== */
   });
   it('Should show error message when the API fails', () => {
@@ -82,21 +79,19 @@ describe('Contact form spec', () => {
       statusCode: 400,
     }).as('contact-form-success');
     cy.visit('http://localhost:3000');
-    cy.get(':nth-child(3) > a').click();
+    cy.get('#About').click();
     cy.get(
-      '[href="/about/contact"] > .MuiListItemText-root > .MuiTypography-root'
+      "#contact-about-route"
     ).click();
-    cy.get('#\\:r2\\:').clear('j');
-    cy.get('#\\:r2\\:').type('josh test');
-    cy.get('#\\:r3\\:').clear('j');
-    cy.get('#\\:r3\\:').type('josh@test.com');
-    cy.get('#\\:r4\\:').click();
-    cy.get('#\\:r4\\:').type('some test message');
-    cy.get('form > .MuiButtonBase-root').click();
-    cy.get('.css-ix1f03-MuiTypography-root').should(
+    cy.get('#contact-form-name').type('josh test');
+    cy.get('#contact-form-email').type('josh@test.com');
+    cy.get('#contact-form-message').click();
+    cy.get('#contact-form-message').type('some test message');
+    cy.get('#contact-send-button').click();
+    cy.get('#contact-message-status').should(
       'have.text',
       'Failed to send message.'
     );
-    cy.get('.css-ix1f03-MuiTypography-root').should('be.visible');
+    cy.get('#contact-message-status').should('be.visible');
   });
 });
