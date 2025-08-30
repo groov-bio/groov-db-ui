@@ -202,6 +202,7 @@ export default function RegFamilyTiles() {
               component={Link} 
               to={`/database/${item.family}`}
               sx={{ p: 1 }}
+            id={`database-link-${item.family}`}
             >
               <Box
                 component="img"

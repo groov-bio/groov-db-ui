@@ -134,7 +134,7 @@ export default function SensorTable(props) {
     if (isAllSensors && allSensorsData.length > 0) {
       allSensorsData.forEach((sensor, index) => {
         const entry = {
-          id: index,
+          id: sensor.uniprotID,
           alias: sensor.alias,
           accession: sensor.accession,
           uniprot: sensor.uniprotID,
@@ -150,6 +150,7 @@ export default function SensorTable(props) {
           <Route
             key={index}
             path={`/entry/${sensor.family}/${sensor.uniprotID}`}
+            id={`${sensor.uniprotID}-route-link`}
             element={
               <SensorPage
                 sensorID={sensor.uniprotID}
@@ -263,6 +264,7 @@ export default function SensorTable(props) {
             key={isAllSensors ? 'all-sensors' : props.family}
             rows={rows}
             columns={getColumns()}
+            getRowId={(row) => row.uniprot || `row-${row.id}`}
             pageSizeOptions={[10, 20, 30]}
             density="compact"
             sx={{fontSize: {xs:12, sm: 14}, paddingLeft:2 }}
