@@ -11,9 +11,11 @@ import {
   Divider,
   Pagination,
   Stack,
+  useTheme,
 } from '@mui/material';
 
 export default function LigandViewer({ ligand, placement }) {
+  const theme = useTheme();
   const [ligandNumber, setLigandNumber] = useState(1);
   const [ligandName, setLigandName] = useState('Loading ...');
   const [smileValid, setSmileValid] = useState([]);
@@ -80,22 +82,13 @@ export default function LigandViewer({ ligand, placement }) {
   return (
     <Box sx={{ flexGrow: 1 }} mt={placement.ligMT} mb={placement.ligMB}>
       <Grid container style={{ width: '100%' }}>
-        {/* Component Title */}
-        <Grid size={12}>
-          <Typography
-            component="div"
-            sx={{ marginLeft: '5%', fontSize: {xs:24, sm:28}, fontWeight: 300 }}
-          >
-            Ligand
-          </Typography>
-        </Grid>
-
         {/* Chemical Structure and Name */}
         <Grid size={12}>
           <Paper
             elevation={0}
             sx={{
-              border: '1px solid #c7c7c7',
+              border: (theme) => `1px solid ${theme.palette.mode === 'dark' ? '#555' : '#c7c7c7'}`,
+              backgroundColor: '#ffffff',
               height: { xs: '300px', sm: '500px' },
               marginLeft: {xs:2, sm:0},
               marginRight: {xs:2, sm:0}
@@ -116,6 +109,7 @@ export default function LigandViewer({ ligand, placement }) {
                 style={{
                   width: '100%',
                   height: '100%',
+                  backgroundColor: '#ffffff',
                 }}
                 id="SMILEScanvas"
               />
@@ -163,7 +157,7 @@ export default function LigandViewer({ ligand, placement }) {
               <Link
                 href={'https://doi.org/' + ligand[ligandNumber - 1]['doi']}
                 target="_blank"
-                style={{ textDecoration: 'None', color: '#243fab' }}
+                sx={{ textDecoration: 'none' }}
               >
                 <Typography
                   component="span"
@@ -198,7 +192,7 @@ export default function LigandViewer({ ligand, placement }) {
             <Grid size={6} textAlign="left" ml={'15px'}>
               <Link
                 href={'https://www.groov.bio/about/about-groovdb'}
-                style={{ textDecoration: 'None', color: '#243fab' }}
+                sx={{ textDecoration: 'none' }}
               >
                 <Typography
                   component="span"

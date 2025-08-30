@@ -16,23 +16,14 @@ export default function SeqViewer(props) {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container style={{ width: '100%' }}>
-        {/* Component Title */}
-        <Grid size={12}>
-          <Typography
-            component="div"
-            sx={{ ml: { xs: '5%', sm: '2.5%' }, fontSize: {xs:24,sm:28}, fontWeight: 300 }}
-          >
-            Protein Sequence
-          </Typography>
-        </Grid>
 
         <Grid size={12} mt={1}>
           <Paper
             elevation={0}
             sx={{
               padding: 3,
-              border: '1px solid #c7c7c7',
-              background: '#f2f2f2',
+              border: (theme) => `1px solid ${theme.palette.mode === 'dark' ? '#555' : '#c7c7c7'}`,
+              backgroundColor: (theme) => theme.palette.mode === 'dark' ? '#2a2a2a' : '#f2f2f2',
               marginLeft: {xs:1,sm:0},
               marginRight: {xs:1,sm:0}
             }}

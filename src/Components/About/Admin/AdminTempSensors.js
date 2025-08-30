@@ -7,11 +7,19 @@ import {
   Dialog,
   CircularProgress,
   DialogContent,
+  Container,
+  Paper,
+  Tabs,
+  Tab,
+  useTheme,
+  useMediaQuery,
 } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import { useSnackbar } from 'notistack';
 import TempSensor from '../TempSensor';
 import useUserStore from '../../../zustand/user.store';
+import ListIcon from '@mui/icons-material/List';
+import PreviewIcon from '@mui/icons-material/Preview';
 
 export default function AdminTempSensors({
   tempData,
@@ -21,9 +29,24 @@ export default function AdminTempSensors({
 }) {
   const [tempRows, setTempRows] = useState([]);
   const [tempIndex, setTempIndex] = useState(null);
+  const [activeTab, setActiveTab] = useState(0);
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   const user = useUserStore((context) => context.user);
+
+  const handleTabChange = (_, newValue) => {
+    setActiveTab(newValue);
+  };
+
+  const TabPanel = ({ children, value, index }) => {
+    return (
+      <div hidden={value !== index}>
+        {value === index && <Box sx={{ pt: 2 }}>{children}</Box>}
+      </div>
+    );
+  };
 
   const tempColumns = [
     { field: 'id', headerName: 'Index', width: 100 },
@@ -36,6 +59,7 @@ export default function AdminTempSensors({
           onClick={() => {
             // The database entries are 1 indexed, rather than 0 indexed.
             setTempIndex(params.id);
+            setActiveTab(1); // Switch to preview tab
           }}
         >
           {params.value}
@@ -200,10 +224,9 @@ export default function AdminTempSensors({
       .then((res) => {
         if (res.ok) {
           let copy = tempRows.filter(function (obj) {
-            obj.alias !== sensorId;
+            return obj.alias !== sensorId;
           });
-          let formedRows = constructRows(copy);
-          setTempRows(formedRows);
+          setTempRows(copy);
           enqueueSnackbar(
             `Successfully rejected sensor ${sensorId}, please let the end user know.`,
             { variant: 'success', preventDuplicate: true }
@@ -224,41 +247,81 @@ export default function AdminTempSensors({
   };
 
   return (
-    <>
-      <Grid item xs={8} mt={6}>
-        <Typography variant="h5">Submitted data pending review</Typography>
-      </Grid>
+    <Box sx={{ mt: 4 }}>
+      {/* Header Section */}
+      <Paper sx={{ p: 3, borderRadius: 2, mb: 3, background: 'linear-gradient(135deg, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.05) 100%)' }}>
+        <Typography
+          variant="h5"
+          component="h2"
+          sx={{
+            fontWeight: 600,
+            mb: 1,
+          }}
+        >
+          Submitted Data Pending Review
+        </Typography>
+        <Typography 
+          variant="body2" 
+          color="text.secondary"
+          sx={{ lineHeight: 1.6 }}
+        >
+          Review and approve submitted sensor data for processing
+        </Typography>
+      </Paper>
 
-      {/* Temp Sensor Table  */}
-      <Box
-        sx={{
-          height: 220,
-          width: '70%',
-          mt: 2,
-        }}
-      >
-        <DataGrid
-          rows={tempRows}
-          columns={tempColumns}
-          autoPageSize
-          rowsPerPageOptions={[5]}
-          density="compact"
-        />
-      </Box>
-
-      {/* Placeholder  */}
-      <Box
-        sx={{
-          width: '95%',
-          mt: 2,
-        }}
-      >
-        {tempIndex !== null ? (
-          <TempSensor data={tempData[tempIndex]} />
-        ) : (
-          <h3>Select a temp sensor</h3>
-        )}
-      </Box>
-    </>
+      {/* Tabs Section */}
+      <Paper sx={{ borderRadius: 2 }}>
+        <Tabs 
+          value={activeTab} 
+          onChange={handleTabChange}
+          variant={isMobile ? 'scrollable' : 'fullWidth'}
+          scrollButtons="auto"
+          sx={{ borderBottom: 1, borderColor: 'divider' }}
+        >
+          <Tab icon={<ListIcon />} label="Sensor List" />
+          <Tab icon={<PreviewIcon />} label="Sensor Preview" disabled={tempIndex === null} />
+        </Tabs>
+        
+        {/* Tab 0: Sensor List */}
+        <TabPanel value={activeTab} index={0}>
+          <Box sx={{ p: 3 }}>
+            <Box
+              sx={{
+                height: 400,
+                width: '100%',
+              }}
+            >
+              <DataGrid
+                rows={tempRows}
+                columns={tempColumns}
+                autoPageSize
+                rowsPerPageOptions={[5, 10, 25]}
+                density="compact"
+                sx={{ 
+                  '& .MuiDataGrid-root': {
+                    border: 'none',
+                  }
+                }}
+              />
+            </Box>
+          </Box>
+        </TabPanel>
+        
+        {/* Tab 1: Sensor Preview */}
+        <TabPanel value={activeTab} index={1}>
+          <Box sx={{ p: 3 }}>
+            {tempIndex !== null ? (
+              <TempSensor data={tempData[tempIndex]} />
+            ) : (
+              <Box sx={{ textAlign: 'center', py: 8 }}>
+                <Typography variant="h6" color="text.secondary">
+                  Select a sensor from the list to preview
+                </Typography>
+              </Box>
+            )}
+          </Box>
+        </TabPanel>
+      </Paper>
+    </Box>
   );
 }

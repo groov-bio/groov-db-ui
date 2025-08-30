@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, Link as MuiLink } from '@mui/material';
 import { Link } from 'react-router-dom';
 import DownloadAllSensors from './DownloadAllSensors.js';
 
@@ -44,9 +44,9 @@ export default function ProgrammaticAccess() {
       >
         <b>REST API</b>
       </Typography>
-      <a href={'https://api.groov.bio/swagger'} target="__blank">
+      <MuiLink href={'https://api.groov.bio/swagger'} target="_blank">
         https://api.groov.bio/swagger
-      </a>
+      </MuiLink>
       <Typography sx={{ fontSize: { xs: 14, sm: 16, md: 18 } }}>
         Subsets of the database can be accessed via our REST API. Full
         documentation on API endpoints and path parameters are detailed in the

@@ -23,6 +23,18 @@ const lightTheme = createTheme({
       paper: '#ffffff',
     },
   },
+  components: {
+    MuiLink: {
+      styleOverrides: {
+        root: {
+          color: '#1976d2',
+          '&:hover': {
+            color: '#1565c0',
+          },
+        },
+      },
+    },
+  },
 });
 
 const darkTheme = createTheme({
@@ -34,6 +46,21 @@ const darkTheme = createTheme({
     background: {
       default: '#121212',
       paper: '#1e1e1e',
+    },
+    link: {
+      main: '#90caf9',
+    },
+  },
+  components: {
+    MuiLink: {
+      styleOverrides: {
+        root: {
+          color: '#90caf9',
+          '&:hover': {
+            color: '#bbdefb',
+          },
+        },
+      },
     },
   },
 });

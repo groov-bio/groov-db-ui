@@ -9,7 +9,8 @@ import {
   Grid,
   Typography,
   Skeleton,
-  Button
+  Button,
+  Link as MuiLink
 } from '@mui/material';
 import {
   DataGrid,
@@ -86,11 +87,12 @@ export default function SensorTable(props) {
         headerName: 'Uniprot',
         width: 110,
         renderCell: (params) => (
-          <Link 
+          <MuiLink 
+            component={Link}
             to={`/entry/${isAllSensors ? params.row.family : props.family}/${params.value}`} 
           >
             {params.value}
-          </Link>
+          </MuiLink>
         ),
       },
       { field: 'alias', headerName: 'Alias', width: 110 },

@@ -1,7 +1,19 @@
 import React from 'react';
 
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, Link as MuiLink, styled } from '@mui/material';
 import { Link } from 'react-router-dom';
+
+const StyledRouterLink = styled(Link)(({ theme }) => ({
+  fontSize: '18px',
+  textDecoration: 'none',
+  display: 'inline',
+  paddingLeft: '5px',
+  paddingRight: '5px',
+  color: theme.palette.mode === 'dark' ? '#90caf9' : '#1976d2',
+  '&:hover': {
+    color: theme.palette.mode === 'dark' ? '#bbdefb' : '#1565c0',
+  },
+}));
 
 export default function Contribute() {
   return (
@@ -40,20 +52,9 @@ export default function Contribute() {
       >
         Use the
       </Typography>
-      <Link
-        to="/addSensor"
-        sx={{ fontSize: { xs: 14, sm: 16, md: 18 } }}
-        style={{
-          textDecoration: 'None',
-          color: '#6116f7',
-          display: 'span',
-          fontSize: '18px',
-          paddingLeft: 5,
-          paddingRight: 5,
-        }}
-      >
+      <StyledRouterLink to="/addSensor">
         Biosensor Submission Form
-      </Link>
+      </StyledRouterLink>
       <Typography
         sx={{ fontSize: { xs: 14, sm: 16, md: 18 } }}
         component="span"
@@ -64,13 +65,12 @@ export default function Contribute() {
         accompanied by DOIs for publications that describe the biosensor's DNA
         and ligand binding activities. If you would like to submit information
         about unpublished proteins, please
-        <a
+        <MuiLink
           href="https://groov.bio/about/contact"
-          style={{ textDecoration: 'None' }}
         >
           {' '}
           contact us
-        </a>
+        </MuiLink>
         .
       </Typography>
     </Box>

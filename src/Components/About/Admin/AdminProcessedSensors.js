@@ -178,15 +178,14 @@ export default function AdminProcessedSensors({
   }, [processedData]);
 
   return (
-    <>
-      <Grid item xs={8} mt={6}>
-        <Typography variant="h5">Processed sensors pending review</Typography>
-      </Grid>
+    <Box sx={{ mb: 4 }}>
+      <Typography variant="h5" sx={{ mb: 2 }}>
+        Processed sensors pending review
+      </Typography>
       <Box
         sx={{
           height: 220,
-          width: '70%',
-          mt: 2,
+          width: '100%',
         }}
       >
         <DataGrid
@@ -197,6 +196,6 @@ export default function AdminProcessedSensors({
           density="compact"
         />
       </Box>
-    </>
+    </Box>
   );
 }

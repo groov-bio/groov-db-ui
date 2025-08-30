@@ -118,7 +118,7 @@ export default function AdvancedSearch() {
           border: '1px solid rgba(0, 0, 0, 0.1)',
           borderRadius: 1,
           p: 2,
-          backgroundColor: 'rgba(255, 255, 255, 1)',
+          // backgroundColor: 'rgba(255, 255, 255, 0.9)',
           position: 'relative',
           zIndex: 100,
         }}
@@ -250,9 +250,8 @@ export default function AdvancedSearch() {
       ) : searchResults.length > 0 ? (
         <Box
           sx={{
-            border: '1px solid rgba(0, 0, 0, 0.1)',
+            border: '4px solid rgba(0, 0, 0)',
             borderRadius: 1,
-            backgroundColor: 'rgba(255, 255, 255, 1)',
             position: 'relative',
             zIndex: 10,
           }}

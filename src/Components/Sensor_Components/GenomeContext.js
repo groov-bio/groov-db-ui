@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import { Stage, Layer, Line } from 'react-konva';
 
@@ -11,8 +11,7 @@ import {
   useMediaQuery,
   useTheme,
   Chip,
-  Stack,
-  rgbToHex
+  Stack
 } from '@mui/material';
 
 import { generateGraphic } from '../../lib/FormatOperon';
@@ -21,25 +20,23 @@ export default function GenomeContext({ sensor, alias }) {
   const [operon, setOperon] = useState([]);
   const [geneFocus, setGeneFocus] = useState(undefined);
   const [formattedData, setFormattedData] = useState([]);
+  const [calculatedWidth, setCalculatedWidth] = useState(800);
 
-  const lineRef = React.useRef(null);
+  const lineRef = useRef(null);
 
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+
+  // Use desktop dimensions for consistency
   const arrowLength = parseInt(window.innerHeight) > 800 ? 20 : 15;
   const geneHeight = parseInt(window.innerHeight) > 800 ? 40 : 30;
   const yOffset = 3;
   const xOffset = 3;
   const strokeWidth = parseInt(window.innerHeight) > 800 ? 3 : 2;
-  // Needed to arbitrarily set to 0.87 because operon extends past viewport otherwise
-  //To detect size of screen
-  const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  
+  // Use desktop width as base, but allow override for calculated width
+  const baseOperonWidth = isSmallScreen ? 800 : parseInt(window.innerWidth) * 0.62;
 
-  let operonWidth;
-  if (isSmallScreen === true) {
-    operonWidth = parseInt(window.innerWidth) * 0.87;
-  } else {
-    operonWidth = parseInt(window.innerWidth) * 0.62;
-  }
 
   useEffect(() => {
     //the if statement here is used to prevent this from running on initialization.
@@ -54,6 +51,25 @@ export default function GenomeContext({ sensor, alias }) {
   }, []);
 
   useEffect(() => {
+    if (formattedData.length === 0) return;
+    
+    // First pass: calculate total required width
+    let totalWidth = xOffset;
+    for (var gene of formattedData) {
+      var genePercent = parseInt(gene.length);
+      var geneLength =
+        genePercent > 2
+          ? baseOperonWidth * (genePercent * 0.01) - arrowLength
+          : baseOperonWidth * (genePercent * 0.01);
+      var spacerLength = baseOperonWidth * (parseInt(gene.spacer) * 0.01);
+      totalWidth += geneLength + arrowLength + spacerLength;
+    }
+    
+    // On desktop, use base width. On mobile, use calculated width for natural scrolling
+    const finalWidth = isSmallScreen ? Math.max(800, totalWidth + 50) : baseOperonWidth;
+    setCalculatedWidth(finalWidth);
+    
+    // Second pass: render genes with final width
     var x_pos = xOffset;
     const genes = [];
     var counter = 0;
@@ -64,9 +80,9 @@ export default function GenomeContext({ sensor, alias }) {
 
       var geneLength =
         genePercent > 2
-          ? operonWidth * (genePercent * 0.01) - arrowLength
-          : operonWidth * (genePercent * 0.01);
-      var spacerLength = operonWidth * (parseInt(gene.spacer) * 0.01);
+          ? finalWidth * (genePercent * 0.01) - arrowLength
+          : finalWidth * (genePercent * 0.01);
+      var spacerLength = finalWidth * (parseInt(gene.spacer) * 0.01);
 
       genes.push(
         <Line
@@ -136,19 +152,7 @@ export default function GenomeContext({ sensor, alias }) {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container style={{ width: '100%' }}>
-        {/* Component Title */}
-
-        <Grid size={12}>
-          <Typography
-            component="div"
-            sx={{ ml: { xs: '5%', sm: '2.5%' }, fontSize: {xs:24,sm:28}, fontWeight: 300 }}
-          >
-            Genome Context
-          </Typography>
-        </Grid>
-
         {/* Operon */}
-
         <Grid size={12} mt={1}>
           <Paper 
             elevation={0} 
@@ -156,31 +160,79 @@ export default function GenomeContext({ sensor, alias }) {
               padding: 3, 
               border: '1px solid #c7c7c7',
               marginLeft: {xs:1,sm:0},
-              marginRight: {xs:1,sm:0} }}
-            >
+              marginRight: {xs:1,sm:0}
+            }}
+          >
             <Grid container spacing={5} columns={12}>
               <Grid size={12} align="center">
-                <Stage width={operonWidth} height={50}>
-                  <Layer>{operon}</Layer>
-                </Stage>
+                <Box 
+                  sx={{ 
+                    overflowX: 'auto', 
+                    overflowY: 'hidden',
+                    width: '100%',
+                    '&::-webkit-scrollbar': {
+                      height: '8px',
+                    },
+                    '&::-webkit-scrollbar-track': {
+                      backgroundColor: '#f1f1f1',
+                      borderRadius: '4px',
+                    },
+                    '&::-webkit-scrollbar-thumb': {
+                      backgroundColor: '#c1c1c1',
+                      borderRadius: '4px',
+                      '&:hover': {
+                        backgroundColor: '#a1a1a1',
+                      },
+                    },
+                  }}
+                >
+                  <Stage width={calculatedWidth} height={50}>
+                    <Layer>{operon}</Layer>
+                  </Stage>
+                </Box>
               </Grid>
 
               {/* Color-coded Legend */}
-
               <Grid container columns={12} justifyContent="center" size={12}>
-
-                <Stack direction="row" spacing={{xs:1,sm:3}}>
-                  <Chip label="Enzyme" sx={{backgroundColor: '#ff3021', color: "white", fontSize: {xs:10,sm:16}}}/>
-                  <Chip label="Transporter" sx={{backgroundColor: "yellow", color: "black", fontSize: {xs:10,sm:16}}}/>
-                  <Chip label="Regulator" sx={{backgroundColor: "#3030fc", color: "white", fontSize: {xs:10,sm:16}}}/>
-                  <Chip label="Other" sx={{backgroundColor: "#3d3d3d", color: "white", fontSize: {xs:10,sm:16}}}/>
-                  <Chip label={alias} sx={{backgroundColor: "#008c02", color: "white", fontSize: {xs:10,sm:16}}}/>
-                </Stack>
-
+                <Box 
+                  sx={{ 
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    justifyContent: 'center',
+                    gap: { xs: 0.5, sm: 1 },
+                    maxWidth: '100%',
+                    px: { xs: 1, sm: 0 }
+                  }}
+                >
+                  <Chip 
+                    label="Enzyme" 
+                    size={isSmallScreen ? "small" : "medium"}
+                    sx={{backgroundColor: '#ff3021', color: "white", fontSize: {xs:10,sm:16}}}
+                  />
+                  <Chip 
+                    label="Transporter" 
+                    size={isSmallScreen ? "small" : "medium"}
+                    sx={{backgroundColor: "yellow", color: "black", fontSize: {xs:10,sm:16}}}
+                  />
+                  <Chip 
+                    label="Regulator" 
+                    size={isSmallScreen ? "small" : "medium"}
+                    sx={{backgroundColor: "#3030fc", color: "white", fontSize: {xs:10,sm:16}}}
+                  />
+                  <Chip 
+                    label="Other" 
+                    size={isSmallScreen ? "small" : "medium"}
+                    sx={{backgroundColor: "#3d3d3d", color: "white", fontSize: {xs:10,sm:16}}}
+                  />
+                  <Chip 
+                    label={alias} 
+                    size={isSmallScreen ? "small" : "medium"}
+                    sx={{backgroundColor: "#008c02", color: "white", fontSize: {xs:10,sm:16}}}
+                  />
+                </Box>
               </Grid>
 
               {/* Gene Annotation Table */}
-
               <Grid
                 size={12}
                 mb={3}
@@ -215,7 +267,7 @@ export default function GenomeContext({ sensor, alias }) {
                             formattedData[geneFocus].link
                           }
                           target="_blank"
-                          style={{ textDecoration: 'None', color: '#243fab' }}
+                          sx={{ textDecoration: 'none' }}
                         >
                           <Typography
                             component="span"

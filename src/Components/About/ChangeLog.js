@@ -1,4 +1,4 @@
-import { Box, Typography, Button } from '@mui/material';
+import { Box, Typography, Button, Link } from '@mui/material';
 
 export default function ChangeLog() {
   /**
@@ -90,7 +90,7 @@ export default function ChangeLog() {
           </Typography>
           <Typography sx={{ fontSize: { xs: 14, sm: 16, md: 18 } }}>
             We are always looking for ways to improve groov<sup>DB</sup>. If you
-            have any suggestions, please <a href="contact">contact us</a>.
+            have any suggestions, please <Link href="contact">contact us</Link>.
           </Typography>
         </Box>
 

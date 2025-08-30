@@ -101,25 +101,6 @@ export default function ReferenceViewer(props) {
   return (
     <Box sx={{ flexGrow: 1 }} mb={5}>
       <Grid container style={{ width: '100%' }}>
-        {/* Component Title */}
-
-        <Grid
-          size={12}
-          sx={{ 
-            paddingBottom: '2px', 
-            borderBottom: '1px solid #a9aaab',
-            marginLeft: {xs:1,sm:0},
-            marginRight: {xs:1,sm:0}
-           }}
-        >
-          <Typography
-            component="div"
-            sx={{ ml: { xs: '5%', sm: '2.5%' }, fontSize: {xs:24,sm:28}, fontWeight: 300 }}
-          >
-            References
-          </Typography>
-        </Grid>
-
         {/* Reference List */}
 
         <Grid size={12} mb={3}>

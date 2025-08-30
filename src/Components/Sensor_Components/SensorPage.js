@@ -31,15 +31,18 @@ import InfoIcon from '@mui/icons-material/Info';
 import DnaIcon from '@mui/icons-material/Biotech';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import SourceIcon from '@mui/icons-material/Source';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
 
 import useSensorStore from '../../zustand/sensor.store.js';
 import useUserStore from '../../zustand/user.store.js';
 
 import { getFirstTwoWords } from '../../lib/utils.js';
 
-export default function SensorPage({ isAdmin, user }) {
+export default function SensorPage({ isAdmin, user, family: propFamily, uniprotID: propUniprotID }) {
   
-  const {family, uniprotID } = useParams();
+  const urlParams = useParams();
+  const family = propFamily || urlParams.family;
+  const uniprotID = propUniprotID || urlParams.uniprotID;
   
   const navigate = useNavigate();
   const location = useLocation();
@@ -53,6 +56,7 @@ export default function SensorPage({ isAdmin, user }) {
 
   const isAdminPath = location.pathname.startsWith('/admin');
   const [activeTab, setActiveTab] = useState(0);
+  const [isNightingaleLoaded, setIsNightingaleLoaded] = useState(false);
 
   const handleTabChange = (_, newValue) => {
     setActiveTab(newValue);
@@ -241,188 +245,201 @@ export default function SensorPage({ isAdmin, user }) {
           </Box>
         </Paper>
 
-        {/* Main Content Area */}
-        <Grid container spacing={3}>
-          {/* Left Column - Primary Data */}
-          <Grid size={{ xs: 12, lg: 8 }}>
-            <Stack spacing={3}>
-              
-              {/* Navigation Tabs */}
-              <Paper sx={{ borderRadius: 2 }}>
-                <Tabs 
-                  value={activeTab} 
-                  onChange={handleTabChange}
-                  variant={isMobile ? 'scrollable' : 'fullWidth'}
-                  scrollButtons="auto"
-                  sx={{ borderBottom: 1, borderColor: 'divider' }}
-                >
-                  <Tab icon={<DnaIcon />} label="Structure & Sequence" />
-                  <Tab icon={<AccountTreeIcon />} label="Genome Context" />
-                  <Tab icon={<SourceIcon />} label="References" />
-                </Tabs>
-                
-                <TabPanel value={activeTab} index={0}>
-                  <Grid container spacing={3}>
-                    {/* Ligands */}
-                    <Grid size={{ xs: 12, md: 6 }}>
-                      {sensorData.ligands ? (
-                        <SectionCard title="Ligands" icon={<InfoIcon color="primary" />} dense>
-                          <LigandViewer
-                            ligand={sensorData.ligands}
-                            key={new Date().getTime()}
-                            placement={placement}
-                          />
-                        </SectionCard>
-                      ) : (
-                        <MissingDataComponent
-                          title="Ligands"
-                          message="No ligands submitted"
-                        />
-                      )}
-                    </Grid>
-                    
-                    {/* Protein Structure */}
-                    <Grid size={{ xs: 12, md: 6 }}>
-                      <SectionCard title="Protein Structure" icon={<DnaIcon color="primary" />} dense>
-                        <ProteinStructure
-                          key={new Date().getTime()}
-                          structureIDs={[
-                            ...(sensorData.structures ? sensorData.structures : []),
-                            `AF-${sensorData.uniprotID}-F1`,
-                          ]}
-                          uniprotID={sensorData.uniprotID}
-                        />
-                      </SectionCard>
-                    </Grid>
-                    
-                    {/* Sequence */}
-                    <Grid size={12}>
-                      <SectionCard title="Protein Sequence" icon={<DnaIcon color="primary" />}>
-                        <SeqViewer sequence={sensorData.sequence} />
-                      </SectionCard>
-                    </Grid>
-                    
-                    {/* DNA Binding Operators */}
-                    <Grid size={12}>
-                      {sensorData.operators ? (
-                        <SectionCard title="DNA Binding Operators" icon={<AccountTreeIcon color="primary" />}>
-                          <DNAbinding operator_data={sensorData.operators} />
-                        </SectionCard>
-                      ) : (
-                        <MissingDataComponent
-                          title="DNA Binding Operators"
-                          message="No operators submitted"
-                        />
-                      )}
-                    </Grid>
-                  </Grid>
-                </TabPanel>
-                
-                <TabPanel value={activeTab} index={1}>
-                  <SectionCard title="Genome Context" icon={<AccountTreeIcon color="primary" />}>
-                    <GenomeContext
-                      sensor={sensorData}
-                      key={new Date().getTime()}
-                      alias={sensorData.alias}
-                    />
-                  </SectionCard>
-                </TabPanel>
-                
-                <TabPanel value={activeTab} index={2}>
-                  <SectionCard title="References" icon={<SourceIcon color="primary" />}>
-                    <ReferenceViewer
-                      references={sensorData.fullReferences}
-                      key={new Date().getTime()}
-                    />
-                  </SectionCard>
-                </TabPanel>
-              </Paper>
-            </Stack>
-          </Grid>
-
-          {/* Right Sidebar - Metadata & Links */}
-          <Grid size={{ xs: 12, lg: 4 }}>
-            <Stack spacing={3}>
-              
-              {/* Detailed Metadata */}
-              <SectionCard title="Sensor Information" icon={<InfoIcon color="primary" />}>
-                <MetadataTable
-                  tableData={{
-                    'Regulation Type': {
-                      name: sensorData.regulationType.length
-                        ? sensorData.regulationType
-                        : 'Unavailable',
-                    },
-                    'Uniprot ID': {
-                      name: sensorData.uniprotID,
-                      link: {
-                        url: `https://www.uniprot.org/uniprot/${sensorData.uniprotID}`,
-                      },
-                    },
-                    'RefSeq ID': {
-                      name: sensorData.accession,
-                      link: {
-                        url: `https://www.ncbi.nlm.nih.gov/protein/${sensorData.accession}`,
-                      },
-                    },
-                    'KEGG ID': {
-                      name: sensorData.keggID ? sensorData.keggID : 'None',
-                      ...(sensorData.keggID !== 'None' && {
-                        link: {
-                          url: `https://www.genome.jp/dbget-bin/www_bget?${sensorData.keggID}`,
+        {/* Full Width Tabs */}
+        <Paper sx={{ borderRadius: 2 }}>
+          <Tabs 
+            value={activeTab} 
+            onChange={handleTabChange}
+            variant={isMobile ? 'scrollable' : 'fullWidth'}
+            scrollButtons="auto"
+            sx={{ borderBottom: 1, borderColor: 'divider' }}
+          >
+            <Tab icon={<InfoIcon />} label="Overview" />
+            <Tab icon={<DnaIcon />} label="Structure & Ligands" />
+            <Tab icon={<SourceIcon />} label="Sequence & Operators" />
+            <Tab icon={<AccountTreeIcon />} label="Genome Context" />
+            <Tab icon={<MenuBookIcon />} label="References" />
+          </Tabs>
+          
+          {/* Tab 0: Overview - Sensor Information & Quick Actions */}
+          <TabPanel value={activeTab} index={0}>
+            <Container maxWidth="lg" sx={{ py: 3 }}>
+              <Grid container spacing={4}>
+                <Grid size={{ xs: 12, md: 6 }}>
+                  <SectionCard title="Sensor Information" icon={<InfoIcon color="primary" />}>
+                    <MetadataTable
+                      tableData={{
+                        'Regulation Type': {
+                          name: sensorData.regulationType.length
+                            ? sensorData.regulationType
+                            : 'Unavailable',
                         },
-                      }),
-                    },
-                    Organism: {
-                      name: getFirstTwoWords(sensorData.organism),
-                      link: {
-                        url: `https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?lvl=0&id=${sensorData.organismID}`,
-                      },
-                    },
-                  }}
+                        'Uniprot ID': {
+                          name: sensorData.uniprotID,
+                          link: {
+                            url: `https://www.uniprot.org/uniprot/${sensorData.uniprotID}`,
+                          },
+                        },
+                        'RefSeq ID': {
+                          name: sensorData.accession,
+                          link: {
+                            url: `https://www.ncbi.nlm.nih.gov/protein/${sensorData.accession}`,
+                          },
+                        },
+                        'KEGG ID': {
+                          name: sensorData.keggID ? sensorData.keggID : 'None',
+                          ...(sensorData.keggID !== 'None' && {
+                            link: {
+                              url: `https://www.genome.jp/dbget-bin/www_bget?${sensorData.keggID}`,
+                            },
+                          }),
+                        },
+                        Organism: {
+                          name: getFirstTwoWords(sensorData.organism),
+                          link: {
+                            url: `https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?lvl=0&id=${sensorData.organismID}`,
+                          },
+                        },
+                      }}
+                    />
+                  </SectionCard>
+                </Grid>
+                
+                <Grid size={{ xs: 12, md: 6 }}>
+                  <SectionCard title="External Database Links" icon={<SourceIcon color="primary" />}>
+                    <Stack spacing={2}>
+                      <Button 
+                        variant="outlined" 
+                        fullWidth 
+                        href={`https://www.uniprot.org/uniprot/${sensorData.uniprotID}`}
+                        target="_blank"
+                        sx={{ justifyContent: 'flex-start' }}
+                      >
+                        View in UniProt
+                      </Button>
+                      <Button 
+                        variant="outlined" 
+                        fullWidth 
+                        href={`https://www.ncbi.nlm.nih.gov/protein/${sensorData.accession}`}
+                        target="_blank"
+                        sx={{ justifyContent: 'flex-start' }}
+                      >
+                        View in NCBI
+                      </Button>
+                      {sensorData.keggID && sensorData.keggID !== 'None' && (
+                        <Button 
+                          variant="outlined" 
+                          fullWidth 
+                          href={`https://www.genome.jp/dbget-bin/www_bget?${sensorData.keggID}`}
+                          target="_blank"
+                          sx={{ justifyContent: 'flex-start' }}
+                        >
+                          View in KEGG
+                        </Button>
+                      )}
+                      <Button 
+                        variant="outlined" 
+                        fullWidth 
+                        href={`https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?lvl=0&id=${sensorData.organismID}`}
+                        target="_blank"
+                        sx={{ justifyContent: 'flex-start' }}
+                      >
+                        View Organism in NCBI Taxonomy
+                      </Button>
+                    </Stack>
+                  </SectionCard>
+                </Grid>
+              </Grid>
+            </Container>
+          </TabPanel>
+          
+          {/* Tab 1: Structure & Ligands */}
+          <TabPanel value={activeTab} index={1}>
+            <Container maxWidth="lg" sx={{ py: 3 }}>
+              <Grid container spacing={4}>
+                <Grid size={{ xs: 12, lg: 6 }}>
+                  {sensorData.ligands ? (
+                    <SectionCard title="Ligands" icon={<InfoIcon color="primary" />}>
+                      <LigandViewer
+                        ligand={sensorData.ligands}
+                        key={new Date().getTime()}
+                        placement={placement}
+                      />
+                    </SectionCard>
+                  ) : (
+                    <MissingDataComponent
+                      title="Ligands"
+                      message="No ligands submitted"
+                    />
+                  )}
+                </Grid>
+                
+                <Grid size={{ xs: 12, lg: 6 }}>
+                  <SectionCard title="Protein Structure" icon={<DnaIcon color="primary" />}>
+                    <ProteinStructure
+                      key={new Date().getTime()}
+                      structureIDs={[
+                        ...(sensorData.structures ? sensorData.structures : []),
+                        `AF-${sensorData.uniprotID}-F1`,
+                      ]}
+                      uniprotID={sensorData.uniprotID}
+                      isComponentLoaded={isNightingaleLoaded}
+                      setIsComponentLoaded={setIsNightingaleLoaded}
+                    />
+                  </SectionCard>
+                </Grid>
+              </Grid>
+            </Container>
+          </TabPanel>
+          
+          {/* Tab 2: Sequence & Operators */}
+          <TabPanel value={activeTab} index={2}>
+            <Container maxWidth="lg" sx={{ py: 3 }}>
+              <Stack spacing={4}>
+                <SectionCard title="Protein Sequence" icon={<DnaIcon color="primary" />}>
+                  <SeqViewer sequence={sensorData.sequence} />
+                </SectionCard>
+                
+                {sensorData.operators ? (
+                  <SectionCard title="DNA Binding Operators" icon={<AccountTreeIcon color="primary" />}>
+                    <DNAbinding operator_data={sensorData.operators} />
+                  </SectionCard>
+                ) : (
+                  <MissingDataComponent
+                    title="DNA Binding Operators"
+                    message="No operators submitted"
+                  />
+                )}
+              </Stack>
+            </Container>
+          </TabPanel>
+          
+          {/* Tab 3: Genome Context */}
+          <TabPanel value={activeTab} index={3}>
+            <Container maxWidth="lg" sx={{ py: 3 }}>
+              <SectionCard title="Genome Context" icon={<AccountTreeIcon color="primary" />}>
+                <GenomeContext
+                  sensor={sensorData}
+                  key={new Date().getTime()}
+                  alias={sensorData.alias}
                 />
               </SectionCard>
-              
-              {/* Quick Actions */}
-              <Paper sx={{ p: 2, borderRadius: 2 }}>
-                <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>
-                  Quick Actions
-                </Typography>
-                <Stack spacing={1}>
-                  <Button 
-                    variant="outlined" 
-                    fullWidth 
-                    href={`https://www.uniprot.org/uniprot/${sensorData.uniprotID}`}
-                    target="_blank"
-                    sx={{ justifyContent: 'flex-start' }}
-                  >
-                    View in UniProt
-                  </Button>
-                  <Button 
-                    variant="outlined" 
-                    fullWidth 
-                    href={`https://www.ncbi.nlm.nih.gov/protein/${sensorData.accession}`}
-                    target="_blank"
-                    sx={{ justifyContent: 'flex-start' }}
-                  >
-                    View in NCBI
-                  </Button>
-                  {sensorData.keggID && sensorData.keggID !== 'None' && (
-                    <Button 
-                      variant="outlined" 
-                      fullWidth 
-                      href={`https://www.genome.jp/dbget-bin/www_bget?${sensorData.keggID}`}
-                      target="_blank"
-                      sx={{ justifyContent: 'flex-start' }}
-                    >
-                      View in KEGG
-                    </Button>
-                  )}
-                </Stack>
-              </Paper>
-            </Stack>
-          </Grid>
-        </Grid>
+            </Container>
+          </TabPanel>
+          
+          {/* Tab 4: References */}
+          <TabPanel value={activeTab} index={4}>
+            <Container maxWidth="lg" sx={{ py: 3 }}>
+              <SectionCard title="References" icon={<SourceIcon color="primary" />}>
+                <ReferenceViewer
+                  references={sensorData.fullReferences}
+                  key={new Date().getTime()}
+                />
+              </SectionCard>
+            </Container>
+          </TabPanel>
+        </Paper>
+
 
       </Stack>
     </Container>

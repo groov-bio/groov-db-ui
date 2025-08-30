@@ -86,7 +86,15 @@ export default function About() {
               {topics.map((topic) => (
                 <ListItem
                   button
-                  style={{ marginLeft: '10px' }}
+                  sx={{ 
+                    marginLeft: '10px',
+                    '& .MuiListItemText-primary': {
+                      color: (theme) => theme.palette.mode === 'dark' ? '#90caf9' : '#1976d2',
+                    },
+                    '&:hover .MuiListItemText-primary': {
+                      color: (theme) => theme.palette.mode === 'dark' ? '#bbdefb' : '#1565c0',
+                    }
+                  }}
                   key={topic.id}
                   component={Link}
                   to={topic.path}

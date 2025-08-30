@@ -117,7 +117,7 @@ export default function RegFamilyTiles() {
         py: { xs: 2, md: 3 },
         borderRight: { xs: 'none', md: '1px solid' },
         borderColor: { xs: 'transparent', md: 'divider' },
-        backgroundColor: { xs: 'transparent', md: 'grey.50' },
+        backgroundColor: { xs: 'transparent', md: 'background.paper' },
       }}
     >
       <Typography
@@ -175,7 +175,7 @@ export default function RegFamilyTiles() {
             elevation={2}
             sx={{ 
               transition: 'all 0.2s ease',
-              backgroundColor: 'white',
+              backgroundColor: 'background.paper',
               border: '1px solid',
               borderColor: 'grey.200',
               '&:hover': { 
