@@ -198,6 +198,7 @@ export default function NavigationBar(props) {
               >
                 <Link
                   to={linkItems[index]}
+                  id={navItems[index]}
                   style={{
                     color: 'white',
                     textDecoration: 'none',

@@ -85,10 +85,11 @@ export default function ChangeLog() {
             sx={{ fontSize: { xs: 24, sm: 28, md: 32 } }}
             fontWeight="300"
             gutterBottom
+            id="about-change-log-header"
           >
             Change Log
           </Typography>
-          <Typography sx={{ fontSize: { xs: 14, sm: 16, md: 18 } }}>
+          <Typography sx={{ fontSize: { xs: 14, sm: 16, md: 18 } }} id="improve-groov">
             We are always looking for ways to improve groov<sup>DB</sup>. If you
             have any suggestions, please <Link href="contact">contact us</Link>.
           </Typography>

@@ -60,6 +60,7 @@ export default function DownloadAllSensors() {
           <DownloadIcon />
         )
       }
+      id="download-all-sensors-button"
       onClick={handleDownload}
       disabled={buttonDisabled}
       sx={{ whiteSpace: 'nowrap', minWidth: '200px' }}

@@ -14,6 +14,7 @@ export default function AboutGroovDB() {
         sx={{ fontSize: { xs: 24, sm: 28, md: 32 } }}
         fontWeight="300"
         gutterBottom
+        id={"about-header"}
       >
         A genetic sensor database
       </Typography>
@@ -34,7 +35,7 @@ export default function AboutGroovDB() {
         <br />
         <br />
         groov<sup>DB</sup> was designed and created in 2022 by{' '}
-        <Link href="https://simondoelsnitz.com" target="_blank">
+        <Link href="https://simondoelsnitz.com" target="_blank" id="simon-url">
           Simon d'Oelsnitz
         </Link>{' '}
         and Joshua D. Love.

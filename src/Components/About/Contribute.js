@@ -52,7 +52,7 @@ export default function Contribute() {
       >
         Use the
       </Typography>
-      <StyledRouterLink to="/addSensor">
+      <StyledRouterLink to="/addSensor" id="about-add-sensor">
         Biosensor Submission Form
       </StyledRouterLink>
       <Typography

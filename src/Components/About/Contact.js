@@ -65,6 +65,7 @@ export default function Contact() {
         sx={{ fontSize: { xs: 24, sm: 28, md: 32 } }}
         fontWeight="300"
         gutterBottom
+        id="about-contact-us-header"
       >
         Contact Us
       </Typography>
@@ -83,7 +84,7 @@ export default function Contact() {
               fullWidth
               error={touched.name && Boolean(errors.name)}
               helperText={touched.name && errors.name}
-              data-testid="contact-form-name"
+              id="contact-form-name"
             />
             <Field
               as={TextField}
@@ -94,7 +95,7 @@ export default function Contact() {
               margin="normal"
               error={touched.email && Boolean(errors.email)}
               helperText={touched.email && errors.email}
-              data-testid="contact-form-email"
+              id="contact-form-email"
             />
             <Field
               as={TextField}
@@ -106,7 +107,7 @@ export default function Contact() {
               rows={4}
               error={touched.message && Boolean(errors.message)}
               helperText={touched.message && errors.message}
-              data-testid="contact-form-message"
+              id="contact-form-message"
             />
 
             <Box sx={{ my: 2 }}>
@@ -126,6 +127,7 @@ export default function Contact() {
               type="submit"
               disabled={isSubmitting}
               sx={{ mt: 2 }}
+              id="contact-send-button"
             >
               Send
             </Button>

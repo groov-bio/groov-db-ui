@@ -14,6 +14,7 @@ export default function Contact() {
         sx={{ fontSize: { xs: 24, sm: 28, md: 32 } }}
         fontWeight="300"
         gutterBottom
+        id="about-cite-header"
       >
         Citing groov<sup>DB</sup>
       </Typography>
@@ -48,6 +49,7 @@ export default function Contact() {
         fontWeight="300"
         mt={5}
         gutterBottom
+        id="about-cite-other"
       >
         Citing other tools
       </Typography>

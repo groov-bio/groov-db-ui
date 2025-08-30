@@ -17,78 +17,78 @@ describe('About page spec', () => {
 
     cy.visit('http://localhost:3000');
     /* ==== Generated with Cypress Studio ==== */
-    cy.get(':nth-child(3) > a').click();
-    cy.get('.css-1p277o4-MuiTypography-root').should('be.visible');
-    cy.get('.css-rx71jq > .MuiBox-root > :nth-child(2) > a').should(
+    cy.get('#About').click();
+    cy.get('#about-header').should('be.visible');
+    cy.get('#simon-url').should(
       'have.attr',
       'href',
       'https://simondoelsnitz.com'
     );
-    cy.get(':nth-child(4) > a').should('have.attr', 'href', 'contact');
+    cy.get('#contact-about-route').should('have.attr', 'href', '/about/contact');
     cy.get(
-      '[href="/about/cite"] > .MuiListItemText-root > .MuiTypography-root'
+      '#cite-about-route'
     ).click();
-    cy.get('.css-1p277o4-MuiTypography-root').should(
+    cy.get('#about-cite-header').should(
       'have.text',
       'Citing groovDB'
     );
-    cy.get('.css-nxwiv9-MuiTypography-root').should(
+    cy.get('#about-cite-other').should(
       'have.text',
       'Citing other tools'
     );
     cy.get(
-      '[href="/about/contributing"] > .MuiListItemText-root > .MuiTypography-root'
+      '#contributing-about-route'
     ).click();
-    cy.get('[sx="[object Object]"]').should('have.attr', 'href', '/addSensor');
-    cy.get('span.css-1vzvt9i-MuiTypography-root > a').should(
+    cy.get('#about-add-sensor').should('have.attr', 'href', '/addSensor');
+    cy.get('#contact-about-route').should(
       'have.attr',
       'href',
-      'https://groov.bio/about/contact'
+      '/about/contact'
     );
     cy.get(
-      '[href="/about/contact"] > .MuiListItemText-root > .MuiTypography-root'
+      "#contact-about-route"
     ).click();
-    cy.get('.css-1isinvg > .MuiTypography-root').should(
+    cy.get('#about-contact-us-header').should(
       'have.text',
       'Contact Us'
     );
-    cy.get('#\\:r2\\:').should('be.visible');
-    cy.get('#\\:r3\\:').should('be.visible');
-    cy.get('#\\:r4\\:').should('be.visible');
-    cy.get('form > .MuiButtonBase-root').should('have.text', 'Send');
+    cy.get('#contact-form-name').should('be.visible');
+    cy.get('#contact-form-email').should('be.visible');
+    cy.get('#contact-form-message').should('be.visible');
+    cy.get('#contact-send-button').should('have.text', 'Send');
     cy.get(
-      '[href="/about/change-log"] > .MuiListItemText-root > .MuiTypography-root'
+      "#change-log-about-route"
     ).click();
-    cy.get('.MuiTypography-gutterBottom').should('have.text', 'Change Log');
-    cy.get('.css-1vzvt9i-MuiTypography-root').should(
+    cy.get('#about-change-log-header').should('have.text', 'Change Log');
+    cy.get('#improve-groov').should(
       'have.text',
       'We are always looking for ways to improve groovDB. If you have any suggestions, please contact us.'
     );
     cy.get(
-      '[href="/about/programmatic-access"] > .MuiListItemText-root > .MuiTypography-root'
+      "#programmatic-access-about-route"
     ).click();
-    cy.get('.css-1p277o4-MuiTypography-root').should(
+    cy.get('#about-programmatic-access-header').should(
       'have.text',
       'Programmatic access'
     );
-    cy.get('.css-rx71jq > .MuiBox-root > .MuiButtonBase-root').should(
+    cy.get('#about-download-all-sensors').should(
       'have.text',
-      'Download All Sensors'
+      'Download all sensors'
     );
-    cy.get('.css-rx71jq > .MuiBox-root > .MuiButtonBase-root').should(
+    cy.get('#download-all-sensors-button').should(
       'be.enabled'
     );
-    cy.get('.css-6hbkvk-MuiTypography-root').should(
+    cy.get('#download-all-sensors-about').should(
       'have.text',
       'All sensor data can be downloaded as a single JSON file via the link above. As of May 2025, the file is 2.1 MB.'
     );
-    cy.get('.MuiBox-root > a').should(
+    cy.get('#swagger-page').should(
       'have.attr',
       'href',
       'https://api.groov.bio/swagger'
     );
 
-    cy.get('.css-1vzvt9i-MuiTypography-root').should(
+    cy.get('#rest-api-about').should(
       'have.text',
       'Subsets of the database can be accessed via our REST API. Full documentation on API endpoints and path parameters are detailed in the Swagger page linked above. The main endpoints are /search, for text-based queries, /getPages, to retrieve all sensors within a specific family, and /getSensor, to retrieve all information on a specific sensor entry.'
     );
