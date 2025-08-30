@@ -147,7 +147,7 @@ export default function NavigationBar(props) {
               <Box
                 component="img"
                 sx={{ height: '50px' }}
-                src="/groovDB_Icon.png"
+                src={theme.palette.mode === 'dark' ? '/groovDB_Icon_dark.png' : '/groovDB_Icon.png'}
                 alt="groovDB_icon"
               />
             </Link>
@@ -169,18 +169,18 @@ export default function NavigationBar(props) {
             ) : (
               <MenuIcon onClick={handleDrawerToggle} sx={{ width: 70 }} />
             )}
+          </IconButton>
 
+          <Box sx={{ display: { xs: 'flex', sm: 'none' }, position: 'absolute', left: '50%', transform: 'translateX(-50%)' }}>
             <Link to="/home">
               <Box
                 component="img"
-                display="flex"
-                justifyContent="center"
-                sx={{ height: '30px', ml: 5 }}
+                sx={{ height: '30px' }}
                 src="/groovDB_icon_mobile.png"
                 alt="groovDB_icon"
               />
             </Link>
-          </IconButton>
+          </Box>
 
           <Box
             sx={{ display: { xs: 'none', sm: 'block' } }}
@@ -218,9 +218,12 @@ export default function NavigationBar(props) {
           onClick={toggleTheme}
           sx={{ 
             position: 'absolute', 
-            top: '8px', 
+            top: '50%',
+            transform: 'translateY(-50%)',
             right: '80px',
             display: { xs: 'none', sm: 'flex' },
+            alignItems: 'center',
+            justifyContent: 'center',
             color: 'white'
           }}
           title={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
@@ -230,7 +233,12 @@ export default function NavigationBar(props) {
 
         <IconButton
           onClick={handleAvatarClick}
-          sx={{ position: 'absolute', top: '2px', right: '10px' }}
+          sx={{ 
+            position: 'absolute', 
+            top: '50%',
+            transform: 'translateY(-50%)',
+            right: '10px' 
+          }}
         >
           <Avatar>
             {/* Conditionally render either the first initial or person icon */}

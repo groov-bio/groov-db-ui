@@ -31,7 +31,7 @@ export default function RegFamilyTiles() {
   });
 
   const torender = [
-    { image: '/All-families.png', family: '' },
+    { image: '/All-families.png', family: '', darkImage: '/All-families-dark.png' },
     { image: '/TetR-family.png', family: 'TetR' },
     { image: '/LysR-family.png', family: 'LysR' },
     { image: '/AraC-family.png', family: 'AraC' },
@@ -152,14 +152,26 @@ export default function RegFamilyTiles() {
                 >
                   <Box
                     component="img"
-                    src={item.image}
+                    src={theme.palette.mode === 'dark' && item.darkImage ? item.darkImage : item.image}
                     alt={`${item.family} family`}
                     sx={{
                       width: '100%',
                       height: 75,
                       objectFit: 'contain',
+                      mb: 1,
                     }}
                   />
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      textAlign: 'center',
+                      fontSize: 18,
+                      fontWeight: 500,
+                      color: 'text.primary',
+                    }}
+                  >
+                    {item.family}
+                  </Typography>
                 </CardActionArea>
               </Card>
             </Grid>
@@ -193,15 +205,28 @@ export default function RegFamilyTiles() {
             >
               <Box
                 component="img"
-                src={item.image}
+                src={theme.palette.mode === 'dark' && item.darkImage ? item.darkImage : item.image}
                 alt={`${item.family} family`}
                 sx={{
                   width: '100%',
                   height: 120,
                   objectFit: 'contain',
                   filter: 'contrast(1.1) brightness(1.05)',
+                  mb: 1,
                 }}
               />
+              <Typography
+                variant="body2"
+                sx={{
+                  textAlign: 'center',
+                  fontSize: 21,
+                  fontWeight: 500,
+                  color: 'text.primary',
+                  pb: 1,
+                }}
+              >
+                {item.family}
+              </Typography>
             </CardActionArea>
           </Card>
         ))}
