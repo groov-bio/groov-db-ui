@@ -60,7 +60,7 @@ export default function SensorPage({ isAdmin, user, family: propFamily, uniprotI
   const isAdminPath = location.pathname.startsWith('/admin');
   const [activeTab, setActiveTab] = useState(0);
   const [isNightingaleLoaded, setIsNightingaleLoaded] = useState(false);
-  const [isTabView, setIsTabView] = useState(true);
+  const [isTabView, setIsTabView] = useState(false);
 
   const handleTabChange = (_, newValue) => {
     setActiveTab(newValue);
@@ -218,7 +218,7 @@ export default function SensorPage({ isAdmin, user, family: propFamily, uniprotI
                   value={family?.toUpperCase()} 
                   id={'sensor-metadata-family'}
                 />
-                <MetadataChip 
+                {/* <MetadataChip 
                   label="Type" 
                   value={sensorData.regulationType || 'Unknown'} 
                   id="sensor-metadata-type"
@@ -230,7 +230,7 @@ export default function SensorPage({ isAdmin, user, family: propFamily, uniprotI
                     url: `https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?lvl=0&id=${sensorData.organismID}`
                   }}
                   id="sensor-metadata-organism"
-                />
+                /> */}
               </Box>
             </Box>
             
@@ -317,6 +317,9 @@ export default function SensorPage({ isAdmin, user, family: propFamily, uniprotI
                               url: `https://www.genome.jp/dbget-bin/www_bget?${sensorData.keggID}`,
                             },
                           }),
+                        },
+                        'Protein Length': {
+                          name: sensorData.sequence.length,
                         },
                         Organism: {
                           name: getFirstTwoWords(sensorData.organism),

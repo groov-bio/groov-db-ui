@@ -10,9 +10,13 @@ import {
   Button 
 } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
-import DnaIcon from '@mui/icons-material/Biotech';
 import SourceIcon from '@mui/icons-material/Source';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
+import HexagonOutlinedIcon from '@mui/icons-material/HexagonOutlined';
+import SwapCallsOutlinedIcon from '@mui/icons-material/SwapCallsOutlined';
+import ClearAllOutlinedIcon from '@mui/icons-material/ClearAllOutlined';
+import ScatterPlotOutlinedIcon from '@mui/icons-material/ScatterPlotOutlined';
+import FeedOutlinedIcon from '@mui/icons-material/FeedOutlined';
 
 import GenomeContext from './GenomeContext.js';
 import LigandViewer from './LigandViewer.js';
@@ -104,6 +108,9 @@ export default function SinglePageView({
                       url: `https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?lvl=0&id=${sensorData.organismID}`,
                     },
                   },
+                  'Protein Length': {
+                    name: sensorData.sequence.length,
+                  },
                 }}
               />
             </SectionCard>
@@ -159,7 +166,7 @@ export default function SinglePageView({
         <Grid container spacing={4}>
           <Grid size={{ xs: 12, lg: 6 }}>
             {sensorData.ligands ? (
-              <SectionCard title="Ligands" icon={<InfoIcon color="primary" />}>
+              <SectionCard title="Ligands" icon={<HexagonOutlinedIcon size="medium" color="primary" />}>
                 <LigandViewer
                   ligand={sensorData.ligands}
                   key={new Date().getTime()}
@@ -175,7 +182,7 @@ export default function SinglePageView({
           </Grid>
           
           <Grid size={{ xs: 12, lg: 6 }}>
-            <SectionCard title="Protein Structure" icon={<DnaIcon color="primary" />}>
+            <SectionCard title="Structure" icon={<SwapCallsOutlinedIcon color="primary" />}>
               <ProteinStructure
                 key={new Date().getTime()}
                 structureIDs={[
@@ -193,14 +200,14 @@ export default function SinglePageView({
         {/* Sequence & Operators Section */}
         <Grid container spacing={4}>
           <Grid size={12}>
-            <SectionCard title="Protein Sequence" icon={<DnaIcon color="primary" />}>
+            <SectionCard title="Sequence" icon={<ClearAllOutlinedIcon color="primary" />}>
               <SeqViewer sequence={sensorData.sequence} />
             </SectionCard>
           </Grid>
           
           {sensorData.operators && (
             <Grid size={12}>
-              <SectionCard title="DNA Binding Operators" icon={<AccountTreeIcon color="primary" />}>
+              <SectionCard title="DNA Binding" icon={<ScatterPlotOutlinedIcon color="primary" />}>
                 <DNAbinding operator_data={sensorData.operators} />
               </SectionCard>
             </Grid>
@@ -223,7 +230,7 @@ export default function SinglePageView({
         {/* References Section */}
         <Grid container spacing={4}>
           <Grid size={12}>
-            <SectionCard title="References" icon={<SourceIcon color="primary" />}>
+            <SectionCard title="References" icon={<FeedOutlinedIcon color="primary" />}>
               <ReferenceViewer
                 references={sensorData.fullReferences}
                 key={new Date().getTime()}
