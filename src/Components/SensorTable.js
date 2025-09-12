@@ -111,21 +111,6 @@ export default function SensorTable(props) {
     return baseColumns;
   };
 
-  const selectionPrompt = () => {
-    return (
-      <Box>
-        <Grid container spacing={4} columns={12} mt={3} justifyContent="center">
-          <Grid size={10} mb={6}>
-            <Typography
-              sx={{ fontSize: { xs: 22, md: 24 }, textAlign: 'center' }}
-            >
-              Please select a sensor
-            </Typography>
-          </Grid>
-        </Grid>
-      </Box>
-    );
-  };
 
   useEffect(() => {
     const rowsToAdd = [];
@@ -217,7 +202,7 @@ export default function SensorTable(props) {
       direction="column"
       alignItems="center"
       justify="center"
-      sx={{ minHeight: '100vh', mt: 4 }}
+      sx={{ mt: 4 }}
     >
       {/* Back to All Sensors Button - only show for family-specific views */}
       {/* {!isAllSensors && (
@@ -299,8 +284,6 @@ export default function SensorTable(props) {
         // ref={scrollRef}
       >
         <Routes>
-          <Route path="/" element={selectionPrompt()} />
-
           {sensorRouteList}
         </Routes>
       </Box>
