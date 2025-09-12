@@ -9,9 +9,7 @@ import {
   Stack, 
   Button 
 } from '@mui/material';
-import InfoIcon from '@mui/icons-material/Info';
-import SourceIcon from '@mui/icons-material/Source';
-import AccountTreeIcon from '@mui/icons-material/AccountTree';
+import HubOutlinedIcon from '@mui/icons-material/HubOutlined';
 import HexagonOutlinedIcon from '@mui/icons-material/HexagonOutlined';
 import SwapCallsOutlinedIcon from '@mui/icons-material/SwapCallsOutlined';
 import ClearAllOutlinedIcon from '@mui/icons-material/ClearAllOutlined';
@@ -52,12 +50,13 @@ export default function SinglePageView({
 
   const SectionCard = ({ children, title, icon, dense = false }) => {
     return (
-      <Card sx={{ height: '100%', borderRadius: 2 }}>
+      <Card elevation={0} sx={{ height: '100%', borderRadius: 2, border: "1px solid #c5c6fc" }}>
+      {/* <Card sx={{ height: '100%', borderRadius: 2 }}> */}
         <CardContent sx={{ p: dense ? 2 : 3, '&:last-child': { pb: dense ? 2 : 3 } }}>
           {title && (
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2 }}>
               {icon}
-              <Typography variant="h6" sx={{ fontWeight: 600 }}>
+              <Typography variant="h5" sx={{ fontWeight: 400 }}>
                 {title}
               </Typography>
             </Box>
@@ -69,11 +68,13 @@ export default function SinglePageView({
   };
 
   return (
-    <Container maxWidth="xl" sx={{ py: 3 }}>
+    <Container sx={{ py: 3 }}>
       <Stack spacing={4}>
+
+
         {/* Overview Section */}
-        <Grid container spacing={4}>
-          <Grid size={{ xs: 12, md: 6 }}>
+        {/* <Grid container spacing={4}> */}
+          {/* <Grid size={{ xs: 12, md: 6 }}>
             <SectionCard title="Sensor Information" icon={<InfoIcon color="primary" />}>
               <MetadataTable
                 tableData={{
@@ -114,9 +115,9 @@ export default function SinglePageView({
                 }}
               />
             </SectionCard>
-          </Grid>
+          </Grid> */}
           
-          <Grid size={{ xs: 12, md: 6 }}>
+          {/* <Grid size={{ xs: 12, md: 6 }}>
             <SectionCard title="External Database Links" icon={<SourceIcon color="primary" />}>
               <Stack spacing={2}>
                 <Button 
@@ -159,14 +160,14 @@ export default function SinglePageView({
                 </Button>
               </Stack>
             </SectionCard>
-          </Grid>
-        </Grid>
+          </Grid> */}
+        {/* </Grid> */}
 
         {/* Structure & Ligands Section */}
         <Grid container spacing={4}>
           <Grid size={{ xs: 12, lg: 6 }}>
             {sensorData.ligands ? (
-              <SectionCard title="Ligands" icon={<HexagonOutlinedIcon size="medium" color="primary" />}>
+              <SectionCard title="Ligand" icon={<HexagonOutlinedIcon size="medium" color="primary" />}>
                 <LigandViewer
                   ligand={sensorData.ligands}
                   key={new Date().getTime()}
@@ -175,8 +176,8 @@ export default function SinglePageView({
               </SectionCard>
             ) : (
               <MissingDataComponent
-                title="Ligands"
-                message="No ligands submitted"
+                title="Ligand"
+                message="No ligand submitted"
               />
             )}
           </Grid>
@@ -217,7 +218,7 @@ export default function SinglePageView({
         {/* Genome Context Section */}
         <Grid container spacing={4}>
           <Grid size={12}>
-            <SectionCard title="Genome Context" icon={<AccountTreeIcon color="primary" />}>
+            <SectionCard title="Genome Context" icon={<HubOutlinedIcon color="primary" />}>
               <GenomeContext
                 sensor={sensorData}
                 key={new Date().getTime()}

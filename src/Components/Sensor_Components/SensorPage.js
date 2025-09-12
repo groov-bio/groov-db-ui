@@ -181,7 +181,7 @@ export default function SensorPage({ isAdmin, user, family: propFamily, uniprotI
   }
 
   return (
-    <Container maxWidth="xl" sx={{ py: 3 }}>
+    <Container sx={{ py: 3 }}>
       <Stack spacing={3}>
         {/* Header Section */}
         <Paper sx={{ p: 3, borderRadius: 2, background: 'linear-gradient(135deg, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.05) 100%)' }}>
@@ -192,12 +192,11 @@ export default function SensorPage({ isAdmin, user, family: propFamily, uniprotI
                 component="h1"
                 sx={{
                   fontSize: { xs: '1.75rem', sm: '2.5rem', md: '3rem' },
-                  fontWeight: 700,
+                  fontWeight: 500,
                   mb: 1,
                   background: 'linear-gradient(45deg, #1976d2, #42a5f5)',
                   backgroundClip: 'text',
                   WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
                 }}
               >
                 {sensorData.alias}
@@ -265,6 +264,52 @@ export default function SensorPage({ isAdmin, user, family: propFamily, uniprotI
                 </Button>
               )}
             </Box>
+
+            <Grid >
+
+              <MetadataTable
+                tableData={{
+                  'Regulation Type': {
+                    name: sensorData.regulationType.length
+                      ? sensorData.regulationType
+                      : 'Unavailable',
+                  },
+                  'Uniprot ID': {
+                    name: sensorData.uniprotID,
+                    link: {
+                      url: `https://www.uniprot.org/uniprot/${sensorData.uniprotID}`,
+                    },
+                  },
+                  'RefSeq ID': {
+                    name: sensorData.accession,
+                    link: {
+                      url: `https://www.ncbi.nlm.nih.gov/protein/${sensorData.accession}`,
+                    },
+                  },
+                  'KEGG ID': {
+                    name: sensorData.keggID ? sensorData.keggID : 'None',
+                    ...(sensorData.keggID !== 'None' && {
+                      link: {
+                        url: `https://www.genome.jp/dbget-bin/www_bget?${sensorData.keggID}`,
+                      },
+                    }),
+                  },
+                  Organism: {
+                    name: getFirstTwoWords(sensorData.organism),
+                    link: {
+                      url: `https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?lvl=0&id=${sensorData.organismID}`,
+                    },
+                  },
+                  'Protein Length': {
+                    name: sensorData.sequence.length,
+                  },
+                }}
+              />
+
+          </Grid>
+
+
+
           </Box>
         </Paper>
 
@@ -278,7 +323,7 @@ export default function SensorPage({ isAdmin, user, family: propFamily, uniprotI
               scrollButtons="auto"
               sx={{ borderBottom: 1, borderColor: 'divider' }}
             >
-              <Tab icon={<InfoIcon />} label="Overview" id="sensor-overview-tab"/>
+              {/* <Tab icon={<InfoIcon />} label="Overview" id="sensor-overview-tab"/> */}
               <Tab icon={<DnaIcon />} label="Structure & Ligands" id="sensor-ligands-tab"/>
               <Tab icon={<SourceIcon />} label="Sequence & Operators" id="sensor-operators-tab"/>
               <Tab icon={<AccountTreeIcon />} label="Genome Context" id="sensor-genomes-tab"/>
@@ -286,10 +331,10 @@ export default function SensorPage({ isAdmin, user, family: propFamily, uniprotI
             </Tabs>
           
           {/* Tab 0: Overview - Sensor Information & Quick Actions */}
-          <TabPanel value={activeTab} index={0}>
+          {/* <TabPanel value={activeTab} index={0}>
             <Container maxWidth="lg" sx={{ py: 3 }}>
-              <Grid container spacing={4}>
-                <Grid size={{ xs: 12, md: 6 }}>
+              <Grid container spacing={4}> */}
+                {/* <Grid size={{ xs: 12, md: 6 }}>
                   <SectionCard title="Sensor Information" icon={<InfoIcon color="primary" />}>
                     <MetadataTable
                       tableData={{
@@ -318,9 +363,6 @@ export default function SensorPage({ isAdmin, user, family: propFamily, uniprotI
                             },
                           }),
                         },
-                        'Protein Length': {
-                          name: sensorData.sequence.length,
-                        },
                         Organism: {
                           name: getFirstTwoWords(sensorData.organism),
                           link: {
@@ -330,9 +372,9 @@ export default function SensorPage({ isAdmin, user, family: propFamily, uniprotI
                       }}
                     />
                   </SectionCard>
-                </Grid>
+                </Grid> */}
                 
-                <Grid size={{ xs: 12, md: 6 }}>
+                {/* <Grid size={{ xs: 12, md: 6 }}>
                   <SectionCard title="External Database Links" icon={<SourceIcon color="primary" />}>
                     <Stack spacing={2}>
                       <Button 
@@ -375,14 +417,14 @@ export default function SensorPage({ isAdmin, user, family: propFamily, uniprotI
                       </Button>
                     </Stack>
                   </SectionCard>
-                </Grid>
-              </Grid>
+                </Grid> */}
+              {/* </Grid>
             </Container>
-          </TabPanel>
+          </TabPanel> */}
           
           {/* Tab 1: Structure & Ligands */}
-          <TabPanel value={activeTab} index={1}>
-            <Container maxWidth="lg" sx={{ py: 3 }}>
+          <TabPanel value={activeTab} index={0}>
+            <Container sx={{ py: 3 }}>
               <Grid container spacing={4}>
                 <Grid size={{ xs: 12, lg: 6 }}>
                   {sensorData.ligands ? (
@@ -420,8 +462,8 @@ export default function SensorPage({ isAdmin, user, family: propFamily, uniprotI
           </TabPanel>
           
           {/* Tab 2: Sequence & Operators */}
-          <TabPanel value={activeTab} index={2}>
-            <Container maxWidth="lg" sx={{ py: 3 }}>
+          <TabPanel value={activeTab} index={1}>
+            <Container sx={{ py: 3 }}>
               <Stack spacing={4}>
                 <SectionCard title="Protein Sequence" icon={<DnaIcon color="primary" />}>
                   <SeqViewer sequence={sensorData.sequence} />
@@ -442,8 +484,8 @@ export default function SensorPage({ isAdmin, user, family: propFamily, uniprotI
           </TabPanel>
           
           {/* Tab 3: Genome Context */}
-          <TabPanel value={activeTab} index={3}>
-            <Container maxWidth="lg" sx={{ py: 3 }}>
+          <TabPanel value={activeTab} index={2}>
+            <Container sx={{ py: 3 }}>
               <SectionCard title="Genome Context" icon={<AccountTreeIcon color="primary" />}>
                 <GenomeContext
                   sensor={sensorData}
@@ -455,8 +497,8 @@ export default function SensorPage({ isAdmin, user, family: propFamily, uniprotI
           </TabPanel>
           
           {/* Tab 4: References */}
-          <TabPanel value={activeTab} index={4}>
-            <Container maxWidth="lg" sx={{ py: 3 }}>
+          <TabPanel value={activeTab} index={3}>
+            <Container sx={{ py: 3 }}>
               <SectionCard title="References" icon={<SourceIcon color="primary" />}>
                 <ReferenceViewer
                   references={sensorData.fullReferences}
