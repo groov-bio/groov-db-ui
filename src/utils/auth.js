@@ -67,3 +67,23 @@ export const handleAuthCode = async (code, setUser = null) => {
     throw err;
   }
 };
+
+export const getValidToken = async () => {
+  try {
+    const session = await Auth.currentSession();
+    const accessToken = session.getAccessToken();
+    const tokenExpiresAt = accessToken.payload.exp * 1000;
+    const now = Date.now();
+    const fiveMinutesFromNow = now + (59 * 60 * 1000);
+
+    // If token expires within 5 minutes, refresh it
+    if (tokenExpiresAt < fiveMinutesFromNow) {
+      const refreshedSession = await Auth.currentSession({ bypassCache: true });
+      return refreshedSession.getAccessToken().getJwtToken();
+    }
+
+    return accessToken.getJwtToken();
+  } catch (error) {
+    throw error;
+  }
+};

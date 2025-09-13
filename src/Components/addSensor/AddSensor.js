@@ -14,6 +14,7 @@ import { Formik, Form } from 'formik';
 import validationSchema, { isCompleteEntry } from '../../lib/ValidationSchema';
 import useUserStore from '../../zustand/user.store';
 import { useSnackbar } from 'notistack';
+import { getValidToken } from '../../utils/auth';
 
 export default function AddSensor() {
   const user = useUserStore((context) => context.user);
@@ -90,62 +91,68 @@ export default function AddSensor() {
   };
 
   const handleSubmit = async (values, { resetForm }) => {
-    // Make a copy of values to avoid manipulating formik state
-    const copiedValues = JSON.parse(JSON.stringify(values));
+    try {
+      // Make a copy of values to avoid manipulating formik state
+      const copiedValues = JSON.parse(JSON.stringify(values));
 
-    const formData = {
-      family: copiedValues.about.family.toUpperCase(),
-      uniProtID: copiedValues.about.uniProtID,
-      about: {
-        about: copiedValues.about?.about,
-        accession: copiedValues.about.accession,
-        alias: copiedValues.about.alias,
-        mechanism: copiedValues.about.mechanism,
-      },
-      ...(copiedValues.ligands.length > 1 ||
-      copiedValues.ligands?.some(isCompleteEntry)
-        ? {
-            ligands: {
-              data: processFigures(copiedValues.ligands),
-            },
+      const formData = {
+        family: copiedValues.about.family.toUpperCase(),
+        uniProtID: copiedValues.about.uniProtID,
+        about: {
+          about: copiedValues.about?.about,
+          accession: copiedValues.about.accession,
+          alias: copiedValues.about.alias,
+          mechanism: copiedValues.about.mechanism,
+        },
+        ...(copiedValues.ligands.length > 1 ||
+        copiedValues.ligands?.some(isCompleteEntry)
+          ? {
+              ligands: {
+                data: processFigures(copiedValues.ligands),
+              },
+            }
+          : {}),
+        ...(copiedValues.operators.length > 1 ||
+        copiedValues.operators?.some(isCompleteEntry)
+          ? {
+              operator: {
+                data: processFigures(copiedValues.operators),
+              },
+            }
+          : {}),
+        user: user.cognitoUser.getUsername(),
+        timeSubmit: Date.now(),
+      };
+
+      // Get a valid (potentially refreshed) token
+      const validToken = await getValidToken();
+
+      const resp = await fetch(`https://api.groov.bio/insertForm`, {
+        method: 'POST',
+        headers: {
+          Accept: '*/*',
+          Authorization: validToken,
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (resp.ok) {
+        enqueueSnackbar(
+          `Successfully submit ${copiedValues.about.alias}, we will reach out if there's any questions!`,
+          {
+            variant: 'success',
           }
-        : {}),
-      ...(copiedValues.operators.length > 1 ||
-      copiedValues.operators?.some(isCompleteEntry)
-        ? {
-            operator: {
-              data: processFigures(copiedValues.operators),
-            },
-          }
-        : {}),
-      user: user.cognitoUser.getUsername(),
-      timeSubmit: Date.now(),
-    };
-
-    const resp = await fetch(`https://api.groov.bio/insertForm`, {
-      method: 'POST',
-      headers: {
-        Accept: '*/*',
-        Authorization: user.cognitoUser
-          .getSignInUserSession()
-          .getAccessToken()
-          .getJwtToken(),
-      },
-      body: JSON.stringify(formData),
-    });
-
-    if (resp.ok) {
-      enqueueSnackbar(
-        `Successfully submit ${copiedValues.about.alias}, we will reach out if there's any questions!`,
-        {
-          variant: 'success',
-        }
-      );
-      resetForm();
-      setStepValue(0);
-    } else {
-      const result = await resp.json();
-      enqueueSnackbar(result.message, {
+        );
+        resetForm();
+        setStepValue(0);
+      } else {
+        const result = await resp.json();
+        enqueueSnackbar(result.message, {
+          variant: 'error',
+        });
+      }
+    } catch (error) {
+      enqueueSnackbar('Error submitting form. Please try again or refresh the page.', {
         variant: 'error',
       });
     }
