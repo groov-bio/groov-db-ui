@@ -241,6 +241,7 @@ export default function SensorPage({ isAdmin, user, family: propFamily, uniprotI
                 }
                 label={isTabView ? "Tab View" : "Single Page"}
                 sx={{ m: 0 }}
+                id="sensor-page-tab-view-switch"
               />
               
               {/* Edit Sensor Button */}

@@ -39,7 +39,7 @@ describe('About page spec', () => {
     cy.get(
       '#contributing-about-route'
     ).click();
-    cy.get('#about-add-sensor').should('have.attr', 'href', '/addSensor');
+    cy.get('#about-add-sensor').should('have.attr', 'href', 'https://www.groov.bio/addSensor/');
     cy.get('#contact-about-route').should(
       'have.attr',
       'href',

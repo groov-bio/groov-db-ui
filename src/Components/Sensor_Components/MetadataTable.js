@@ -62,6 +62,7 @@ export default function MetadataTable({ tableData }) {
                         wordBreak: 'break-word',
                         overflowWrap: 'break-word'
                       }}
+                      id={`metadata-table-${key}`}
                     >
                       {tableData[key].name}
                     </Typography>
@@ -78,6 +79,7 @@ export default function MetadataTable({ tableData }) {
                           wordBreak: 'break-word',
                           overflowWrap: 'break-word'
                         }}
+                        id={`metadata-table-data-${key}`}
                       >
                         {tableData[key].name}
                       </Typography>
@@ -113,6 +115,7 @@ export default function MetadataTable({ tableData }) {
                       wordBreak: 'break-word',
                       overflowWrap: 'break-word'
                     }}
+                    id={`metadata-table-${key}`}
                   >
                     {tableData[key].name}
                   </Typography>

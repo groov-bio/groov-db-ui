@@ -12,8 +12,8 @@ describe('Tools spec', () => {
     cy.visit('http://localhost:3000');
     /* ==== Generated with Cypress Studio ==== */
     cy.get('#Tools').click();
-    cy.get('[href="https://snowprint.groov.bio"] > img').should('be.visible');
-    cy.get('[href="https://ligify.groov.bio"] > img').should('be.visible');
+    cy.get('#snowprint-img').should('be.visible');
+    cy.get('#ligify-img').should('be.visible');
     cy.get('#snowprint-desc').should(
       'be.visible'
     );
@@ -23,12 +23,12 @@ describe('Tools spec', () => {
     cy.get('#snowprint-link').should(
       'have.attr',
       'href',
-      'https://doi.org/10.1038/s42003-024-05849-8'
+      'https://snowprint.groov.bio'
     );
     cy.get('#ligify-link').should(
       'have.attr',
       'href',
-      'https://www.biorxiv.org/content/10.1101/2024.02.20.581298v1'
+      'https://ligify.groov.bio'
     );
     /* ==== End Cypress Studio ==== */
   });

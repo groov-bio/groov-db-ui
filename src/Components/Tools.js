@@ -13,7 +13,7 @@ export default function Tools() {
 
 
 
-  const ToolCard = ({ link, icon, title, description}) => {
+  const ToolCard = ({ link, icon, title, description, imgId, descId, linkId}) => {
     return (
 
 
@@ -27,11 +27,12 @@ export default function Tools() {
       },
       cursor: "pointer",}}>
 
-    <a href={link} target="__blank__"   style={{ textDecoration: "none", color: "inherit"  }}>
+    <a href={link} target="__blank__"   style={{ textDecoration: "none", color: "inherit"  }} id={linkId}>
       <Grid container alignItems={"center"}>
         <Grid>
           <Box
             component="img"
+            id={imgId}
             src={icon}
             sx={{ width: {xs:50, sm:75, ms:100}, margin: 'auto', display: 'block' }}
           />
@@ -53,7 +54,7 @@ export default function Tools() {
                   pr={2}
                   >
         <Grid>
-          <Typography fontWeight="400" sx={{ fontSize: { xs: 12, sm:16, md: 18 } }}>
+          <Typography fontWeight="400" sx={{ fontSize: { xs: 12, sm:16, md: 18 } }} id={descId}>
             {description}
           </Typography>
         </Grid>
@@ -89,6 +90,9 @@ export default function Tools() {
 
 
         <ToolCard 
+          imgId="snowprint-img"
+          descId="snowprint-desc"
+          linkId="snowprint-link"
           link="https://snowprint.groov.bio"
           icon="Snowprint_Logo2.png"
           title="Snowprint"
@@ -96,6 +100,9 @@ export default function Tools() {
         />
 
         <ToolCard 
+          imgId="ligify-img"
+          descId="ligify-desc"
+          linkId="ligify-link"
           link="https://ligify.groov.bio"
           icon="Ligify_Logo2.png"
           title="Ligify"
@@ -103,6 +110,7 @@ export default function Tools() {
         />
 
         <ToolCard 
+          linkId="sensbio-link"
           link="https://jonathan-tellechea-sensbio-app-sensbio-f6bjn1.streamlit.app/"
           icon="GenericTool_Logo.png"
           title="SensBio"
@@ -110,6 +118,7 @@ export default function Tools() {
         />
 
         <ToolCard 
+          linkId="tfbminer-link"
           link="https://github.com/UoMMIB/TFBMiner"
           icon="GenericTool_Logo.png"
           title="TFBMiner"

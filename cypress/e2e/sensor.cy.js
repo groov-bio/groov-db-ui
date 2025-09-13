@@ -30,13 +30,13 @@ describe('Sensor Page', () => {
     cy.get('#Browse').click();
     cy.get('#database-link-TetR').click({force: true});
     cy.get('[data-id="U2Y8G0"] [data-field="uniprot"] a').click();
+    cy.get('#sensor-page-tab-view-switch').click();
     cy.get('#sensor-about').should(
       'have.text',
       'Regulates the expression of the ecd operon responsible for the degradation of estradiol.'
     );
     cy.get("#sensor-metadata-family").should('have.text', "Family: TETR")
-    cy.get("#sensor-metadata-type").should('have.text', "Type: Apo-repressor")
-    cy.get("#sensor-metadata-organism").should('have.text', "Organism: Caenibius tardaugens")
+    cy.get("#metadata-table-data-Organism").should('have.text', "Caenibius tardaugens")
     cy.get("#sensor-ligands-tab").click()
     cy.get('#SMILEScanvas').should('have.id', 'SMILEScanvas');
     cy.get('#SMILEScanvas').should('be.visible');
