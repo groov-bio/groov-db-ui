@@ -164,7 +164,7 @@ export default function SensorPage({ isAdmin, user, family: propFamily, uniprotI
 
   if (sensorData === undefined) {
     return (
-      <Container maxWidth="xl" sx={{ py: 4 }}>
+      <Container sx={{ py: 4 }}>
         <Stack spacing={3}>
           <Skeleton variant="rectangular" height={80} sx={{ borderRadius: 2 }} />
           <Grid container spacing={3}>
@@ -181,12 +181,14 @@ export default function SensorPage({ isAdmin, user, family: propFamily, uniprotI
   }
 
   return (
-    <Container sx={{ py: 3 }}>
+    <Container sx={{ py: 3 }} >
       <Stack spacing={3}>
         {/* Header Section */}
         <Paper sx={{ p: 3, borderRadius: 2, background: 'linear-gradient(135deg, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.05) 100%)' }}>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 2 }}>
             <Box sx={{ flex: 1, minWidth: 0 }}>
+
+              {/* Alias */}
               <Typography
                 variant="h3"
                 component="h1"
@@ -201,6 +203,8 @@ export default function SensorPage({ isAdmin, user, family: propFamily, uniprotI
               >
                 {sensorData.alias}
               </Typography>
+
+              {/* Description */}
               <Typography 
                 variant="body1" 
                 color="text.secondary"
@@ -217,23 +221,16 @@ export default function SensorPage({ isAdmin, user, family: propFamily, uniprotI
                   value={family?.toUpperCase()} 
                   id={'sensor-metadata-family'}
                 />
-                {/* <MetadataChip 
-                  label="Type" 
-                  value={sensorData.regulationType || 'Unknown'} 
-                  id="sensor-metadata-type"
-                />
-                <MetadataChip 
-                  label="Organism" 
-                  value={getFirstTwoWords(sensorData.organism)} 
-                  link={{
-                    url: `https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?lvl=0&id=${sensorData.organismID}`
-                  }}
-                  id="sensor-metadata-organism"
-                /> */}
+  
               </Box>
             </Box>
             
-            <Box sx={{ display: 'flex', gap: 2, alignItems: 'center', flexWrap: 'wrap' }}>
+
+            {/* Tab / Single Page view Switch */}
+            <Box sx={{ display: 'flex', gap: 2, alignItems: 'center', flexWrap: 'wrap',
+              width: { xs: '100%', sm: '100%', md: 'auto' },
+              justifyContent: { xs: 'flex-end', sm: 'flex-end', md: 'flex-start' } }}
+              mb={{xs:3, sm:3, md:0}}>
               <FormControlLabel
                 control={
                   <Switch
@@ -246,10 +243,12 @@ export default function SensorPage({ isAdmin, user, family: propFamily, uniprotI
                 sx={{ m: 0 }}
               />
               
+              {/* Edit Sensor Button */}
               {!isAdminPath && (
                 <Button
                   variant="contained"
                   size="large"
+                  
                   startIcon={<EditIcon />}
                   onClick={() =>
                     navigate(
@@ -258,7 +257,12 @@ export default function SensorPage({ isAdmin, user, family: propFamily, uniprotI
                         : '/account?reason=editSensor'
                     )
                   }
-                  sx={{ borderRadius: 2 }}
+                  sx={{
+                    borderRadius: 2,
+                    px: { xs: 2, sm: 2, md: 3},  // horizontal padding
+                    py: { xs: 0.6, sm: 0.75, md: 0.9}, // vertical padding
+                    fontSize: { xs: '0.7rem', sm: '0.8rem', md: '0.9rem' }, // font scaling
+                  }}
                 >
                   Edit Sensor
                 </Button>
