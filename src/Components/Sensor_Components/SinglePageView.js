@@ -7,7 +7,6 @@ import {
   Card, 
   CardContent, 
   Stack, 
-  Button 
 } from '@mui/material';
 import HubOutlinedIcon from '@mui/icons-material/HubOutlined';
 import HexagonOutlinedIcon from '@mui/icons-material/HexagonOutlined';
@@ -21,14 +20,11 @@ import LigandViewer from './LigandViewer.js';
 import ReferenceViewer from './ReferenceViewer.js';
 import SeqViewer from './SeqViewer.js';
 import DNAbinding from './DNAbinding.js';
-import MetadataTable from './MetadataTable.js';
 import ProteinStructure from './ProteinStructure.js';
 
-import { getFirstTwoWords } from '../../lib/utils.js';
 
 export default function SinglePageView({ 
   sensorData, 
-  family, 
   isNightingaleLoaded, 
   setIsNightingaleLoaded,
   placement 
@@ -50,8 +46,7 @@ export default function SinglePageView({
 
   const SectionCard = ({ children, title, icon, dense = false }) => {
     return (
-      <Card elevation={0} sx={{ height: '100%', borderRadius: 2, border: "1px solid #c5c6fc" }}>
-      {/* <Card sx={{ height: '100%', borderRadius: 2 }}> */}
+      <Card elevation={0}  sx={{ height: '100%', borderRadius: 2, border: "1px solid #c5c6fc" }}>
         <CardContent sx={{ p: dense ? 2 : 3, '&:last-child': { pb: dense ? 2 : 3 } }}>
           {title && (
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2 }}>
@@ -68,100 +63,8 @@ export default function SinglePageView({
   };
 
   return (
-    <Container sx={{ py: 3 }}>
+    <Container maxWidth="xl" disableGutters sx={{ py: 3 }}>
       <Stack spacing={4}>
-
-
-        {/* Overview Section */}
-        {/* <Grid container spacing={4}> */}
-          {/* <Grid size={{ xs: 12, md: 6 }}>
-            <SectionCard title="Sensor Information" icon={<InfoIcon color="primary" />}>
-              <MetadataTable
-                tableData={{
-                  'Regulation Type': {
-                    name: sensorData.regulationType.length
-                      ? sensorData.regulationType
-                      : 'Unavailable',
-                  },
-                  'Uniprot ID': {
-                    name: sensorData.uniprotID,
-                    link: {
-                      url: `https://www.uniprot.org/uniprot/${sensorData.uniprotID}`,
-                    },
-                  },
-                  'RefSeq ID': {
-                    name: sensorData.accession,
-                    link: {
-                      url: `https://www.ncbi.nlm.nih.gov/protein/${sensorData.accession}`,
-                    },
-                  },
-                  'KEGG ID': {
-                    name: sensorData.keggID ? sensorData.keggID : 'None',
-                    ...(sensorData.keggID !== 'None' && {
-                      link: {
-                        url: `https://www.genome.jp/dbget-bin/www_bget?${sensorData.keggID}`,
-                      },
-                    }),
-                  },
-                  Organism: {
-                    name: getFirstTwoWords(sensorData.organism),
-                    link: {
-                      url: `https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?lvl=0&id=${sensorData.organismID}`,
-                    },
-                  },
-                  'Protein Length': {
-                    name: sensorData.sequence.length,
-                  },
-                }}
-              />
-            </SectionCard>
-          </Grid> */}
-          
-          {/* <Grid size={{ xs: 12, md: 6 }}>
-            <SectionCard title="External Database Links" icon={<SourceIcon color="primary" />}>
-              <Stack spacing={2}>
-                <Button 
-                  variant="outlined" 
-                  fullWidth 
-                  href={`https://www.uniprot.org/uniprot/${sensorData.uniprotID}`}
-                  target="_blank"
-                  sx={{ justifyContent: 'flex-start' }}
-                >
-                  View in UniProt
-                </Button>
-                <Button 
-                  variant="outlined" 
-                  fullWidth 
-                  href={`https://www.ncbi.nlm.nih.gov/protein/${sensorData.accession}`}
-                  target="_blank"
-                  sx={{ justifyContent: 'flex-start' }}
-                >
-                  View in NCBI
-                </Button>
-                {sensorData.keggID && sensorData.keggID !== 'None' && (
-                  <Button 
-                    variant="outlined" 
-                    fullWidth 
-                    href={`https://www.genome.jp/dbget-bin/www_bget?${sensorData.keggID}`}
-                    target="_blank"
-                    sx={{ justifyContent: 'flex-start' }}
-                  >
-                    View in KEGG
-                  </Button>
-                )}
-                <Button 
-                  variant="outlined" 
-                  fullWidth 
-                  href={`https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?lvl=0&id=${sensorData.organismID}`}
-                  target="_blank"
-                  sx={{ justifyContent: 'flex-start' }}
-                >
-                  View Organism in NCBI Taxonomy
-                </Button>
-              </Stack>
-            </SectionCard>
-          </Grid> */}
-        {/* </Grid> */}
 
         {/* Structure & Ligands Section */}
         <Grid container spacing={4}>

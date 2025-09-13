@@ -323,104 +323,12 @@ export default function SensorPage({ isAdmin, user, family: propFamily, uniprotI
               scrollButtons="auto"
               sx={{ borderBottom: 1, borderColor: 'divider' }}
             >
-              {/* <Tab icon={<InfoIcon />} label="Overview" id="sensor-overview-tab"/> */}
               <Tab icon={<DnaIcon />} label="Structure & Ligands" id="sensor-ligands-tab"/>
               <Tab icon={<SourceIcon />} label="Sequence & Operators" id="sensor-operators-tab"/>
               <Tab icon={<AccountTreeIcon />} label="Genome Context" id="sensor-genomes-tab"/>
               <Tab icon={<MenuBookIcon />} label="References" id="sensor-refs-tab"/>
             </Tabs>
           
-          {/* Tab 0: Overview - Sensor Information & Quick Actions */}
-          {/* <TabPanel value={activeTab} index={0}>
-            <Container maxWidth="lg" sx={{ py: 3 }}>
-              <Grid container spacing={4}> */}
-                {/* <Grid size={{ xs: 12, md: 6 }}>
-                  <SectionCard title="Sensor Information" icon={<InfoIcon color="primary" />}>
-                    <MetadataTable
-                      tableData={{
-                        'Regulation Type': {
-                          name: sensorData.regulationType.length
-                            ? sensorData.regulationType
-                            : 'Unavailable',
-                        },
-                        'Uniprot ID': {
-                          name: sensorData.uniprotID,
-                          link: {
-                            url: `https://www.uniprot.org/uniprot/${sensorData.uniprotID}`,
-                          },
-                        },
-                        'RefSeq ID': {
-                          name: sensorData.accession,
-                          link: {
-                            url: `https://www.ncbi.nlm.nih.gov/protein/${sensorData.accession}`,
-                          },
-                        },
-                        'KEGG ID': {
-                          name: sensorData.keggID ? sensorData.keggID : 'None',
-                          ...(sensorData.keggID !== 'None' && {
-                            link: {
-                              url: `https://www.genome.jp/dbget-bin/www_bget?${sensorData.keggID}`,
-                            },
-                          }),
-                        },
-                        Organism: {
-                          name: getFirstTwoWords(sensorData.organism),
-                          link: {
-                            url: `https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?lvl=0&id=${sensorData.organismID}`,
-                          },
-                        },
-                      }}
-                    />
-                  </SectionCard>
-                </Grid> */}
-                
-                {/* <Grid size={{ xs: 12, md: 6 }}>
-                  <SectionCard title="External Database Links" icon={<SourceIcon color="primary" />}>
-                    <Stack spacing={2}>
-                      <Button 
-                        variant="outlined" 
-                        fullWidth 
-                        href={`https://www.uniprot.org/uniprot/${sensorData.uniprotID}`}
-                        target="_blank"
-                        sx={{ justifyContent: 'flex-start' }}
-                      >
-                        View in UniProt
-                      </Button>
-                      <Button 
-                        variant="outlined" 
-                        fullWidth 
-                        href={`https://www.ncbi.nlm.nih.gov/protein/${sensorData.accession}`}
-                        target="_blank"
-                        sx={{ justifyContent: 'flex-start' }}
-                      >
-                        View in NCBI
-                      </Button>
-                      {sensorData.keggID && sensorData.keggID !== 'None' && (
-                        <Button 
-                          variant="outlined" 
-                          fullWidth 
-                          href={`https://www.genome.jp/dbget-bin/www_bget?${sensorData.keggID}`}
-                          target="_blank"
-                          sx={{ justifyContent: 'flex-start' }}
-                        >
-                          View in KEGG
-                        </Button>
-                      )}
-                      <Button 
-                        variant="outlined" 
-                        fullWidth 
-                        href={`https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?lvl=0&id=${sensorData.organismID}`}
-                        target="_blank"
-                        sx={{ justifyContent: 'flex-start' }}
-                      >
-                        View Organism in NCBI Taxonomy
-                      </Button>
-                    </Stack>
-                  </SectionCard>
-                </Grid> */}
-              {/* </Grid>
-            </Container>
-          </TabPanel> */}
           
           {/* Tab 1: Structure & Ligands */}
           <TabPanel value={activeTab} index={0}>
