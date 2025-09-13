@@ -48,31 +48,33 @@ export default function Contribute() {
       <Typography
         sx={{ fontSize: { xs: 14, sm: 16, md: 18 } }}
         component="span"
+        fontWeight={400}
         mt={1}
       >
-        Use the
-      </Typography>
-      <StyledRouterLink to="/addSensor" id="about-add-sensor">
-        Biosensor Submission Form
-      </StyledRouterLink>
-      <Typography
-        sx={{ fontSize: { xs: 14, sm: 16, md: 18 } }}
-        component="span"
-      >
+        Use the <a href="https://www.groov.bio/addSensor/" style={{textDecoration:"none"}}>biosensor submission form</a>{' '}
         to create a new record for a biosensor that is not currently in the
         database. Please search for the biosensor and common aliases first to
         confirm that it does not already exits. All new submissions must be
         accompanied by DOIs for publications that describe the biosensor's DNA
         and ligand binding activities. If you would like to submit information
-        about unpublished proteins, please
-        <MuiLink
-          href="https://groov.bio/about/contact"
-        >
-          {' '}
-          contact us
-        </MuiLink>
-        .
+        about unpublished proteins, please <a href="https://groov.bio/about/contact" style={{textDecoration:"none"}}>
+          {' '} contact us</a>.
       </Typography>
+
+      <Typography sx={{ fontSize: { xs: 14, sm: 16, md: 18 } }} mt={3}>
+        <b>Batch submissions</b>
+      </Typography>
+
+      <Typography
+        sx={{ fontSize: { xs: 14, sm: 16, md: 18 } }}
+        component="span"
+        mt={1}
+      >
+        If you would like to submit batches of multiple sensor entries, please 
+        <a href="https://groov.bio/about/contact" style={{textDecoration:"none"}}>
+          {' '} contact us</a>.
+      </Typography>
+
     </Box>
   );
 }
