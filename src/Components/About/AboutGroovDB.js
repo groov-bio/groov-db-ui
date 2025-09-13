@@ -81,7 +81,7 @@ export default function AboutGroovDB() {
         <ol>
           <li>
             <Link
-              href="https://en.wikipedia.org/wiki/Electrophoretic_mobility_shift_assay"
+              href="https://doi.org/10.1093/nar/9.13.3047"
               target="_blank"
             >
               Electrophoretic Mobility Shift Assay (EMSA)
@@ -95,7 +95,7 @@ export default function AboutGroovDB() {
           </ul>
           <li>
             <Link
-              href="https://en.wikipedia.org/wiki/DNase_footprinting_assay"
+              href="https://doi.org/10.1016/0076-6879(86)30011-9"
               target="_blank"
             >
               DNase Footprinting
@@ -109,7 +109,7 @@ export default function AboutGroovDB() {
           </ul>
           <li>
             <Link
-              href="https://en.wikipedia.org/wiki/Isothermal_titration_calorimetry"
+              href="https://doi.org/10.1038/s43586-023-00199-x"
               target="_blank"
             >
               Isothermal Titration Calorimetry (ITC)
@@ -123,7 +123,7 @@ export default function AboutGroovDB() {
           </ul>
           <li>
             <Link
-              href="https://en.wikipedia.org/wiki/X-ray_crystallography"
+              href="https://doi.org/10.1038/505602a"
               target="_blank"
             >
               Co-Crystal Structure
@@ -140,7 +140,7 @@ export default function AboutGroovDB() {
           </ul>
           <li>
             <Link
-              href="https://en.wikipedia.org/wiki/Surface_plasmon_resonance"
+              href="https://doi.org/10.1007/978-1-4939-2877-4_20"
               target="_blank"
             >
               Surface Plasmon Resonance (SPR)
@@ -154,7 +154,7 @@ export default function AboutGroovDB() {
           </li>
           <li>
             <Link
-              href="https://en.wikipedia.org/wiki/Fluorescence_anisotropy"
+              href="https://doi.org/10.1007/978-1-60327-015-1_35"
               target="_blank"
             >
               Fluorescence Polarization
@@ -169,7 +169,7 @@ export default function AboutGroovDB() {
           </ul>
           <li>
             <Link
-              href="https://en.wikipedia.org/wiki/Synthetic_biological_circuit"
+              href="https://doi.org/10.1073/pnas.95.23.13670"
               target="_blank"
             >
               Synthetic Regulation
