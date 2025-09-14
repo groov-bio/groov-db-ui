@@ -64,7 +64,7 @@ export default function SeqViewer(props) {
               <Box
                 key={index}
                 sx={{
-                  width: { xs: '100px', sm: '130px' },
+                  width: { xs: '90px', sm: '130px' },
                   marginBottom: { xs: '0px', sm: '7px' },
                   display: 'inline-block',
                 }}

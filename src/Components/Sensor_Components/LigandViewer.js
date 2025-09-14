@@ -83,15 +83,13 @@ export default function LigandViewer({ ligand, placement }) {
     <Box sx={{ flexGrow: 1 }} mt={placement.ligMT} mb={placement.ligMB}>
       <Grid container style={{ width: '100%' }}>
         {/* Chemical Structure and Name */}
-        <Grid size={12}>
+        <Grid size={12} >
           <Paper
             elevation={0}
             sx={{
-              border: (theme) => `1px solid ${theme.palette.mode === 'dark' ? '#555' : '#c7c7c7'}`,
+              border: {xs:'none', sm:'1px solid #c2c2c2'},
               backgroundColor: '#ffffff',
-              height: { xs: '300px', sm: '500px' },
-              marginLeft: {xs:2, sm:0},
-              marginRight: {xs:2, sm:0}
+              height: { xs: '280px', sm: '480px' }
             }}
           >
             <Box
@@ -125,7 +123,7 @@ export default function LigandViewer({ ligand, placement }) {
         </Grid>
 
         {/* Pagination */}
-        <Grid size={12} mb={3} mt={7}>
+        <Grid size={12} mb={3} mt={10}>
           <Stack spacing={2} alignItems="center">
             <Pagination
               count={ligand.length}

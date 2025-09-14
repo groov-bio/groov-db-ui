@@ -118,7 +118,7 @@ export default function DNAbinding({ operator_data }) {
           <Paper 
             elevation={0} 
             sx={{ 
-            padding: 3, 
+            padding: {xs:1, sm:3}, 
             border: (theme) => `1px solid ${theme.palette.mode === 'dark' ? '#555' : '#c7c7c7'}`,
             marginLeft: {xs:1,sm:0},
             marginRight: {xs:1,sm:0} }}>

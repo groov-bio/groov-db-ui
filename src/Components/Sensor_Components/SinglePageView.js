@@ -47,9 +47,9 @@ export default function SinglePageView({
   const SectionCard = ({ children, title, icon, dense = false }) => {
     return (
       <Card elevation={0}  sx={{ height: '100%', borderRadius: 2, border: "1px solid #c5c6fc" }}>
-        <CardContent sx={{ p: dense ? 2 : 3, '&:last-child': { pb: dense ? 2 : 3 } }}>
+        <CardContent sx={{ pt: dense ? 2 : 3, pl: {xs:0, sm: dense ? 2 : 3},pr: {xs:0, sm: dense ? 2 : 3}, '&:last-child': { pb: dense ? 2 : 3 } }}>
           {title && (
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2 }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2, ml:{xs:2,sm:0} }}>
               {icon}
               <Typography variant="h5" sx={{ fontWeight: 400 }}>
                 {title}
@@ -68,7 +68,7 @@ export default function SinglePageView({
 
         {/* Structure & Ligands Section */}
         <Grid container spacing={4}>
-          <Grid size={{ xs: 12, lg: 6 }}>
+          <Grid size={{ xs: 12, md: 6 }} >
             {sensorData.ligands ? (
               <SectionCard title="Ligand" icon={<HexagonOutlinedIcon size="medium" color="primary" />}>
                 <LigandViewer
@@ -85,7 +85,7 @@ export default function SinglePageView({
             )}
           </Grid>
           
-          <Grid size={{ xs: 12, lg: 6 }}>
+          <Grid size={{ xs: 12, md: 6 }}>
             <SectionCard title="Structure" icon={<SwapCallsOutlinedIcon color="primary" />}>
               <ProteinStructure
                 key={new Date().getTime()}

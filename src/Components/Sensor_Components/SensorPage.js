@@ -329,7 +329,7 @@ export default function SensorPage({ isAdmin, user, family: propFamily, uniprotI
               sx={{ borderBottom: 1, borderColor: 'divider' }}
             >
               <Tab icon={<DnaIcon />} label="Structure & Ligands" id="sensor-ligands-tab"/>
-              <Tab icon={<SourceIcon />} label="Sequence & Operators" id="sensor-operators-tab"/>
+              <Tab icon={<SourceIcon />} label="Sequence & DNA Binding" id="sensor-operators-tab"/>
               <Tab icon={<AccountTreeIcon />} label="Genome Context" id="sensor-genomes-tab"/>
               <Tab icon={<MenuBookIcon />} label="References" id="sensor-refs-tab"/>
             </Tabs>
@@ -341,7 +341,7 @@ export default function SensorPage({ isAdmin, user, family: propFamily, uniprotI
               <Grid container spacing={4}>
                 <Grid size={{ xs: 12, lg: 6 }}>
                   {sensorData.ligands ? (
-                    <SectionCard title="Ligands" icon={<InfoIcon color="primary" />}>
+                    <SectionCard title="Ligand" icon={<InfoIcon color="primary" />}>
                       <LigandViewer
                         ligand={sensorData.ligands}
                         key={new Date().getTime()}
@@ -350,14 +350,14 @@ export default function SensorPage({ isAdmin, user, family: propFamily, uniprotI
                     </SectionCard>
                   ) : (
                     <MissingDataComponent
-                      title="Ligands"
+                      title="Ligand"
                       message="No ligands submitted"
                     />
                   )}
                 </Grid>
                 
                 <Grid size={{ xs: 12, lg: 6 }}>
-                  <SectionCard title="Protein Structure" icon={<DnaIcon color="primary" />}>
+                  <SectionCard title="Structure" icon={<DnaIcon color="primary" />}>
                     <ProteinStructure
                       key={new Date().getTime()}
                       structureIDs={[
@@ -374,22 +374,22 @@ export default function SensorPage({ isAdmin, user, family: propFamily, uniprotI
             </Container>
           </TabPanel>
           
-          {/* Tab 2: Sequence & Operators */}
+          {/* Tab 2: Sequence & DNA Binding */}
           <TabPanel value={activeTab} index={1}>
             <Container sx={{ py: 3 }}>
               <Stack spacing={4}>
-                <SectionCard title="Protein Sequence" icon={<DnaIcon color="primary" />}>
+                <SectionCard title="Sequence" icon={<DnaIcon color="primary" />}>
                   <SeqViewer sequence={sensorData.sequence} />
                 </SectionCard>
                 
                 {sensorData.operators ? (
-                  <SectionCard title="DNA Binding Operators" icon={<AccountTreeIcon color="primary" />}>
+                  <SectionCard title="DNA Binding" icon={<AccountTreeIcon color="primary" />}>
                     <DNAbinding operator_data={sensorData.operators} />
                   </SectionCard>
                 ) : (
                   <MissingDataComponent
-                    title="DNA Binding Operators"
-                    message="No operators submitted"
+                    title="DNA Binding"
+                    message="No DNA binding submitted"
                   />
                 )}
               </Stack>

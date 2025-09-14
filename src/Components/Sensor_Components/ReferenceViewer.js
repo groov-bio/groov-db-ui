@@ -38,7 +38,7 @@ export default function ReferenceViewer(props) {
                 columns={12}
                 sx={{
                   ml: {
-                    xs: 1,
+                    xs: 0,
                     sm: 2,
                   },
                 }}
@@ -47,7 +47,7 @@ export default function ReferenceViewer(props) {
                 <Grid size={12}>
                   <Typography
                     component="div"
-                    sx={{ fontSize: { xs: 14, sm: 16 } }}
+                    sx={{ fontSize: { xs: 12, sm: 14, md: 16 } }}
                     //This is required in order to render the embedded <i> tags in the titles
                     dangerouslySetInnerHTML={{
                       __html: item.title
@@ -99,7 +99,7 @@ export default function ReferenceViewer(props) {
   }, [props.references]);
 
   return (
-    <Box sx={{ flexGrow: 1 }} mb={5}>
+    <Box sx={{ flexGrow: 1 }}>
       <Grid container style={{ width: '100%' }}>
         {/* Reference List */}
 

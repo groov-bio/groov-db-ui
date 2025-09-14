@@ -157,13 +157,16 @@ export default function GenomeContext({ sensor, alias }) {
           <Paper 
             elevation={0} 
             sx={{ 
-              padding: 3, 
+              pl: {xs:0, sm:3}, 
+              pr: {xs:0, sm:3}, 
+              pt: 3, 
+              pb: 3, 
               border: '1px solid #c7c7c7',
               marginLeft: {xs:1,sm:0},
               marginRight: {xs:1,sm:0}
             }}
           >
-            <Grid container spacing={5} columns={12}>
+            <Grid container spacing={4} columns={12}>
               <Grid size={12} align="center">
                 <Box 
                   sx={{ 
@@ -242,7 +245,7 @@ export default function GenomeContext({ sensor, alias }) {
                 size={12}
                 mb={3}
                 align="left"
-                style={{ height: 100, textAlign: 'center' }}
+                style={{ height: 100, textAlign: 'center'}}
               >
                 {geneFocus != undefined ? (
                   <Grid size={12} mt={3}>

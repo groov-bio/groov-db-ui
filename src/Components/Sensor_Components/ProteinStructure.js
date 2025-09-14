@@ -56,7 +56,7 @@ export default function ProteinStructure(props) {
 
         {/* Protein Structure */}
         <Grid size={12}>
-          <Paper elevation={0} sx={{ height: '500px' }}>
+          <Paper elevation={0} sx={{ height: '500px', ml:{xs:2, sm:0}, mr:{xs:2, sm:0}  }}>
             {typeof structureIDs[structureIndex - 1] !== 'undefined' ? (
               isLoading ? (
                 <div style={{ textAlign: 'center', paddingTop: '200px' }}>
