@@ -43,6 +43,18 @@ export default function RegFamilyTiles() {
     { image: '/Other-family.png', family: 'Other' },
   ];
 
+  const familyDescriptions = {
+    "TetR": "Highly represented. Oftentimes dimeric repressors that bind to structurally diverse ligands",
+    "LysR": "Highly represented. Oftentimes dimeric activators that bind to structurally diverse ligands",
+    "AraC": "Highly represented. Oftentimes dimeric activators that bind to structurally diverse ligands",
+    "MarR": "Oftentimes dimeric repressors that bind to structurally diverse ligands",
+    "LacI": "Oftentimes dimeric repressors that bind to sugars",
+    "GntR": "Oftentimes dimeric repressors that bind to structurally diverse ligands",
+    "LuxR": "Oftentimes dimeric activators involved in quorum sensing that bind to homoserine lactones",
+    "IclR": "Oftentimes dimeric repressors that bind to organic acids and small aromatic ligands",
+    "Other": "All other families, including ROK, AsnC, TrpR, and DeoR"
+  }
+
   const MainContent = ({ family = "all" }) => {
     return (
       <Box sx={{ 
@@ -74,7 +86,8 @@ export default function RegFamilyTiles() {
               ? isMobile 
                 ? "Browse all sensors or select a family above" 
                 : "Browse all sensors or select a family from the sidebar"
-              : `Viewing sensors from the ${family} regulatory family`
+                : `${familyDescriptions[family]}`
+              // : `Viewing sensors from the ${family} regulatory family`
             }
           </Typography>
 

@@ -7,9 +7,7 @@ import { useAllSensors } from '../queries/sensors.js';
 import {
   Box,
   Grid,
-  Typography,
   Skeleton,
-  Button,
   Link as MuiLink
 } from '@mui/material';
 import {
@@ -37,7 +35,6 @@ export default function SensorTable(props) {
   );
 
 
-  // const scrollRef = useRef(null);
 
   useEffect(() => {
     if (!isAllSensors) {
@@ -66,18 +63,7 @@ export default function SensorTable(props) {
     }
   }, [props.family, isAllSensors]);
 
-  /* scroll function */
-  // const executeScroll = () => {
-  //   if (!scrollRef) return;
-  //   // Get element coords from Ref
-  //   const element =
-  //     scrollRef.current.getBoundingClientRect().top + window.scrollY;
 
-  //   window.scroll({
-  //     top: element,
-  //     behavior: 'smooth',
-  //   });
-  // };
 
   const getColumns = () => {
     const baseColumns = [
@@ -204,37 +190,13 @@ export default function SensorTable(props) {
       justify="center"
       sx={{ mt: 4 }}
     >
-      {/* Back to All Sensors Button - only show for family-specific views */}
-      {/* {!isAllSensors && (
-        <Box sx={{ mb: 3 }}>
-          <Button 
-            component={Link} 
-            to="/database" 
-            variant="outlined" 
-            size="small"
-          >
-            ← Back to All Sensors
-          </Button>
-        </Box>
-      )} */}
 
-      {/* Family Name  */}
-      {/* <Typography
-        component="div"
-        gutterBottom
-        sx={{
-          fontSize: { xs: 30, sm: 55 },
-          fontWeight: 300,
-        }}
-      >
-        {isAllSensors ? 'All Sensors' : props.family}
-      </Typography> */}
 
       {/* Regulator Table  */}
       <Box
         sx={{
           height: {xs:500, md:600},
-          width: { xs: '90%', sm: '75%', md: '60%' },
+          width: { xs: '95%', sm: '75%', md: '60%' },
         }}
       >
         {(loading || (isAllSensors && allSensorsLoading)) ? (
