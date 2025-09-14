@@ -2,7 +2,7 @@ import Search from './Search.js';
 import AdvancedSearch from './AdvancedSearch.js';
 import Stats from './Stats.js';
 
-import { Box, Paper, Grid, Typography, styled, Tabs, Tab } from '@mui/material';
+import { Box, Paper, Grid, Typography, styled, Tabs, Tab, useTheme } from '@mui/material';
 
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
@@ -12,6 +12,7 @@ import { useState } from 'react';
 
 export default function Home() {
   const [searchTab, setSearchTab] = useState(0);
+  const theme = useTheme();
 
   const handleTabChange = (event, newValue) => {
     setSearchTab(newValue);
@@ -32,7 +33,9 @@ export default function Home() {
       alignItems="center"
       sx={{ minHeight: '100%' }}
       style={{
-        background: 'linear-gradient(to right bottom, #91baff, #ffffff)',
+        background: theme.palette.mode === 'dark' 
+          ? 'linear-gradient(to right bottom, #1a1a2e, #16213e, #0f3460)'
+          : 'linear-gradient(to right bottom, #91baff, #ffffff)',
       }}
     >
       <Grid
@@ -66,6 +69,7 @@ export default function Home() {
           }}
           component="div"
           textAlign="center"
+          id="home-page-header"
         >
           Find your sensor
         </Typography>

@@ -1,0 +1,1130 @@
+{
+    "data": {
+        "1": {
+            "accession": "WP_021690437.1",
+            "alias": "EdcR",
+            "keggID": "None",
+            "organism": "Caenibius tardaugens NBRC 16725",
+            "uniprotID": "U2Y8G0",
+            "ligands": [
+                "Estradiol",
+                "Estrone"
+            ]
+        },
+        "2": {
+            "accession": "AAD13556.1",
+            "alias": "LanK",
+            "keggID": "None",
+            "organism": "Streptomyces cyanogenus",
+            "uniprotID": "Q9ZGB7",
+            "ligands": [
+                "Landomycin A",
+                "Landomycin E"
+            ]
+        },
+        "3": {
+            "accession": "WP_001264144.1",
+            "alias": "VceR",
+            "keggID": "vch:VC_1408",
+            "organism": "Vibrio cholerae serotype O1 (strain ATCC 39315 / El Tor Inaba N16961)",
+            "uniprotID": "Q9KS52",
+            "ligands": [
+                "Carbonyl cyanide m-chlorophenyl hydrazone",
+                "Carbonyl cyanide p-trifluoromethoxyphenyl hydrazone",
+                "Deoxycholic acid",
+                "Phenylmercuric acetate",
+                "Chloramphenicol"
+            ]
+        },
+        "4": {
+            "accession": "WP_000777169.1",
+            "alias": "BreR",
+            "keggID": "vch:VC_1746",
+            "organism": "Vibrio cholerae serotype O1 (strain ATCC 39315 / El Tor Inaba N16961)",
+            "uniprotID": "Q9KR96",
+            "ligands": [
+                "Deoxycholic acid",
+                "Glycodeoxycholic acid",
+                "Lithocholic acid",
+                "Taurochenodeoxycholic acid"
+            ]
+        },
+        "5": {
+            "accession": "WP_003112936.1",
+            "alias": "AguR",
+            "keggID": "pae:PA0294",
+            "organism": "Pseudomonas aeruginosa (strain ATCC 15692 / DSM 22644 / CIP 104116 / JCM 14847 / LMG 12228 / 1C / PRS 101 / PAO1)",
+            "uniprotID": "Q9I6J7",
+            "ligands": [
+                "Agmatine"
+            ]
+        },
+        "6": {
+            "accession": "WP_003113688.1",
+            "alias": "CurR",
+            "keggID": "pae:PA2196",
+            "organism": "Pseudomonas aeruginosa (strain ATCC 15692 / DSM 22644 / CIP 104116 / JCM 14847 / LMG 12228 / 1C / PRS 101 / PAO1)",
+            "uniprotID": "Q9I1S1",
+            "ligands": [
+                "NaOCl",
+                "N-ethylmaleimide"
+            ]
+        },
+        "7": {
+            "accession": "WP_003119828.1",
+            "alias": "CifR",
+            "keggID": "pae:PA2931",
+            "organism": "Pseudomonas aeruginosa (strain ATCC 15692 / DSM 22644 / CIP 104116 / JCM 14847 / LMG 12228 / 1C / PRS 101 / PAO1)",
+            "uniprotID": "Q9HZR6",
+            "ligands": [
+                "Epibromohydrin"
+            ]
+        },
+        "8": {
+            "accession": "WP_003091195.1",
+            "alias": "PsrA",
+            "keggID": "pae:PA3006",
+            "organism": "Pseudomonas aeruginosa (strain ATCC 15692 / DSM 22644 / CIP 104116 / JCM 14847 / LMG 12228 / 1C / PRS 101 / PAO1)",
+            "uniprotID": "Q9HZJ9",
+            "ligands": [
+                "Oleate",
+                "Lauric acid",
+                "Myristic acid",
+                "Palmitic acid"
+            ]
+        },
+        "9": {
+            "accession": "WP_003092152.1",
+            "alias": "NalD",
+            "keggID": "pae:PA3574",
+            "organism": "Pseudomonas aeruginosa (strain ATCC 15692 / DSM 22644 / CIP 104116 / JCM 14847 / LMG 12228 / 1C / PRS 101 / PAO1)",
+            "uniprotID": "Q9HY46",
+            "ligands": [
+                "Novobiocin"
+            ]
+        },
+        "10": {
+            "accession": "WP_003113837.1",
+            "alias": "NalC",
+            "keggID": "pae:PA3721",
+            "organism": "Pseudomonas aeruginosa (strain ATCC 15692 / DSM 22644 / CIP 104116 / JCM 14847 / LMG 12228 / 1C / PRS 101 / PAO1)",
+            "uniprotID": "Q9HXS0",
+            "ligands": [
+                "Pentachlorophenol",
+                "2,4-dichlorophenol",
+                "2,4,6-trichlorophenol",
+                "Triclosan"
+            ]
+        },
+        "11": {
+            "accession": "WP_003107570.1",
+            "alias": "DesT",
+            "keggID": "pae:PA4890",
+            "organism": "Pseudomonas aeruginosa (strain ATCC 15692 / DSM 22644 / CIP 104116 / JCM 14847 / LMG 12228 / 1C / PRS 101 / PAO1)",
+            "uniprotID": "Q9HUS3",
+            "ligands": [
+                "Stearoyl CoA",
+                "Palmitoyl CoA",
+                "Oleoyl CoA",
+                "Palmitoleoyl CoA"
+            ]
+        },
+        "12": {
+            "accession": "WP_003973710.1",
+            "alias": "AtrA",
+            "keggID": "None",
+            "organism": "Streptomyces coelicolor (strain ATCC BAA-471 / A3(2) / M145)",
+            "uniprotID": "Q9F3K5",
+            "ligands": [
+                "Heptaene"
+            ]
+        },
+        "13": {
+            "accession": "WP_003977696.1",
+            "alias": "XdhR",
+            "keggID": "None",
+            "organism": "Streptomyces coelicolor (strain ATCC BAA-471 / A3(2) / M145)",
+            "uniprotID": "Q9EWZ1",
+            "ligands": [
+                "GTP",
+                "ppGpp"
+            ]
+        },
+        "14": {
+            "accession": "WP_001137892.1",
+            "alias": "MphR",
+            "keggID": "None",
+            "organism": "Escherichia coli",
+            "uniprotID": "Q9EVJ6",
+            "ligands": [
+                "Erythromycin A",
+                "Oleandomycin"
+            ]
+        },
+        "15": {
+            "accession": "NP_266817.1",
+            "alias": "HrtR",
+            "keggID": "lla:L53789",
+            "organism": "Lactococcus lactis subsp. lactis (strain IL1403)",
+            "uniprotID": "Q9CHR1",
+            "ligands": [
+                "Hemin"
+            ]
+        },
+        "16": {
+            "accession": "AAK06798.1",
+            "alias": "SimR",
+            "keggID": "None",
+            "organism": "Streptomyces antibioticus",
+            "uniprotID": "Q9AMH9",
+            "ligands": [
+                "Simocyclinone D8",
+                "Simocyclinone C4"
+            ]
+        },
+        "17": {
+            "accession": "WP_011031854.1",
+            "alias": "KijR",
+            "keggID": "None",
+            "organism": "Streptomyces coelicolor (strain ATCC BAA-471 / A3(2) / M145)",
+            "uniprotID": "Q9AK09",
+            "ligands": [
+                "Kijanimicin"
+            ]
+        },
+        "18": {
+            "accession": "WP_033220308.1",
+            "alias": "VarR",
+            "keggID": "None",
+            "organism": "Streptomyces virginiae",
+            "uniprotID": "Q9AJL5",
+            "ligands": [
+                "Virginiamycin S"
+            ]
+        },
+        "19": {
+            "accession": "AAK15050.1",
+            "alias": "TtgR",
+            "keggID": "ppx:T1E_0244",
+            "organism": "Pseudomonas putida (strain DOT-T1E)",
+            "uniprotID": "Q9AIU0",
+            "ligands": [
+                "Naringenin",
+                "Butyl paraben",
+                "Phloretin"
+            ],
+            "family": "TETR"
+        },
+        "20": {
+            "accession": "WP_011029378.1",
+            "alias": "SCO4008",
+            "keggID": "None",
+            "organism": "Streptomyces coelicolor (strain ATCC BAA-471 / A3(2) / M145)",
+            "uniprotID": "Q9ADP7",
+            "ligands": [
+                "Ethidium",
+                "Crystal violet",
+                "Safranin O",
+                "Methylene blue",
+                "Benzalkonium chloride",
+                "Cetyltrimethylammonium",
+                "Eriochrome black T"
+            ]
+        },
+        "21": {
+            "accession": "WP_011029392.1",
+            "alias": "Pip",
+            "keggID": "None",
+            "organism": "Streptomyces coelicolor (strain ATCC BAA-471 / A3(2) / M145)",
+            "uniprotID": "Q9ADN3",
+            "ligands": [
+                "Pristinamycin I"
+            ]
+        },
+        "22": {
+            "accession": "WP_011030795.1",
+            "alias": "ScbR2",
+            "keggID": "None",
+            "organism": "Streptomyces coelicolor (strain ATCC BAA-471 / A3(2) / M145)",
+            "uniprotID": "Q93S03",
+            "ligands": [
+                "Actinorhodin",
+                "Undecylprodigiosin"
+            ]
+        },
+        "23": {
+            "accession": "WP_015037182.1",
+            "alias": "JadR",
+            "keggID": "sve:SVEN_6001",
+            "organism": "Streptomyces venezuelae (strain ATCC 10712 / CBS 650.69 / DSM 40230 / JCM 4526 / NBRC 13096 / PD 04745)",
+            "uniprotID": "Q939Q2",
+            "ligands": [
+                "2,3-dehydro-UWM6",
+                "Dehydrorabelomycin",
+                "Jadomycin B",
+                "Jadomycin A"
+            ]
+        },
+        "24": {
+            "accession": "WP_011014162.1",
+            "alias": "RolR",
+            "keggID": "cgl:Cgl1157",
+            "organism": "Corynebacterium glutamicum (strain ATCC 13032 / DSM 20300 / BCRC 11384 / JCM 1318 / LMG 3730 / NCIMB 10025)",
+            "uniprotID": "Q8NR95",
+            "ligands": [
+                "Resorcinol",
+                "Hydroxyquinol"
+            ]
+        },
+        "25": {
+            "accession": "WP_003856101.1",
+            "alias": "AcnR",
+            "keggID": "cgb:cg1738",
+            "organism": "Corynebacterium glutamicum (strain ATCC 13032 / DSM 20300 / BCRC 11384 / JCM 1318 / LMG 3730 / NCIMB 10025)",
+            "uniprotID": "Q8NQ97",
+            "ligands": [
+                "Citrate"
+            ]
+        },
+        "26": {
+            "accession": "BAB99883.1",
+            "alias": "CgFasR",
+            "keggID": "cgl:Cgl2490",
+            "organism": "Corynebacterium glutamicum (strain ATCC 13032 / DSM 20300 / BCRC 11384 / JCM 1318 / LMG 3730 / NCIMB 10025)",
+            "uniprotID": "Q8NMS5",
+            "ligands": [
+                "Oleoyl-CoA",
+                "Palmitoyl-CoA"
+            ]
+        },
+        "27": {
+            "accession": "WP_011015249.1",
+            "alias": "CgmR",
+            "keggID": "cgl:Cgl2612",
+            "organism": "Corynebacterium glutamicum (strain ATCC 13032 / DSM 20300 / BCRC 11384 / JCM 1318 / LMG 3730 / NCIMB 10025)",
+            "uniprotID": "Q8NMG3",
+            "ligands": [
+                "Putrescine",
+                "Cadaverine",
+                "1,7-Diaminoheptane",
+                "1,6-Diaminohexane",
+                "Ethidium"
+            ]
+        },
+        "28": {
+            "accession": "CAC87048.1",
+            "alias": "SmeT",
+            "keggID": "None",
+            "organism": "Stenotrophomonas maltophilia",
+            "uniprotID": "Q8KLP4",
+            "ligands": [
+                "Triclosan"
+            ]
+        },
+        "29": {
+            "accession": "WP_016359483.1",
+            "alias": "HdnoR",
+            "keggID": "None",
+            "organism": "Paenarthrobacter nicotinovorans",
+            "uniprotID": "Q8GAF9",
+            "ligands": [
+                "6-OH-D-nicotine",
+                "6-OH-L-nicotine"
+            ]
+        },
+        "30": {
+            "accession": "WP_000181689.1",
+            "alias": "SczA",
+            "keggID": "spr:spr1673",
+            "organism": "Streptococcus pneumoniae (strain ATCC BAA-255 / R6)",
+            "uniprotID": "Q8DNK2",
+            "ligands": [
+                "Cobalt",
+                "Nickel",
+                "Zinc"
+            ]
+        },
+        "31": {
+            "accession": "BAC49587.1",
+            "alias": "FrrA",
+            "keggID": "bja:blr4322",
+            "organism": "Bradyrhizobium diazoefficiens (strain JCM 10833 / BCRC 13528 / IAM 13628 / NBRC 14792 / USDA 110)",
+            "uniprotID": "Q89M71",
+            "ligands": [
+                "Genistein"
+            ]
+        },
+        "32": {
+            "accession": "WP_011089760.1",
+            "alias": "BdtR",
+            "keggID": "bja:blr7023",
+            "organism": "Bradyrhizobium diazoefficiens (strain JCM 10833 / BCRC 13528 / IAM 13628 / NBRC 14792 / USDA 110)",
+            "uniprotID": "Q89EP9",
+            "ligands": [
+                "Genistein"
+            ]
+        },
+        "33": {
+            "accession": "WP_005768695.1",
+            "alias": "PmeR",
+            "keggID": "pst:PSPTO_4302",
+            "organism": "Pseudomonas syringae pv. tomato (strain ATCC BAA-871 / DC3000)",
+            "uniprotID": "Q87X86",
+            "ligands": [
+                "Butylparaben",
+                "Methylparaben",
+                "Morin",
+                "Naringenin",
+                "Phloretin",
+                "Quercetin"
+            ]
+        },
+        "34": {
+            "accession": "WP_010985050.1",
+            "alias": "AveT",
+            "keggID": "sma:SAVERM_3619",
+            "organism": "Streptomyces avermitilis (strain ATCC 31267 / DSM 46492 / JCM 5070 / NBRC 14893 / NCIMB 12804 / NRRL 8165 / MA-4680)",
+            "uniprotID": "Q82H91",
+            "ligands": [
+                "C-5-O-B1"
+            ]
+        },
+        "35": {
+            "accession": "WP_010985133.1",
+            "alias": "AvaR2",
+            "keggID": "sma:SAVERM_3702",
+            "organism": "Streptomyces avermitilis (strain ATCC 31267 / DSM 46492 / JCM 5070 / NBRC 14893 / NCIMB 12804 / NRRL 8165 / MA-4680)",
+            "uniprotID": "Q82H44",
+            "ligands": [
+                "Avenolide",
+                "Jadomycin B"
+            ]
+        },
+        "36": {
+            "accession": "WP_010986683.1",
+            "alias": "AccR",
+            "keggID": "sma:SAVERM_5279",
+            "organism": "Streptomyces avermitilis (strain ATCC 31267 / DSM 46492 / JCM 5070 / NBRC 14893 / NCIMB 12804 / NRRL 8165 / MA-4680)",
+            "uniprotID": "Q82CR4",
+            "ligands": [
+                "Acetyl-CoA",
+                "Propionyl-CoA",
+                "Methylcrotonyl-CoA"
+            ]
+        },
+        "37": {
+            "accession": "WP_010973650.1",
+            "alias": "NieR",
+            "keggID": "atu:Atu4217",
+            "organism": "Agrobacterium fabrum (strain C58 / ATCC 33970)",
+            "uniprotID": "Q7CUC4",
+            "ligands": [
+                "Sodium hydroxide"
+            ]
+        },
+        "38": {
+            "accession": "WP_002857627.1",
+            "alias": "CmeR",
+            "keggID": "None",
+            "organism": "Campylobacter jejuni",
+            "uniprotID": "Q7B8P6",
+            "ligands": [
+                "Taurocholate",
+                "Salicylate",
+                "Indole-3-acetic acid ",
+                "Vanillin",
+                "Tyrosol",
+                "Tryptophol",
+                "2,3-Dihydroxybenzoate"
+            ]
+        },
+        "39": {
+            "accession": "WP_011227711.1",
+            "alias": "TtFadR",
+            "keggID": "ttj:TTHA0101",
+            "organism": "Thermus thermophilus (strain ATCC 27634 / DSM 579 / HB8)",
+            "uniprotID": "Q5SM42",
+            "ligands": [
+                "Lauroyl-CoA"
+            ]
+        },
+        "40": {
+            "accession": "WP_011228340.1",
+            "alias": "PaaR",
+            "keggID": "ttj:TTHA0973",
+            "organism": "Thermus thermophilus (strain ATCC 27634 / DSM 579 / HB8)",
+            "uniprotID": "Q5SJN5",
+            "ligands": [
+                "Phenylacetyl-CoA"
+            ]
+        },
+        "41": {
+            "accession": "WP_002497698.1",
+            "alias": "IcaR",
+            "keggID": "ser:SERP2292",
+            "organism": "Staphylococcus epidermidis (strain ATCC 35984 / RP62A)",
+            "uniprotID": "Q5HKQ1",
+            "ligands": [
+                "Gentamicin",
+                "Streptomycin"
+            ]
+        },
+        "42": {
+            "accession": "WP_011263239.1",
+            "alias": "VFA0359",
+            "keggID": "vfi:VF_A0359",
+            "organism": "Aliivibrio fischeri (strain ATCC 700601 / ES114)",
+            "uniprotID": "Q5E0L7",
+            "ligands": [
+                "Deoxycholic acid"
+            ]
+        },
+        "43": {
+            "accession": "AAB36583.1",
+            "alias": "JadR2",
+            "keggID": "None",
+            "organism": "Streptomyces venezuelae",
+            "uniprotID": "Q56153",
+            "ligands": [
+                "Jadomycin B",
+                "Jadomycin A"
+            ]
+        },
+        "44": {
+            "accession": "WP_011030045.1",
+            "alias": "ActR",
+            "keggID": "None",
+            "organism": "Streptomyces coelicolor",
+            "uniprotID": "Q53901",
+            "ligands": [
+                "(S)-DNPA",
+                "Kalafungin",
+                "Actinorhodin"
+            ]
+        },
+        "45": {
+            "accession": "BAA03510.1",
+            "alias": "CamR",
+            "keggID": "None",
+            "organism": "Pseudomonas putida",
+            "uniprotID": "Q51597",
+            "ligands": [
+                "Camphor"
+            ]
+        },
+        "46": {
+            "accession": "AAY92066.1",
+            "alias": "PltZ",
+            "keggID": "pfl:PFL_2794",
+            "organism": "Pseudomonas fluorescens (strain ATCC BAA-477 / NRRL B-23932 / Pf-5)",
+            "uniprotID": "Q4KCY3",
+            "ligands": [
+                "Pyoluteorin"
+            ]
+        },
+        "47": {
+            "accession": "WP_011064124.1",
+            "alias": "PhlH",
+            "keggID": "pfl:PFL_5951",
+            "organism": "Pseudomonas fluorescens (strain ATCC BAA-477 / NRRL B-23932 / Pf-5)",
+            "uniprotID": "Q4K424",
+            "ligands": [
+                "Pyoluteorin",
+                "2,4-DAPG",
+                "MAPG"
+            ]
+        },
+        "48": {
+            "accession": "AAY86547.1",
+            "alias": "PhlF",
+            "keggID": "None",
+            "organism": "Pseudomonas fluorescens",
+            "uniprotID": "Q4JIX3",
+            "ligands": [
+                "2,4-DAPG"
+            ]
+        },
+        "49": {
+            "accession": "WP_011336736.1",
+            "alias": "AcuR",
+            "keggID": "rsp:RSP_1435",
+            "organism": "Cereibacter sphaeroides (strain ATCC 17023 / DSM 158 / JCM 6121 / CCUG 31486 / LMG 2827 / NBRC 12203 / NCIMB 8253 / ATH 2.4.1.)",
+            "uniprotID": "Q3J6K8",
+            "ligands": [
+                "Acrylate"
+            ]
+        },
+        "50": {
+            "accession": "WP_011554266.1",
+            "alias": "AibR",
+            "keggID": "mxa:MXAN_4263",
+            "organism": "Myxococcus xanthus (strain DK1622)",
+            "uniprotID": "Q1D4I5",
+            "ligands": [
+                "Isovaleryl coenzyme A"
+            ]
+        },
+        "51": {
+            "accession": "AAZ77685.1",
+            "alias": "ChlF1",
+            "keggID": "None",
+            "organism": "Streptomyces antibioticus",
+            "uniprotID": "Q0R4N6",
+            "ligands": [
+                "Chlorothricin",
+                "Deschloro-chlorothricin",
+                "Demethylsalicycloyl-chlorothricin"
+            ]
+        },
+        "52": {
+            "accession": "WP_003417984.1",
+            "alias": "Rv3405c",
+            "keggID": "mtu:Rv3405c",
+            "organism": "Mycobacterium tuberculosis (strain ATCC 25618 / H37Rv)",
+            "uniprotID": "P9WMC3",
+            "ligands": [
+                "Tetracycline"
+            ]
+        },
+        "53": {
+            "accession": "WP_003399797.1",
+            "alias": "EthR",
+            "keggID": "mtu:Rv3855",
+            "organism": "Mycobacterium tuberculosis (strain ATCC 25618 / H37Rv)",
+            "uniprotID": "P9WMC1",
+            "ligands": [
+                "Cyclic di-GMP",
+                "N-(cyclopentylmethyl)pyrrolidine-1-carboxamide",
+                "BDM14744",
+                "2-Phenylethyl-butyrate"
+            ]
+        },
+        "54": {
+            "accession": "WP_001032936.1",
+            "alias": "NemR",
+            "keggID": "ecj:JW5874",
+            "organism": "Escherichia coli (strain K12)",
+            "uniprotID": "P67430",
+            "ligands": [
+                "N-Ethylmaleimide",
+                "Showdomycin"
+            ]
+        },
+        "55": {
+            "accession": "WP_013083972.1",
+            "alias": "Bm3R1",
+            "keggID": "None",
+            "organism": "Priestia megaterium",
+            "uniprotID": "P43506",
+            "ligands": [
+                "Pentobarbital",
+                "Methohexital"
+            ]
+        },
+        "56": {
+            "accession": "WP_003227022.1",
+            "alias": "QdoR",
+            "keggID": "bsu:BSU39990",
+            "organism": "Bacillus subtilis (strain 168)",
+            "uniprotID": "P42105",
+            "ligands": [
+                "Quercetin"
+            ]
+        },
+        "57": {
+            "accession": "WP_003693763.1",
+            "alias": "MtrR",
+            "keggID": "None",
+            "organism": "Neisseria gonorrhoeae",
+            "uniprotID": "P39897",
+            "ligands": [
+                "Chenodeoxycholate",
+                "Taurodeoxycholate",
+                "Ethinyl estradiol",
+                "Beta-estradiol",
+                "Progesterone",
+                "Testosterone"
+            ]
+        },
+        "58": {
+            "accession": "NP_414847.3",
+            "alias": "BetI",
+            "keggID": "ecj:JW0305",
+            "organism": "Escherichia coli (strain K12)",
+            "uniprotID": "P17446",
+            "ligands": [
+                "Choline"
+            ]
+        },
+        "59": {
+            "accession": "WOT35542.1",
+            "alias": "DrrR1",
+            "keggID": "None",
+            "organism": "Streptomyces coeruleorubidus",
+            "uniprotID": "P0DXY9",
+            "ligands": [
+                "Daunorubicin",
+                "Doxorubicin"
+            ]
+        },
+        "60": {
+            "accession": "QWF22305.1",
+            "alias": "PnbX",
+            "keggID": "None",
+            "organism": "Nocardioides sp. (strain LMS-CY)",
+            "uniprotID": "P0DXG5",
+            "ligands": [
+                "4-Nitrobenzoate"
+            ]
+        },
+        "61": {
+            "accession": "AKU14494.1",
+            "alias": "HbdR",
+            "keggID": "None",
+            "organism": "Aromatoleum sp. (strain CIB)",
+            "uniprotID": "P0DXG3",
+            "ligands": [
+                "3-Hydroxybenzoyl-CoA"
+            ]
+        },
+        "62": {
+            "accession": "NP_415533.1",
+            "alias": "RutR",
+            "keggID": "ecj:JW0998",
+            "organism": "Escherichia coli (strain K12)",
+            "uniprotID": "P0ACU2",
+            "ligands": [
+                "Uracil"
+            ]
+        },
+        "63": {
+            "accession": "WP_000113282.1",
+            "alias": "TetR",
+            "keggID": "None",
+            "organism": "Escherichia coli",
+            "uniprotID": "P0ACT4",
+            "ligands": [
+                "Tetracycline"
+            ]
+        },
+        "64": {
+            "accession": "WP_000101737",
+            "alias": "EcAcrR",
+            "keggID": "ecj:JW0453",
+            "organism": "Escherichia coli (strain K12)",
+            "uniprotID": "P0ACS9",
+            "ligands": [
+                "Cadaverine",
+                "Ethidium",
+                "Spermidine"
+            ]
+        },
+        "65": {
+            "accession": "WP_001807342.1",
+            "alias": "QacR",
+            "keggID": "None",
+            "organism": "Staphylococcus aureus",
+            "uniprotID": "P0A0N4",
+            "ligands": [
+                "Methyl Green",
+                "Berberine",
+                "4',6-Diamidino-2-phenylindole",
+                "Palmatine",
+                "Malachite green",
+                "Pyronin Y",
+                "Tetraphenylarsonium",
+                "3,3'-Dipropyloxacarbocyanine iodide",
+                "Amicarbalide",
+                "Propamidine",
+                "Nitidine",
+                "Avicin",
+                "Chlorhexidine"
+            ]
+        },
+        "66": {
+            "accession": "WP_003400591.1",
+            "alias": "OxiR",
+            "keggID": "mtu:Rv0067c",
+            "organism": "Mycobacterium tuberculosis (strain ATCC 25618 / H37Rv)",
+            "uniprotID": "O53612",
+            "ligands": [
+                "Isoniazid"
+            ]
+        },
+        "67": {
+            "accession": "WP_003416573.1",
+            "alias": "Rv3160c",
+            "keggID": "mtu:Rv3160c",
+            "organism": "Mycobacterium tuberculosis (strain ATCC 25618 / H37Rv)",
+            "uniprotID": "O53310",
+            "ligands": [
+                "C10"
+            ]
+        },
+        "68": {
+            "accession": "WP_013222564.1",
+            "alias": "RifQ",
+            "keggID": "None",
+            "organism": "Amycolatopsis mediterranei",
+            "uniprotID": "O52558",
+            "ligands": [
+                "Rifamycin B"
+            ]
+        },
+        "69": {
+            "accession": "WP_003246449.1",
+            "alias": "LmrA",
+            "keggID": "bsu:BSU02680",
+            "organism": "Bacillus subtilis (strain 168)",
+            "uniprotID": "O34619",
+            "ligands": [
+                "Quercetin",
+                "Fisetin",
+                "Genistein"
+            ]
+        },
+        "70": {
+            "accession": "AAB62296.1",
+            "alias": "CymR",
+            "keggID": "None",
+            "organism": "Pseudomonas putida",
+            "uniprotID": "O33453",
+            "ligands": [
+                "Cumate"
+            ]
+        },
+        "71": {
+            "accession": "WP_003401571.1",
+            "alias": "Rv0302",
+            "keggID": "mtu:Rv0302",
+            "organism": "Mycobacterium tuberculosis (strain ATCC 25618 / H37Rv)",
+            "uniprotID": "O07229",
+            "ligands": [
+                "Palmitic acid"
+            ]
+        },
+        "72": {
+            "accession": "WP_003412790.1",
+            "alias": "Fad35R",
+            "keggID": "mtu:Rv2506",
+            "organism": "Mycobacterium tuberculosis (strain ATCC 25618 / H37Rv)",
+            "uniprotID": "O06169",
+            "ligands": [
+                "Palmityl-CoA"
+            ]
+        },
+        "73": {
+            "accession": "WP_003899886.1",
+            "alias": "InbR",
+            "keggID": "mtu:Rv0275c",
+            "organism": "Mycobacterium tuberculosis (strain ATCC 25618 / H37Rv)",
+            "uniprotID": "L7N6A2",
+            "ligands": [
+                "Isoniazid"
+            ]
+        },
+        "74": {
+            "accession": "WP_050417930.1",
+            "alias": "MbdR",
+            "keggID": "None",
+            "organism": "Azoarcus sp. CIB",
+            "uniprotID": "K4Q644",
+            "ligands": [
+                "3-Methylbenzoyl-CoA"
+            ]
+        },
+        "75": {
+            "accession": "WP_003416005.1",
+            "alias": "Rv3066",
+            "keggID": "mtu:Rv3066",
+            "organism": "Mycobacterium tuberculosis (strain ATCC 25618 / H37Rv)",
+            "uniprotID": "I6X658",
+            "ligands": [
+                "Ethidium"
+            ]
+        },
+        "76": {
+            "accession": "WP_011015509.1",
+            "alias": "McbR",
+            "keggID": "None",
+            "organism": "Corynebacterium glutamicum",
+            "uniprotID": "H7C662",
+            "ligands": [
+                "S-adenosylhomocysteine"
+            ]
+        },
+        "77": {
+            "accession": "AEM66515.1",
+            "alias": "AlkX",
+            "keggID": "None",
+            "organism": "Dietzia sp. DQ12-45-1b",
+            "uniprotID": "G3EIL4",
+            "ligands": [
+                "Palmitic acid"
+            ]
+        },
+        "78": {
+            "accession": "AEH42489.1",
+            "alias": "CalR3",
+            "keggID": "None",
+            "organism": "Streptomyces chartreusis",
+            "uniprotID": "F8QZR9",
+            "ligands": [
+                "Cezomycin",
+                "Calcimycin"
+            ]
+        },
+        "79": {
+            "accession": "WP_013366341.1",
+            "alias": "EilR",
+            "keggID": "esc:Entcl_2353",
+            "organism": "Enterobacter lignolyticus (strain SCF1)",
+            "uniprotID": "E3G817",
+            "ligands": [
+                "Crystal violet",
+                "Acridine orange",
+                "Pyronin Y",
+                "Malachite green",
+                "Victoria blue R",
+                "Proflavine",
+                "Methylene blue",
+                "Neutral red"
+            ]
+        },
+        "80": {
+            "accession": "WP_003948165.1",
+            "alias": "BkdR",
+            "keggID": "salb:XNR_4213",
+            "organism": "Streptomyces albidoflavus",
+            "uniprotID": "D6B1F8",
+            "ligands": [
+                "Acetyl-CoA",
+                "Propionyl-CoA",
+                "Acetate",
+                "Propionate"
+            ]
+        },
+        "81": {
+            "accession": "ACS29497.1",
+            "alias": "MdoR",
+            "keggID": "None",
+            "organism": "Mycobacterium sp. (strain DSM 3803 / JC1)",
+            "uniprotID": "C5MRT6",
+            "ligands": [
+                "Methanol"
+            ]
+        },
+        "82": {
+            "accession": "ACO06750.1",
+            "alias": "EmhR",
+            "keggID": "None",
+            "organism": "Pseudomonas fluorescens",
+            "uniprotID": "C1KA83",
+            "ligands": [
+                "Indole"
+            ]
+        },
+        "83": {
+            "accession": "WP_012480398.1",
+            "alias": "MfsR",
+            "keggID": "sml:Smlt2677",
+            "organism": "Stenotrophomonas maltophilia (strain K279a)",
+            "uniprotID": "B2FTM9",
+            "ligands": [
+                "Benzalkonium",
+                "Ethidium"
+            ]
+        },
+        "84": {
+            "accession": "WP_005407901.1",
+            "alias": "DitR",
+            "keggID": "sml:Smlt0547",
+            "organism": "Stenotrophomonas maltophilia (strain K279a)",
+            "uniprotID": "B2FL17",
+            "ligands": [
+                "Diamide"
+            ]
+        },
+        "85": {
+            "accession": "WP_009944749.1",
+            "alias": "AcrT",
+            "keggID": "sen:SACE_3980",
+            "organism": "Saccharopolyspora erythraea (strain ATCC 11635 / DSM 40517 / JCM 4748 / NBRC 13426 / NCIMB 8594 / NRRL 2338)",
+            "uniprotID": "A4FGS6",
+            "ligands": [
+                "Propionyl-CoA"
+            ]
+        },
+        "86": {
+            "accession": "WP_009949582.1",
+            "alias": "PccD",
+            "keggID": "sen:SACE_3396",
+            "organism": "Saccharopolyspora erythraea (strain ATCC 11635 / DSM 40517 / JCM 4748 / NBRC 13426 / NCIMB 8594 / NRRL 2338)",
+            "uniprotID": "A4FF46",
+            "ligands": [
+                "Methylmalonic acid"
+            ]
+        },
+        "87": {
+            "accession": "ABK75291.1",
+            "alias": "KstR",
+            "keggID": "msg:MSMEI_5881",
+            "organism": "Mycolicibacterium smegmatis (strain ATCC 700084 / mc(2)155)",
+            "uniprotID": "A0R528",
+            "ligands": [
+                "3-oxo-4-cholestenoic acid"
+            ]
+        },
+        "88": {
+            "accession": "ABK70852.1",
+            "alias": "DarR",
+            "keggID": "msm:MSMEG_5346",
+            "organism": "Mycolicibacterium smegmatis (strain ATCC 700084 / mc(2)155)",
+            "uniprotID": "A0R352",
+            "ligands": [
+                "Cyclic di-AMP"
+            ]
+        },
+        "89": {
+            "accession": "ABK70543.1",
+            "alias": "MSMEG_2295",
+            "keggID": "msm:MSMEG_1015",
+            "organism": "Mycolicibacterium smegmatis (strain ATCC 700084 / mc(2)155)",
+            "uniprotID": "A0QR78",
+            "ligands": [
+                "Plumbagin",
+                "Novobiocin"
+            ]
+        },
+        "90": {
+            "accession": "WP_003080639.1",
+            "alias": "EHN63435",
+            "keggID": "None",
+            "organism": "Comamonas testosteroni",
+            "uniprotID": "A0A8B4S4L4",
+            "ligands": [
+                "Testosterone"
+            ]
+        },
+        "91": {
+            "accession": "WP_014469484.1",
+            "alias": "BAK71752",
+            "keggID": "None",
+            "organism": "Aliarcobacter butzleri L354",
+            "uniprotID": "A0A837JIV4",
+            "ligands": [
+                "Tetrahydropapaverine"
+            ]
+        },
+        "92": {
+            "accession": "QOQ86083.1",
+            "alias": "FcbR",
+            "keggID": "None",
+            "organism": "Comamonas sediminis",
+            "uniprotID": "A0A7M1LCC3",
+            "ligands": [
+                "4-Chlorobenzoyl-CoA"
+            ]
+        },
+        "93": {
+            "accession": "SMC09139.1",
+            "alias": "SMC09139",
+            "keggID": "None",
+            "organism": "Nitratiruptor tergarcus DSM 16512",
+            "uniprotID": "A0A1W1WSF7",
+            "ligands": [
+                "Geraniol",
+                "Ursodiol"
+            ]
+        },
+        "94": {
+            "accession": "SEE04737.1",
+            "alias": "SEE04737",
+            "keggID": "None",
+            "organism": "Rhizobiales bacterium GAS188",
+            "uniprotID": "A0A1H5FMT9",
+            "ligands": [
+                "Olivetolic acid"
+            ]
+        },
+        "95": {
+            "accession": "AMR55379.1",
+            "alias": "NdpR",
+            "keggID": "None",
+            "organism": "Sphingomonas melonis TY",
+            "uniprotID": "A0A142I9H0",
+            "ligands": [
+                "2,5-Dihydroxypyridine"
+            ]
+        },
+        "96": {
+            "accession": "WP_000113609.1",
+            "alias": "RamR",
+            "keggID": "seo:STM14_0676",
+            "organism": "Salmonella typhimurium (strain 14028s / SGSC 2262)",
+            "uniprotID": "A0A0F6AY66",
+            "ligands": [
+                "Berberine",
+                "Ethidium",
+                "Dequalinium",
+                "Rhodamine 6G",
+                "Crystal Violet"
+            ]
+        },
+        "97": {
+            "accession": "WP_024087624.1",
+            "alias": "NicR2",
+            "keggID": "None",
+            "organism": "Pseudomonas putida (strain DSM 28022 / S16)",
+            "uniprotID": "A0A0B4KIF6",
+            "ligands": [
+                "6-hydroxy-3-succinoyl-pyridine"
+            ]
+        },
+        "98": {
+            "accession": "WP_035269502.1",
+            "alias": "HpaR",
+            "keggID": "afa:UZ73_10765",
+            "organism": "Alcaligenes faecalis",
+            "uniprotID": "A0A0A2NIP2",
+            "ligands": [
+                "5-Hydroxypicolinic acid"
+            ]
+        },
+        "99": {
+            "accession": "AIY20223.2",
+            "alias": "PinR",
+            "keggID": "psim:KR76_27130",
+            "organism": "Nocardioides simplex",
+            "uniprotID": "A0A0A1DUF2",
+            "ligands": [
+                "Progesterone",
+                "Cortisol",
+                "Aldosterone"
+            ]
+        },
+        "100": {
+            "accession": "WP_000323807.1",
+            "alias": "AmvR",
+            "keggID": "None",
+            "organism": "Acinetobacter baumannii",
+            "uniprotID": "A0A0D5YGI2",
+            "ligands": [
+                "Spermidine"
+            ],
+            "family": "TETR"
+        },
+        "101": {
+            "accession": "WP_010985136.1",
+            "alias": "AvaR1",
+            "keggID": "sma:SAVERM_3705",
+            "organism": "Streptomyces avermitilis (strain ATCC 31267 / DSM 46492 / JCM 5070 / NBRC 14893 / NCIMB 12804 / NRRL 8165 / MA-4680)",
+            "uniprotID": "Q82H41",
+            "ligands": [
+                "Avenolide"
+            ],
+            "family": "TETR"
+        }
+    },
+    "count": 101
+}

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, Link } from '@mui/material';
 
 export default function Contact() {
   return (
@@ -14,6 +14,7 @@ export default function Contact() {
         sx={{ fontSize: { xs: 24, sm: 28, md: 32 } }}
         fontWeight="300"
         gutterBottom
+        id="about-cite-header"
       >
         Citing groov<sup>DB</sup>
       </Typography>
@@ -31,9 +32,9 @@ export default function Contact() {
         d'Oelsnitz S, Love JD, Diaz DJ, Ellington AD. GroovDB: A Database of
         Ligand-Inducible Transcription Factors.<br></br>
         <i>ACS Synth Biol.</i> <b>11</b>, 10 (2022). doi:{' '}
-        <a href="https://doi.org/10.1021/acssynbio.2c00382" target="__blank">
+        <Link href="https://doi.org/10.1021/acssynbio.2c00382" target="_blank">
           10.1021/acssynbio.2c00382
-        </a>
+        </Link>
         <br />
       </Typography>
 
@@ -48,6 +49,7 @@ export default function Contact() {
         fontWeight="300"
         mt={5}
         gutterBottom
+        id="about-cite-other"
       >
         Citing other tools
       </Typography>
@@ -66,9 +68,9 @@ export default function Contact() {
         d'Oelsnitz S, Stofel SK, Love JD, Ellington AD. Snowprint: a predictive
         tool for genetic biosensor discovery.<br></br>
         <i>Commun Biol. </i> <b> 7</b>, 163 (2024). doi:{' '}
-        <a href="https://doi.org/10.1038/s42003-024-05849-8" target="__blank">
+        <Link href="https://doi.org/10.1038/s42003-024-05849-8" target="_blank">
           10.1038/s42003-024-05849-8
-        </a>
+        </Link>
         <br />
       </Typography>
 
@@ -81,9 +83,9 @@ export default function Contact() {
         d'Oelsnitz S, Love JD, Ellington AD, Ross D. Ligify: Automated genome
         mining for ligand-inducible transcription factors.<br></br>
         <i>ACS Synth Biol.</i> <b>13</b>, 8 (2024). doi:{' '}
-        <a href="https://doi.org/10.1021/acssynbio.4c00372" target="__blank">
+        <Link href="https://doi.org/10.1021/acssynbio.4c00372" target="_blank">
           10.1021/acssynbio.4c00372
-        </a>
+        </Link>
         <br />
       </Typography>
     </Box>

@@ -18,10 +18,10 @@ export default function Stats() {
         bottom: '20px',
       }}
     >
-      <Typography sx={{ fontSize: { xs: 14, sm: 22 } }}>
+      <Typography sx={{ fontSize: { xs: 14, sm: 22 } }} id="regulators-count">
         Regulators: {regulators}
       </Typography>
-      <Typography sx={{ fontSize: { xs: 14, sm: 22 } }}>
+      <Typography sx={{ fontSize: { xs: 14, sm: 22 } }} id="ligands-count">
         Unique ligands: {ligands}
       </Typography>
     </Grid>

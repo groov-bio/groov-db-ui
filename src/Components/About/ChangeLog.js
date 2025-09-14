@@ -1,4 +1,4 @@
-import { Box, Typography, Button } from '@mui/material';
+import { Box, Typography, Button, Link } from '@mui/material';
 
 export default function ChangeLog() {
   /**
@@ -85,15 +85,24 @@ export default function ChangeLog() {
             sx={{ fontSize: { xs: 24, sm: 28, md: 32 } }}
             fontWeight="300"
             gutterBottom
+            id="about-change-log-header"
           >
             Change Log
           </Typography>
-          <Typography sx={{ fontSize: { xs: 14, sm: 16, md: 18 } }}>
+          <Typography sx={{ fontSize: { xs: 14, sm: 16, md: 18 } }} id="improve-groov">
             We are always looking for ways to improve groov<sup>DB</sup>. If you
-            have any suggestions, please <a href="contact">contact us</a>.
+            have any suggestions, please <Link href="contact">contact us</Link>.
           </Typography>
         </Box>
-
+        <Box id="v1.17" sx={{ gridColumn: 'span 12' }}>
+          <Box>
+            {getHeader('30 August, 2025', '1.17', 'Feature')}
+            {createList([
+              `Let there be - dark?`,
+              `We've added dark mode and a variety of UX improvements such as a new tab view on the sensor page.`,
+            ])}
+          </Box>
+        </Box>
         <Box id="v1.16" sx={{ gridColumn: 'span 12' }}>
           <Box>
             {getHeader('13 August, 2025', '1.16', 'Feature')}

@@ -113,36 +113,33 @@ export default function DNAbinding({ operator_data }) {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container style={{ width: '100%' }}>
-        {/* Component Title */}
-        <Grid size={12}>
-          <Typography
-            component="div"
-            variant="h5"
-            sx={{ ml: { xs: '5%', sm: '2.5%' }, fontSize: {xs:24,sm:28}, fontWeight: 300 }}
-          >
-            DNA Binding
-          </Typography>
-        </Grid>
         <Grid size={12} mt={1}>
           {/* Container */}
           <Paper 
             elevation={0} 
             sx={{ 
-            padding: 3, 
-            border: '1px solid #c7c7c7',
+            padding: {xs:1, sm:3}, 
+            border: (theme) => `1px solid ${theme.palette.mode === 'dark' ? '#555' : '#c7c7c7'}`,
             marginLeft: {xs:1,sm:0},
             marginRight: {xs:1,sm:0} }}>
             <Grid container>
               {/* Operator Logo */}
               <Grid size={{xs:12, md:12}} sx={{ overflow: 'scroll' }}>
                 {isSmallScreen && logoMatrix ? (
-                  <DNALogo ppm={logoMatrix} height="90px" yAxisMax={2.5} />
+                  <DNALogo 
+                    ppm={logoMatrix} 
+                    height="90px" 
+                    yAxisMax={2.5}
+                  />
                 ) : (
                   <Box></Box>
                 )}
-                :
-                {isSmallScreen == false && logoMatrix ? (
-                  <DNALogo ppm={logoMatrix} height="170px" yAxisMax={2.5} />
+                {!isSmallScreen && logoMatrix ? (
+                  <DNALogo 
+                    ppm={logoMatrix} 
+                    height="170px" 
+                    yAxisMax={2.5}
+                  />
                 ) : (
                   <Box></Box>
                 )}
@@ -156,6 +153,7 @@ export default function DNAbinding({ operator_data }) {
                 <DataGrid
                   rows={rows}
                   columns={columns}
+                  getRowId={(row) => row.sequence || `row-${row.id}`}
                   autoPageSize
                   height="400px"
                   rowsPerPageOptions={[5]}

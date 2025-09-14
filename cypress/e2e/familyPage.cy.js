@@ -10,27 +10,18 @@ describe('Family Page', () => {
     }).as('googleAnalytics');
 
     // Mock family-specific API call
-    cy.intercept('GET', 'https://groov-api.com/indexes/lysr.json', {
-      fixture: 'lysrFamilyPages.json',
-    }).as('lysr-search');
+    cy.intercept('GET', 'https://groov-api.com/indexes/tetr.json', {
+      fixture: 'tetrFamilyPages.json',
+    }).as('tetr-search');
 
     cy.visit('http://localhost:3000');
     /* ==== Generated with Cypress Studio ==== */
-    cy.get('.MuiToolbar-root > .css-130f8nx > :nth-child(1)').click();
-    cy.get('.MuiToolbar-root > .css-130f8nx > :nth-child(1) > a').click();
-    cy.get(':nth-child(2) > a > .MuiBox-root').click();
-    cy.get('[data-id="0"] > .MuiDataGrid-cell--withRenderer > a').should(
+    cy.get('#Browse').click();
+    cy.get('#database-link-TetR').click();
+    cy.get('[data-id="U2Y8G0"] [data-field="uniprot"] a').should(
       'have.attr',
       'href',
-      '/database/LysR/AtzR'
-    );
-    cy.get('.MuiGrid-direction-xs-column').click();
-    cy.get('[data-testid="KeyboardArrowRightIcon"]').click();
-    cy.get(
-      '.MuiDataGrid-row--lastVisible > [data-field="ligand"] > .MuiDataGrid-cellContent'
-    ).should('be.visible');
-    cy.get('.MuiGrid-container > .MuiGrid-root > .MuiTypography-root').should(
-      'be.visible'
+      '/entry/TetR/U2Y8G0'
     );
     /* ==== End Cypress Studio ==== */
   });

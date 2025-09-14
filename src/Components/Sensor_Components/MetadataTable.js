@@ -41,24 +41,28 @@ export default function MetadataTable({ tableData }) {
                 <Grid size={6} textAlign="right">
                   <Typography
                     component="span"
-                    width="100px"
                     sx={{
                       fontSize: { xs: 14, sm: 16, md: 16 },
                       paddingRight: '15px',
                       borderRight: '2px solid #0084ff',
+                      display: 'inline-block',
                     }}
                   >
                     <b>{key}</b>
                   </Typography>
                 </Grid>
 
-                <Grid size={5} textAlign="left" ml={'15px'}>
+                <Grid size={6} textAlign="left" sx={{ pl: 2 }}>
                   {tableData[key].link.url ===
                   'https://www.genome.jp/dbget-bin/www_bget?null' ? (
                     <Typography
                       component="span"
-                      width="100px"
-                      sx={{ fontSize: { xs: 14, sm: 16 } }}
+                      sx={{ 
+                        fontSize: { xs: 14, sm: 16 },
+                        wordBreak: 'break-word',
+                        overflowWrap: 'break-word'
+                      }}
+                      id={`metadata-table-${key}`}
                     >
                       {tableData[key].name}
                     </Typography>
@@ -66,12 +70,16 @@ export default function MetadataTable({ tableData }) {
                     <Link
                       href={tableData[key].link.url}
                       target="_blank"
-                      style={{ textDecoration: 'None', color: '#243fab' }}
+                      sx={{ textDecoration: 'none' }}
                     >
                       <Typography
                         component="span"
-                        width="100px"
-                        sx={{ fontSize: { xs: 14, sm: 16 } }}
+                        sx={{ 
+                          fontSize: { xs: 14, sm: 16 },
+                          wordBreak: 'break-word',
+                          overflowWrap: 'break-word'
+                        }}
+                        id={`metadata-table-data-${key}`}
                       >
                         {tableData[key].name}
                       </Typography>
@@ -88,22 +96,26 @@ export default function MetadataTable({ tableData }) {
                 <Grid size={6} textAlign="right">
                   <Typography
                     component="span"
-                    width="100px"
                     sx={{
                       fontSize: { xs: 14, sm: 16, md: 16 },
                       paddingRight: '15px',
                       borderRight: '2px solid #0084ff',
+                      display: 'inline-block',
                     }}
                   >
                     <b>{key}</b>
                   </Typography>
                 </Grid>
 
-                <Grid size={5} textAlign="left" ml={'15px'}>
+                <Grid size={6} textAlign="left" sx={{ pl: 2 }}>
                   <Typography
                     component="span"
-                    width="100px"
-                    sx={{ fontSize: { xs: 14, sm: 16, md: 16 } }}
+                    sx={{ 
+                      fontSize: { xs: 14, sm: 16, md: 16 },
+                      wordBreak: 'break-word',
+                      overflowWrap: 'break-word'
+                    }}
+                    id={`metadata-table-${key}`}
                   >
                     {tableData[key].name}
                   </Typography>

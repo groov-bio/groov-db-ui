@@ -62,7 +62,7 @@ export default function AddSensorFooter({ stepValue, setStepValue }) {
           Next
         </Button>
       ) : (
-        <Button onClick={submitForm}>Submit</Button>
+        <Button onClick={submitForm} id="add-new-sensor-submit">Submit</Button>
       )}
     </Box>
   );

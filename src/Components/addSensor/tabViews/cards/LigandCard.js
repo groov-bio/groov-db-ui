@@ -74,6 +74,7 @@ export default function LigandCard({ index }) {
                 <FormikTextInput
                   name={`ligands.${index}.name`}
                   label="Ligand Name"
+                  id="new-sensor-ligand-name"
                   fullWidth
                 />
               </Box>
@@ -82,6 +83,7 @@ export default function LigandCard({ index }) {
                 <FormikTextInput
                   name={`ligands.${index}.SMILES`}
                   label="Ligand SMILES"
+                  id="new-sensor-ligand-smiles"
                   fullWidth
                 />
               </Box>
@@ -90,6 +92,7 @@ export default function LigandCard({ index }) {
                 <FormikTextInput
                   name={`ligands.${index}.doi`}
                   label="Ligand DOI"
+                  id="new-sensor-ligand-doi"
                   fullWidth
                 />
               </Box>
@@ -107,6 +110,7 @@ export default function LigandCard({ index }) {
                   <FormikTextInput
                     name={`ligands.${index}.ref_figure`}
                     label="Figure Number"
+                    id="new-sensor-ligand-fig"
                   />
                 </FormControl>
               </Box>

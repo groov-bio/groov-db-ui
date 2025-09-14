@@ -31,7 +31,7 @@ export default function RegFamilyTiles() {
   });
 
   const torender = [
-    { image: '/All-families.png', family: '' },
+    { image: '/All-families.png', family: '', darkImage: '/All-families-dark.png' },
     { image: '/TetR-family.png', family: 'TetR' },
     { image: '/LysR-family.png', family: 'LysR' },
     { image: '/AraC-family.png', family: 'AraC' },
@@ -42,6 +42,18 @@ export default function RegFamilyTiles() {
     { image: '/IclR-family.png', family: 'IclR' },
     { image: '/Other-family.png', family: 'Other' },
   ];
+
+  const familyDescriptions = {
+    "TetR": "Highly represented. Oftentimes dimeric repressors that bind to structurally diverse ligands",
+    "LysR": "Highly represented. Oftentimes dimeric activators that bind to structurally diverse ligands",
+    "AraC": "Highly represented. Oftentimes dimeric activators that bind to structurally diverse ligands",
+    "MarR": "Oftentimes dimeric repressors that bind to structurally diverse ligands",
+    "LacI": "Oftentimes dimeric repressors that bind to sugars",
+    "GntR": "Oftentimes dimeric repressors that bind to structurally diverse ligands",
+    "LuxR": "Oftentimes dimeric activators involved in quorum sensing that bind to homoserine lactones",
+    "IclR": "Oftentimes dimeric repressors that bind to organic acids and small aromatic ligands",
+    "Other": "All other families, including ROK, AsnC, TrpR, and DeoR"
+  }
 
   const MainContent = ({ family = "all" }) => {
     return (
@@ -74,7 +86,8 @@ export default function RegFamilyTiles() {
               ? isMobile 
                 ? "Browse all sensors or select a family above" 
                 : "Browse all sensors or select a family from the sidebar"
-              : `Viewing sensors from the ${family} regulatory family`
+                : `${familyDescriptions[family]}`
+              // : `Viewing sensors from the ${family} regulatory family`
             }
           </Typography>
 
@@ -117,7 +130,7 @@ export default function RegFamilyTiles() {
         py: { xs: 2, md: 3 },
         borderRight: { xs: 'none', md: '1px solid' },
         borderColor: { xs: 'transparent', md: 'divider' },
-        backgroundColor: { xs: 'transparent', md: 'grey.50' },
+        backgroundColor: { xs: 'transparent', md: 'background.paper' },
       }}
     >
       <Typography
@@ -152,14 +165,26 @@ export default function RegFamilyTiles() {
                 >
                   <Box
                     component="img"
-                    src={item.image}
+                    src={theme.palette.mode === 'dark' && item.darkImage ? item.darkImage : item.image}
                     alt={`${item.family} family`}
                     sx={{
                       width: '100%',
                       height: 75,
                       objectFit: 'contain',
+                      mb: 1,
                     }}
                   />
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      textAlign: 'center',
+                      fontSize: 18,
+                      fontWeight: 500,
+                      color: 'text.primary',
+                    }}
+                  >
+                    {item.family}
+                  </Typography>
                 </CardActionArea>
               </Card>
             </Grid>
@@ -175,7 +200,7 @@ export default function RegFamilyTiles() {
             elevation={2}
             sx={{ 
               transition: 'all 0.2s ease',
-              backgroundColor: 'white',
+              backgroundColor: 'background.paper',
               border: '1px solid',
               borderColor: 'grey.200',
               '&:hover': { 
@@ -190,18 +215,32 @@ export default function RegFamilyTiles() {
               component={Link} 
               to={`/database/${item.family}`}
               sx={{ p: 1 }}
+            id={`database-link-${item.family}`}
             >
               <Box
                 component="img"
-                src={item.image}
+                src={theme.palette.mode === 'dark' && item.darkImage ? item.darkImage : item.image}
                 alt={`${item.family} family`}
                 sx={{
                   width: '100%',
                   height: 120,
                   objectFit: 'contain',
                   filter: 'contrast(1.1) brightness(1.05)',
+                  mb: 1,
                 }}
               />
+              <Typography
+                variant="body2"
+                sx={{
+                  textAlign: 'center',
+                  fontSize: 21,
+                  fontWeight: 500,
+                  color: 'text.primary',
+                  pb: 1,
+                }}
+              >
+                {item.family}
+              </Typography>
             </CardActionArea>
           </Card>
         ))}

@@ -15,7 +15,8 @@ export default function ProteinStructure(props) {
 
   //index of structures currently displayed
   const [structureIndex, setStructureIndex] = useState(1);
-  const [isComponentLoaded, setIsComponentLoaded] = useState(false);
+  const isComponentLoaded = props.isComponentLoaded;
+  const setIsComponentLoaded = props.setIsComponentLoaded;
   const [isLoading, setIsLoading] = useState(false);
 
   const changeStructure = (event, value) => {
@@ -52,19 +53,10 @@ export default function ProteinStructure(props) {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container style={{ width: '100%' }}>
-        {/* Component Title */}
-        <Grid size={12}>
-          <Typography
-            component="div"
-            sx={{ marginLeft: '5%', fontSize: {xs:24,sm:28}, fontWeight: 300 }}
-          >
-            Structure
-          </Typography>
-        </Grid>
 
         {/* Protein Structure */}
         <Grid size={12}>
-          <Paper elevation={0} sx={{ height: '500px' }}>
+          <Paper elevation={0} sx={{ height: '500px', ml:{xs:2, sm:0}, mr:{xs:2, sm:0}  }}>
             {typeof structureIDs[structureIndex - 1] !== 'undefined' ? (
               isLoading ? (
                 <div style={{ textAlign: 'center', paddingTop: '200px' }}>
@@ -145,7 +137,7 @@ export default function ProteinStructure(props) {
                       structureIDs[structureIndex - 1]
                     }
                     target="_blank"
-                    style={{ textDecoration: 'None', color: '#243fab' }}
+                    sx={{ textDecoration: 'none' }}
                   >
                     <Typography
                       component="span"
@@ -161,7 +153,7 @@ export default function ProteinStructure(props) {
                       'https://alphafold.ebi.ac.uk/entry/' + props.uniprotID
                     }
                     target="_blank"
-                    style={{ textDecoration: 'None', color: '#243fab' }}
+                    sx={{ textDecoration: 'none' }}
                   >
                     <Typography
                       component="span"

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, Link as MuiLink } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 export default function FAQ_Tutorial() {
@@ -35,13 +35,12 @@ export default function FAQ_Tutorial() {
         }}
       >
         Please submit your sensor via our
-        <a
+        <MuiLink
           href="https://groov.bio/addSensor"
-          style={{ textDecoration: 'None' }}
         >
           {' '}
           submission form.{' '}
-        </a>
+        </MuiLink>
         You will first be prompted to login if you haven't already.
       </Typography>
 
@@ -61,13 +60,12 @@ export default function FAQ_Tutorial() {
         }}
       >
         We'll happily accept it! Please
-        <a
+        <MuiLink
           href="https://groov.bio/about/contact"
-          style={{ textDecoration: 'None' }}
         >
           {' '}
           contact us{' '}
-        </a>
+        </MuiLink>
         for help with automating large submissions.
       </Typography>
 
@@ -87,22 +85,20 @@ export default function FAQ_Tutorial() {
         }}
       >
         Currently accepted methods for interaction evidence are listed
-        <a
+        <MuiLink
           href="https://groov.bio/about/about-groovdb"
-          style={{ textDecoration: 'None' }}
         >
           {' '}
           here.{' '}
-        </a>
+        </MuiLink>
         However, we'd be happy to consider other methods that also provide
         confident interaction evidence. Please
-        <a
+        <MuiLink
           href="https://groov.bio/about/contact"
-          style={{ textDecoration: 'None' }}
         >
           {' '}
           contact us{' '}
-        </a>
+        </MuiLink>
         to add it to our accepted methods list.
       </Typography>
 
@@ -125,13 +121,12 @@ export default function FAQ_Tutorial() {
         activators) are supported. However, we would consider adding support for
         other biosensor types if there is enough interest. If you would like to
         see this feature added, please
-        <a
+        <MuiLink
           href="https://groov.bio/about/contact"
-          style={{ textDecoration: 'None' }}
         >
           {' '}
           let us know.
-        </a>
+        </MuiLink>
       </Typography>
 
       {/* <Typography sx={{ 

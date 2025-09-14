@@ -75,6 +75,7 @@ export default function OperatorCard({ index }) {
                 <FormikTextInput
                   name={`operators.${index}.sequence`}
                   label="Operator Sequence"
+                  id="new-sensor-operator-sequence"
                   fullWidth
                 />
               </Box>
@@ -83,6 +84,7 @@ export default function OperatorCard({ index }) {
                 <FormikTextInput
                   name={`operators.${index}.doi`}
                   label="Operator DOI"
+                  id="new-sensor-operator-doi"
                   fullWidth
                 />
               </Box>
@@ -100,6 +102,7 @@ export default function OperatorCard({ index }) {
                   <FormikTextInput
                     name={`operators.${index}.ref_figure`}
                     label="Figure Number"
+                    id="new-sensor-operator-fig"
                   />
                 </FormControl>
               </Box>

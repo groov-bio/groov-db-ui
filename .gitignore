@@ -16,3 +16,4 @@ TODO.md
 .env.development
 .env.production
 .env.*
+cypress/screenshots/**

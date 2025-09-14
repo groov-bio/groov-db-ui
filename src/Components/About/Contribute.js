@@ -1,7 +1,19 @@
 import React from 'react';
 
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, Link as MuiLink, styled } from '@mui/material';
 import { Link } from 'react-router-dom';
+
+const StyledRouterLink = styled(Link)(({ theme }) => ({
+  fontSize: '18px',
+  textDecoration: 'none',
+  display: 'inline',
+  paddingLeft: '5px',
+  paddingRight: '5px',
+  color: theme.palette.mode === 'dark' ? '#90caf9' : '#1976d2',
+  '&:hover': {
+    color: theme.palette.mode === 'dark' ? '#bbdefb' : '#1565c0',
+  },
+}));
 
 export default function Contribute() {
   return (
@@ -36,43 +48,33 @@ export default function Contribute() {
       <Typography
         sx={{ fontSize: { xs: 14, sm: 16, md: 18 } }}
         component="span"
+        fontWeight={400}
         mt={1}
       >
-        Use the
-      </Typography>
-      <Link
-        to="/addSensor"
-        sx={{ fontSize: { xs: 14, sm: 16, md: 18 } }}
-        style={{
-          textDecoration: 'None',
-          color: '#6116f7',
-          display: 'span',
-          fontSize: '18px',
-          paddingLeft: 5,
-          paddingRight: 5,
-        }}
-      >
-        Biosensor Submission Form
-      </Link>
-      <Typography
-        sx={{ fontSize: { xs: 14, sm: 16, md: 18 } }}
-        component="span"
-      >
+        Use the <a href="https://www.groov.bio/addSensor/" style={{textDecoration:"none"}} id="about-add-sensor">biosensor submission form</a>{' '}
         to create a new record for a biosensor that is not currently in the
         database. Please search for the biosensor and common aliases first to
         confirm that it does not already exits. All new submissions must be
         accompanied by DOIs for publications that describe the biosensor's DNA
         and ligand binding activities. If you would like to submit information
-        about unpublished proteins, please
-        <a
-          href="https://groov.bio/about/contact"
-          style={{ textDecoration: 'None' }}
-        >
-          {' '}
-          contact us
-        </a>
-        .
+        about unpublished proteins, please <a href="https://groov.bio/about/contact" style={{textDecoration:"none"}}>
+          {' '} contact us</a>.
       </Typography>
+
+      <Typography sx={{ fontSize: { xs: 14, sm: 16, md: 18 } }} mt={3}>
+        <b>Batch submissions</b>
+      </Typography>
+
+      <Typography
+        sx={{ fontSize: { xs: 14, sm: 16, md: 18 } }}
+        component="span"
+        mt={1}
+      >
+        If you would like to submit batches of multiple sensor entries, please 
+        <a href="https://groov.bio/about/contact" style={{textDecoration:"none"}}>
+          {' '} contact us</a>.
+      </Typography>
+
     </Box>
   );
 }

@@ -14,6 +14,7 @@ import Tools from './Components/Tools.js';
 import { Routes, Route } from 'react-router-dom';
 import './css/App.css';
 import { useMediaQuery, useTheme } from '@mui/material';
+import { CustomThemeProvider } from './contexts/ThemeContext';
 import { RequireAuth } from './Components/Auth/RequireAuth';
 import { RequireAdminAuth } from './Components/Auth/RequireAdminAuth';
 import { Amplify } from 'aws-amplify';
@@ -45,53 +46,55 @@ export default function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Box
-        display="grid"
-        gridTemplateColumns="repeat(12, 1fr)"
-        gridTemplateRows={isSmallScreen ? `56px` : `64px`}
-        gridAutoRows="auto"
-        sx={{ height: '100%' }}
-      >
-        <Box gridColumn="span 12">
-          <NavigationBar />
+      <CustomThemeProvider>
+        <Box
+          display="grid"
+          gridTemplateColumns="repeat(12, 1fr)"
+          gridTemplateRows={isSmallScreen ? `56px` : `64px`}
+          gridAutoRows="auto"
+          sx={{ height: '100%' }}
+        >
+          <Box gridColumn="span 12">
+            <NavigationBar />
+          </Box>
+          <Box gridColumn="span 12">
+            <Routes>
+              <Route path="/home" element={<Home />} />
+              <Route path="/" element={<Home />} />
+              <Route path="/database/*" element={<RegFamilyTiles />} />
+              <Route path="/entry/:family/:uniprotID" element={<SensorPage />} />
+              <Route path="/account" element={<Account />} />
+              <Route path="/account/" element={<Account />} />
+              <Route
+                path="/admin"
+                element={
+                  <RequireAdminAuth>
+                    <Admin />
+                  </RequireAdminAuth>
+                }
+              />
+              <Route path="/about/*" element={<About />} />
+              <Route path="/tools" element={<Tools />} />
+              <Route
+                path="/addSensor"
+                element={
+                  <RequireAuth>
+                    <AddSensor />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path="/editSensor/:family/:sensorID"
+                element={
+                  <RequireAuth>
+                    <EditSensor />
+                  </RequireAuth>
+                }
+              />
+            </Routes>
+          </Box>
         </Box>
-        <Box gridColumn="span 12">
-          <Routes>
-            <Route path="/home" element={<Home />} />
-            <Route path="/" element={<Home />} />
-            <Route path="/database/*" element={<RegFamilyTiles />} />
-            <Route path="/entry/:family/:uniprotID" element={<SensorPage />} />
-            <Route path="/account" element={<Account />} />
-            <Route path="/account/" element={<Account />} />
-            <Route
-              path="/admin"
-              element={
-                <RequireAdminAuth>
-                  <Admin />
-                </RequireAdminAuth>
-              }
-            />
-            <Route path="/about/*" element={<About />} />
-            <Route path="/tools" element={<Tools />} />
-            <Route
-              path="/addSensor"
-              element={
-                <RequireAuth>
-                  <AddSensor />
-                </RequireAuth>
-              }
-            />
-            <Route
-              path="/editSensor/:family/:sensorID"
-              element={
-                <RequireAuth>
-                  <EditSensor />
-                </RequireAuth>
-              }
-            />
-          </Routes>
-        </Box>
-      </Box>
+      </CustomThemeProvider>
     </QueryClientProvider>
   );
 }

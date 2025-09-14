@@ -11,9 +11,11 @@ import {
   Divider,
   Pagination,
   Stack,
+  useTheme,
 } from '@mui/material';
 
 export default function LigandViewer({ ligand, placement }) {
+  const theme = useTheme();
   const [ligandNumber, setLigandNumber] = useState(1);
   const [ligandName, setLigandName] = useState('Loading ...');
   const [smileValid, setSmileValid] = useState([]);
@@ -80,25 +82,14 @@ export default function LigandViewer({ ligand, placement }) {
   return (
     <Box sx={{ flexGrow: 1 }} mt={placement.ligMT} mb={placement.ligMB}>
       <Grid container style={{ width: '100%' }}>
-        {/* Component Title */}
-        <Grid size={12}>
-          <Typography
-            component="div"
-            sx={{ marginLeft: '5%', fontSize: {xs:24, sm:28}, fontWeight: 300 }}
-          >
-            Ligand
-          </Typography>
-        </Grid>
-
         {/* Chemical Structure and Name */}
-        <Grid size={12}>
+        <Grid size={12} >
           <Paper
             elevation={0}
             sx={{
-              border: '1px solid #c7c7c7',
-              height: { xs: '300px', sm: '500px' },
-              marginLeft: {xs:2, sm:0},
-              marginRight: {xs:2, sm:0}
+              border: {xs:'none', sm:'1px solid #c2c2c2'},
+              backgroundColor: '#ffffff',
+              height: { xs: '280px', sm: '480px' }
             }}
           >
             <Box
@@ -116,6 +107,7 @@ export default function LigandViewer({ ligand, placement }) {
                 style={{
                   width: '100%',
                   height: '100%',
+                  backgroundColor: '#ffffff',
                 }}
                 id="SMILEScanvas"
               />
@@ -123,6 +115,7 @@ export default function LigandViewer({ ligand, placement }) {
             <Typography
               component="div"
               sx={{ textAlign: 'center', fontSize: {xs:18, sm:24}, fontWeight: 400 }}
+              id="sensor-ligand-name"
             >
               {ligandName}
             </Typography>
@@ -130,7 +123,7 @@ export default function LigandViewer({ ligand, placement }) {
         </Grid>
 
         {/* Pagination */}
-        <Grid size={12} mb={3} mt={7}>
+        <Grid size={12} mb={3} mt={10}>
           <Stack spacing={2} alignItems="center">
             <Pagination
               count={ligand.length}
@@ -163,12 +156,13 @@ export default function LigandViewer({ ligand, placement }) {
               <Link
                 href={'https://doi.org/' + ligand[ligandNumber - 1]['doi']}
                 target="_blank"
-                style={{ textDecoration: 'None', color: '#243fab' }}
+                sx={{ textDecoration: 'none' }}
               >
                 <Typography
                   component="span"
                   width="100px"
                   sx={{ fontSize: { xs: 14, sm: 16, md: 16 } }}
+                  id="sensor-ligand-figure"
                 >
                   {ligand[ligandNumber - 1]['ref_figure']}
                 </Typography>
@@ -198,12 +192,13 @@ export default function LigandViewer({ ligand, placement }) {
             <Grid size={6} textAlign="left" ml={'15px'}>
               <Link
                 href={'https://www.groov.bio/about/about-groovdb'}
-                style={{ textDecoration: 'None', color: '#243fab' }}
+                sx={{ textDecoration: 'none' }}
               >
                 <Typography
                   component="span"
                   width="100px"
                   sx={{ fontSize: { xs: 14, sm: 16, md: 16 } }}
+                  id="sensor-ligand-method"
                 >
                   {ligand[ligandNumber - 1]['method']}
                 </Typography>

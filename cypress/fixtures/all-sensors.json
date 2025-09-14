@@ -1,0 +1,4111 @@
+{
+    "version": "2025-08-02T17:16:38.661Z",
+    "count": 216,
+    "sensors": [
+        {
+            "uniprotID": "U2Y8G0",
+            "organism": "Caenibius tardaugens NBRC 16725",
+            "keggID": null,
+            "name": null,
+            "organismID": 1219035,
+            "alias": "EdcR",
+            "about": "Regulates the expression of the ecd operon responsible for the degradation of estradiol.",
+            "sequence": "MANELKAAANPRRSPGRPRDASREKVILTETLALLGELGFAGLTVDAVVARAKVSKATIYRRWATKEELAIAAFDLLPLIEPVETGDIESEIIAYIDQYYGFLRTTPLSSVLPALVSEAMHNPTLAERLNEVVQRRRESGIAMIRRAITRGELPATTPPDIAHELIVGPMLQRSFFEPANFRREDFLVMVRVIVAGLKAVGKATSSAA",
+            "accession": "WP_021690437.1",
+            "family": "TETR",
+            "regulationType": "Apo-repressor",
+            "ligands": [
+                {
+                    "name": "Estradiol",
+                    "fullDOI": {
+                        "journal": "Genes",
+                        "title": "Identification of the EdcR Estrogen-Dependent Repressor in Caenibius tardaugens NBRC 16725: Construction of a Cellular Estradiol Biosensor",
+                        "year": 2021,
+                        "url": "http://dx.doi.org/10.3390/genes12121846",
+                        "authors": [
+                            {
+                                "lastName": "Ibero",
+                                "firstName": "Juan"
+                            },
+                            {
+                                "lastName": "Galán",
+                                "firstName": "Beatriz"
+                            },
+                            {
+                                "lastName": "García",
+                                "firstName": "José L."
+                            }
+                        ],
+                        "doi": "10.3390/genes12121846"
+                    },
+                    "SMILES": "C[C@]12CC[C@H]3[C@H]([C@@H]1CC[C@@H]2O)CCC4=C3C=CC(=C4)O",
+                    "ref_figure": "Figure 12",
+                    "method": "Synthetic regulation",
+                    "doi": "10.3390/genes12121846"
+                },
+                {
+                    "name": "Estrone",
+                    "fullDOI": {
+                        "journal": "Genes",
+                        "title": "Identification of the EdcR Estrogen-Dependent Repressor in Caenibius tardaugens NBRC 16725: Construction of a Cellular Estradiol Biosensor",
+                        "year": 2021,
+                        "url": "http://dx.doi.org/10.3390/genes12121846",
+                        "authors": [
+                            {
+                                "lastName": "Ibero",
+                                "firstName": "Juan"
+                            },
+                            {
+                                "lastName": "Galán",
+                                "firstName": "Beatriz"
+                            },
+                            {
+                                "lastName": "García",
+                                "firstName": "José L."
+                            }
+                        ],
+                        "doi": "10.3390/genes12121846"
+                    },
+                    "SMILES": "C[C@]12CC[C@H]3[C@H]([C@@H]1CCC2=O)CCC4=C3C=CC(=C4)O",
+                    "ref_figure": "Figure 12",
+                    "method": "Synthetic regulation",
+                    "doi": "10.3390/genes12121846"
+                }
+            ],
+            "operators": [
+                {
+                    "sequence": "AATAACAGTACCAATAGTATCGAAAGT",
+                    "fullDOI": {
+                        "journal": "Genes",
+                        "title": "Identification of the EdcR Estrogen-Dependent Repressor in Caenibius tardaugens NBRC 16725: Construction of a Cellular Estradiol Biosensor",
+                        "year": 2021,
+                        "url": "http://dx.doi.org/10.3390/genes12121846",
+                        "authors": [
+                            {
+                                "lastName": "Ibero",
+                                "firstName": "Juan"
+                            },
+                            {
+                                "lastName": "Galán",
+                                "firstName": "Beatriz"
+                            },
+                            {
+                                "lastName": "García",
+                                "firstName": "José L."
+                            }
+                        ],
+                        "doi": "10.3390/genes12121846"
+                    },
+                    "ref_figure": "Figure 12",
+                    "method": "Synthetic regulation",
+                    "doi": "10.3390/genes12121846"
+                }
+            ],
+            "newOperon": {
+                "operon": [
+                    {
+                        "alias": "NT2_RS11605",
+                        "description": "choline dehydrogenase",
+                        "link": "WP_021690436.1",
+                        "direction": "-",
+                        "start": 450167,
+                        "stop": 451801
+                    },
+                    {
+                        "alias": "NT2_RS11610",
+                        "description": "TetR/AcrR family transcriptional regulator",
+                        "link": "WP_021690437.1",
+                        "direction": "+",
+                        "start": 452154,
+                        "stop": 452780
+                    },
+                    {
+                        "alias": "NT2_RS11615",
+                        "description": "cytochrome P450",
+                        "link": "WP_021690438.1",
+                        "direction": "-",
+                        "start": 452761,
+                        "stop": 453951
+                    }
+                ],
+                "regIndex": 1,
+                "genome": "NZ_BASZ01000005.1"
+            },
+            "operon": [],
+            "structures": null,
+            "references": [
+                {
+                    "doi": "10.3390/genes12121846",
+                    "figure": "Figure 12",
+                    "interaction": "Ligand",
+                    "method": "Synthetic regulation"
+                },
+                {
+                    "doi": "10.3390/genes12121846",
+                    "figure": "Figure 12",
+                    "interaction": "Ligand",
+                    "method": "Synthetic regulation"
+                },
+                {
+                    "doi": "10.3390/genes12121846",
+                    "figure": "Figure 12",
+                    "interaction": "Operator",
+                    "method": "Synthetic regulation"
+                }
+            ],
+            "fullReferences": [
+                {
+                    "title": "Identification of the EdcR Estrogen-Dependent Repressor in Caenibius tardaugens NBRC 16725: Construction of a Cellular Estradiol Biosensor",
+                    "authors": [
+                        {
+                            "lastName": "Ibero",
+                            "firstName": "Juan"
+                        },
+                        {
+                            "lastName": "Galán",
+                            "firstName": "Beatriz"
+                        },
+                        {
+                            "lastName": "García",
+                            "firstName": "José L."
+                        }
+                    ],
+                    "year": 2021,
+                    "journal": "Genes",
+                    "doi": "10.3390/genes12121846",
+                    "url": "http://dx.doi.org/10.3390/genes12121846",
+                    "interaction": [
+                        {
+                            "figure": "Figure 12",
+                            "type": "Ligand",
+                            "method": "Synthetic regulation"
+                        },
+                        {
+                            "figure": "Figure 12",
+                            "type": "Ligand",
+                            "method": "Synthetic regulation"
+                        },
+                        {
+                            "figure": "Figure 12",
+                            "type": "Operator",
+                            "method": "Synthetic regulation"
+                        }
+                    ]
+                }
+            ],
+            "id": "U2Y8G0"
+        },
+        {
+            "uniprotID": "A0REX6",
+            "organism": "Bacillus thuringiensis (strain Al Hakam)",
+            "keggID": "btl:BALH_2482",
+            "name": "acoR",
+            "organismID": 412694,
+            "alias": "AcoR",
+            "about": "Activates the expression of a sigma 54-depedent promoter expressing the acetoin degradation gene cluster in response to acetoin.",
+            "sequence": "MLASPFYLHTWKKFVDEGVLDSNRINERISESWYRCKQANVNPHMNKGQKILSSNIFQDQKKKSEIFLDIAIPQIQNMRKTIDELQMMALLIDPDGYVLSLSGNEQTLKRAKHINFIEGVKWTEAAVGTNAIGTALEIEEAIMISGTEHYSVASHSWSCAAAPIHNDDGKLIGVLDFSCPIEFSHPYMLGMVTSIAHAIERECSIRVHQNELHLIHRFLDVIDSDEQVVICNHRDVIVSASKKVRERVSNWSRMKLEDLMQNGLKPKLEVPVYSNDRMIGKCIYVKENKQGNVFSTSPFINGITFPGVIGTSNAFQHTLEEIKLVSPTDASVYVCGETGVGKEYVARAIHENSPRKNGPFIAVNCGSLPKELMESELFGYAEGAFTGARRHGYKGKFEQADGGTIFLDEIGEVPPEMQVALLRVLQERTVTPIGSSKEIPVNIRIITATHKDLLRLVEEGKFRQDLYYRLHVYPLYVPSLIERKEDIPYFIQHFCERKNWNVAFPKSICNQFSQHTWPGNIRELLNALERIYILSQGREICEKQISFLLQTMMRNQHQLELQTENKTEDTLNFREKIQRDSMIEALEKTNGNVSLAAKLLDVPRSTFYKRMQKYKL",
+            "accession": "WP_000881406.1",
+            "family": "OTHER",
+            "regulationType": "Co-activator",
+            "ligands": [
+                {
+                    "name": "Acetoin",
+                    "fullDOI": {
+                        "journal": "Microbiological Research",
+                        "title": "Transcription in the acetoin catabolic pathway is regulated by AcoR and CcpA in Bacillus thuringiensis",
+                        "year": 2020,
+                        "url": "http://dx.doi.org/10.1016/j.micres.2020.126438",
+                        "authors": [
+                            {
+                                "lastName": "Peng",
+                                "firstName": "Qi"
+                            },
+                            {
+                                "lastName": "Zhao",
+                                "firstName": "Xin"
+                            },
+                            {
+                                "lastName": "Wen",
+                                "firstName": "Jilong"
+                            },
+                            {
+                                "lastName": "Huang",
+                                "firstName": "Minzhong"
+                            },
+                            {
+                                "lastName": "Zhang",
+                                "firstName": "Jie"
+                            },
+                            {
+                                "lastName": "Song",
+                                "firstName": "Fuping"
+                            }
+                        ],
+                        "doi": "10.1016/j.micres.2020.126438"
+                    },
+                    "SMILES": "CC(C(=O)C)O",
+                    "ref_figure": "Figure 2A",
+                    "method": "Synthetic regulation",
+                    "doi": "10.1016/j.micres.2020.126438"
+                }
+            ],
+            "operators": [
+                {
+                    "sequence": "GACAAAACGAGACAGATGTCTCATTTTGTC",
+                    "fullDOI": {
+                        "journal": "Microbiological Research",
+                        "title": "Transcription in the acetoin catabolic pathway is regulated by AcoR and CcpA in Bacillus thuringiensis",
+                        "year": 2020,
+                        "url": "http://dx.doi.org/10.1016/j.micres.2020.126438",
+                        "authors": [
+                            {
+                                "lastName": "Peng",
+                                "firstName": "Qi"
+                            },
+                            {
+                                "lastName": "Zhao",
+                                "firstName": "Xin"
+                            },
+                            {
+                                "lastName": "Wen",
+                                "firstName": "Jilong"
+                            },
+                            {
+                                "lastName": "Huang",
+                                "firstName": "Minzhong"
+                            },
+                            {
+                                "lastName": "Zhang",
+                                "firstName": "Jie"
+                            },
+                            {
+                                "lastName": "Song",
+                                "firstName": "Fuping"
+                            }
+                        ],
+                        "doi": "10.1016/j.micres.2020.126438"
+                    },
+                    "ref_figure": "Figure 2C",
+                    "method": "DNase footprinting",
+                    "doi": "10.1016/j.micres.2020.126438"
+                }
+            ],
+            "newOperon": {
+                "regIndex": 4,
+                "genome": "NC_008600.1",
+                "operon": [
+                    {
+                        "link": "WP_000062915.1",
+                        "start": 2643798,
+                        "alias": "BALH_RS13695",
+                        "description": "NUDIX domain-containing protein",
+                        "stop": 2644235,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "WP_000006418.1",
+                        "start": 2644571,
+                        "alias": "BALH_RS13700",
+                        "description": "SRPBCC family protein",
+                        "stop": 2645029,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "WP_001079911.1",
+                        "start": 2645155,
+                        "alias": "BALH_RS13705",
+                        "description": "DUF3953 domain-containing protein",
+                        "stop": 2645394,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "WP_000873824.1",
+                        "start": 2645527,
+                        "alias": "BALH_RS13710",
+                        "description": "DUF3977 family protein",
+                        "stop": 2645784,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "WP_000881406.1",
+                        "start": 2645896,
+                        "alias": "BALH_RS13715",
+                        "description": "sigma-54-dependent Fis family transcriptional regulator",
+                        "stop": 2647746,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "WP_078383688.1",
+                        "start": 2647871,
+                        "alias": "BALH_RS29570",
+                        "description": "hypothetical protein",
+                        "stop": 2648038,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "WP_000499975.1",
+                        "start": 2648062,
+                        "alias": "BALH_RS13725",
+                        "description": "NIPSNAP family protein",
+                        "stop": 2648400,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "WP_000584353.1",
+                        "start": 2648428,
+                        "alias": "BALH_RS13730",
+                        "description": "GNAT family N-acetyltransferase",
+                        "stop": 2648970,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "WP_000493622.1",
+                        "start": 2648983,
+                        "alias": "BALH_RS13735",
+                        "description": "DeoR/GlpR family DNA-binding transcription regulator",
+                        "stop": 2649753,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "WP_000836194.1",
+                        "start": 2650004,
+                        "alias": "BALH_RS13740",
+                        "description": "hypothetical protein",
+                        "stop": 2650501,
+                        "direction": "+"
+                    }
+                ]
+            },
+            "operon": [],
+            "structures": [],
+            "references": [
+                {
+                    "doi": "10.1016/j.micres.2020.126438",
+                    "figure": "Figure 2A",
+                    "interaction": "Ligand",
+                    "method": "Synthetic regulation"
+                },
+                {
+                    "doi": "10.1016/j.micres.2020.126438",
+                    "figure": "Figure 2C",
+                    "interaction": "Operator",
+                    "method": "DNase footprinting"
+                }
+            ],
+            "fullReferences": [
+                {
+                    "title": "Transcription in the acetoin catabolic pathway is regulated by AcoR and CcpA in Bacillus thuringiensis",
+                    "authors": [
+                        {
+                            "lastName": "Peng",
+                            "firstName": "Qi"
+                        },
+                        {
+                            "lastName": "Zhao",
+                            "firstName": "Xin"
+                        },
+                        {
+                            "lastName": "Wen",
+                            "firstName": "Jilong"
+                        },
+                        {
+                            "lastName": "Huang",
+                            "firstName": "Minzhong"
+                        },
+                        {
+                            "lastName": "Zhang",
+                            "firstName": "Jie"
+                        },
+                        {
+                            "lastName": "Song",
+                            "firstName": "Fuping"
+                        }
+                    ],
+                    "year": 2020,
+                    "journal": "Microbiological Research",
+                    "doi": "10.1016/j.micres.2020.126438",
+                    "url": "http://dx.doi.org/10.1016/j.micres.2020.126438",
+                    "interaction": [
+                        {
+                            "figure": "Figure 2A",
+                            "type": "Ligand",
+                            "method": "Synthetic regulation"
+                        },
+                        {
+                            "figure": "Figure 2C",
+                            "type": "Operator",
+                            "method": "DNase footprinting"
+                        }
+                    ]
+                }
+            ],
+            "id": "A0REX6"
+        },
+        {
+            "uniprotID": "A7B863",
+            "organism": "Mediterraneibacter gnavus (strain ATCC 29149 / DSM 114966 / JCM 6515 / VPI C7-9)",
+            "keggID": null,
+            "name": null,
+            "organismID": 411470,
+            "alias": "HisR",
+            "about": "Regulates the expression of itself and histidine biosynthesis genes (hisZGDCBHAF).",
+            "sequence": "MSKKIRTEAVDYLFDAILSLKDKEECYTFFEDICTINELLSLSQRFEVAKMLREQKTYLEIAEKTGASTATISRVNRSLNYGNDGYDMVFERMEK",
+            "accession": "WP_004844715.1",
+            "family": "OTHER",
+            "regulationType": "Co-repressor",
+            "ligands": [
+                {
+                    "name": "Histidine",
+                    "fullDOI": {
+                        "journal": "BMC Genomics",
+                        "title": "Evolution of transcriptional regulation of histidine metabolism in Gram-positive bacteria",
+                        "year": 2022,
+                        "url": "http://dx.doi.org/10.1186/s12864-022-08796-y",
+                        "authors": [
+                            {
+                                "lastName": "Ashniev",
+                                "firstName": "German A."
+                            },
+                            {
+                                "lastName": "Sernova",
+                                "firstName": "Natalia V."
+                            },
+                            {
+                                "lastName": "Shevkoplias",
+                                "firstName": "Aleksei E."
+                            },
+                            {
+                                "lastName": "Rodionov",
+                                "firstName": "Ivan D."
+                            },
+                            {
+                                "lastName": "Rodionova",
+                                "firstName": "Irina A."
+                            },
+                            {
+                                "lastName": "Vitreschak",
+                                "firstName": "Alexey G."
+                            },
+                            {
+                                "lastName": "Gelfand",
+                                "firstName": "Mikhail S."
+                            },
+                            {
+                                "lastName": "Rodionov",
+                                "firstName": "Dmitry A."
+                            }
+                        ],
+                        "doi": "10.1186/s12864-022-08796-y"
+                    },
+                    "SMILES": "C1=C(NC=N1)C[C@@H](C(=O)O)N",
+                    "ref_figure": "Figure 6",
+                    "method": "Fluorescence polarization",
+                    "doi": "10.1186/s12864-022-08796-y"
+                }
+            ],
+            "operators": [
+                {
+                    "sequence": "CAGTTTAGTATAGTAAAGT",
+                    "fullDOI": {
+                        "journal": "BMC Genomics",
+                        "title": "Evolution of transcriptional regulation of histidine metabolism in Gram-positive bacteria",
+                        "year": 2022,
+                        "url": "http://dx.doi.org/10.1186/s12864-022-08796-y",
+                        "authors": [
+                            {
+                                "lastName": "Ashniev",
+                                "firstName": "German A."
+                            },
+                            {
+                                "lastName": "Sernova",
+                                "firstName": "Natalia V."
+                            },
+                            {
+                                "lastName": "Shevkoplias",
+                                "firstName": "Aleksei E."
+                            },
+                            {
+                                "lastName": "Rodionov",
+                                "firstName": "Ivan D."
+                            },
+                            {
+                                "lastName": "Rodionova",
+                                "firstName": "Irina A."
+                            },
+                            {
+                                "lastName": "Vitreschak",
+                                "firstName": "Alexey G."
+                            },
+                            {
+                                "lastName": "Gelfand",
+                                "firstName": "Mikhail S."
+                            },
+                            {
+                                "lastName": "Rodionov",
+                                "firstName": "Dmitry A."
+                            }
+                        ],
+                        "doi": "10.1186/s12864-022-08796-y"
+                    },
+                    "ref_figure": "Figure 6",
+                    "method": "Fluorescence polarization",
+                    "doi": "10.1186/s12864-022-08796-y"
+                }
+            ],
+            "newOperon": {
+                "regIndex": 1,
+                "genome": "NZ_AAYG02000032.1",
+                "operon": [
+                    {
+                        "link": "WP_004844714.1",
+                        "start": 247667,
+                        "alias": "RUMGNA_RS16485",
+                        "description": "DUF1836 domain-containing protein",
+                        "stop": 248284,
+                        "direction": "+"
+                    },
+                    {
+                        "link": "WP_004844715.1",
+                        "start": 248331,
+                        "alias": "RUMGNA_RS16490",
+                        "description": "YerC/YecD family TrpR-related protein",
+                        "stop": 248618,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "WP_004844716.1",
+                        "start": 248741,
+                        "alias": "RUMGNA_RS16495",
+                        "description": "phosphatase",
+                        "stop": 249466,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "WP_004844718.1",
+                        "start": 249913,
+                        "alias": "RUMGNA_RS16500",
+                        "description": "hypothetical protein",
+                        "stop": 251055,
+                        "direction": "+"
+                    }
+                ]
+            },
+            "operon": [],
+            "structures": [],
+            "references": [
+                {
+                    "doi": "10.1186/s12864-022-08796-y",
+                    "figure": "Figure 6",
+                    "interaction": "Ligand",
+                    "method": "Fluorescence polarization"
+                },
+                {
+                    "doi": "10.1186/s12864-022-08796-y",
+                    "figure": "Figure 6",
+                    "interaction": "Operator",
+                    "method": "Fluorescence polarization"
+                }
+            ],
+            "fullReferences": [
+                {
+                    "title": "Evolution of transcriptional regulation of histidine metabolism in Gram-positive bacteria",
+                    "authors": [
+                        {
+                            "lastName": "Ashniev",
+                            "firstName": "German A."
+                        },
+                        {
+                            "lastName": "Sernova",
+                            "firstName": "Natalia V."
+                        },
+                        {
+                            "lastName": "Shevkoplias",
+                            "firstName": "Aleksei E."
+                        },
+                        {
+                            "lastName": "Rodionov",
+                            "firstName": "Ivan D."
+                        },
+                        {
+                            "lastName": "Rodionova",
+                            "firstName": "Irina A."
+                        },
+                        {
+                            "lastName": "Vitreschak",
+                            "firstName": "Alexey G."
+                        },
+                        {
+                            "lastName": "Gelfand",
+                            "firstName": "Mikhail S."
+                        },
+                        {
+                            "lastName": "Rodionov",
+                            "firstName": "Dmitry A."
+                        }
+                    ],
+                    "year": 2022,
+                    "journal": "BMC Genomics",
+                    "doi": "10.1186/s12864-022-08796-y",
+                    "url": "http://dx.doi.org/10.1186/s12864-022-08796-y",
+                    "interaction": [
+                        {
+                            "figure": "Figure 6",
+                            "type": "Ligand",
+                            "method": "Fluorescence polarization"
+                        },
+                        {
+                            "figure": "Figure 6",
+                            "type": "Operator",
+                            "method": "Fluorescence polarization"
+                        }
+                    ]
+                }
+            ],
+            "id": "A7B863"
+        },
+        {
+            "uniprotID": "O05261",
+            "organism": "Bacillus subtilis (strain 168)",
+            "keggID": "bsu:BSU31210",
+            "name": "yulB",
+            "organismID": 224308,
+            "alias": "BsRhaR",
+            "about": "Represses the expression of itself and the rhaEWRBMA operon responsible for l-rhamnose catabolism",
+            "sequence": "MLVAERQQKIVEIVNMRSSIRVSELSDIFSVTEETIRRDLEKLEKEHKLSRSHGGAVSIQQKESEIHFSEREITNVIEKKAIAHEAAKYVKSGDRIILDASTTAWYMAKILPDIELTVITNSMKAAIELSNKENISVISTGGILLEKSLSFAGPLAERSLETYHVNKTFLSCKGFDVHNGMSDSNEWQALLKKRMIERSDQTILMADSSKWGNREFSHIASLQDVSRLITDSGLDPASVKALEDKKVKVTAVPLSKRG",
+            "accession": "WP_009968057.1",
+            "family": "OTHER",
+            "regulationType": "Apo-repressor",
+            "ligands": [
+                {
+                    "name": "L-Rhamnulose-1-phosphate",
+                    "fullDOI": {
+                        "journal": "J Bacteriol",
+                        "title": "Regulation of the\n            <i>rhaEWRBMA</i>\n            Operon Involved in\n            <scp>l</scp>\n            -Rhamnose Catabolism through Two Transcriptional Factors, RhaR and CcpA, in Bacillus subtilis",
+                        "year": 2016,
+                        "url": "http://dx.doi.org/10.1128/JB.00856-15",
+                        "authors": [
+                            {
+                                "lastName": "Hirooka",
+                                "firstName": "Kazutake"
+                            },
+                            {
+                                "lastName": "Kodoi",
+                                "firstName": "Yusuke"
+                            },
+                            {
+                                "lastName": "Satomura",
+                                "firstName": "Takenori"
+                            },
+                            {
+                                "lastName": "Fujita",
+                                "firstName": "Yasutaro"
+                            }
+                        ],
+                        "doi": "10.1128/jb.00856-15"
+                    },
+                    "SMILES": "C[C@H](O)[C@H](O)[C@@H](O)C(=O)COP([O-])([O-])=O",
+                    "ref_figure": "Figure 7",
+                    "method": "EMSA",
+                    "doi": "10.1128/JB.00856-15"
+                }
+            ],
+            "operators": [
+                {
+                    "sequence": "AAAAGCAAAAATAAACAAAAACGATTCAAAAACAAACAGAAATCATATATAATGAAAACGGATACAAATAAAAGGGT",
+                    "fullDOI": {
+                        "journal": "J Bacteriol",
+                        "title": "Regulation of the\n            <i>rhaEWRBMA</i>\n            Operon Involved in\n            <scp>l</scp>\n            -Rhamnose Catabolism through Two Transcriptional Factors, RhaR and CcpA, in Bacillus subtilis",
+                        "year": 2016,
+                        "url": "http://dx.doi.org/10.1128/JB.00856-15",
+                        "authors": [
+                            {
+                                "lastName": "Hirooka",
+                                "firstName": "Kazutake"
+                            },
+                            {
+                                "lastName": "Kodoi",
+                                "firstName": "Yusuke"
+                            },
+                            {
+                                "lastName": "Satomura",
+                                "firstName": "Takenori"
+                            },
+                            {
+                                "lastName": "Fujita",
+                                "firstName": "Yasutaro"
+                            }
+                        ],
+                        "doi": "10.1128/jb.00856-15"
+                    },
+                    "ref_figure": "Figure 5",
+                    "method": "DNase footprinting",
+                    "doi": "10.1128/JB.00856-15"
+                }
+            ],
+            "newOperon": {
+                "regIndex": 3,
+                "genome": "NC_000964.3",
+                "operon": [
+                    {
+                        "link": "NP_390996.1",
+                        "start": 3197933,
+                        "alias": "BSU_31180",
+                        "description": "L-rhamnose isomerase",
+                        "stop": 3199207,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "NP_390997.1",
+                        "start": 3199233,
+                        "alias": "BSU_31190",
+                        "description": "L-rhamnose mutarotase",
+                        "stop": 3199547,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "NP_390998.1",
+                        "start": 3199565,
+                        "alias": "BSU_31200",
+                        "description": "rhamnulokinase",
+                        "stop": 3201022,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "NP_390999.1",
+                        "start": 3201027,
+                        "alias": "BSU_31210",
+                        "description": "transcriptional regulator of the rhamnose operon (RhaR / l-rhamnulose-1-phosphate)",
+                        "stop": 3201803,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "NP_391000.1",
+                        "start": 3201860,
+                        "alias": "BSU_31220",
+                        "description": "bifunctional rhamnulose-1-phosphate aldolase/alcohol dehydrogenase",
+                        "stop": 3203929,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "NP_391001.1",
+                        "start": 3204067,
+                        "alias": "BSU_31230",
+                        "description": "methyl-accepting chemotaxis protein",
+                        "stop": 3206055,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "NP_391002.2",
+                        "start": 3206169,
+                        "alias": "BSU_31240",
+                        "description": "methyl-accepting chemotaxis protein",
+                        "stop": 3208154,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "NP_391003.1",
+                        "start": 3208280,
+                        "alias": "BSU_31250",
+                        "description": "methyl-accepting chemotaxis protein (membrane curvature dependent localisation)",
+                        "stop": 3210268,
+                        "direction": "-"
+                    }
+                ]
+            },
+            "operon": [],
+            "structures": [],
+            "references": [
+                {
+                    "doi": "10.1128/JB.00856-15",
+                    "figure": "Figure 7",
+                    "interaction": "Ligand",
+                    "method": "EMSA"
+                },
+                {
+                    "doi": "10.1128/JB.00856-15",
+                    "figure": "Figure 5",
+                    "interaction": "Operator",
+                    "method": "DNase footprinting"
+                }
+            ],
+            "fullReferences": [
+                {
+                    "title": "Regulation of the\n            <i>rhaEWRBMA</i>\n            Operon Involved in\n            <scp>l</scp>\n            -Rhamnose Catabolism through Two Transcriptional Factors, RhaR and CcpA, in Bacillus subtilis",
+                    "authors": [
+                        {
+                            "lastName": "Hirooka",
+                            "firstName": "Kazutake"
+                        },
+                        {
+                            "lastName": "Kodoi",
+                            "firstName": "Yusuke"
+                        },
+                        {
+                            "lastName": "Satomura",
+                            "firstName": "Takenori"
+                        },
+                        {
+                            "lastName": "Fujita",
+                            "firstName": "Yasutaro"
+                        }
+                    ],
+                    "year": 2016,
+                    "journal": "J Bacteriol",
+                    "doi": "10.1128/jb.00856-15",
+                    "url": "http://dx.doi.org/10.1128/JB.00856-15",
+                    "interaction": [
+                        {
+                            "figure": "Figure 7",
+                            "type": "Ligand",
+                            "method": "EMSA"
+                        },
+                        {
+                            "figure": "Figure 5",
+                            "type": "Operator",
+                            "method": "DNase footprinting"
+                        }
+                    ]
+                }
+            ],
+            "id": "O05261"
+        },
+        {
+            "uniprotID": "O86130",
+            "organism": "Bacillus licheniformis (strain ATCC 14580 / DSM 13 / JCM 2505 / CCUG 7422 / NBRC 12200 / NCIMB 9375 / NCTC 10341 / NRRL NRS-1264 / Gibson 46)",
+            "keggID": "bld:BLi02596",
+            "name": "argR",
+            "organismID": 279010,
+            "alias": "ArgR",
+            "about": "Represses the anabolic ornithine carbamoyltransferase and activates the catabolic arginine deiminase pathway",
+            "sequence": "MNKGQRHIKIREIITANEIETQDELVDILKKDGYNVTQATVSRDIKELHLVKVPTNNGSYKYSLPADQRFNPLSKLKRSLMDAFVKIDSASHLIVLKTMPGNAQAIGALMDNLDWEEIMGTICGDDTILIICRTHDDTKVVQKKILELL",
+            "accession": "WP_003183369.1",
+            "family": "OTHER",
+            "regulationType": "Co-repressor",
+            "ligands": [
+                {
+                    "name": "L-Arginine",
+                    "fullDOI": {
+                        "journal": "J Bacteriol",
+                        "title": "The\n            <i>arcABDC</i>\n            Gene Cluster, Encoding the Arginine Deiminase Pathway of\n            <i>Bacillus licheniformis</i>\n            , and Its Activation by the Arginine Repressor ArgR",
+                        "year": 1998,
+                        "url": "http://dx.doi.org/10.1128/JB.180.24.6468-6475.1998",
+                        "authors": [
+                            {
+                                "lastName": "Maghnouj",
+                                "firstName": "Abdelouahid"
+                            },
+                            {
+                                "lastName": "de Sousa Cabral",
+                                "firstName": "Tiago Franco"
+                            },
+                            {
+                                "lastName": "Stalon",
+                                "firstName": "Victor"
+                            },
+                            {
+                                "lastName": "Vander Wauven",
+                                "firstName": "Corinne"
+                            }
+                        ],
+                        "doi": "10.1128/jb.180.24.6468-6475.1998"
+                    },
+                    "SMILES": "C(C[C@@H](C(=O)O)N)CN=C(N)N",
+                    "ref_figure": "Figure 5",
+                    "method": "EMSA",
+                    "doi": "10.1128/JB.180.24.6468-6475.1998"
+                }
+            ],
+            "operators": [
+                {
+                    "sequence": "ATTTTCCATTTATCATAATTATTCATTTTTGTTTT",
+                    "fullDOI": {
+                        "journal": "J Bacteriol",
+                        "title": "The\n            <i>arcABDC</i>\n            Gene Cluster, Encoding the Arginine Deiminase Pathway of\n            <i>Bacillus licheniformis</i>\n            , and Its Activation by the Arginine Repressor ArgR",
+                        "year": 1998,
+                        "url": "http://dx.doi.org/10.1128/JB.180.24.6468-6475.1998",
+                        "authors": [
+                            {
+                                "lastName": "Maghnouj",
+                                "firstName": "Abdelouahid"
+                            },
+                            {
+                                "lastName": "de Sousa Cabral",
+                                "firstName": "Tiago Franco"
+                            },
+                            {
+                                "lastName": "Stalon",
+                                "firstName": "Victor"
+                            },
+                            {
+                                "lastName": "Vander Wauven",
+                                "firstName": "Corinne"
+                            }
+                        ],
+                        "doi": "10.1128/jb.180.24.6468-6475.1998"
+                    },
+                    "ref_figure": "Figure 6",
+                    "method": "DNase footprinting",
+                    "doi": "10.1128/JB.180.24.6468-6475.1998"
+                }
+            ],
+            "newOperon": {
+                "regIndex": 5,
+                "genome": "NC_006270.3",
+                "operon": [
+                    {
+                        "link": "WP_003183357.1",
+                        "start": 2510848,
+                        "alias": "TRNA_RS34340",
+                        "description": "serine acetyltransferase",
+                        "stop": 2511231,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "WP_003183359.1",
+                        "start": 2511362,
+                        "alias": "TRNA_RS34345",
+                        "description": "antimicrobial peptide LCI",
+                        "stop": 2511658,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "WP_003183361.1",
+                        "start": 2512031,
+                        "alias": "TRNA_RS34350",
+                        "description": "sporulation transcription factor Spo0A",
+                        "stop": 2512831,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "WP_044051837.1",
+                        "start": 2513121,
+                        "alias": "TRNA_RS34355",
+                        "description": "SpoIVB peptidase",
+                        "stop": 2514437,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "WP_003183366.1",
+                        "start": 2514587,
+                        "alias": "TRNA_RS34360",
+                        "description": "DNA repair protein RecN",
+                        "stop": 2516317,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "WP_003183369.1",
+                        "start": 2516349,
+                        "alias": "TRNA_RS34365",
+                        "description": "transcriptional regulator ArgR",
+                        "stop": 2516798,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "WP_003183371.1",
+                        "start": 2516964,
+                        "alias": "TRNA_RS34370",
+                        "description": "TlyA family RNA methyltransferase",
+                        "stop": 2517809,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "WP_003183372.1",
+                        "start": 2517806,
+                        "alias": "TRNA_RS34375",
+                        "description": "1-deoxy-D-xylulose-5-phosphate synthase",
+                        "stop": 2519707,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "WP_003183374.1",
+                        "start": 2519941,
+                        "alias": "TRNA_RS34380",
+                        "description": "polyprenyl synthetase family protein",
+                        "stop": 2520831,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "WP_011198110.1",
+                        "start": 2520821,
+                        "alias": "TRNA_RS34385",
+                        "description": "exodeoxyribonuclease VII small subunit",
+                        "stop": 2521081,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "WP_003183378.1",
+                        "start": 2521074,
+                        "alias": "TRNA_RS34390",
+                        "description": "exodeoxyribonuclease VII large subunit",
+                        "stop": 2522423,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "WP_003183381.1",
+                        "start": 2522500,
+                        "alias": "TRNA_RS34395",
+                        "description": "bifunctional methylenetetrahydrofolate dehydrogenase/methenyltetrahydrofolate cyclohydrolase FolD",
+                        "stop": 2523354,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "WP_003183384.1",
+                        "start": 2523371,
+                        "alias": "TRNA_RS34400",
+                        "description": "transcription antitermination factor NusB",
+                        "stop": 2523760,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "WP_031314658.1",
+                        "start": 2524052,
+                        "alias": "TRNA_RS34405",
+                        "description": "Asp23/Gls24 family envelope stress response protein",
+                        "stop": 2524435,
+                        "direction": "-"
+                    }
+                ]
+            },
+            "operon": [],
+            "structures": [],
+            "references": [
+                {
+                    "doi": "10.1128/JB.180.24.6468-6475.1998",
+                    "figure": "Figure 5",
+                    "interaction": "Ligand",
+                    "method": "EMSA"
+                },
+                {
+                    "doi": "10.1128/JB.180.24.6468-6475.1998",
+                    "figure": "Figure 6",
+                    "interaction": "Operator",
+                    "method": "DNase footprinting"
+                }
+            ],
+            "fullReferences": [
+                {
+                    "title": "The\n            <i>arcABDC</i>\n            Gene Cluster, Encoding the Arginine Deiminase Pathway of\n            <i>Bacillus licheniformis</i>\n            , and Its Activation by the Arginine Repressor ArgR",
+                    "authors": [
+                        {
+                            "lastName": "Maghnouj",
+                            "firstName": "Abdelouahid"
+                        },
+                        {
+                            "lastName": "de Sousa Cabral",
+                            "firstName": "Tiago Franco"
+                        },
+                        {
+                            "lastName": "Stalon",
+                            "firstName": "Victor"
+                        },
+                        {
+                            "lastName": "Vander Wauven",
+                            "firstName": "Corinne"
+                        }
+                    ],
+                    "year": 1998,
+                    "journal": "J Bacteriol",
+                    "doi": "10.1128/jb.180.24.6468-6475.1998",
+                    "url": "http://dx.doi.org/10.1128/JB.180.24.6468-6475.1998",
+                    "interaction": [
+                        {
+                            "figure": "Figure 5",
+                            "type": "Ligand",
+                            "method": "EMSA"
+                        },
+                        {
+                            "figure": "Figure 6",
+                            "type": "Operator",
+                            "method": "DNase footprinting"
+                        }
+                    ]
+                }
+            ],
+            "id": "O86130"
+        },
+        {
+            "uniprotID": "P0A881",
+            "organism": "Escherichia coli (strain K12)",
+            "keggID": "ecj:JW4356",
+            "name": "trpR",
+            "organismID": 83333,
+            "alias": "TrpR",
+            "about": "Regulates the expression of tryptophan biosynthesis genes",
+            "sequence": "MAQQSPYSAAMAEQRHQEWLRFVDLLKNAYQNDLHLPLLNLMLTPDEREALGTRVRIVEELLRGEMSQRELKNELGAGIATITRGSNSLKAAPVELRQWLEEVLLKSD",
+            "accession": "NP_418810.1",
+            "family": "OTHER",
+            "regulationType": "Co-Repressor",
+            "ligands": [
+                {
+                    "name": "Tryptophan",
+                    "fullDOI": {
+                        "journal": "Nat Chem Biol",
+                        "title": "Directed evolution of a synthetic phylogeny of programmable Trp repressors",
+                        "year": 2018,
+                        "url": "http://dx.doi.org/10.1038/s41589-018-0006-7",
+                        "authors": [
+                            {
+                                "lastName": "Ellefson",
+                                "firstName": "Jared W."
+                            },
+                            {
+                                "lastName": "Ledbetter",
+                                "firstName": "Michael P."
+                            },
+                            {
+                                "lastName": "Ellington",
+                                "firstName": "Andrew D."
+                            }
+                        ],
+                        "doi": "10.1038/s41589-018-0006-7"
+                    },
+                    "SMILES": "C1=CC=C2C(=C1)C(=CN2)C[C@@H](C(=O)O)N",
+                    "ref_figure": "Figure 4",
+                    "method": "Synthetic regulation",
+                    "doi": "10.1038/s41589-018-0006-7"
+                }
+            ],
+            "operators": [
+                {
+                    "sequence": "CGTACTAGTTAACTAGTACG",
+                    "fullDOI": {
+                        "journal": "Journal of Molecular Biology",
+                        "title": "The Solution Structures of the trp Repressor-Operator DNA Complex",
+                        "year": 1994,
+                        "url": "http://dx.doi.org/10.1006/jmbi.1994.1317",
+                        "authors": [
+                            {
+                                "lastName": "Zhang",
+                                "firstName": "Hong"
+                            },
+                            {
+                                "lastName": "Zhao",
+                                "firstName": "Daqing"
+                            },
+                            {
+                                "lastName": "Revington",
+                                "firstName": "Matthew"
+                            },
+                            {
+                                "lastName": "Lee",
+                                "firstName": "Weontae"
+                            },
+                            {
+                                "lastName": "Jia",
+                                "firstName": "Xin"
+                            },
+                            {
+                                "lastName": "Arrowsmith",
+                                "firstName": "Cheryl"
+                            },
+                            {
+                                "lastName": "Jardetzky",
+                                "firstName": "Oleg"
+                            }
+                        ],
+                        "doi": "10.1006/jmbi.1994.1317"
+                    },
+                    "ref_figure": "Figure 7",
+                    "method": "Crystal Structure",
+                    "doi": "10.1006/jmbi.1994.1317"
+                }
+            ],
+            "newOperon": {
+                "regIndex": 2,
+                "genome": "NC_000913.3",
+                "operon": [
+                    {
+                        "link": "NP_418808.1",
+                        "start": 4628855,
+                        "alias": "b4391",
+                        "description": "energy-dependent translational throttle protein EttA",
+                        "stop": 4630522,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "NP_418809.4",
+                        "start": 4630733,
+                        "alias": "b4392",
+                        "description": "soluble lytic murein transglycosylase",
+                        "stop": 4632670,
+                        "direction": "+"
+                    },
+                    {
+                        "link": "NP_418810.1",
+                        "start": 4632760,
+                        "alias": "b4393",
+                        "description": "DNA-binding transcriptional repressor TrpR",
+                        "stop": 4633086,
+                        "direction": "+"
+                    },
+                    {
+                        "link": "NP_418811.2",
+                        "start": 4633233,
+                        "alias": "b4394",
+                        "description": "inosine/xanthosine triphosphatase",
+                        "stop": 4633745,
+                        "direction": "-"
+                    }
+                ]
+            },
+            "operon": [],
+            "structures": [
+                "1CO0",
+                "1JHG",
+                "1MI7",
+                "1RCS",
+                "1TRO",
+                "1TRR",
+                "1WRP",
+                "1WRS",
+                "1WRT",
+                "1ZT9",
+                "2OZ9",
+                "3SSW",
+                "3SSX",
+                "3WRP",
+                "6EJW",
+                "6EKP",
+                "6ELB",
+                "6ELF",
+                "6ELG",
+                "6ENI",
+                "6ENN",
+                "6F7F",
+                "6F7G",
+                "6F9K",
+                "6FAL",
+                "6ST6",
+                "6ST7"
+            ],
+            "references": [
+                {
+                    "doi": "10.1038/s41589-018-0006-7",
+                    "figure": "Figure 4",
+                    "interaction": "Ligand",
+                    "method": "Synthetic regulation"
+                },
+                {
+                    "doi": "10.1006/jmbi.1994.1317",
+                    "figure": "Figure 7",
+                    "interaction": "Operator",
+                    "method": "Crystal Structure"
+                },
+                {
+                    "doi": "None",
+                    "figure": null,
+                    "interaction": "Structure",
+                    "method": "SOLUTION NMR"
+                },
+                {
+                    "doi": "None",
+                    "figure": null,
+                    "interaction": "Structure",
+                    "method": "X-RAY DIFFRACTION"
+                },
+                {
+                    "doi": "10.1016/j.str.2004.03.019",
+                    "figure": null,
+                    "interaction": "Structure",
+                    "method": "X-RAY DIFFRACTION"
+                },
+                {
+                    "doi": "10.1006/jmbi.1994.1317",
+                    "figure": null,
+                    "interaction": "Structure",
+                    "method": "SOLUTION NMR"
+                },
+                {
+                    "doi": "10.1038/335321a0",
+                    "figure": null,
+                    "interaction": "Structure",
+                    "method": "X-RAY DIFFRACTION"
+                },
+                {
+                    "doi": "10.1038/366178a0",
+                    "figure": null,
+                    "interaction": "Structure",
+                    "method": "X-RAY DIFFRACTION"
+                },
+                {
+                    "doi": "10.1002/prot.340030103",
+                    "figure": null,
+                    "interaction": "Structure",
+                    "method": "X-RAY DIFFRACTION"
+                },
+                {
+                    "doi": "10.1006/jmbi.1993.1076",
+                    "figure": null,
+                    "interaction": "Structure",
+                    "method": "SOLUTION NMR"
+                },
+                {
+                    "doi": "10.1006/jmbi.1993.1076",
+                    "figure": null,
+                    "interaction": "Structure",
+                    "method": "SOLUTION NMR"
+                },
+                {
+                    "doi": "None",
+                    "figure": null,
+                    "interaction": "Structure",
+                    "method": "X-RAY DIFFRACTION"
+                },
+                {
+                    "doi": "10.1002/prot.340030103",
+                    "figure": null,
+                    "interaction": "Structure",
+                    "method": "X-RAY DIFFRACTION"
+                },
+                {
+                    "doi": "10.1002/pro.759",
+                    "figure": null,
+                    "interaction": "Structure",
+                    "method": "X-RAY DIFFRACTION"
+                },
+                {
+                    "doi": "10.1002/pro.759",
+                    "figure": null,
+                    "interaction": "Structure",
+                    "method": "X-RAY DIFFRACTION"
+                },
+                {
+                    "doi": "10.1002/prot.340030103",
+                    "figure": null,
+                    "interaction": "Structure",
+                    "method": "X-RAY DIFFRACTION"
+                },
+                {
+                    "doi": "None",
+                    "figure": null,
+                    "interaction": "Structure",
+                    "method": "X-RAY DIFFRACTION"
+                },
+                {
+                    "doi": "10.1038/s41586-021-03425-2",
+                    "figure": null,
+                    "interaction": "Structure",
+                    "method": "X-RAY DIFFRACTION"
+                },
+                {
+                    "doi": "10.1038/s41586-021-03425-2",
+                    "figure": null,
+                    "interaction": "Structure",
+                    "method": "X-RAY DIFFRACTION"
+                },
+                {
+                    "doi": "10.1038/s41586-021-03425-2",
+                    "figure": null,
+                    "interaction": "Structure",
+                    "method": "X-RAY DIFFRACTION"
+                },
+                {
+                    "doi": "10.1038/s41586-021-03425-2",
+                    "figure": null,
+                    "interaction": "Structure",
+                    "method": "X-RAY DIFFRACTION"
+                },
+                {
+                    "doi": "10.1038/s41586-021-03425-2",
+                    "figure": null,
+                    "interaction": "Structure",
+                    "method": "X-RAY DIFFRACTION"
+                },
+                {
+                    "doi": "10.1038/s41586-021-03425-2",
+                    "figure": null,
+                    "interaction": "Structure",
+                    "method": "X-RAY DIFFRACTION"
+                },
+                {
+                    "doi": "None",
+                    "figure": null,
+                    "interaction": "Structure",
+                    "method": "X-RAY DIFFRACTION"
+                },
+                {
+                    "doi": "None",
+                    "figure": null,
+                    "interaction": "Structure",
+                    "method": "X-RAY DIFFRACTION"
+                },
+                {
+                    "doi": "None",
+                    "figure": null,
+                    "interaction": "Structure",
+                    "method": "X-RAY DIFFRACTION"
+                },
+                {
+                    "doi": "None",
+                    "figure": null,
+                    "interaction": "Structure",
+                    "method": "X-RAY DIFFRACTION"
+                },
+                {
+                    "doi": "10.1107/S2053230X21006142",
+                    "figure": null,
+                    "interaction": "Structure",
+                    "method": "X-RAY DIFFRACTION"
+                },
+                {
+                    "doi": "10.1107/S2053230X21006142",
+                    "figure": null,
+                    "interaction": "Structure",
+                    "method": "X-RAY DIFFRACTION"
+                }
+            ],
+            "fullReferences": [
+                {
+                    "title": "Directed evolution of a synthetic phylogeny of programmable Trp repressors",
+                    "authors": [
+                        {
+                            "lastName": "Ellefson",
+                            "firstName": "Jared W."
+                        },
+                        {
+                            "lastName": "Ledbetter",
+                            "firstName": "Michael P."
+                        },
+                        {
+                            "lastName": "Ellington",
+                            "firstName": "Andrew D."
+                        }
+                    ],
+                    "year": 2018,
+                    "journal": "Nat Chem Biol",
+                    "doi": "10.1038/s41589-018-0006-7",
+                    "url": "http://dx.doi.org/10.1038/s41589-018-0006-7",
+                    "interaction": [
+                        {
+                            "figure": "Figure 4",
+                            "type": "Ligand",
+                            "method": "Synthetic regulation"
+                        }
+                    ]
+                },
+                {
+                    "title": "The Solution Structures of the trp Repressor-Operator DNA Complex",
+                    "authors": [
+                        {
+                            "lastName": "Zhang",
+                            "firstName": "Hong"
+                        },
+                        {
+                            "lastName": "Zhao",
+                            "firstName": "Daqing"
+                        },
+                        {
+                            "lastName": "Revington",
+                            "firstName": "Matthew"
+                        },
+                        {
+                            "lastName": "Lee",
+                            "firstName": "Weontae"
+                        },
+                        {
+                            "lastName": "Jia",
+                            "firstName": "Xin"
+                        },
+                        {
+                            "lastName": "Arrowsmith",
+                            "firstName": "Cheryl"
+                        },
+                        {
+                            "lastName": "Jardetzky",
+                            "firstName": "Oleg"
+                        }
+                    ],
+                    "year": 1994,
+                    "journal": "Journal of Molecular Biology",
+                    "doi": "10.1006/jmbi.1994.1317",
+                    "url": "http://dx.doi.org/10.1006/jmbi.1994.1317",
+                    "interaction": [
+                        {
+                            "figure": "Figure 7",
+                            "type": "Operator",
+                            "method": "Crystal Structure"
+                        },
+                        {
+                            "figure": null,
+                            "type": "Structure",
+                            "method": "SOLUTION NMR"
+                        }
+                    ]
+                },
+                {
+                    "title": "None",
+                    "authors": "None",
+                    "year": "None",
+                    "journal": "None",
+                    "doi": "None",
+                    "url": "None",
+                    "interaction": [
+                        {
+                            "figure": null,
+                            "type": "Structure",
+                            "method": "SOLUTION NMR"
+                        },
+                        {
+                            "figure": null,
+                            "type": "Structure",
+                            "method": "X-RAY DIFFRACTION"
+                        },
+                        {
+                            "figure": null,
+                            "type": "Structure",
+                            "method": "X-RAY DIFFRACTION"
+                        },
+                        {
+                            "figure": null,
+                            "type": "Structure",
+                            "method": "X-RAY DIFFRACTION"
+                        },
+                        {
+                            "figure": null,
+                            "type": "Structure",
+                            "method": "X-RAY DIFFRACTION"
+                        },
+                        {
+                            "figure": null,
+                            "type": "Structure",
+                            "method": "X-RAY DIFFRACTION"
+                        },
+                        {
+                            "figure": null,
+                            "type": "Structure",
+                            "method": "X-RAY DIFFRACTION"
+                        },
+                        {
+                            "figure": null,
+                            "type": "Structure",
+                            "method": "X-RAY DIFFRACTION"
+                        }
+                    ]
+                },
+                {
+                    "title": "E. coli trp Repressor Forms a Domain-Swapped Array in Aqueous Alcohol",
+                    "authors": [
+                        {
+                            "lastName": "Lawson",
+                            "firstName": "Catherine L"
+                        },
+                        {
+                            "lastName": "Benoff",
+                            "firstName": "Brian"
+                        },
+                        {
+                            "lastName": "Berger",
+                            "firstName": "Tatyana"
+                        },
+                        {
+                            "lastName": "Berman",
+                            "firstName": "Helen M"
+                        },
+                        {
+                            "lastName": "Carey",
+                            "firstName": "Jannette"
+                        }
+                    ],
+                    "year": 2004,
+                    "journal": "Structure",
+                    "doi": "10.1016/j.str.2004.03.019",
+                    "url": "http://dx.doi.org/10.1016/j.str.2004.03.019",
+                    "interaction": [
+                        {
+                            "figure": null,
+                            "type": "Structure",
+                            "method": "X-RAY DIFFRACTION"
+                        }
+                    ]
+                },
+                {
+                    "title": "Crystal structure of trp represser/operator complex at atomic resolution",
+                    "authors": [
+                        {
+                            "lastName": "Otwinowski",
+                            "firstName": "Z."
+                        },
+                        {
+                            "lastName": "Schevitz",
+                            "firstName": "R. W."
+                        },
+                        {
+                            "lastName": "Zhang",
+                            "firstName": "R.-G."
+                        },
+                        {
+                            "lastName": "Lawson",
+                            "firstName": "C. L."
+                        },
+                        {
+                            "lastName": "Joachimiak",
+                            "firstName": "A."
+                        },
+                        {
+                            "lastName": "Marmorstein",
+                            "firstName": "R. Q."
+                        },
+                        {
+                            "lastName": "Luisi",
+                            "firstName": "B. F."
+                        },
+                        {
+                            "lastName": "Sigler",
+                            "firstName": "P. B."
+                        }
+                    ],
+                    "year": 1988,
+                    "journal": "Nature",
+                    "doi": "10.1038/335321a0",
+                    "url": "http://dx.doi.org/10.1038/335321a0",
+                    "interaction": [
+                        {
+                            "figure": null,
+                            "type": "Structure",
+                            "method": "X-RAY DIFFRACTION"
+                        }
+                    ]
+                },
+                {
+                    "title": "Tandem binding in crystals of a trp represser/operator half-site complex",
+                    "authors": [
+                        {
+                            "lastName": "Lawson",
+                            "firstName": "Catherine L."
+                        },
+                        {
+                            "lastName": "Carey",
+                            "firstName": "Jannette"
+                        }
+                    ],
+                    "year": 1993,
+                    "journal": "Nature",
+                    "doi": "10.1038/366178a0",
+                    "url": "http://dx.doi.org/10.1038/366178a0",
+                    "interaction": [
+                        {
+                            "figure": null,
+                            "type": "Structure",
+                            "method": "X-RAY DIFFRACTION"
+                        }
+                    ]
+                },
+                {
+                    "title": "Flexibility of the DNA-binding domains oftrp repressor",
+                    "authors": [
+                        {
+                            "lastName": "Lawson",
+                            "firstName": "Catherine L."
+                        },
+                        {
+                            "lastName": "Zhang",
+                            "firstName": "Rong-guang"
+                        },
+                        {
+                            "lastName": "Schevitz",
+                            "firstName": "Richard W."
+                        },
+                        {
+                            "lastName": "Otwinowski",
+                            "firstName": "Zdzislaw"
+                        },
+                        {
+                            "lastName": "Joachimiak",
+                            "firstName": "Andrzej"
+                        },
+                        {
+                            "lastName": "Sigler",
+                            "firstName": "Paul B."
+                        }
+                    ],
+                    "year": 1988,
+                    "journal": "Proteins",
+                    "doi": "10.1002/prot.340030103",
+                    "url": "http://dx.doi.org/10.1002/prot.340030103",
+                    "interaction": [
+                        {
+                            "figure": null,
+                            "type": "Structure",
+                            "method": "X-RAY DIFFRACTION"
+                        },
+                        {
+                            "figure": null,
+                            "type": "Structure",
+                            "method": "X-RAY DIFFRACTION"
+                        },
+                        {
+                            "figure": null,
+                            "type": "Structure",
+                            "method": "X-RAY DIFFRACTION"
+                        }
+                    ]
+                },
+                {
+                    "title": "Refined Solution Structures of the Escherichia coli trp Holo- and Aporepressor",
+                    "authors": [
+                        {
+                            "lastName": "Zhao",
+                            "firstName": "D."
+                        },
+                        {
+                            "lastName": "Arrowsmith",
+                            "firstName": "C.H."
+                        },
+                        {
+                            "lastName": "Jia",
+                            "firstName": "X."
+                        },
+                        {
+                            "lastName": "Jardetzky",
+                            "firstName": "O."
+                        }
+                    ],
+                    "year": 1993,
+                    "journal": "Journal of Molecular Biology",
+                    "doi": "10.1006/jmbi.1993.1076",
+                    "url": "http://dx.doi.org/10.1006/jmbi.1993.1076",
+                    "interaction": [
+                        {
+                            "figure": null,
+                            "type": "Structure",
+                            "method": "SOLUTION NMR"
+                        },
+                        {
+                            "figure": null,
+                            "type": "Structure",
+                            "method": "SOLUTION NMR"
+                        }
+                    ]
+                },
+                {
+                    "title": "Environment-dependent long-range structural distortion in a temperature-sensitive point mutant",
+                    "authors": [
+                        {
+                            "lastName": "Carey",
+                            "firstName": "Jannette"
+                        },
+                        {
+                            "lastName": "Benoff",
+                            "firstName": "Brian"
+                        },
+                        {
+                            "lastName": "Harish",
+                            "firstName": "Balasubramanian"
+                        },
+                        {
+                            "lastName": "Yuan",
+                            "firstName": "Lara"
+                        },
+                        {
+                            "lastName": "Lawson",
+                            "firstName": "Catherine L."
+                        }
+                    ],
+                    "year": 2011,
+                    "journal": "Protein Science",
+                    "doi": "10.1002/pro.759",
+                    "url": "http://dx.doi.org/10.1002/pro.759",
+                    "interaction": [
+                        {
+                            "figure": null,
+                            "type": "Structure",
+                            "method": "X-RAY DIFFRACTION"
+                        },
+                        {
+                            "figure": null,
+                            "type": "Structure",
+                            "method": "X-RAY DIFFRACTION"
+                        }
+                    ]
+                },
+                {
+                    "title": "A biosensor for the direct visualization of auxin",
+                    "authors": [
+                        {
+                            "lastName": "Herud-Sikimić",
+                            "firstName": "Ole"
+                        },
+                        {
+                            "lastName": "Stiel",
+                            "firstName": "Andre C."
+                        },
+                        {
+                            "lastName": "Kolb",
+                            "firstName": "Martina"
+                        },
+                        {
+                            "lastName": "Shanmugaratnam",
+                            "firstName": "Sooruban"
+                        },
+                        {
+                            "lastName": "Berendzen",
+                            "firstName": "Kenneth W."
+                        },
+                        {
+                            "lastName": "Feldhaus",
+                            "firstName": "Christian"
+                        },
+                        {
+                            "lastName": "Höcker",
+                            "firstName": "Birte"
+                        },
+                        {
+                            "lastName": "Jürgens",
+                            "firstName": "Gerd"
+                        }
+                    ],
+                    "year": 2021,
+                    "journal": "Nature",
+                    "doi": "10.1038/s41586-021-03425-2",
+                    "url": "http://dx.doi.org/10.1038/s41586-021-03425-2",
+                    "interaction": [
+                        {
+                            "figure": null,
+                            "type": "Structure",
+                            "method": "X-RAY DIFFRACTION"
+                        },
+                        {
+                            "figure": null,
+                            "type": "Structure",
+                            "method": "X-RAY DIFFRACTION"
+                        },
+                        {
+                            "figure": null,
+                            "type": "Structure",
+                            "method": "X-RAY DIFFRACTION"
+                        },
+                        {
+                            "figure": null,
+                            "type": "Structure",
+                            "method": "X-RAY DIFFRACTION"
+                        },
+                        {
+                            "figure": null,
+                            "type": "Structure",
+                            "method": "X-RAY DIFFRACTION"
+                        },
+                        {
+                            "figure": null,
+                            "type": "Structure",
+                            "method": "X-RAY DIFFRACTION"
+                        }
+                    ]
+                },
+                {
+                    "title": "Crystal structures of Val58Ile tryptophan repressor in a domain-swapped array in the presence and absence of <scp>L</scp>-tryptophan",
+                    "authors": [
+                        {
+                            "lastName": "Sprenger",
+                            "firstName": "Janina"
+                        },
+                        {
+                            "lastName": "Lawson",
+                            "firstName": "Catherine L."
+                        },
+                        {
+                            "lastName": "von Wachenfeldt",
+                            "firstName": "Claes"
+                        },
+                        {
+                            "lastName": "Lo Leggio",
+                            "firstName": "Leila"
+                        },
+                        {
+                            "lastName": "Carey",
+                            "firstName": "Jannette"
+                        }
+                    ],
+                    "year": 2021,
+                    "journal": "Acta Cryst Sect F",
+                    "doi": "10.1107/s2053230x21006142",
+                    "url": "http://dx.doi.org/10.1107/S2053230X21006142",
+                    "interaction": [
+                        {
+                            "figure": null,
+                            "type": "Structure",
+                            "method": "X-RAY DIFFRACTION"
+                        },
+                        {
+                            "figure": null,
+                            "type": "Structure",
+                            "method": "X-RAY DIFFRACTION"
+                        }
+                    ]
+                }
+            ],
+            "id": "P0A881"
+        },
+        {
+            "uniprotID": "Q2YIQ4",
+            "organism": "Brucella abortus (strain 2308)",
+            "keggID": "bmf:BAB2_0369",
+            "name": "eryD",
+            "organismID": 359391,
+            "alias": "EryD",
+            "about": "Regulates the expression of itself and the eryABC genes responsible for erythritol catabolism",
+            "sequence": "MADADDSLALRAAWLHFVAGMTQSAVAKRLGLPSVKAHRLIAKAVADGAVKVTIDGDITECIDLENRLADLYGLDYCEVAPDIGEEGLPLMALGHAGANFMRREIEHGDHEVIGIGHGRTLSAAVGYMPRVMANDLRFVSLLGGLTRNFAANPHDVMHRIAEKTGMPAYVMPVPFFANTAEDREVLLAQRGVTTVFDMGCRAELKIVGIGTVDAQAQLVTSGMIELGEVEEIANLGGVGEMLGHFFNANGQWLETALTGRTIAASVENADMSRIVALAGGLSKVDAIRAVLKSGRLYGLITDERTAKALIGQPNGK",
+            "accession": "WP_002965779.1",
+            "family": "OTHER",
+            "regulationType": "Apo-Repressor",
+            "ligands": [
+                {
+                    "name": "Erythritol",
+                    "fullDOI": {
+                        "journal": "Metabolic Engineering",
+                        "title": "Combining genetically-encoded biosensors with high throughput strain screening to maximize erythritol production in Yarrowia lipolytica",
+                        "year": 2020,
+                        "url": "http://dx.doi.org/10.1016/j.ymben.2020.03.006",
+                        "authors": [
+                            {
+                                "lastName": "Qiu",
+                                "firstName": "Xueliang"
+                            },
+                            {
+                                "lastName": "Xu",
+                                "firstName": "Peng"
+                            },
+                            {
+                                "lastName": "Zhao",
+                                "firstName": "Xinrui"
+                            },
+                            {
+                                "lastName": "Du",
+                                "firstName": "Guocheng"
+                            },
+                            {
+                                "lastName": "Zhang",
+                                "firstName": "Juan"
+                            },
+                            {
+                                "lastName": "Li",
+                                "firstName": "Jianghua"
+                            }
+                        ],
+                        "doi": "10.1016/j.ymben.2020.03.006"
+                    },
+                    "SMILES": "C([C@H]([C@H](CO)O)O)O",
+                    "ref_figure": "Figure 5",
+                    "method": "Synthetic Regulation",
+                    "doi": "10.1016/j.ymben.2020.03.006"
+                }
+            ],
+            "operators": [
+                {
+                    "sequence": "CTCCAACATGCGCCATCGCCCGATTTCGCCATGGAAGGGGCTGCGAGCGACCTGTTTTCAGTCGCGGGAGGAAATCCGGATGTTTATGAAAGCCTGTGTCAGCC",
+                    "fullDOI": {
+                        "journal": "Metabolic Engineering",
+                        "title": "Combining genetically-encoded biosensors with high throughput strain screening to maximize erythritol production in Yarrowia lipolytica",
+                        "year": 2020,
+                        "url": "http://dx.doi.org/10.1016/j.ymben.2020.03.006",
+                        "authors": [
+                            {
+                                "lastName": "Qiu",
+                                "firstName": "Xueliang"
+                            },
+                            {
+                                "lastName": "Xu",
+                                "firstName": "Peng"
+                            },
+                            {
+                                "lastName": "Zhao",
+                                "firstName": "Xinrui"
+                            },
+                            {
+                                "lastName": "Du",
+                                "firstName": "Guocheng"
+                            },
+                            {
+                                "lastName": "Zhang",
+                                "firstName": "Juan"
+                            },
+                            {
+                                "lastName": "Li",
+                                "firstName": "Jianghua"
+                            }
+                        ],
+                        "doi": "10.1016/j.ymben.2020.03.006"
+                    },
+                    "ref_figure": "Figure 5",
+                    "method": "Synthetic Regulation",
+                    "doi": "10.1016/j.ymben.2020.03.006"
+                }
+            ],
+            "newOperon": {
+                "regIndex": 5,
+                "genome": "NC_004311.2",
+                "operon": [
+                    {
+                        "link": "WP_004690334.1",
+                        "start": 847270,
+                        "alias": "BR_RS14075",
+                        "description": "DUF2291 family protein",
+                        "stop": 847926,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "WP_002965786.1",
+                        "start": 847906,
+                        "alias": "BR_RS17090",
+                        "description": "hypothetical protein",
+                        "stop": 848073,
+                        "direction": "+"
+                    },
+                    {
+                        "link": "WP_006133441.1",
+                        "start": 848670,
+                        "alias": "BR_RS14080",
+                        "description": "FGGY-family carbohydrate kinase",
+                        "stop": 850223,
+                        "direction": "+"
+                    },
+                    {
+                        "link": "WP_004690337.1",
+                        "start": 850236,
+                        "alias": "BR_RS14085",
+                        "description": "glycerol-3-phosphate dehydrogenase",
+                        "stop": 851744,
+                        "direction": "+"
+                    },
+                    {
+                        "link": "WP_004690338.1",
+                        "start": 851752,
+                        "alias": "BR_RS14090",
+                        "description": "TIM barrel protein",
+                        "stop": 852684,
+                        "direction": "+"
+                    },
+                    {
+                        "link": "WP_002965779.1",
+                        "start": 852712,
+                        "alias": "BR_RS14095",
+                        "description": "sugar-binding transcriptional regulator",
+                        "stop": 853662,
+                        "direction": "+"
+                    },
+                    {
+                        "link": "WP_002965778.1",
+                        "start": 853750,
+                        "alias": "BR_RS14100",
+                        "description": "DeoR/GlpR family DNA-binding transcription regulator",
+                        "stop": 854514,
+                        "direction": "+"
+                    },
+                    {
+                        "link": "WP_002965777.1",
+                        "start": 854527,
+                        "alias": "BR_RS14105",
+                        "description": "triose-phosphate isomerase",
+                        "stop": 855297,
+                        "direction": "+"
+                    },
+                    {
+                        "link": "WP_002965776.1",
+                        "start": 855309,
+                        "alias": "BR_RS14110",
+                        "description": "RpiB/LacA/LacB family sugar-phosphate isomerase",
+                        "stop": 855764,
+                        "direction": "+"
+                    }
+                ]
+            },
+            "operon": [],
+            "structures": null,
+            "references": [
+                {
+                    "doi": "10.1016/j.ymben.2020.03.006",
+                    "figure": "Figure 5",
+                    "interaction": "Ligand",
+                    "method": "Synthetic Regulation"
+                },
+                {
+                    "doi": "10.1016/j.ymben.2020.03.006",
+                    "figure": "Figure 5",
+                    "interaction": "Operator",
+                    "method": "Synthetic Regulation"
+                }
+            ],
+            "fullReferences": [
+                {
+                    "title": "Combining genetically-encoded biosensors with high throughput strain screening to maximize erythritol production in Yarrowia lipolytica",
+                    "authors": [
+                        {
+                            "lastName": "Qiu",
+                            "firstName": "Xueliang"
+                        },
+                        {
+                            "lastName": "Xu",
+                            "firstName": "Peng"
+                        },
+                        {
+                            "lastName": "Zhao",
+                            "firstName": "Xinrui"
+                        },
+                        {
+                            "lastName": "Du",
+                            "firstName": "Guocheng"
+                        },
+                        {
+                            "lastName": "Zhang",
+                            "firstName": "Juan"
+                        },
+                        {
+                            "lastName": "Li",
+                            "firstName": "Jianghua"
+                        }
+                    ],
+                    "year": 2020,
+                    "journal": "Metabolic Engineering",
+                    "doi": "10.1016/j.ymben.2020.03.006",
+                    "url": "http://dx.doi.org/10.1016/j.ymben.2020.03.006",
+                    "interaction": [
+                        {
+                            "figure": "Figure 5",
+                            "type": "Ligand",
+                            "method": "Synthetic Regulation"
+                        },
+                        {
+                            "figure": "Figure 5",
+                            "type": "Operator",
+                            "method": "Synthetic Regulation"
+                        }
+                    ]
+                }
+            ],
+            "id": "Q2YIQ4"
+        },
+        {
+            "uniprotID": "Q4J717",
+            "organism": "Sulfolobus acidocaldarius (strain ATCC 33909 / DSM 639 / JCM 8929 / NBRC 15157 / NCIMB 11770)",
+            "keggID": "sai:Saci_2136",
+            "name": null,
+            "organismID": 330779,
+            "alias": "BarR",
+            "about": "Activates the expression of itself and a beta-alanine aminotransferase gene in response to beta-alanine",
+            "sequence": "MIEIYTKFYIYAYILEKMYYIQMELDEIDIKILKILQENAKQSLEDMSEMLKLPKSTIAYRIKRLESQGIIKGYYAHIDPYALDQDYIVITFVRAKYGKDYHLNLGSKLAEIPGVWGVYFVLGDTDFVVMARYKNREEFMKNFLEKLMSMPEIERTSTQIVVKTIKEAPNIVIY",
+            "accession": "WP_011278931.1",
+            "family": "OTHER",
+            "regulationType": "Co-activator",
+            "ligands": [
+                {
+                    "name": "beta-Alanine",
+                    "fullDOI": {
+                        "journal": "Molecular Microbiology",
+                        "title": "BarR, an Lrp-type transcription factor in<i>S</i><i>ulfolobus acidocaldarius</i>, regulates an aminotransferase gene in a β-alanine responsive manner",
+                        "year": 2014,
+                        "url": "http://dx.doi.org/10.1111/mmi.12583",
+                        "authors": [
+                            {
+                                "lastName": "Liu",
+                                "firstName": "Han"
+                            },
+                            {
+                                "lastName": "Orell",
+                                "firstName": "Alvaro"
+                            },
+                            {
+                                "lastName": "Maes",
+                                "firstName": "Dominique"
+                            },
+                            {
+                                "lastName": "van Wolferen",
+                                "firstName": "Marleen"
+                            },
+                            {
+                                "lastName": "Ann-Christin",
+                                "firstName": "Lindås"
+                            },
+                            {
+                                "lastName": "Bernander",
+                                "firstName": "Rolf"
+                            },
+                            {
+                                "lastName": "Albers",
+                                "firstName": "Sonja-Verena"
+                            },
+                            {
+                                "lastName": "Charlier",
+                                "firstName": "Daniel"
+                            },
+                            {
+                                "lastName": "Peeters",
+                                "firstName": "Eveline"
+                            }
+                        ],
+                        "doi": "10.1111/mmi.12583"
+                    },
+                    "SMILES": "C(CN)C(=O)O",
+                    "ref_figure": "Figure 7",
+                    "method": "EMSA",
+                    "doi": "10.1111/mmi.12583"
+                }
+            ],
+            "operators": [
+                {
+                    "sequence": "TAGTAAATTACACAA",
+                    "fullDOI": {
+                        "journal": "Molecular Microbiology",
+                        "title": "BarR, an Lrp-type transcription factor in<i>S</i><i>ulfolobus acidocaldarius</i>, regulates an aminotransferase gene in a β-alanine responsive manner",
+                        "year": 2014,
+                        "url": "http://dx.doi.org/10.1111/mmi.12583",
+                        "authors": [
+                            {
+                                "lastName": "Liu",
+                                "firstName": "Han"
+                            },
+                            {
+                                "lastName": "Orell",
+                                "firstName": "Alvaro"
+                            },
+                            {
+                                "lastName": "Maes",
+                                "firstName": "Dominique"
+                            },
+                            {
+                                "lastName": "van Wolferen",
+                                "firstName": "Marleen"
+                            },
+                            {
+                                "lastName": "Ann-Christin",
+                                "firstName": "Lindås"
+                            },
+                            {
+                                "lastName": "Bernander",
+                                "firstName": "Rolf"
+                            },
+                            {
+                                "lastName": "Albers",
+                                "firstName": "Sonja-Verena"
+                            },
+                            {
+                                "lastName": "Charlier",
+                                "firstName": "Daniel"
+                            },
+                            {
+                                "lastName": "Peeters",
+                                "firstName": "Eveline"
+                            }
+                        ],
+                        "doi": "10.1111/mmi.12583"
+                    },
+                    "ref_figure": "Figure 6",
+                    "method": "DNase footprinting",
+                    "doi": "10.1111/mmi.12583"
+                },
+                {
+                    "sequence": "TTTGAATATTATACAA",
+                    "fullDOI": {
+                        "journal": "Molecular Microbiology",
+                        "title": "BarR, an Lrp-type transcription factor in<i>S</i><i>ulfolobus acidocaldarius</i>, regulates an aminotransferase gene in a β-alanine responsive manner",
+                        "year": 2014,
+                        "url": "http://dx.doi.org/10.1111/mmi.12583",
+                        "authors": [
+                            {
+                                "lastName": "Liu",
+                                "firstName": "Han"
+                            },
+                            {
+                                "lastName": "Orell",
+                                "firstName": "Alvaro"
+                            },
+                            {
+                                "lastName": "Maes",
+                                "firstName": "Dominique"
+                            },
+                            {
+                                "lastName": "van Wolferen",
+                                "firstName": "Marleen"
+                            },
+                            {
+                                "lastName": "Ann-Christin",
+                                "firstName": "Lindås"
+                            },
+                            {
+                                "lastName": "Bernander",
+                                "firstName": "Rolf"
+                            },
+                            {
+                                "lastName": "Albers",
+                                "firstName": "Sonja-Verena"
+                            },
+                            {
+                                "lastName": "Charlier",
+                                "firstName": "Daniel"
+                            },
+                            {
+                                "lastName": "Peeters",
+                                "firstName": "Eveline"
+                            }
+                        ],
+                        "doi": "10.1111/mmi.12583"
+                    },
+                    "ref_figure": "Figure 6",
+                    "method": "DNase footprinting",
+                    "doi": "10.1111/mmi.12583"
+                },
+                {
+                    "sequence": "TTGAATATATACAA",
+                    "fullDOI": {
+                        "journal": "Molecular Microbiology",
+                        "title": "BarR, an Lrp-type transcription factor in<i>S</i><i>ulfolobus acidocaldarius</i>, regulates an aminotransferase gene in a β-alanine responsive manner",
+                        "year": 2014,
+                        "url": "http://dx.doi.org/10.1111/mmi.12583",
+                        "authors": [
+                            {
+                                "lastName": "Liu",
+                                "firstName": "Han"
+                            },
+                            {
+                                "lastName": "Orell",
+                                "firstName": "Alvaro"
+                            },
+                            {
+                                "lastName": "Maes",
+                                "firstName": "Dominique"
+                            },
+                            {
+                                "lastName": "van Wolferen",
+                                "firstName": "Marleen"
+                            },
+                            {
+                                "lastName": "Ann-Christin",
+                                "firstName": "Lindås"
+                            },
+                            {
+                                "lastName": "Bernander",
+                                "firstName": "Rolf"
+                            },
+                            {
+                                "lastName": "Albers",
+                                "firstName": "Sonja-Verena"
+                            },
+                            {
+                                "lastName": "Charlier",
+                                "firstName": "Daniel"
+                            },
+                            {
+                                "lastName": "Peeters",
+                                "firstName": "Eveline"
+                            }
+                        ],
+                        "doi": "10.1111/mmi.12583"
+                    },
+                    "ref_figure": "Figure 6",
+                    "method": "DNase footprinting",
+                    "doi": "10.1111/mmi.12583"
+                }
+            ],
+            "newOperon": {
+                "regIndex": 1,
+                "genome": "CP000077.1",
+                "operon": [
+                    {
+                        "link": "AAY81428.1",
+                        "start": 1962756,
+                        "alias": "Saci_2135",
+                        "description": "DNA repair ATPase",
+                        "stop": 1963553,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "AAY81429.1",
+                        "start": 1963887,
+                        "alias": "Saci_2136",
+                        "description": "transcriptional regulator AsnC family",
+                        "stop": 1964411,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "AAY81430.1",
+                        "start": 1964516,
+                        "alias": "Saci_2137",
+                        "description": "class-III aminotransferase",
+                        "stop": 1965850,
+                        "direction": "+"
+                    }
+                ]
+            },
+            "operon": [],
+            "structures": [],
+            "references": [
+                {
+                    "doi": "10.1111/mmi.12583",
+                    "figure": "Figure 7",
+                    "interaction": "Ligand",
+                    "method": "EMSA"
+                },
+                {
+                    "doi": "10.1111/mmi.12583",
+                    "figure": "Figure 6",
+                    "interaction": "Operator",
+                    "method": "DNase footprinting"
+                },
+                {
+                    "doi": "10.1111/mmi.12583",
+                    "figure": "Figure 6",
+                    "interaction": "Operator",
+                    "method": "DNase footprinting"
+                },
+                {
+                    "doi": "10.1111/mmi.12583",
+                    "figure": "Figure 6",
+                    "interaction": "Operator",
+                    "method": "DNase footprinting"
+                }
+            ],
+            "fullReferences": [
+                {
+                    "title": "BarR, an Lrp-type transcription factor in<i>S</i><i>ulfolobus acidocaldarius</i>, regulates an aminotransferase gene in a β-alanine responsive manner",
+                    "authors": [
+                        {
+                            "lastName": "Liu",
+                            "firstName": "Han"
+                        },
+                        {
+                            "lastName": "Orell",
+                            "firstName": "Alvaro"
+                        },
+                        {
+                            "lastName": "Maes",
+                            "firstName": "Dominique"
+                        },
+                        {
+                            "lastName": "van Wolferen",
+                            "firstName": "Marleen"
+                        },
+                        {
+                            "lastName": "Ann-Christin",
+                            "firstName": "Lindås"
+                        },
+                        {
+                            "lastName": "Bernander",
+                            "firstName": "Rolf"
+                        },
+                        {
+                            "lastName": "Albers",
+                            "firstName": "Sonja-Verena"
+                        },
+                        {
+                            "lastName": "Charlier",
+                            "firstName": "Daniel"
+                        },
+                        {
+                            "lastName": "Peeters",
+                            "firstName": "Eveline"
+                        }
+                    ],
+                    "year": 2014,
+                    "journal": "Molecular Microbiology",
+                    "doi": "10.1111/mmi.12583",
+                    "url": "http://dx.doi.org/10.1111/mmi.12583",
+                    "interaction": [
+                        {
+                            "figure": "Figure 7",
+                            "type": "Ligand",
+                            "method": "EMSA"
+                        },
+                        {
+                            "figure": "Figure 6",
+                            "type": "Operator",
+                            "method": "DNase footprinting"
+                        },
+                        {
+                            "figure": "Figure 6",
+                            "type": "Operator",
+                            "method": "DNase footprinting"
+                        },
+                        {
+                            "figure": "Figure 6",
+                            "type": "Operator",
+                            "method": "DNase footprinting"
+                        }
+                    ]
+                }
+            ],
+            "id": "Q4J717"
+        },
+        {
+            "uniprotID": "Q9X2G2",
+            "organism": "Thermotoga maritima (strain ATCC 43589 / DSM 3109 / JCM 10099 / NBRC 100826 / MSB8)",
+            "keggID": "tma:TM1847",
+            "name": "None",
+            "organismID": 243274,
+            "alias": "GluR",
+            "about": "Regulates the glucose transporter gluEFK and the trehalose transporter treEFG",
+            "sequence": "MTEKVSRFPGVFPLIVIGVPGSVDKTHKKLAFAPNLNRWRDIDVEKYFKVFEVYLENDANLAALAEMMRNKHFGDRKNIVYILVREGIGGGIIIEGKLYKGSFNAAGEIGHMKMYDRGPCFCGRVGCWEANTSISHCVRQYEKKKPLPGNTMYEKFETLCRIYEEDPLAKEVLDEFTGILIDGIVNLVNILSPEIVIVGGEGVFLPESVFEVIVSETRRQVHPMDKEVSVEKGSLSNKEVVLEGTSILSSMMISERLV",
+            "accession": "NP_229643.1",
+            "family": "OTHER",
+            "regulationType": "Apo-Repressor",
+            "ligands": [
+                {
+                    "name": "D-Glucose",
+                    "fullDOI": {
+                        "journal": "Nucleic Acids Research",
+                        "title": "Functional diversification of ROK-family transcriptional regulators of sugar catabolism in the Thermotogae phylum",
+                        "year": 2012,
+                        "url": "http://dx.doi.org/10.1093/nar/gks1184",
+                        "authors": [
+                            {
+                                "lastName": "Kazanov",
+                                "firstName": "Marat D."
+                            },
+                            {
+                                "lastName": "Li",
+                                "firstName": "Xiaoqing"
+                            },
+                            {
+                                "lastName": "Gelfand",
+                                "firstName": "Mikhail S."
+                            },
+                            {
+                                "lastName": "Osterman",
+                                "firstName": "Andrei L."
+                            },
+                            {
+                                "lastName": "Rodionov",
+                                "firstName": "Dmitry A."
+                            }
+                        ],
+                        "doi": "10.1093/nar/gks1184"
+                    },
+                    "SMILES": "C([C@@H]1[C@H]([C@@H]([C@H](C(O1)O)O)O)O)O",
+                    "ref_figure": "Figure S3",
+                    "method": "EMSA",
+                    "doi": "10.1093/nar/gks1184"
+                }
+            ],
+            "operators": [
+                {
+                    "sequence": "ATTTAATTCCTTTGGAAATTAAT",
+                    "fullDOI": {
+                        "journal": "Nucleic Acids Research",
+                        "title": "Functional diversification of ROK-family transcriptional regulators of sugar catabolism in the Thermotogae phylum",
+                        "year": 2012,
+                        "url": "http://dx.doi.org/10.1093/nar/gks1184",
+                        "authors": [
+                            {
+                                "lastName": "Kazanov",
+                                "firstName": "Marat D."
+                            },
+                            {
+                                "lastName": "Li",
+                                "firstName": "Xiaoqing"
+                            },
+                            {
+                                "lastName": "Gelfand",
+                                "firstName": "Mikhail S."
+                            },
+                            {
+                                "lastName": "Osterman",
+                                "firstName": "Andrei L."
+                            },
+                            {
+                                "lastName": "Rodionov",
+                                "firstName": "Dmitry A."
+                            }
+                        ],
+                        "doi": "10.1093/nar/gks1184"
+                    },
+                    "ref_figure": "Figure S3",
+                    "method": "EMSA",
+                    "doi": "10.1093/nar/gks1184"
+                }
+            ],
+            "newOperon": {
+                "regIndex": 1,
+                "genome": "NC_000853.1",
+                "operon": [
+                    {
+                        "link": "WP_004082390.1",
+                        "start": 1825249,
+                        "alias": "TM_RS09385",
+                        "description": "WD40 repeat domain-containing protein",
+                        "stop": 1826991,
+                        "direction": "+"
+                    },
+                    {
+                        "link": "WP_010865418.1",
+                        "start": 1827011,
+                        "alias": "TM_RS09390",
+                        "description": "ROK family protein",
+                        "stop": 1827787,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "WP_004082399.1",
+                        "start": 1827820,
+                        "alias": "TM_RS09395",
+                        "description": "glycosyl transferase",
+                        "stop": 1830261,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "WP_004082400.1",
+                        "start": 1830569,
+                        "alias": "TM_RS09400",
+                        "description": "DUF4382 domain-containing protein",
+                        "stop": 1831495,
+                        "direction": "+"
+                    }
+                ]
+            },
+            "operon": [],
+            "structures": null,
+            "references": [
+                {
+                    "doi": "10.1093/nar/gks1184",
+                    "figure": "Figure S3",
+                    "interaction": "Ligand",
+                    "method": "EMSA"
+                },
+                {
+                    "doi": "10.1093/nar/gks1184",
+                    "figure": "Figure S3",
+                    "interaction": "Operator",
+                    "method": "EMSA"
+                }
+            ],
+            "fullReferences": [
+                {
+                    "title": "Functional diversification of ROK-family transcriptional regulators of sugar catabolism in the Thermotogae phylum",
+                    "authors": [
+                        {
+                            "lastName": "Kazanov",
+                            "firstName": "Marat D."
+                        },
+                        {
+                            "lastName": "Li",
+                            "firstName": "Xiaoqing"
+                        },
+                        {
+                            "lastName": "Gelfand",
+                            "firstName": "Mikhail S."
+                        },
+                        {
+                            "lastName": "Osterman",
+                            "firstName": "Andrei L."
+                        },
+                        {
+                            "lastName": "Rodionov",
+                            "firstName": "Dmitry A."
+                        }
+                    ],
+                    "year": 2012,
+                    "journal": "Nucleic Acids Research",
+                    "doi": "10.1093/nar/gks1184",
+                    "url": "http://dx.doi.org/10.1093/nar/gks1184",
+                    "interaction": [
+                        {
+                            "figure": "Figure S3",
+                            "type": "Ligand",
+                            "method": "EMSA"
+                        },
+                        {
+                            "figure": "Figure S3",
+                            "type": "Operator",
+                            "method": "EMSA"
+                        }
+                    ]
+                }
+            ],
+            "id": "Q9X2G2"
+        },
+        {
+            "uniprotID": "R4NMJ0",
+            "organism": "Thermotoga maritima (strain ATCC 43589 / DSM 3109 / JCM 10099 / NBRC 100826 / MSB8)",
+            "keggID": "tmm:Tmari_0029",
+            "name": "None",
+            "organismID": 243274,
+            "alias": "BglR",
+            "about": "Regulates an operon involved in the utilization of beta-linked glucose polymers, and the utilization of resulting beta-glucosides such as cellobiose",
+            "sequence": "MHKKLNPKSMKRENKKMVLRYLIESGPHSRVEIARKTGLAQSAIWRIIEELVNEGLVEEKGTATGRRRKAVTYGPTRSFITSIIYNVEVLETLVAVGFLDGAWRIIERFSTPKDFDEFKQRVTSSYENILKSHVLNKNISKVVFSLPGIVNTESKFLIHAPNLGWRNIDFRREFGNLDLEVLVENDSNLSLLAEEFFSQDVKESDVAFFLYFGEGIGGAISVNGKIVRGENFAAGEIGHVVLDVKNGKEVEEFLSISKLVERMEKFVELQGESLDEKFRYIKRLWFSGEKNVKETMEEFLQHVAVVLKNIIYFLNPGVIVLGGVVNDLWDTFGSFIKRELEKITDREIANVLIRDTIFKEISPSLVGGNVLAIEEFLRQIT",
+            "accession": "NP_227848.1",
+            "family": "OTHER",
+            "regulationType": "Apo-Repressor",
+            "ligands": [
+                {
+                    "name": "D-Glucose",
+                    "fullDOI": {
+                        "journal": "Nucleic Acids Research",
+                        "title": "Functional diversification of ROK-family transcriptional regulators of sugar catabolism in the Thermotogae phylum",
+                        "year": 2012,
+                        "url": "http://dx.doi.org/10.1093/nar/gks1184",
+                        "authors": [
+                            {
+                                "lastName": "Kazanov",
+                                "firstName": "Marat D."
+                            },
+                            {
+                                "lastName": "Li",
+                                "firstName": "Xiaoqing"
+                            },
+                            {
+                                "lastName": "Gelfand",
+                                "firstName": "Mikhail S."
+                            },
+                            {
+                                "lastName": "Osterman",
+                                "firstName": "Andrei L."
+                            },
+                            {
+                                "lastName": "Rodionov",
+                                "firstName": "Dmitry A."
+                            }
+                        ],
+                        "doi": "10.1093/nar/gks1184"
+                    },
+                    "SMILES": "C([C@@H]1[C@H]([C@@H]([C@H](C(O1)O)O)O)O)O",
+                    "ref_figure": "Figure S3",
+                    "method": "EMSA",
+                    "doi": "10.1093/nar/gks1184"
+                },
+                {
+                    "name": "Cellobiose",
+                    "fullDOI": {
+                        "journal": "Nucleic Acids Research",
+                        "title": "Functional diversification of ROK-family transcriptional regulators of sugar catabolism in the Thermotogae phylum",
+                        "year": 2012,
+                        "url": "http://dx.doi.org/10.1093/nar/gks1184",
+                        "authors": [
+                            {
+                                "lastName": "Kazanov",
+                                "firstName": "Marat D."
+                            },
+                            {
+                                "lastName": "Li",
+                                "firstName": "Xiaoqing"
+                            },
+                            {
+                                "lastName": "Gelfand",
+                                "firstName": "Mikhail S."
+                            },
+                            {
+                                "lastName": "Osterman",
+                                "firstName": "Andrei L."
+                            },
+                            {
+                                "lastName": "Rodionov",
+                                "firstName": "Dmitry A."
+                            }
+                        ],
+                        "doi": "10.1093/nar/gks1184"
+                    },
+                    "SMILES": "C([C@@H]1[C@H]([C@@H]([C@H]([C@@H](O1)O[C@@H]2[C@H](O[C@H]([C@@H]([C@H]2O)O)O)CO)O)O)O)O",
+                    "ref_figure": "Figure S3",
+                    "method": "EMSA",
+                    "doi": "10.1093/nar/gks1184"
+                },
+                {
+                    "name": "Gentibiose",
+                    "fullDOI": {
+                        "journal": "Nucleic Acids Research",
+                        "title": "Functional diversification of ROK-family transcriptional regulators of sugar catabolism in the Thermotogae phylum",
+                        "year": 2012,
+                        "url": "http://dx.doi.org/10.1093/nar/gks1184",
+                        "authors": [
+                            {
+                                "lastName": "Kazanov",
+                                "firstName": "Marat D."
+                            },
+                            {
+                                "lastName": "Li",
+                                "firstName": "Xiaoqing"
+                            },
+                            {
+                                "lastName": "Gelfand",
+                                "firstName": "Mikhail S."
+                            },
+                            {
+                                "lastName": "Osterman",
+                                "firstName": "Andrei L."
+                            },
+                            {
+                                "lastName": "Rodionov",
+                                "firstName": "Dmitry A."
+                            }
+                        ],
+                        "doi": "10.1093/nar/gks1184"
+                    },
+                    "SMILES": "C([C@@H]1[C@H]([C@@H]([C@H]([C@@H](O1)OC[C@@H]2[C@H]([C@@H]([C@H](C(O2)O)O)O)O)O)O)O)O",
+                    "ref_figure": "Figure S3",
+                    "method": "EMSA",
+                    "doi": "10.1093/nar/gks1184"
+                }
+            ],
+            "operators": [
+                {
+                    "sequence": "AATTTCTTTCTGAGGAAGATAGA",
+                    "fullDOI": {
+                        "journal": "Nucleic Acids Research",
+                        "title": "Functional diversification of ROK-family transcriptional regulators of sugar catabolism in the Thermotogae phylum",
+                        "year": 2012,
+                        "url": "http://dx.doi.org/10.1093/nar/gks1184",
+                        "authors": [
+                            {
+                                "lastName": "Kazanov",
+                                "firstName": "Marat D."
+                            },
+                            {
+                                "lastName": "Li",
+                                "firstName": "Xiaoqing"
+                            },
+                            {
+                                "lastName": "Gelfand",
+                                "firstName": "Mikhail S."
+                            },
+                            {
+                                "lastName": "Osterman",
+                                "firstName": "Andrei L."
+                            },
+                            {
+                                "lastName": "Rodionov",
+                                "firstName": "Dmitry A."
+                            }
+                        ],
+                        "doi": "10.1093/nar/gks1184"
+                    },
+                    "ref_figure": "Figure S3",
+                    "method": "EMSA",
+                    "doi": "10.1093/nar/gks1184"
+                }
+            ],
+            "newOperon": {
+                "regIndex": 7,
+                "genome": "NC_000853.1",
+                "operon": [
+                    {
+                        "link": "WP_004082478.1",
+                        "start": 23400,
+                        "alias": "TM_RS00105",
+                        "description": "beta-glucosidase",
+                        "stop": 25565,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "WP_004082479.1",
+                        "start": 25549,
+                        "alias": "TM_RS00110",
+                        "description": "hypothetical protein",
+                        "stop": 25755,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "WP_004082480.1",
+                        "start": 25755,
+                        "alias": "TM_RS00115",
+                        "description": "ABC transporter ATP-binding protein",
+                        "stop": 26561,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "WP_004082481.1",
+                        "start": 26558,
+                        "alias": "TM_RS00120",
+                        "description": "ABC transporter ATP-binding protein",
+                        "stop": 27550,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "WP_004082483.1",
+                        "start": 27554,
+                        "alias": "TM_RS00125",
+                        "description": "ABC transporter permease",
+                        "stop": 28396,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "WP_004082485.1",
+                        "start": 28400,
+                        "alias": "TM_RS00130",
+                        "description": "ABC transporter permease",
+                        "stop": 29416,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "WP_004082487.1",
+                        "start": 29479,
+                        "alias": "TM_RS00135",
+                        "description": "ABC transporter substrate-binding protein",
+                        "stop": 31293,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "WP_004082489.1",
+                        "start": 31324,
+                        "alias": "TM_RS00140",
+                        "description": "ROK family transcriptional regulator",
+                        "stop": 32469,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "WP_228378899.1",
+                        "start": 32888,
+                        "alias": "TM_RS00145",
+                        "description": "prolyl oligopeptidase family serine peptidase",
+                        "stop": 34015,
+                        "direction": "+"
+                    },
+                    {
+                        "link": "WP_004082494.1",
+                        "start": 34103,
+                        "alias": "TM_RS00150",
+                        "description": "DUF362 domain-containing protein",
+                        "stop": 35176,
+                        "direction": "+"
+                    },
+                    {
+                        "link": "WP_010865033.1",
+                        "start": 35265,
+                        "alias": "TM_RS00155",
+                        "description": "hypothetical protein",
+                        "stop": 36722,
+                        "direction": "+"
+                    },
+                    {
+                        "link": "WP_004082498.1",
+                        "start": 36719,
+                        "alias": "TM_RS00160",
+                        "description": "NTPase",
+                        "stop": 37243,
+                        "direction": "+"
+                    },
+                    {
+                        "link": "WP_004082500.1",
+                        "start": 37240,
+                        "alias": "TM_RS00165",
+                        "description": "HD domain-containing protein",
+                        "stop": 38490,
+                        "direction": "+"
+                    },
+                    {
+                        "link": "WP_004082502.1",
+                        "start": 38501,
+                        "alias": "TM_RS00170",
+                        "description": "6-carboxytetrahydropterin synthase QueD",
+                        "stop": 38863,
+                        "direction": "+"
+                    },
+                    {
+                        "link": "WP_004082504.1",
+                        "start": 38860,
+                        "alias": "TM_RS00175",
+                        "description": "GTP cyclohydrolase FolE2",
+                        "stop": 39639,
+                        "direction": "+"
+                    }
+                ]
+            },
+            "operon": [],
+            "structures": null,
+            "references": [
+                {
+                    "doi": "10.1093/nar/gks1184",
+                    "figure": "Figure S3",
+                    "interaction": "Ligand",
+                    "method": "EMSA"
+                },
+                {
+                    "doi": "10.1093/nar/gks1184",
+                    "figure": "Figure S3",
+                    "interaction": "Ligand",
+                    "method": "EMSA"
+                },
+                {
+                    "doi": "10.1093/nar/gks1184",
+                    "figure": "Figure S3",
+                    "interaction": "Ligand",
+                    "method": "EMSA"
+                },
+                {
+                    "doi": "10.1093/nar/gks1184",
+                    "figure": "Figure S3",
+                    "interaction": "Operator",
+                    "method": "EMSA"
+                }
+            ],
+            "fullReferences": [
+                {
+                    "title": "Functional diversification of ROK-family transcriptional regulators of sugar catabolism in the Thermotogae phylum",
+                    "authors": [
+                        {
+                            "lastName": "Kazanov",
+                            "firstName": "Marat D."
+                        },
+                        {
+                            "lastName": "Li",
+                            "firstName": "Xiaoqing"
+                        },
+                        {
+                            "lastName": "Gelfand",
+                            "firstName": "Mikhail S."
+                        },
+                        {
+                            "lastName": "Osterman",
+                            "firstName": "Andrei L."
+                        },
+                        {
+                            "lastName": "Rodionov",
+                            "firstName": "Dmitry A."
+                        }
+                    ],
+                    "year": 2012,
+                    "journal": "Nucleic Acids Research",
+                    "doi": "10.1093/nar/gks1184",
+                    "url": "http://dx.doi.org/10.1093/nar/gks1184",
+                    "interaction": [
+                        {
+                            "figure": "Figure S3",
+                            "type": "Ligand",
+                            "method": "EMSA"
+                        },
+                        {
+                            "figure": "Figure S3",
+                            "type": "Ligand",
+                            "method": "EMSA"
+                        },
+                        {
+                            "figure": "Figure S3",
+                            "type": "Ligand",
+                            "method": "EMSA"
+                        },
+                        {
+                            "figure": "Figure S3",
+                            "type": "Operator",
+                            "method": "EMSA"
+                        }
+                    ]
+                }
+            ],
+            "id": "R4NMJ0"
+        },
+        {
+            "uniprotID": "R4NNI4",
+            "organism": "Thermotoga maritima (strain ATCC 43589 / DSM 3109 / JCM 10099 / NBRC 100826 / MSB8)",
+            "keggID": "tmm:Tmari_0390",
+            "name": "None",
+            "organismID": 243274,
+            "alias": "TreR",
+            "about": "Regulates the trehalose transporter operon treEFG, and the treTR operon encoding the trehalose degradation enzyme TreT",
+            "sequence": "MPSPLLRRENKIKILRYILKNGKTTRNQLASNLNLAHSTLSYIIDELLDEGFLVFEEIKKKRGRPYQILSVNPEKFTAIGVKVGREEVRGVLFDARMNPLKEHRVQILSGMRNNDGYTRALRETIEQLRSENLLGVGICSSGIVKEGRVVVSHVMNVKDWDPRKVLKDLERILVMNDSDALCREISQRVNTDFLLVSYGVGIGASLWKDKKIHHIEMGHMLAASEGKCYCGQTGCLEYHSSEYAVLKSYLGKEIDFEDFITSEEEKYRQTIEELREKAREDFDSVKVHYEKAFKTFSVVLGNVIMGSGVSRVFFAGEGVVSEEMVKILEELVKVRFNRDFVGEVQFQVADANWMLGAARAVVDKYLPYIVK",
+            "accession": "NP_228203.1",
+            "family": "OTHER",
+            "regulationType": "Apo-Repressor",
+            "ligands": [
+                {
+                    "name": "Trehalose",
+                    "fullDOI": {
+                        "journal": "Nucleic Acids Research",
+                        "title": "Functional diversification of ROK-family transcriptional regulators of sugar catabolism in the Thermotogae phylum",
+                        "year": 2012,
+                        "url": "http://dx.doi.org/10.1093/nar/gks1184",
+                        "authors": [
+                            {
+                                "lastName": "Kazanov",
+                                "firstName": "Marat D."
+                            },
+                            {
+                                "lastName": "Li",
+                                "firstName": "Xiaoqing"
+                            },
+                            {
+                                "lastName": "Gelfand",
+                                "firstName": "Mikhail S."
+                            },
+                            {
+                                "lastName": "Osterman",
+                                "firstName": "Andrei L."
+                            },
+                            {
+                                "lastName": "Rodionov",
+                                "firstName": "Dmitry A."
+                            }
+                        ],
+                        "doi": "10.1093/nar/gks1184"
+                    },
+                    "SMILES": "C([C@@H]1[C@H]([C@@H]([C@H]([C@H](O1)O[C@@H]2[C@@H]([C@H]([C@@H]([C@H](O2)CO)O)O)O)O)O)O)O",
+                    "ref_figure": "Figure S3",
+                    "method": "EMSA",
+                    "doi": "10.1093/nar/gks1184"
+                }
+            ],
+            "operators": [
+                {
+                    "sequence": "ATTAATTCAAGTTACGAATAAAT ",
+                    "fullDOI": {
+                        "journal": "Nucleic Acids Research",
+                        "title": "Functional diversification of ROK-family transcriptional regulators of sugar catabolism in the Thermotogae phylum",
+                        "year": 2012,
+                        "url": "http://dx.doi.org/10.1093/nar/gks1184",
+                        "authors": [
+                            {
+                                "lastName": "Kazanov",
+                                "firstName": "Marat D."
+                            },
+                            {
+                                "lastName": "Li",
+                                "firstName": "Xiaoqing"
+                            },
+                            {
+                                "lastName": "Gelfand",
+                                "firstName": "Mikhail S."
+                            },
+                            {
+                                "lastName": "Osterman",
+                                "firstName": "Andrei L."
+                            },
+                            {
+                                "lastName": "Rodionov",
+                                "firstName": "Dmitry A."
+                            }
+                        ],
+                        "doi": "10.1093/nar/gks1184"
+                    },
+                    "ref_figure": "Figure S3",
+                    "method": "EMSA",
+                    "doi": "10.1093/nar/gks1184"
+                }
+            ],
+            "newOperon": {
+                "regIndex": 2,
+                "genome": "NC_000853.1",
+                "operon": [
+                    {
+                        "link": "WP_010865109.1",
+                        "start": 408295,
+                        "alias": "TM_RS01975",
+                        "description": "ABC transporter ATP-binding protein",
+                        "stop": 409200,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "WP_004083215.1",
+                        "start": 411580,
+                        "alias": "TM_RS01980",
+                        "description": "glycosyltransferase",
+                        "stop": 412800,
+                        "direction": "+"
+                    },
+                    {
+                        "link": "WP_004083219.1",
+                        "start": 412805,
+                        "alias": "TM_RS01985",
+                        "description": "ROK family transcriptional regulator",
+                        "stop": 413920,
+                        "direction": "+"
+                    },
+                    {
+                        "link": "WP_004083223.1",
+                        "start": 413947,
+                        "alias": "TM_RS01990",
+                        "description": "hypothetical protein",
+                        "stop": 414684,
+                        "direction": "-"
+                    }
+                ]
+            },
+            "operon": [],
+            "structures": null,
+            "references": [
+                {
+                    "doi": "10.1093/nar/gks1184",
+                    "figure": "Figure S3",
+                    "interaction": "Ligand",
+                    "method": "EMSA"
+                },
+                {
+                    "doi": "10.1093/nar/gks1184",
+                    "figure": "Figure S3",
+                    "interaction": "Operator",
+                    "method": "EMSA"
+                }
+            ],
+            "fullReferences": [
+                {
+                    "title": "Functional diversification of ROK-family transcriptional regulators of sugar catabolism in the Thermotogae phylum",
+                    "authors": [
+                        {
+                            "lastName": "Kazanov",
+                            "firstName": "Marat D."
+                        },
+                        {
+                            "lastName": "Li",
+                            "firstName": "Xiaoqing"
+                        },
+                        {
+                            "lastName": "Gelfand",
+                            "firstName": "Mikhail S."
+                        },
+                        {
+                            "lastName": "Osterman",
+                            "firstName": "Andrei L."
+                        },
+                        {
+                            "lastName": "Rodionov",
+                            "firstName": "Dmitry A."
+                        }
+                    ],
+                    "year": 2012,
+                    "journal": "Nucleic Acids Research",
+                    "doi": "10.1093/nar/gks1184",
+                    "url": "http://dx.doi.org/10.1093/nar/gks1184",
+                    "interaction": [
+                        {
+                            "figure": "Figure S3",
+                            "type": "Ligand",
+                            "method": "EMSA"
+                        },
+                        {
+                            "figure": "Figure S3",
+                            "type": "Operator",
+                            "method": "EMSA"
+                        }
+                    ]
+                }
+            ],
+            "id": "R4NNI4"
+        },
+        {
+            "uniprotID": "R4NQX8",
+            "organism": "Thermotoga maritima (strain ATCC 43589 / DSM 3109 / JCM 10099 / NBRC 100826 / MSB8)",
+            "keggID": "tmm:Tmari_1231",
+            "name": "None",
+            "organismID": 243274,
+            "alias": "ManR",
+            "about": "Regulates two operons involved in the degradation of beta-mannan and the utilization of resulting mannose-containing oligosaccharides",
+            "sequence": "MPKSVRAENISRILKRIMKSPVSRVELAEELGLTKTTVGEIAKIFLEKGIVVEEKDSPKGVGRPTKSLKISPNCAYVLGIEVTRDEIAACLIDASMNILAHEAHPLPSQSDREETLNVMYRIIDRAKDMMEKLGSKLSALTVAAPGPIDTERGIIIDPRNFPLSQIPLANLLKEKYGIEVWVENDADMGAVGEKWYTKRDDSFAWILTGKGIGAGIIIDGELYRGENGYAGEIGYTRVFNGNEYVFLEDVCNENVVLKHVLSMGFSSLAEARDSGDVRVKEYFDDIARYFSIGLLNLIHLFGISKIVIGGFFKELGENFLKKIKIEVETHLLYKHSVDMSFSKVQEPVIAFGAAVHALENYLERVTTS",
+            "accession": "NP_229029.1",
+            "family": "OTHER",
+            "regulationType": "Apo-Repressor",
+            "ligands": [
+                {
+                    "name": "D-Mannose",
+                    "fullDOI": {
+                        "journal": "Nucleic Acids Research",
+                        "title": "Functional diversification of ROK-family transcriptional regulators of sugar catabolism in the Thermotogae phylum",
+                        "year": 2012,
+                        "url": "http://dx.doi.org/10.1093/nar/gks1184",
+                        "authors": [
+                            {
+                                "lastName": "Kazanov",
+                                "firstName": "Marat D."
+                            },
+                            {
+                                "lastName": "Li",
+                                "firstName": "Xiaoqing"
+                            },
+                            {
+                                "lastName": "Gelfand",
+                                "firstName": "Mikhail S."
+                            },
+                            {
+                                "lastName": "Osterman",
+                                "firstName": "Andrei L."
+                            },
+                            {
+                                "lastName": "Rodionov",
+                                "firstName": "Dmitry A."
+                            }
+                        ],
+                        "doi": "10.1093/nar/gks1184"
+                    },
+                    "SMILES": "C([C@@H]1[C@H]([C@@H]([C@@H](C(O1)O)O)O)O)O",
+                    "ref_figure": "Figure S3",
+                    "method": "EMSA",
+                    "doi": "10.1093/nar/gks1184"
+                }
+            ],
+            "operators": [
+                {
+                    "sequence": "AAATAAGTAAAGTTTACTAATTA",
+                    "fullDOI": {
+                        "journal": "Nucleic Acids Research",
+                        "title": "Functional diversification of ROK-family transcriptional regulators of sugar catabolism in the Thermotogae phylum",
+                        "year": 2012,
+                        "url": "http://dx.doi.org/10.1093/nar/gks1184",
+                        "authors": [
+                            {
+                                "lastName": "Kazanov",
+                                "firstName": "Marat D."
+                            },
+                            {
+                                "lastName": "Li",
+                                "firstName": "Xiaoqing"
+                            },
+                            {
+                                "lastName": "Gelfand",
+                                "firstName": "Mikhail S."
+                            },
+                            {
+                                "lastName": "Osterman",
+                                "firstName": "Andrei L."
+                            },
+                            {
+                                "lastName": "Rodionov",
+                                "firstName": "Dmitry A."
+                            }
+                        ],
+                        "doi": "10.1093/nar/gks1184"
+                    },
+                    "ref_figure": "Figure S3",
+                    "method": "EMSA",
+                    "doi": "10.1093/nar/gks1184"
+                }
+            ],
+            "newOperon": {
+                "regIndex": 6,
+                "genome": "NC_000853.1",
+                "operon": [
+                    {
+                        "link": "WP_004080078.1",
+                        "start": 1241205,
+                        "alias": "TM_RS06195",
+                        "description": "LacI family DNA-binding transcriptional regulator",
+                        "stop": 1242191,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "WP_004080075.1",
+                        "start": 1242193,
+                        "alias": "TM_RS06200",
+                        "description": "ABC transporter ATP-binding protein",
+                        "stop": 1243140,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "WP_004080073.1",
+                        "start": 1243137,
+                        "alias": "TM_RS06205",
+                        "description": "ABC transporter ATP-binding protein",
+                        "stop": 1244117,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "WP_004080070.1",
+                        "start": 1244114,
+                        "alias": "TM_RS06210",
+                        "description": "ABC transporter permease",
+                        "stop": 1244962,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "WP_004080068.1",
+                        "start": 1244968,
+                        "alias": "TM_RS06215",
+                        "description": "ABC transporter permease",
+                        "stop": 1245957,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "WP_004080066.1",
+                        "start": 1246013,
+                        "alias": "TM_RS06220",
+                        "description": "ABC transporter substrate-binding protein",
+                        "stop": 1247686,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "WP_004080064.1",
+                        "start": 1247818,
+                        "alias": "TM_RS06225",
+                        "description": "ROK family transcriptional regulator",
+                        "stop": 1248924,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "WP_004080062.1",
+                        "start": 1248938,
+                        "alias": "TM_RS06230",
+                        "description": "glycoside hydrolase family 130 protein",
+                        "stop": 1249918,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "WP_004080060.1",
+                        "start": 1249971,
+                        "alias": "TM_RS06235",
+                        "description": "ABC transporter substrate-binding protein",
+                        "stop": 1251653,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "WP_004080058.1",
+                        "start": 1251656,
+                        "alias": "TM_RS06240",
+                        "description": "cellulase family glycosylhydrolase",
+                        "stop": 1253665,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "WP_004080056.1",
+                        "start": 1253824,
+                        "alias": "TM_RS06245",
+                        "description": "MurR/RpiR family transcriptional regulator",
+                        "stop": 1254624,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "WP_004080054.1",
+                        "start": 1254608,
+                        "alias": "TM_RS06250",
+                        "description": "glycosyltransferase",
+                        "stop": 1255750,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "WP_004080052.1",
+                        "start": 1255747,
+                        "alias": "TM_RS06255",
+                        "description": "mannosylglucosylglycerate synthase",
+                        "stop": 1257030,
+                        "direction": "-"
+                    }
+                ]
+            },
+            "operon": [],
+            "structures": null,
+            "references": [
+                {
+                    "doi": "10.1093/nar/gks1184",
+                    "figure": "Figure S3",
+                    "interaction": "Ligand",
+                    "method": "EMSA"
+                },
+                {
+                    "doi": "10.1093/nar/gks1184",
+                    "figure": "Figure S3",
+                    "interaction": "Operator",
+                    "method": "EMSA"
+                }
+            ],
+            "fullReferences": [
+                {
+                    "title": "Functional diversification of ROK-family transcriptional regulators of sugar catabolism in the Thermotogae phylum",
+                    "authors": [
+                        {
+                            "lastName": "Kazanov",
+                            "firstName": "Marat D."
+                        },
+                        {
+                            "lastName": "Li",
+                            "firstName": "Xiaoqing"
+                        },
+                        {
+                            "lastName": "Gelfand",
+                            "firstName": "Mikhail S."
+                        },
+                        {
+                            "lastName": "Osterman",
+                            "firstName": "Andrei L."
+                        },
+                        {
+                            "lastName": "Rodionov",
+                            "firstName": "Dmitry A."
+                        }
+                    ],
+                    "year": 2012,
+                    "journal": "Nucleic Acids Research",
+                    "doi": "10.1093/nar/gks1184",
+                    "url": "http://dx.doi.org/10.1093/nar/gks1184",
+                    "interaction": [
+                        {
+                            "figure": "Figure S3",
+                            "type": "Ligand",
+                            "method": "EMSA"
+                        },
+                        {
+                            "figure": "Figure S3",
+                            "type": "Operator",
+                            "method": "EMSA"
+                        }
+                    ]
+                }
+            ],
+            "id": "R4NQX8"
+        },
+        {
+            "uniprotID": "R4NZ99",
+            "organism": "Thermotoga maritima (strain ATCC 43589 / DSM 3109 / JCM 10099 / NBRC 100826 / MSB8)",
+            "keggID": "tmm:Tmari_0809",
+            "name": "None",
+            "organismID": 243274,
+            "alias": "ChiR",
+            "about": "Regulates the expression of the chiR-cbsA-chiEFG-nagBA operon responsible for the utilization of chitin and/or products of its degradation, chitobiose and GlcNAc",
+            "sequence": "MGGTLLNISPTQHKILKLLIENEKISMREISEKLSVNMSTVSRNFRSLLESGFALKVEEASPGSSGGRKTALYTANPNKFFILGIGVEQNRLIGVVIDAKGNEVEKSEIHRSFRGDEIVNALVDCVEPFKEKYPNTVGISIGMPGIIKENKVIFSSALGIEDLDLGRILSKEFGTEIFVLNDANAAVVGYGFQKKNVVYFLISVPYYLNQPVGVGAGLWLEGSLYQGSNGAAGEFEIDILPSILSGPATLDEVDLKNLSSDSFLKLLSKLSEVASFVSYLLDPETVIFGGDITLFSPEFHSGLAKNVRDHLEKRHISDVEVLFDERGLWTVAFGAAKAFWKRILEDYEFAGKILK",
+            "accession": "NP_228617.1",
+            "family": "OTHER",
+            "regulationType": "Apo-Repressor",
+            "ligands": [
+                {
+                    "name": "Chitobiose",
+                    "fullDOI": {
+                        "journal": "Nucleic Acids Research",
+                        "title": "Functional diversification of ROK-family transcriptional regulators of sugar catabolism in the Thermotogae phylum",
+                        "year": 2012,
+                        "url": "http://dx.doi.org/10.1093/nar/gks1184",
+                        "authors": [
+                            {
+                                "lastName": "Kazanov",
+                                "firstName": "Marat D."
+                            },
+                            {
+                                "lastName": "Li",
+                                "firstName": "Xiaoqing"
+                            },
+                            {
+                                "lastName": "Gelfand",
+                                "firstName": "Mikhail S."
+                            },
+                            {
+                                "lastName": "Osterman",
+                                "firstName": "Andrei L."
+                            },
+                            {
+                                "lastName": "Rodionov",
+                                "firstName": "Dmitry A."
+                            }
+                        ],
+                        "doi": "10.1093/nar/gks1184"
+                    },
+                    "SMILES": "C([C@@H]1[C@H]([C@@H]([C@H]([C@@H](O1)O[C@@H]2[C@H](OC([C@@H]([C@H]2O)N)O)CO)N)O)O)O.Cl",
+                    "ref_figure": "Figure S3",
+                    "method": "EMSA",
+                    "doi": "10.1093/nar/gks1184"
+                }
+            ],
+            "operators": [
+                {
+                    "sequence": "AAGTTGTTTGCGGCATGCAACTA",
+                    "fullDOI": {
+                        "journal": "Nucleic Acids Research",
+                        "title": "Functional diversification of ROK-family transcriptional regulators of sugar catabolism in the Thermotogae phylum",
+                        "year": 2012,
+                        "url": "http://dx.doi.org/10.1093/nar/gks1184",
+                        "authors": [
+                            {
+                                "lastName": "Kazanov",
+                                "firstName": "Marat D."
+                            },
+                            {
+                                "lastName": "Li",
+                                "firstName": "Xiaoqing"
+                            },
+                            {
+                                "lastName": "Gelfand",
+                                "firstName": "Mikhail S."
+                            },
+                            {
+                                "lastName": "Osterman",
+                                "firstName": "Andrei L."
+                            },
+                            {
+                                "lastName": "Rodionov",
+                                "firstName": "Dmitry A."
+                            }
+                        ],
+                        "doi": "10.1093/nar/gks1184"
+                    },
+                    "ref_figure": "Figure S3",
+                    "method": "EMSA",
+                    "doi": "10.1093/nar/gks1184"
+                }
+            ],
+            "newOperon": {
+                "regIndex": 5,
+                "genome": "AE000512.1",
+                "operon": [
+                    {
+                        "link": "AAD35885.1",
+                        "start": 823920,
+                        "alias": "TM_0803",
+                        "description": "CTP synthetase",
+                        "stop": 825494,
+                        "direction": "+"
+                    },
+                    {
+                        "link": "AAD35886.1",
+                        "start": 825491,
+                        "alias": "TM_0804",
+                        "description": "conserved hypothetical protein",
+                        "stop": 826192,
+                        "direction": "+"
+                    },
+                    {
+                        "link": "AAD35887.1",
+                        "start": 826197,
+                        "alias": "TM_0805",
+                        "description": "lipophilic protein, putative",
+                        "stop": 827120,
+                        "direction": "+"
+                    },
+                    {
+                        "link": "AAD35888.1",
+                        "start": 827137,
+                        "alias": "TM_0806",
+                        "description": "hypothetical protein",
+                        "stop": 830334,
+                        "direction": "+"
+                    },
+                    {
+                        "link": "AAD35889.1",
+                        "start": 830496,
+                        "alias": "TM_0807",
+                        "description": "alkyl hydroperoxide reductase, putative",
+                        "stop": 831143,
+                        "direction": "+"
+                    },
+                    {
+                        "link": "AAD35890.1",
+                        "start": 831309,
+                        "alias": "TM_0808",
+                        "description": "transcriptional regulator, XylR-related",
+                        "stop": 832376,
+                        "direction": "+"
+                    },
+                    {
+                        "link": "AAD35891.1",
+                        "start": 832384,
+                        "alias": "TM_0809",
+                        "description": "hydrolase, putative",
+                        "stop": 833787,
+                        "direction": "+"
+                    },
+                    {
+                        "link": "AAD35892.1",
+                        "start": 833784,
+                        "alias": "TM_0810",
+                        "description": "sugar ABC transporter, periplasmic sugar-binding protein",
+                        "stop": 835046,
+                        "direction": "+"
+                    },
+                    {
+                        "link": "AAD35893.1",
+                        "start": 835096,
+                        "alias": "TM_0811",
+                        "description": "sugar ABC transporter, permease protein",
+                        "stop": 835998,
+                        "direction": "+"
+                    },
+                    {
+                        "link": "AAD35894.1",
+                        "start": 835991,
+                        "alias": "TM_0812",
+                        "description": "sugar ABC transporter, permease protein, putative",
+                        "stop": 836806,
+                        "direction": "+"
+                    },
+                    {
+                        "link": "AAD35895.1",
+                        "start": 836820,
+                        "alias": "TM_0813",
+                        "description": "conserved hypothetical protein",
+                        "stop": 837812,
+                        "direction": "+"
+                    },
+                    {
+                        "link": "AAD35896.1",
+                        "start": 837823,
+                        "alias": "TM_0814",
+                        "description": "N-acetylglucosamine-6-phosphate deacetylase",
+                        "stop": 838917,
+                        "direction": "+"
+                    }
+                ]
+            },
+            "operon": [],
+            "structures": null,
+            "references": [
+                {
+                    "doi": "10.1093/nar/gks1184",
+                    "figure": "Figure S3",
+                    "interaction": "Ligand",
+                    "method": "EMSA"
+                },
+                {
+                    "doi": "10.1093/nar/gks1184",
+                    "figure": "Figure S3",
+                    "interaction": "Operator",
+                    "method": "EMSA"
+                }
+            ],
+            "fullReferences": [
+                {
+                    "title": "Functional diversification of ROK-family transcriptional regulators of sugar catabolism in the Thermotogae phylum",
+                    "authors": [
+                        {
+                            "lastName": "Kazanov",
+                            "firstName": "Marat D."
+                        },
+                        {
+                            "lastName": "Li",
+                            "firstName": "Xiaoqing"
+                        },
+                        {
+                            "lastName": "Gelfand",
+                            "firstName": "Mikhail S."
+                        },
+                        {
+                            "lastName": "Osterman",
+                            "firstName": "Andrei L."
+                        },
+                        {
+                            "lastName": "Rodionov",
+                            "firstName": "Dmitry A."
+                        }
+                    ],
+                    "year": 2012,
+                    "journal": "Nucleic Acids Research",
+                    "doi": "10.1093/nar/gks1184",
+                    "url": "http://dx.doi.org/10.1093/nar/gks1184",
+                    "interaction": [
+                        {
+                            "figure": "Figure S3",
+                            "type": "Ligand",
+                            "method": "EMSA"
+                        },
+                        {
+                            "figure": "Figure S3",
+                            "type": "Operator",
+                            "method": "EMSA"
+                        }
+                    ]
+                }
+            ],
+            "id": "R4NZ99"
+        },
+        {
+            "uniprotID": "R4NZK7",
+            "organism": "Thermotoga maritima (strain ATCC 43589 / DSM 3109 / JCM 10099 / NBRC 100826 / MSB8)",
+            "keggID": "tmm:Tmari_0107",
+            "name": "None",
+            "organismID": 243274,
+            "alias": "TM0110",
+            "about": "Regulates multiple operons encoding enzymes and transporters for the utilization of xylose and xylose-containing xylosides",
+            "sequence": "MKYNSPRIKILNKKSILKVIHENHPISRSDISEVTGLTPSSVTRLTKELIDEGYIREIGTMGKNSPGRRRILLDLRKNAFLSLVFDIGVNITTYGIGFFDGEVEPRGTFNTPKEPVEFFNIVKEIYERISGEYRISRISLSVPGMVDMEEKKILLAPNLEWENVNIKELLKVDVPVLADNEANLSMLAEKYHSEDLRNVKEAVFIIIREGVGTGLMIDGKIFRGPSFTAGEAGHMTVNMYSDRQCHCSNWGCWELVSSINWTIEQYGKELPGKNAIEKFQALKQRNDAKRILMKFAENIAVGIVNLVNILNPELVILGGEVVDLGENFLDIIKDFVHQRALKAAVKDLKIRTTEFRNISSNLVGAAVLAVEDIIEEVK",
+            "accession": "NP_227926.1",
+            "family": "OTHER",
+            "regulationType": "Apo-Repressor",
+            "ligands": [
+                {
+                    "name": "D-xylose",
+                    "fullDOI": {
+                        "journal": "Nucleic Acids Research",
+                        "title": "Functional diversification of ROK-family transcriptional regulators of sugar catabolism in the Thermotogae phylum",
+                        "year": 2012,
+                        "url": "http://dx.doi.org/10.1093/nar/gks1184",
+                        "authors": [
+                            {
+                                "lastName": "Kazanov",
+                                "firstName": "Marat D."
+                            },
+                            {
+                                "lastName": "Li",
+                                "firstName": "Xiaoqing"
+                            },
+                            {
+                                "lastName": "Gelfand",
+                                "firstName": "Mikhail S."
+                            },
+                            {
+                                "lastName": "Osterman",
+                                "firstName": "Andrei L."
+                            },
+                            {
+                                "lastName": "Rodionov",
+                                "firstName": "Dmitry A."
+                            }
+                        ],
+                        "doi": "10.1093/nar/gks1184"
+                    },
+                    "SMILES": "C1[C@H]([C@@H]([C@H](C(O1)O)O)O)O",
+                    "ref_figure": "Figure S3",
+                    "method": "EMSA",
+                    "doi": "10.1093/nar/gks1184"
+                },
+                {
+                    "name": "D-Glucose",
+                    "fullDOI": {
+                        "journal": "Nucleic Acids Research",
+                        "title": "Functional diversification of ROK-family transcriptional regulators of sugar catabolism in the Thermotogae phylum",
+                        "year": 2012,
+                        "url": "http://dx.doi.org/10.1093/nar/gks1184",
+                        "authors": [
+                            {
+                                "lastName": "Kazanov",
+                                "firstName": "Marat D."
+                            },
+                            {
+                                "lastName": "Li",
+                                "firstName": "Xiaoqing"
+                            },
+                            {
+                                "lastName": "Gelfand",
+                                "firstName": "Mikhail S."
+                            },
+                            {
+                                "lastName": "Osterman",
+                                "firstName": "Andrei L."
+                            },
+                            {
+                                "lastName": "Rodionov",
+                                "firstName": "Dmitry A."
+                            }
+                        ],
+                        "doi": "10.1093/nar/gks1184"
+                    },
+                    "SMILES": "C([C@@H]1[C@H]([C@@H]([C@H](C(O1)O)O)O)O)O",
+                    "ref_figure": "Figure S3",
+                    "method": "EMSA",
+                    "doi": "10.1093/nar/gks1184"
+                },
+                {
+                    "name": "D-Mannose",
+                    "fullDOI": {
+                        "journal": "Nucleic Acids Research",
+                        "title": "Functional diversification of ROK-family transcriptional regulators of sugar catabolism in the Thermotogae phylum",
+                        "year": 2012,
+                        "url": "http://dx.doi.org/10.1093/nar/gks1184",
+                        "authors": [
+                            {
+                                "lastName": "Kazanov",
+                                "firstName": "Marat D."
+                            },
+                            {
+                                "lastName": "Li",
+                                "firstName": "Xiaoqing"
+                            },
+                            {
+                                "lastName": "Gelfand",
+                                "firstName": "Mikhail S."
+                            },
+                            {
+                                "lastName": "Osterman",
+                                "firstName": "Andrei L."
+                            },
+                            {
+                                "lastName": "Rodionov",
+                                "firstName": "Dmitry A."
+                            }
+                        ],
+                        "doi": "10.1093/nar/gks1184"
+                    },
+                    "SMILES": "C([C@@H]1[C@H]([C@@H]([C@@H](C(O1)O)O)O)O)O",
+                    "ref_figure": "Figure S3",
+                    "method": "EMSA",
+                    "doi": "10.1093/nar/gks1184"
+                }
+            ],
+            "operators": [
+                {
+                    "sequence": "GAAATTTCTTTAGAGGAAAAAAT",
+                    "fullDOI": {
+                        "journal": "Nucleic Acids Research",
+                        "title": "Functional diversification of ROK-family transcriptional regulators of sugar catabolism in the Thermotogae phylum",
+                        "year": 2012,
+                        "url": "http://dx.doi.org/10.1093/nar/gks1184",
+                        "authors": [
+                            {
+                                "lastName": "Kazanov",
+                                "firstName": "Marat D."
+                            },
+                            {
+                                "lastName": "Li",
+                                "firstName": "Xiaoqing"
+                            },
+                            {
+                                "lastName": "Gelfand",
+                                "firstName": "Mikhail S."
+                            },
+                            {
+                                "lastName": "Osterman",
+                                "firstName": "Andrei L."
+                            },
+                            {
+                                "lastName": "Rodionov",
+                                "firstName": "Dmitry A."
+                            }
+                        ],
+                        "doi": "10.1093/nar/gks1184"
+                    },
+                    "ref_figure": "Figure S3",
+                    "method": "EMSA",
+                    "doi": "10.1093/nar/gks1184"
+                }
+            ],
+            "newOperon": {
+                "regIndex": 4,
+                "genome": "NC_000853.1",
+                "operon": [
+                    {
+                        "link": "WP_004082671.1",
+                        "start": 111716,
+                        "alias": "TM_RS00505",
+                        "description": "TM0106 family RecB-like putative nuclease",
+                        "stop": 112900,
+                        "direction": "-"
+                    },
+                    {
+                        "link": "WP_004082673.1",
+                        "start": 112977,
+                        "alias": "TM_RS00510",
+                        "description": "diguanylate cyclase",
+                        "stop": 113549,
+                        "direction": "+"
+                    },
+                    {
+                        "link": "WP_004082675.1",
+                        "start": 113550,
+                        "alias": "TM_RS00515",
+                        "description": "UDP-N-acetylglucosamine 1-carboxyvinyltransferase",
+                        "stop": 114815,
+                        "direction": "+"
+                    },
+                    {
+                        "link": "WP_004082677.1",
+                        "start": 114796,
+                        "alias": "TM_RS00520",
+                        "description": "radical SAM protein",
+                        "stop": 115758,
+                        "direction": "+"
+                    },
+                    {
+                        "link": "WP_004082680.1",
+                        "start": 115866,
+                        "alias": "TM_RS00525",
+                        "description": "ROK family transcriptional regulator",
+                        "stop": 117002,
+                        "direction": "+"
+                    },
+                    {
+                        "link": "WP_004082682.1",
+                        "start": 117016,
+                        "alias": "TM_RS00530",
+                        "description": "iron-containing alcohol dehydrogenase",
+                        "stop": 118179,
+                        "direction": "+"
+                    },
+                    {
+                        "link": "WP_004082684.1",
+                        "start": 118192,
+                        "alias": "TM_RS00535",
+                        "description": "ABC transporter permease",
+                        "stop": 119145,
+                        "direction": "+"
+                    },
+                    {
+                        "link": "WP_004082686.1",
+                        "start": 119160,
+                        "alias": "TM_RS00540",
+                        "description": "polysaccharide deacetylase family protein",
+                        "stop": 119879,
+                        "direction": "+"
+                    },
+                    {
+                        "link": "WP_004082691.1",
+                        "start": 119905,
+                        "alias": "TM_RS00545",
+                        "description": "sugar-binding protein",
+                        "stop": 120876,
+                        "direction": "+"
+                    },
+                    {
+                        "link": "WP_004082693.1",
+                        "start": 120892,
+                        "alias": "TM_RS00550",
+                        "description": "sugar ABC transporter ATP-binding protein",
+                        "stop": 122454,
+                        "direction": "+"
+                    },
+                    {
+                        "link": "WP_004082695.1",
+                        "start": 122454,
+                        "alias": "TM_RS00555",
+                        "description": "xylulokinase",
+                        "stop": 123932,
+                        "direction": "+"
+                    }
+                ]
+            },
+            "operon": [],
+            "structures": null,
+            "references": [
+                {
+                    "doi": "10.1093/nar/gks1184",
+                    "figure": "Figure S3",
+                    "interaction": "Ligand",
+                    "method": "EMSA"
+                },
+                {
+                    "doi": "10.1093/nar/gks1184",
+                    "figure": "Figure S3",
+                    "interaction": "Ligand",
+                    "method": "EMSA"
+                },
+                {
+                    "doi": "10.1093/nar/gks1184",
+                    "figure": "Figure S3",
+                    "interaction": "Ligand",
+                    "method": "EMSA"
+                },
+                {
+                    "doi": "10.1093/nar/gks1184",
+                    "figure": "Figure S3",
+                    "interaction": "Operator",
+                    "method": "EMSA"
+                }
+            ],
+            "fullReferences": [
+                {
+                    "title": "Functional diversification of ROK-family transcriptional regulators of sugar catabolism in the Thermotogae phylum",
+                    "authors": [
+                        {
+                            "lastName": "Kazanov",
+                            "firstName": "Marat D."
+                        },
+                        {
+                            "lastName": "Li",
+                            "firstName": "Xiaoqing"
+                        },
+                        {
+                            "lastName": "Gelfand",
+                            "firstName": "Mikhail S."
+                        },
+                        {
+                            "lastName": "Osterman",
+                            "firstName": "Andrei L."
+                        },
+                        {
+                            "lastName": "Rodionov",
+                            "firstName": "Dmitry A."
+                        }
+                    ],
+                    "year": 2012,
+                    "journal": "Nucleic Acids Research",
+                    "doi": "10.1093/nar/gks1184",
+                    "url": "http://dx.doi.org/10.1093/nar/gks1184",
+                    "interaction": [
+                        {
+                            "figure": "Figure S3",
+                            "type": "Ligand",
+                            "method": "EMSA"
+                        },
+                        {
+                            "figure": "Figure S3",
+                            "type": "Ligand",
+                            "method": "EMSA"
+                        },
+                        {
+                            "figure": "Figure S3",
+                            "type": "Ligand",
+                            "method": "EMSA"
+                        },
+                        {
+                            "figure": "Figure S3",
+                            "type": "Operator",
+                            "method": "EMSA"
+                        }
+                    ]
+                }
+            ],
+            "id": "R4NZK7"
+        }
+    ]
+}

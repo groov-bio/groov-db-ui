@@ -1,12 +1,11 @@
 import { React, useEffect, useState } from 'react';
 
 import {
-  Box,
-  Grid,
   Typography,
   Dialog,
   CircularProgress,
   DialogContent,
+  Container,
 } from '@mui/material';
 
 import '@aws-amplify/ui-react/styles.css';
@@ -108,32 +107,36 @@ export default function Admin() {
 
   return (
     <>
-      <Box>
-        <Grid container spacing={4} columns={12} mb={8} justifyContent="center">
-          <Grid item xs={10} mb={2} mt={10}>
-            <Typography
-              sx={{ fontSize: { xs: 30, sm: 36, md: 48 } }}
-              fontWeight="300"
-              textAlign="center"
-            >
-              {' '}
-              Administrator page
-            </Typography>
-          </Grid>
-          <AdminProcessedSensors
-            processedData={processedData}
-            setViewSensorPage={setViewSensorPage}
-            user={user}
-            handleSensorPromoted={handleSensorPromoted}
-          />
-          <AdminTempSensors
-            tempData={tempData}
-            processedData={processedData}
-            setApproveIsLoading={setApproveIsLoading}
-            handleProcessedAdded={handleProcessedAdded}
-          />
-        </Grid>
-      </Box>
+      <Container maxWidth="xl" sx={{ py: 4 }}>
+        <Typography
+          variant="h2"
+          component="h1"
+          sx={{ 
+            fontSize: { xs: 30, sm: 36, md: 48 },
+            fontWeight: 300,
+            textAlign: 'center',
+            mb: 6,
+            mt: 4
+          }}
+          id="admin-page-header"
+        >
+          Administrator page
+        </Typography>
+        
+        <AdminProcessedSensors
+          processedData={processedData}
+          setViewSensorPage={setViewSensorPage}
+          user={user}
+          handleSensorPromoted={handleSensorPromoted}
+        />
+        
+        <AdminTempSensors
+          tempData={tempData}
+          processedData={processedData}
+          setApproveIsLoading={setApproveIsLoading}
+          handleProcessedAdded={handleProcessedAdded}
+        />
+      </Container>
       <Dialog open={approveIsLoading}>
         <DialogContent>
           <CircularProgress />
@@ -148,10 +151,10 @@ export default function Admin() {
       >
         <DialogContent>
           <SensorPage
-            family={viewSensorPage.data.family}
-            sensorID={viewSensorPage.data.uniProtID}
             isAdmin={true}
             user={user}
+            family={viewSensorPage.data.family}
+            uniprotID={viewSensorPage.data.uniProtID}
           />
         </DialogContent>
       </Dialog>

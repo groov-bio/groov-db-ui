@@ -93,7 +93,6 @@ export default function ForgotPasswordConfirm({ userName, closeAllDialogs }) {
       </Button>
       <Button
         sx={{
-          color: '#1976d2',
           mt: 3,
         }}
         align="center"

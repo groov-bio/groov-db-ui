@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, Link } from '@mui/material';
 
 export default function AboutGroovDB() {
   return (
@@ -14,6 +14,7 @@ export default function AboutGroovDB() {
         sx={{ fontSize: { xs: 24, sm: 28, md: 32 } }}
         fontWeight="300"
         gutterBottom
+        id={"about-header"}
       >
         A genetic sensor database
       </Typography>
@@ -34,9 +35,9 @@ export default function AboutGroovDB() {
         <br />
         <br />
         groov<sup>DB</sup> was designed and created in 2022 by{' '}
-        <a href="https://simondoelsnitz.com" target="__blank__">
+        <Link href="https://simondoelsnitz.com" target="_blank" id="simon-url">
           Simon d'Oelsnitz
-        </a>{' '}
+        </Link>{' '}
         and Joshua D. Love.
       </Typography>
 
@@ -63,7 +64,7 @@ export default function AboutGroovDB() {
         Below we list the types of experimental evidence we accept for inclusion
         into groov<sup>DB</sup>, as well as our guidance to avoid
         overinterpretation. If you suggest that we accept another form of
-        experimental evidence, please <a href="contact"> contact us</a>.
+        experimental evidence, please <Link href="contact"> contact us</Link>.
       </Typography>
       <Typography
         sx={{ fontSize: { xs: 20, sm: 22, md: 24 } }}
@@ -79,12 +80,12 @@ export default function AboutGroovDB() {
       >
         <ol>
           <li>
-            <a
-              href="https://en.wikipedia.org/wiki/Electrophoretic_mobility_shift_assay"
-              target="__blank__"
+            <Link
+              href="https://doi.org/10.1093/nar/9.13.3047"
+              target="_blank"
             >
               Electrophoretic Mobility Shift Assay (EMSA)
-            </a>
+            </Link>
           </li>
           <ul>
             <li>
@@ -93,12 +94,12 @@ export default function AboutGroovDB() {
             </li>
           </ul>
           <li>
-            <a
-              href="https://en.wikipedia.org/wiki/DNase_footprinting_assay"
-              target="__blank__"
+            <Link
+              href="https://doi.org/10.1016/0076-6879(86)30011-9"
+              target="_blank"
             >
               DNase Footprinting
-            </a>
+            </Link>
           </li>
           <ul>
             <li>
@@ -107,12 +108,12 @@ export default function AboutGroovDB() {
             </li>
           </ul>
           <li>
-            <a
-              href="https://en.wikipedia.org/wiki/Isothermal_titration_calorimetry"
-              target="__blank__"
+            <Link
+              href="https://doi.org/10.1038/s43586-023-00199-x"
+              target="_blank"
             >
               Isothermal Titration Calorimetry (ITC)
-            </a>
+            </Link>
           </li>
           <ul>
             <li>
@@ -121,12 +122,12 @@ export default function AboutGroovDB() {
             </li>
           </ul>
           <li>
-            <a
-              href="https://en.wikipedia.org/wiki/X-ray_crystallography"
-              target="__blank__"
+            <Link
+              href="https://doi.org/10.1038/505602a"
+              target="_blank"
             >
               Co-Crystal Structure
-            </a>
+            </Link>
           </li>
           <ul>
             <li>
@@ -138,12 +139,12 @@ export default function AboutGroovDB() {
             </li>
           </ul>
           <li>
-            <a
-              href="https://en.wikipedia.org/wiki/Surface_plasmon_resonance"
-              target="__blank__"
+            <Link
+              href="https://doi.org/10.1007/978-1-4939-2877-4_20"
+              target="_blank"
             >
               Surface Plasmon Resonance (SPR)
-            </a>
+            </Link>
             <ul>
               <li>
                 Quantitative <i>in vitro</i> evidence for both DNA and ligand
@@ -152,12 +153,12 @@ export default function AboutGroovDB() {
             </ul>
           </li>
           <li>
-            <a
-              href="https://en.wikipedia.org/wiki/Fluorescence_anisotropy"
-              target="__blank__"
+            <Link
+              href="https://doi.org/10.1007/978-1-60327-015-1_35"
+              target="_blank"
             >
               Fluorescence Polarization
-            </a>
+            </Link>
           </li>
           <ul>
             <li>
@@ -167,12 +168,12 @@ export default function AboutGroovDB() {
             <li>Only applicable if the ligand is intrinsically fluorescent.</li>
           </ul>
           <li>
-            <a
-              href="https://en.wikipedia.org/wiki/Synthetic_biological_circuit"
-              target="__blank__"
+            <Link
+              href="https://doi.org/10.1073/pnas.95.23.13670"
+              target="_blank"
             >
               Synthetic Regulation
-            </a>
+            </Link>
           </li>
           <ul>
             <li>

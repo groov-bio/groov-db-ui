@@ -31,14 +31,3 @@ body,
 #downloadTemplateButton:hover {
   background-color: #d9d9d9;
 }
-
-#retna {
-  position: fixed;
-  bottom: 0;
-  right: 0;
-}
-#retna a {
-  text-decoration: none;
-  color: #9003fc;
-  font-family: Roboto;
-}

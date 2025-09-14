@@ -1,0 +1,192 @@
+{
+    "uniprotID": "U2Y8G0",
+    "organism": "Caenibius tardaugens NBRC 16725",
+    "keggID": null,
+    "name": null,
+    "organismID": 1219035,
+    "alias": "EdcR",
+    "about": "Regulates the expression of the ecd operon responsible for the degradation of estradiol.",
+    "sequence": "MANELKAAANPRRSPGRPRDASREKVILTETLALLGELGFAGLTVDAVVARAKVSKATIYRRWATKEELAIAAFDLLPLIEPVETGDIESEIIAYIDQYYGFLRTTPLSSVLPALVSEAMHNPTLAERLNEVVQRRRESGIAMIRRAITRGELPATTPPDIAHELIVGPMLQRSFFEPANFRREDFLVMVRVIVAGLKAVGKATSSAA",
+    "accession": "WP_021690437.1",
+    "family": "TETR",
+    "regulationType": "Apo-repressor",
+    "ligands": [
+        {
+            "name": "Estradiol",
+            "fullDOI": {
+                "journal": "Genes",
+                "title": "Identification of the EdcR Estrogen-Dependent Repressor in Caenibius tardaugens NBRC 16725: Construction of a Cellular Estradiol Biosensor",
+                "year": 2021,
+                "url": "http://dx.doi.org/10.3390/genes12121846",
+                "authors": [
+                    {
+                        "lastName": "Ibero",
+                        "firstName": "Juan"
+                    },
+                    {
+                        "lastName": "Galán",
+                        "firstName": "Beatriz"
+                    },
+                    {
+                        "lastName": "García",
+                        "firstName": "José L."
+                    }
+                ],
+                "doi": "10.3390/genes12121846"
+            },
+            "SMILES": "C[C@]12CC[C@H]3[C@H]([C@@H]1CC[C@@H]2O)CCC4=C3C=CC(=C4)O",
+            "ref_figure": "Figure 12",
+            "method": "Synthetic regulation",
+            "doi": "10.3390/genes12121846"
+        },
+        {
+            "name": "Estrone",
+            "fullDOI": {
+                "journal": "Genes",
+                "title": "Identification of the EdcR Estrogen-Dependent Repressor in Caenibius tardaugens NBRC 16725: Construction of a Cellular Estradiol Biosensor",
+                "year": 2021,
+                "url": "http://dx.doi.org/10.3390/genes12121846",
+                "authors": [
+                    {
+                        "lastName": "Ibero",
+                        "firstName": "Juan"
+                    },
+                    {
+                        "lastName": "Galán",
+                        "firstName": "Beatriz"
+                    },
+                    {
+                        "lastName": "García",
+                        "firstName": "José L."
+                    }
+                ],
+                "doi": "10.3390/genes12121846"
+            },
+            "SMILES": "C[C@]12CC[C@H]3[C@H]([C@@H]1CCC2=O)CCC4=C3C=CC(=C4)O",
+            "ref_figure": "Figure 12",
+            "method": "Synthetic regulation",
+            "doi": "10.3390/genes12121846"
+        }
+    ],
+    "operators": [
+        {
+            "sequence": "AATAACAGTACCAATAGTATCGAAAGT",
+            "fullDOI": {
+                "journal": "Genes",
+                "title": "Identification of the EdcR Estrogen-Dependent Repressor in Caenibius tardaugens NBRC 16725: Construction of a Cellular Estradiol Biosensor",
+                "year": 2021,
+                "url": "http://dx.doi.org/10.3390/genes12121846",
+                "authors": [
+                    {
+                        "lastName": "Ibero",
+                        "firstName": "Juan"
+                    },
+                    {
+                        "lastName": "Galán",
+                        "firstName": "Beatriz"
+                    },
+                    {
+                        "lastName": "García",
+                        "firstName": "José L."
+                    }
+                ],
+                "doi": "10.3390/genes12121846"
+            },
+            "ref_figure": "Figure 12",
+            "method": "Synthetic regulation",
+            "doi": "10.3390/genes12121846"
+        }
+    ],
+    "newOperon": {
+        "operon": [
+            {
+                "alias": "NT2_RS11605",
+                "description": "choline dehydrogenase",
+                "link": "WP_021690436.1",
+                "direction": "-",
+                "start": 450167,
+                "stop": 451801
+            },
+            {
+                "alias": "NT2_RS11610",
+                "description": "TetR/AcrR family transcriptional regulator",
+                "link": "WP_021690437.1",
+                "direction": "+",
+                "start": 452154,
+                "stop": 452780
+            },
+            {
+                "alias": "NT2_RS11615",
+                "description": "cytochrome P450",
+                "link": "WP_021690438.1",
+                "direction": "-",
+                "start": 452761,
+                "stop": 453951
+            }
+        ],
+        "regIndex": 1,
+        "genome": "NZ_BASZ01000005.1"
+    },
+    "operon": [],
+    "structures": null,
+    "references": [
+        {
+            "doi": "10.3390/genes12121846",
+            "figure": "Figure 12",
+            "interaction": "Ligand",
+            "method": "Synthetic regulation"
+        },
+        {
+            "doi": "10.3390/genes12121846",
+            "figure": "Figure 12",
+            "interaction": "Ligand",
+            "method": "Synthetic regulation"
+        },
+        {
+            "doi": "10.3390/genes12121846",
+            "figure": "Figure 12",
+            "interaction": "Operator",
+            "method": "Synthetic regulation"
+        }
+    ],
+    "fullReferences": [
+        {
+            "title": "Identification of the EdcR Estrogen-Dependent Repressor in Caenibius tardaugens NBRC 16725: Construction of a Cellular Estradiol Biosensor",
+            "authors": [
+                {
+                    "lastName": "Ibero",
+                    "firstName": "Juan"
+                },
+                {
+                    "lastName": "Galán",
+                    "firstName": "Beatriz"
+                },
+                {
+                    "lastName": "García",
+                    "firstName": "José L."
+                }
+            ],
+            "year": 2021,
+            "journal": "Genes",
+            "doi": "10.3390/genes12121846",
+            "url": "http://dx.doi.org/10.3390/genes12121846",
+            "interaction": [
+                {
+                    "figure": "Figure 12",
+                    "type": "Ligand",
+                    "method": "Synthetic regulation"
+                },
+                {
+                    "figure": "Figure 12",
+                    "type": "Ligand",
+                    "method": "Synthetic regulation"
+                },
+                {
+                    "figure": "Figure 12",
+                    "type": "Operator",
+                    "method": "Synthetic regulation"
+                }
+            ]
+        }
+    ]
+}
