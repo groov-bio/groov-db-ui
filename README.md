@@ -172,7 +172,7 @@ REACT_APP_API_BASE_URL=https://api.groov.bio
 
 If you use GroovDB in your research, please cite:
 
-> d'Oelsnitz, S., Love, J.D., et al. "GroovDB: A comprehensive database of genetic biosensors." _ACS Synthetic Biology_ (2022). DOI: [10.1021/acssynbio.2c00382](https://doi.org/10.1021/acssynbio.2c00382)
+> Love, J.D., et al. "groovDB in 2026: a community-editable database of small molecule biosensors" _Nucleic Acids Research_ (2025). DOI: [10.1093/nar/gkaf1074](https://doi.org/10.1093/nar/gkaf1074)
 
 ## License
 
@@ -180,8 +180,16 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Authors
 
-- **Simon d'Oelsnitz** - _Initial development_ - [simondoelsnitz.com](https://simondoelsnitz.com)
-- **Joshua D. Love** - _Co-developer_
+- **Simon d'Oelsnitz** - _Project lead_ - [simondoelsnitz.com](https://simondoelsnitz.com)
+- **Joshua D. Love** - _Software lead_
+
+## Biocurators
+
+- **Brady M Rafferty**
+- **Michael Thomas**
+- **Nicole N Zhao**
+- **Pranay Talla**
+
 
 ## Acknowledgments
 
@@ -191,7 +199,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Support
 
-- 📖 Documentation: [groov.bio](https://groov.bio)
+- 📖 Documentation: [groov.bio/about](https://groov.bio/about/about-groovdb)
 - 🐛 Bug Reports: [GitHub Issues](https://github.com/your-org/groov-db-ui/issues)
 - 💬 Contact: Use the contact form at [groov.bio/contact](https://groov.bio/contact)
 - 🔬 API Documentation: [api.groov.bio/swagger](https://api.groov.bio/swagger)
