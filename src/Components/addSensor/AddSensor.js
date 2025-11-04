@@ -165,6 +165,7 @@ export default function AddSensor() {
           ml: { xs: 2, sm: 10 },
           mr: 2,
           mt: 5,
+          mb:5,
           gridColumn: { xs: 'span 12', sm: 'span 6' },
         }}
       >
