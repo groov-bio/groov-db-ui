@@ -29,11 +29,12 @@ export default function Contact() {
         mt={2}
         ml={4}
       >
-        d'Oelsnitz S, Love JD, Diaz DJ, Ellington AD. GroovDB: A Database of
-        Ligand-Inducible Transcription Factors.<br></br>
-        <i>ACS Synth Biol.</i> <b>11</b>, 10 (2022). doi:{' '}
-        <Link href="https://doi.org/10.1021/acssynbio.2c00382" target="_blank">
-          10.1021/acssynbio.2c00382
+        Love JD, Rafferty BM, Thomas M, Zhao NN, Talla P, Springer M, Silver PA, d'Oelsnitz S.
+        groov<sup>DB</sup> in 2026: a community-editable database of small molecule biosensors.
+        <br></br>
+        <i>Nucleic Acids Res</i>, 2025; gkaf1074. doi:{' '}
+        <Link href="https://doi.org/10.1093/nar/gkaf1074" target="_blank">
+            10.1093/nar/gkaf1074
         </Link>
         <br />
       </Typography>
