@@ -1,6 +1,7 @@
 import Search from './Search.js';
 import AdvancedSearch from './AdvancedSearch.js';
 import Stats from './Stats.js';
+import NARBanner from './NARbanner.js';
 
 import { Box, Paper, Grid, Typography, styled, Tabs, Tab, useTheme } from '@mui/material';
 
@@ -83,7 +84,8 @@ export default function Home() {
 
         {searchTab === 0 ? <Search width="100%" /> : <AdvancedSearch />}
 
-        <Stats />
+        <Stats/>
+        <NARBanner/>
       </Grid>
     </Grid>
   );
