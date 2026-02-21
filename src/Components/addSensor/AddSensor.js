@@ -240,6 +240,7 @@ export default function AddSensor() {
                 <ProteinTabs
                   proteins={formikValues.values.proteins}
                   currentProteinIndex={currentProteinIndex}
+                  errors={formikValues.errors?.proteins}
                   onProteinChange={(index) => {
                     setCurrentProteinIndex(index);
                     setStepValue(0); 
