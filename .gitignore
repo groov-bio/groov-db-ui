@@ -17,3 +17,5 @@ TODO.md
 .env.production
 .env.*
 cypress/screenshots/**
+
+grv_v2_docs

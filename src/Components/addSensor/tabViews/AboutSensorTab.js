@@ -2,7 +2,7 @@ import { Box, Typography } from '@mui/material';
 import { FormikTextInput } from '../../form-inputs/FormikTextInput';
 import { FormikSelectInput } from '../../form-inputs/FormikSelectInput';
 
-export default function AboutSensorTab() {
+export default function AboutSensorTab({ fieldPrefix = '' }) {
   const familyOptions = [
     'TetR',
     'LysR',
@@ -22,6 +22,10 @@ export default function AboutSensorTab() {
     'Co-activator',
   ];
 
+  const getFieldName = (field) => {
+    return fieldPrefix ? `${fieldPrefix}.${field}` : field;
+  };
+
   return (
     <Box
       display="grid"
@@ -38,20 +42,20 @@ export default function AboutSensorTab() {
       </Box>
 
       <Box gridColumn={'span 12'}>
-        <FormikTextInput name="about.alias" label="Alias" id="new-sensor-about-alias"/>
+        <FormikTextInput name={getFieldName('about.alias')} label="Alias" id="new-sensor-about-alias"/>
       </Box>
 
       <Box gridColumn={'span 12'}>
-        <FormikTextInput name="about.accession" label="RefSeq" id="new-sensor-about-accession"/>
+        <FormikTextInput name={getFieldName('about.accession')} label="RefSeq" id="new-sensor-about-accession"/>
       </Box>
 
       <Box gridColumn={'span 12'}>
-        <FormikTextInput name="about.uniProtID" label="UniProt ID" id="new-sensor-about-uniprot"/>
+        <FormikTextInput name={getFieldName('about.uniProtID')} label="UniProt ID" id="new-sensor-about-uniprot"/>
       </Box>
 
       <Box gridColumn={'span 12'}>
         <FormikSelectInput
-          name="about.family"
+          name={getFieldName('about.family')}
           label="Structural Family"
           options={familyOptions}
         />
@@ -59,14 +63,14 @@ export default function AboutSensorTab() {
 
       <Box gridColumn={'span 12'}>
         <FormikSelectInput
-          name="about.mechanism"
+          name={getFieldName('about.mechanism')}
           label="Mechanism"
           options={mechanisms}
         />
       </Box>
 
       <Box gridColumn={'span 12'}>
-        <FormikTextInput name="about.about" label="About" multiline rows={6} id="new-sensor-about-about"/>
+        <FormikTextInput name={getFieldName('about.about')} label="About" multiline rows={6} id="new-sensor-about-about"/>
       </Box>
     </Box>
   );

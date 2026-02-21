@@ -15,7 +15,7 @@ import { FieldArray } from 'formik';
 import { FormikTextInput } from '../../../form-inputs/FormikTextInput';
 import { FormikSelectInput } from '../../../form-inputs/FormikSelectInput';
 
-export default function LigandCard({ index }) {
+export default function LigandCard({ index, fieldPrefix = '' }) {
   const [open, setOpen] = useState(true);
 
   const figureTypes = [
@@ -38,8 +38,17 @@ export default function LigandCard({ index }) {
     setOpen(!open);
   };
 
+  const getArrayName = () => {
+    return fieldPrefix ? `${fieldPrefix}.ligands` : 'ligands';
+  };
+
+  const getFieldName = (field) => {
+    const arrayName = getArrayName();
+    return `${arrayName}.${index}.${field}`;
+  };
+
   return (
-    <FieldArray name="ligands">
+    <FieldArray name={getArrayName()}>
       {({ remove }) => (
         <>
           <Box
@@ -72,7 +81,7 @@ export default function LigandCard({ index }) {
             <Collapse in={open} timeout="auto" unmountOnExit>
               <Box gridColumn={'span 12'} mb={2}>
                 <FormikTextInput
-                  name={`ligands.${index}.name`}
+                  name={getFieldName('name')}
                   label="Ligand Name"
                   id="new-sensor-ligand-name"
                   fullWidth
@@ -81,7 +90,7 @@ export default function LigandCard({ index }) {
 
               <Box gridColumn={'span 12'} mb={2}>
                 <FormikTextInput
-                  name={`ligands.${index}.SMILES`}
+                  name={getFieldName('SMILES')}
                   label="Ligand SMILES"
                   id="new-sensor-ligand-smiles"
                   fullWidth
@@ -90,7 +99,7 @@ export default function LigandCard({ index }) {
 
               <Box gridColumn={'span 12'} mb={2}>
                 <FormikTextInput
-                  name={`ligands.${index}.doi`}
+                  name={getFieldName('doi')}
                   label="Ligand DOI"
                   id="new-sensor-ligand-doi"
                   fullWidth
@@ -100,7 +109,7 @@ export default function LigandCard({ index }) {
               <Box gridColumn={'span 12'} display="flex" mb={2}>
                 <FormControl fullWidth sx={{ mr: 2 }}>
                   <FormikSelectInput
-                    name={`ligands.${index}.fig_type`}
+                    name={getFieldName('fig_type')}
                     label="Figure Type"
                     options={figureTypes}
                   />
@@ -108,7 +117,7 @@ export default function LigandCard({ index }) {
 
                 <FormControl fullWidth sx={{ ml: 2 }}>
                   <FormikTextInput
-                    name={`ligands.${index}.ref_figure`}
+                    name={getFieldName('ref_figure')}
                     label="Figure Number"
                     id="new-sensor-ligand-fig"
                   />
@@ -117,7 +126,7 @@ export default function LigandCard({ index }) {
 
               <Box gridColumn={'span 12'}>
                 <FormikSelectInput
-                  name={`ligands.${index}.method`}
+                  name={getFieldName('method')}
                   label="Experimental evidence"
                   options={ligandMethods}
                 />
