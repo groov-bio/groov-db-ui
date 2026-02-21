@@ -35,14 +35,6 @@ const figureTypes = [
   'Supplementary Table',
 ];
 
-// ============================================================================
-// Helper Functions (copied from v1)
-// ============================================================================
-
-/**
- * Creates a conditionally required string validator
- * Field is required if any of the otherFields have values
- */
 function conditionallyRequiredString(options) {
   const {
     fieldName,
@@ -117,23 +109,11 @@ function conditionallyRequiredString(options) {
   return schema;
 }
 
-/**
- * Checks if a row has all fields filled out
- * @param {Object} row - The row to check
- * @returns {boolean} True if complete
- */
 export const isCompleteEntry = (row) =>
   row &&
   !_.isEmpty(row) &&
   Object.values(row).every((val) => val && String(val).trim() !== '');
 
-// ============================================================================
-// Schema Definitions
-// ============================================================================
-
-/**
- * Ligand item schema (copied from v1)
- */
 const ligandItemSchema = Yup.object().shape({
   name: conditionallyRequiredString({
     fieldName: 'name',
@@ -247,17 +227,10 @@ const aboutSchema = Yup.object().shape({
     .required('Family is required'),
 });
 
-/**
- * Stimulus section schema (placeholder for future expansion)
- */
 const stimulusSchema = Yup.object().shape({
   // Placeholder - add validation rules as fields are added
 });
 
-/**
- * Single protein schema
- * Validates all sections for one protein entry
- */
 const proteinSchema = Yup.object()
   .shape({
     id: Yup.string().required(),
@@ -283,16 +256,10 @@ const proteinSchema = Yup.object()
     }
   );
 
-/**
- * Shared experiment schema (placeholder for future expansion)
- */
 const sharedExperimentSchema = Yup.object().shape({
   // Placeholder - add validation rules as fields are added
 });
 
-/**
- * V2 Form validation schema - supports multiple proteins
- */
 export const v2_validationSchema = Yup.object().shape({
   shared: Yup.object().shape({
     experiment: sharedExperimentSchema,
