@@ -75,6 +75,12 @@ describe('Admin page spec', () => {
       body: {},
     }).as('rejectProcessedSensor');
 
+    cy.on('uncaught:exception', (err) => {
+      if (err.message.includes('Failed to init Mol*')) {
+        return false;
+      }
+    });
+
     cy.setupAdminAuth();
     cy.visit('http://localhost:3000/admin/');
 

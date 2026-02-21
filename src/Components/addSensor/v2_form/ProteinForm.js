@@ -23,11 +23,13 @@ export default function ProteinForm({ proteinIndex }) {
 
   return (
     <Box>
-      <AddSensorStepper
-        stepValue={stepValue}
-        setStepValue={setStepValue}
-        formikErrors={proteinErrors}
-      />
+      <Box sx={{ mt: 2 }}>
+        <AddSensorStepper
+          stepValue={stepValue}
+          setStepValue={setStepValue}
+          formikErrors={proteinErrors}
+        />
+      </Box>
 
       {proteinErrors.form && (
         <Box
