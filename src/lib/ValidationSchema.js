@@ -13,6 +13,10 @@ const ligandMethods = [
   'Surface plasmon resonance',
   'Fluorescence polarization',
   'Synthetic regulation',
+  'Thermal shift assay',
+  'Spectral shift assay',
+  'Spectrophotometric competition',
+  'DNA affinity chromatography',
 ];
 const operatorMethods = [
   'EMSA',
@@ -22,6 +26,7 @@ const operatorMethods = [
   'Isothermal titration calorimetry',
   'Fluorescence polarization',
   'Synthetic regulation',
+  'ChIP-Seq',
 ];
 
 const figureTypes = [
