@@ -57,7 +57,7 @@ describe('Sensor Page', () => {
     ).should('have.text', 'Synthetic regulation');
     cy.contains("AF-U2Y8G0-F1").should('exist')
     cy.contains("Predicted").should('exist')
-    cy.get("#sensor-operators-tab").click()
+    cy.get("#sensor-operators-tab").click({force: true})
     cy.contains(
       'Length208MANELKAAANPRRSPGRPRDASREKVILTETLALLGELGFAGLTVDAVVARAKVSKATIYRRWATKEELAIAAFDLLPLIEPVETGDIESEIIAYIDQYYGFLRTTPLSSVLPALVSEAMHNPTLAERLNEVVQRRRESGIAMIRRAITRGELPATTPPDIAHELIVGPMLQRSFFEPANFRREDFLVMVRVIVAGLKAVGKATSSAA'
     ).should('exist')

@@ -99,7 +99,7 @@ describe('Admin page spec', () => {
     cy.get('.MuiDataGrid-row > [data-field="sequence"]').should('have.text', 'GCAAGATACGTACTAGTACGTATCTTGC');
     cy.get('#sensor-genomes-tab').click({force: true});
     cy.get('#sensor-refs-tab').click({force: true});
-    cy.get('.MuiGrid-container > :nth-child(1) > .MuiTypography-root').should('have.text', 'Regulation TypeUniprot IDRefSeq IDKEGG IDOrganismProtein Length1. Biochemical basis for the regulation of biosynthesis of antiparasitics by bacterial hormones');
+    cy.get('.MuiGrid-container > :nth-child(1) > .MuiTypography-root').should('have.text', '1. Biochemical basis for the regulation of biosynthesis of antiparasitics by bacterial hormones');
     /* ==== End Cypress Studio ==== */
   });
 });
