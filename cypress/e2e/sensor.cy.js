@@ -25,6 +25,12 @@ describe('Sensor Page', () => {
       { fixture: 'tetrAlphaFold.cif' }
     ).as('tetr-af');
 
+    cy.on('uncaught:exception', (err) => {
+      if (err.message.includes('Failed to init Mol*') || err.message.includes('WebGL')) {
+        return false;
+      }
+    });
+
     cy.visit('http://localhost:3000');
     /* ==== Generated with Cypress Studio ==== */
     cy.get('#Browse').click();

@@ -89,7 +89,7 @@ describe('Admin page spec', () => {
     cy.get('.MuiTypography-h3').should('have.text', 'AvaR1');
     cy.get('#sensor-metadata-family > .MuiChip-label').should('have.text', 'Family: TETR');
     cy.get('#sensor-page-tab-view-switch').click({force: true});
-    cy.get(':nth-child(1) > .MuiGrid-container > .css-15vo6f1-MuiGrid-root > .MuiTypography-root').should('have.text', 'Apo-repressor');
+    cy.get('[id="metadata-table-Regulation Type"]').should('have.text', 'Apo-repressor');
     cy.get('#sensor-ligands-tab').click({force: true});
     cy.get('.css-t5dqux > [style="width: 100%;"]').click({force: true});
     cy.get('#sensor-ligand-name').should('have.text', 'Avenolide');
