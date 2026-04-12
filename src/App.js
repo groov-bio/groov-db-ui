@@ -104,6 +104,7 @@ export default function App() {
 
     fetchFeatureFlags();
   }, [setFlags, setLoading, setError]);
+
   useEffect(() => {
     if (getCookieConsentValue('groov-cookie-consent') === 'true') {
       loadGoogleAnalytics();
