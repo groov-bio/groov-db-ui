@@ -162,6 +162,32 @@ export default function SensorPageV2() {
             }}
           >
             <Box sx={{ flex: 1, minWidth: 0 }}>
+              {/* Primary title */}
+              <Typography
+                variant="h3"
+                component="h1"
+                sx={{
+                  fontSize: { xs: '1.75rem', sm: '2.5rem', md: '3rem' },
+                  fontWeight: 500,
+                  mb: 0.5,
+                  background: 'linear-gradient(45deg, #1976d2, #42a5f5)',
+                  backgroundClip: 'text',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                }}
+              >
+                {displayTitle}
+              </Typography>
+
+              {/* GRV ID */}
+              <Typography
+                variant="subtitle1"
+                color="text.secondary"
+                sx={{ mb: 1.5, fontFamily: 'monospace', letterSpacing: 1 }}
+              >
+                {sensorData.id}
+              </Typography>
+
               {/* Category + type badges */}
               <Box sx={{ display: 'flex', gap: 1, mb: 1.5, flexWrap: 'wrap' }}>
                 <Chip
@@ -176,31 +202,6 @@ export default function SensorPageV2() {
                   size="small"
                 />
               </Box>
-
-              {/* Primary title */}
-              <Typography
-                variant="h3"
-                component="h1"
-                sx={{
-                  fontSize: { xs: '1.75rem', sm: '2.5rem', md: '3rem' },
-                  fontWeight: 500,
-                  mb: 0.5,
-                  background: 'linear-gradient(45deg, #1976d2, #42a5f5)',
-                  backgroundClip: 'text',
-                  WebkitBackgroundClip: 'text',
-                }}
-              >
-                {displayTitle}
-              </Typography>
-
-              {/* GRV ID */}
-              <Typography
-                variant="subtitle1"
-                color="text.secondary"
-                sx={{ mb: 1.5, fontFamily: 'monospace', letterSpacing: 1 }}
-              >
-                {sensorData.id}
-              </Typography>
 
               {/* Description */}
               <Typography

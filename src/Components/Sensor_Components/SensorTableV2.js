@@ -86,7 +86,7 @@ export default function SensorTableV2({ family }) {
           <DataGrid
             key={storeKey}
             rows={rows}
-            columns={isAllSensors ? BASE_COLUMNS : ALL_COLUMNS}
+            columns={ALL_COLUMNS}
             getRowId={(row) => row.id}
             pageSizeOptions={[10, 20, 30]}
             density="compact"

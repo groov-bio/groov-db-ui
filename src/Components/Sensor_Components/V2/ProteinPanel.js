@@ -13,12 +13,14 @@ import HexagonOutlinedIcon from '@mui/icons-material/HexagonOutlined';
 import SwapCallsOutlinedIcon from '@mui/icons-material/SwapCallsOutlined';
 import ScatterPlotOutlinedIcon from '@mui/icons-material/ScatterPlotOutlined';
 import FeedOutlinedIcon from '@mui/icons-material/FeedOutlined';
+import DataArrayOutlinedIcon from '@mui/icons-material/DataArrayOutlined';
 
 import StimulusViewer from './StimulusViewer';
 import GenomeContextV2 from './GenomeContextV2';
 import ReferenceViewerV2 from './ReferenceViewerV2';
 import DNAbinding from '../DNAbinding';
 import ProteinStructure from '../ProteinStructure';
+import SeqViewer from '../SeqViewer';
 import MetadataTable from '../MetadataTable';
 
 const SectionCard = ({ children, title, icon }) => (
@@ -92,6 +94,12 @@ export default function ProteinPanel({ protein, isNightingaleLoaded, setIsNighti
           },
         }
       : {}),
+    ...(protein.regulation_type
+      ? { 'Regulation Type': { name: protein.regulation_type } }
+      : {}),
+    ...(protein.sequence
+      ? { 'Protein Length': { name: protein.sequence.length } }
+      : {}),
   };
 
   const structureIDs = [
@@ -103,6 +111,7 @@ export default function ProteinPanel({ protein, isNightingaleLoaded, setIsNighti
   const hasStimulus = protein.stimulus?.length > 0;
   const hasContext = protein.context?.length > 0 && protein.context[0]?.operon_dir?.length > 0;
   const hasReferences = protein.references?.length > 0;
+  const hasSequence = !!protein.sequence;
 
   return (
     <Container maxWidth="xl" disableGutters sx={{ py: 3 }}>
@@ -144,6 +153,17 @@ export default function ProteinPanel({ protein, isNightingaleLoaded, setIsNighti
           </Grid>
         </Grid>
 
+        {/* Sequence */}
+        {hasSequence && (
+          <Grid container>
+            <Grid size={12}>
+              <SectionCard title="Sequence" icon={<DataArrayOutlinedIcon color="primary" />}>
+                <SeqViewer sequence={protein.sequence} />
+              </SectionCard>
+            </Grid>
+          </Grid>
+        )}
+
         {/* DNA Binding */}
         {hasDNA ? (
           <Grid container>
@@ -172,6 +192,7 @@ export default function ProteinPanel({ protein, isNightingaleLoaded, setIsNighti
           </Grid>
         </Grid>
 
+
         {/* References */}
         {hasReferences && (
           <Grid container>
@@ -182,6 +203,7 @@ export default function ProteinPanel({ protein, isNightingaleLoaded, setIsNighti
             </Grid>
           </Grid>
         )}
+
       </Stack>
     </Container>
   );

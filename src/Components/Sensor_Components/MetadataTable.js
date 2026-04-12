@@ -41,10 +41,11 @@ export default function MetadataTable({ tableData }) {
             {/* Fixed-width label box — border is on the Box so the separator
                 always lands at the same x position regardless of label length */}
             <Box sx={{
-              width: '120px',
+              width: '180px',
               flexShrink: 0,
               paddingRight: '15px',
               borderRight: '2px solid #0084ff',
+              textAlign: 'right',
             }}>
               <Typography component="span" sx={labelSx}>
                 <b>{key}</b>

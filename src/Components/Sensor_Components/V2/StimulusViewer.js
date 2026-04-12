@@ -23,7 +23,7 @@ export default function StimulusViewer({ stimulus, canvasId }) {
   const [currentIndex, setCurrentIndex] = useState(1);
 
   const current = stimulus?.[currentIndex - 1];
-  const stimType = current?.stimulusType?.[0];
+  const stimType = current?.stimulus_type?.[0];
   const evidence = current?.stimulus_evidence?.[0];
   const smallMolecule = stimType?.small_molecule?.[0];
   const light = stimType?.light;
@@ -63,28 +63,30 @@ export default function StimulusViewer({ stimulus, canvasId }) {
     <Box sx={{ flexGrow: 1 }}>
       {/* Molecule / Stimulus Display */}
       {smallMolecule ? (
-        <Paper
-          elevation={0}
-          sx={{
-            border: '1px solid #c2c2c2',
-            backgroundColor: '#ffffff',
-            height: { xs: '280px', sm: '480px' },
-          }}
-        >
-          <Box
+        <>
+          <Paper
+            elevation={0}
             sx={{
-              width: '300px',
-              height: '300px',
-              marginTop: { xs: 0, sm: '70px' },
-              margin: 'auto',
-              display: 'block',
+              border: '1px solid #c2c2c2',
+              backgroundColor: '#ffffff',
+              height: '480px',
             }}
           >
-            <canvas
-              id={stableCanvasId}
-              style={{ width: '100%', height: '100%', backgroundColor: '#ffffff' }}
-            />
-          </Box>
+            <Box
+              sx={{
+                width: '300px',
+                height: '300px',
+                marginTop: { xs: 0, sm: '100px' },
+                margin: 'auto',
+                display: 'block',
+              }}
+            >
+              <canvas
+                id={stableCanvasId}
+                style={{ width: '100%', height: '100%', backgroundColor: '#ffffff' }}
+              />
+            </Box>
+          </Paper>
           <Typography
             sx={{ textAlign: 'center', fontSize: { xs: 18, sm: 24 }, fontWeight: 400, mt: 1 }}
           >
@@ -95,7 +97,7 @@ export default function StimulusViewer({ stimulus, canvasId }) {
               Effect: {smallMolecule.regulatory_effect}
             </Typography>
           )}
-        </Paper>
+        </>
       ) : light ? (
         <Paper
           elevation={0}
@@ -138,16 +140,14 @@ export default function StimulusViewer({ stimulus, canvasId }) {
         </Paper>
       ) : null}
 
-      {/* Pagination */}
-      <Stack spacing={2} alignItems="center" sx={{ mt: stimulus.length > 1 ? 8 : 2, mb: 2 }}>
-        {stimulus.length > 1 && (
-          <Pagination
-            count={stimulus.length}
-            page={currentIndex}
-            onChange={(_, v) => setCurrentIndex(v)}
-            size="small"
-          />
-        )}
+      {/* Pagination — always shown to match Structure card alignment */}
+      <Stack spacing={2} alignItems="center" sx={{ mt: 4, mb: 3 }}>
+        <Pagination
+          count={stimulus.length}
+          page={currentIndex}
+          onChange={(_, v) => setCurrentIndex(v)}
+          size="small"
+        />
       </Stack>
 
       {/* Evidence details */}
