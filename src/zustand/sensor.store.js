@@ -31,6 +31,16 @@ const useSensorStore = create((set) => ({
       })
     );
   },
+
+  v2SensorData: {},
+
+  setV2SensorData: (id, data) => {
+    set(
+      produce((draft) => {
+        draft.v2SensorData[id] = data;
+      })
+    );
+  },
 }));
 
 export default useSensorStore;

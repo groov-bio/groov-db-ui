@@ -4,14 +4,6 @@ import {
   Box,
   Grid,
   Typography,
-  Divider,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper,
   Link,
 } from '@mui/material';
 
@@ -31,100 +23,74 @@ import {
  * @returns
  */
 export default function MetadataTable({ tableData }) {
+  const labelSx = {
+    fontSize: { xs: 14, sm: 16, md: 16 },
+  };
+
+  const valueSx = {
+    fontSize: { xs: 14, sm: 16 },
+    wordBreak: 'break-word',
+    overflowWrap: 'break-word',
+  };
+
   return (
     <Grid container>
-      {Object.keys(tableData).map((key, index) => {
-        if (tableData[key].link) {
-          return (
-            <Grid size={{xs:12, sm:6}} key={index} mb={1}>
-              <Grid container>
-                <Grid size={6} textAlign="right">
-                  <Typography
-                    component="span"
-                    sx={{
-                      fontSize: { xs: 14, sm: 16, md: 16 },
-                      paddingRight: '15px',
-                      borderRight: '2px solid #0084ff',
-                      display: 'inline-block',
-                    }}
-                  >
-                    <b>{key}</b>
-                  </Typography>
-                </Grid>
+      {Object.keys(tableData).map((key, index) => (
+        <Grid size={{ xs: 12, sm: 6 }} key={index} mb={1}>
+          <Box sx={{ display: 'flex', alignItems: 'baseline' }}>
+            {/* Fixed-width label box — border is on the Box so the separator
+                always lands at the same x position regardless of label length */}
+            <Box sx={{
+              width: '120px',
+              flexShrink: 0,
+              paddingRight: '15px',
+              borderRight: '2px solid #0084ff',
+            }}>
+              <Typography component="span" sx={labelSx}>
+                <b>{key}</b>
+              </Typography>
+            </Box>
 
-                <Grid size={6} textAlign="left" sx={{ pl: 2 }}>
-                  {tableData[key].link.url ===
-                  'https://www.genome.jp/dbget-bin/www_bget?null' ? (
-                    <Typography
-                      component="span"
-                      sx={{ 
-                        fontSize: { xs: 14, sm: 16 },
-                        wordBreak: 'break-word',
-                        overflowWrap: 'break-word'
-                      }}
-                      id={`metadata-table-${key}`}
-                    >
-                      {tableData[key].name}
-                    </Typography>
-                  ) : (
-                    <Link
-                      href={tableData[key].link.url}
-                      target="_blank"
-                      sx={{ textDecoration: 'none' }}
-                    >
-                      <Typography
-                        component="span"
-                        sx={{ 
-                          fontSize: { xs: 14, sm: 16 },
-                          wordBreak: 'break-word',
-                          overflowWrap: 'break-word'
-                        }}
-                        id={`metadata-table-data-${key}`}
-                      >
-                        {tableData[key].name}
-                      </Typography>
-                    </Link>
-                  )}
-                </Grid>
-              </Grid>
-            </Grid>
-          );
-        } else {
-          return (
-            <Grid size={{xs:12, sm:6}} key={index} mb={1}>
-              <Grid container>
-                <Grid size={6} textAlign="right">
+            {/* Value: flex: 1 + minWidth: 0 lets long text wrap without overflow */}
+            <Box sx={{ pl: 2, flex: 1, minWidth: 0 }}>
+              {tableData[key].link ? (
+                tableData[key].link.url ===
+                'https://www.genome.jp/dbget-bin/www_bget?null' ? (
                   <Typography
                     component="span"
-                    sx={{
-                      fontSize: { xs: 14, sm: 16, md: 16 },
-                      paddingRight: '15px',
-                      borderRight: '2px solid #0084ff',
-                      display: 'inline-block',
-                    }}
-                  >
-                    <b>{key}</b>
-                  </Typography>
-                </Grid>
-
-                <Grid size={6} textAlign="left" sx={{ pl: 2 }}>
-                  <Typography
-                    component="span"
-                    sx={{ 
-                      fontSize: { xs: 14, sm: 16, md: 16 },
-                      wordBreak: 'break-word',
-                      overflowWrap: 'break-word'
-                    }}
+                    sx={valueSx}
                     id={`metadata-table-${key}`}
                   >
                     {tableData[key].name}
                   </Typography>
-                </Grid>
-              </Grid>
-            </Grid>
-          );
-        }
-      })}
+                ) : (
+                  <Link
+                    href={tableData[key].link.url}
+                    target="_blank"
+                    sx={{ textDecoration: 'none' }}
+                  >
+                    <Typography
+                      component="span"
+                      sx={valueSx}
+                      id={`metadata-table-data-${key}`}
+                    >
+                      {tableData[key].name}
+                    </Typography>
+                  </Link>
+                )
+              ) : (
+                <Typography
+                  component="span"
+                  sx={{ ...valueSx, fontSize: { xs: 14, sm: 16, md: 16 } }}
+                  id={`metadata-table-${key}`}
+                >
+                  {tableData[key].name}
+                </Typography>
+              )}
+            </Box>
+          </Box>
+        </Grid>
+      ))}
     </Grid>
   );
 }
