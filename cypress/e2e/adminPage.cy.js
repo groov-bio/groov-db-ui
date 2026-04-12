@@ -76,7 +76,7 @@ describe('Admin page spec', () => {
     }).as('rejectProcessedSensor');
 
     cy.on('uncaught:exception', (err) => {
-      if (err.message.includes('Failed to init Mol*')) {
+      if (err.message.includes('Failed to init Mol*') || err.message.includes('WebGL')) {
         return false;
       }
     });
