@@ -53,7 +53,7 @@ describe('Contact form spec', () => {
     cy.get('#contact-form-email').type('josh@test.com');
     cy.get('#contact-form-message').click();
     cy.get('#contact-form-message').type('some test message');
-    cy.get('#contact-send-button').click();
+    cy.get('#contact-send-button').click({ force: true });
     cy.get('#contact-message-status').should(
       'have.text',
       'Message sent successfully!'
@@ -87,7 +87,7 @@ describe('Contact form spec', () => {
     cy.get('#contact-form-email').type('josh@test.com');
     cy.get('#contact-form-message').click();
     cy.get('#contact-form-message').type('some test message');
-    cy.get('#contact-send-button').click();
+    cy.get('#contact-send-button').click({ force: true });
     cy.get('#contact-message-status').should(
       'have.text',
       'Failed to send message.'

@@ -22,6 +22,7 @@ import { RequireAuth } from './Components/Auth/RequireAuth';
 import { RequireAdminAuth } from './Components/Auth/RequireAdminAuth';
 import { Amplify } from 'aws-amplify';
 import useUserStore from './zustand/user.store';
+import useFeatureFlagsStore from './zustand/featureFlags.store';
 import awsConfig from './aws-exports.js';
 import { checkAuthStatus } from './utils/auth.js';
 
@@ -64,6 +65,7 @@ export default function App() {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const setUser = useUserStore((context) => context.setUser);
+  const { setFlags, setLoading, setError } = useFeatureFlagsStore();
   const [showBanner, setShowBanner] = useState(
     getCookieConsentValue('groov-cookie-consent') === undefined
   );
@@ -80,6 +82,28 @@ export default function App() {
 
     checkAuth();
   }, [setUser]);
+
+  // Fetch feature flags on app initialization
+  useEffect(() => {
+    const fetchFeatureFlags = async () => {
+      setLoading(true);
+      try {
+        const response = await fetch('https://groov-api.com/feature-flags.json');
+        if (!response.ok) {
+          throw new Error(`Failed to fetch feature flags: ${response.status}`);
+        }
+        const flags = await response.json();
+        setFlags(flags);
+      } catch (err) {
+        console.error('Error fetching feature flags:', err);
+        setError(err.message);
+        // Set empty object as fallback so app continues to work
+        setFlags({});
+      }
+    };
+
+    fetchFeatureFlags();
+  }, [setFlags, setLoading, setError]);
 
   useEffect(() => {
     if (getCookieConsentValue('groov-cookie-consent') === 'true') {

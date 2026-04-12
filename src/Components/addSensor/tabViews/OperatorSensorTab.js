@@ -2,9 +2,14 @@ import { Box, Typography } from '@mui/material';
 import OperatorCard from './cards/OperatorCard';
 
 import { useFormikContext } from 'formik';
+import _ from 'lodash';
 
-export default function OperatorSensorTab() {
+export default function OperatorSensorTab({ fieldPrefix = '' }) {
   const { values } = useFormikContext();
+
+  const operators = fieldPrefix
+    ? _.get(values, `${fieldPrefix}.operators`, [])
+    : values.operators;
 
   return (
     <Box
@@ -22,8 +27,8 @@ export default function OperatorSensorTab() {
           DNA-binding information:
         </Typography>
       </Box>
-      {values.operators.map((item, index) => (
-        <OperatorCard index={index} key={index} />
+      {operators.map((item, index) => (
+        <OperatorCard index={index} key={index} fieldPrefix={fieldPrefix} />
       ))}
     </Box>
   );

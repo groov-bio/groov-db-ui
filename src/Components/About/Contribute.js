@@ -39,7 +39,7 @@ export default function Contribute() {
         fontWeight={400}
         mt={1}
       >
-        Use the <Link href="https://www.groov.bio/addSensor/">biosensor submission form</Link>{' '}
+        Use the <Link href="https://www.groov.bio/addSensor/" id="about-add-sensor">biosensor submission form</Link>{' '}
         to create a new record for a biosensor that is not currently in the
         database. Please search for the biosensor and common aliases first to
         confirm that it does not already exits. All new submissions must be
