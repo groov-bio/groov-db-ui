@@ -3,13 +3,16 @@ import React from 'react';
 import { Link, Route, Routes } from 'react-router-dom';
 
 import SensorTable from './SensorTable.js';
+import SensorTableV2 from './Sensor_Components/SensorTableV2.js';
 import DownloadAllSensors from './About/DownloadAllSensors.js';
+import { useFeatureFlag } from '../zustand/featureFlags.store';
 
 import { Box, Grid, Typography, Button, Card, CardActionArea, useTheme, useMediaQuery } from '@mui/material';
 
 export default function RegFamilyTiles() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const v2SensorTablesEnabled = useFeatureFlag('v2_sensor_tables');
   
   /* adjusts information displayed in table based on screen size width */
   const [dimensions, setDimensions] = React.useState({
@@ -113,7 +116,10 @@ export default function RegFamilyTiles() {
           </Box>
         </Box>
         
-        <SensorTable family={family} dimensions={dimensions} />
+        {v2SensorTablesEnabled
+          ? <SensorTableV2 family={family} />
+          : <SensorTable family={family} dimensions={dimensions} />
+        }
       </Box>
     );
   };
