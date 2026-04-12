@@ -42,26 +42,7 @@ const useSensorStore = create((set) => ({
     );
   },
 
-  v2SensorTable: {
-    all: [],
-    tetr: [],
-    lysr: [],
-    arac: [],
-    marr: [],
-    laci: [],
-    gntr: [],
-    luxr: [],
-    iclr: [],
-    other: [],
-  },
 
-  setV2SensorTable: (family, data) => {
-    set(
-      produce((draft) => {
-        draft.v2SensorTable[family] = data;
-      })
-    );
-  },
 }));
 
 export default useSensorStore;

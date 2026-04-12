@@ -117,7 +117,7 @@ export default function RegFamilyTiles() {
         </Box>
         
         {v2SensorTablesEnabled
-          ? <SensorTableV2 family={family} />
+          ? <SensorTableV2 key={family} family={family} />
           : <SensorTable family={family} dimensions={dimensions} />
         }
       </Box>

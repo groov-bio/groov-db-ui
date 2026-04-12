@@ -1,12 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { Box, Grid, Skeleton, Link as MuiLink } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 
-import useSensorStore from '../../zustand/sensor.store.js';
+import useV2SensorTableStore from '../../zustand/v2SensorTable.store.js';
 import { getFirstTwoWords } from '../../lib/utils.js';
 
-const COLUMNS = [
+const UNIPROT_COLUMN = {
+  field: 'uniprot_id',
+  headerName: 'UniProt',
+  width: 110,
+  renderCell: (params) => (
+    <MuiLink
+      href={`https://www.uniprot.org/uniprot/${params.value}`}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      {params.value}
+    </MuiLink>
+  ),
+};
+
+const BASE_COLUMNS = [
   {
     field: 'id',
     headerName: 'ID',
@@ -18,65 +33,37 @@ const COLUMNS = [
     ),
   },
   { field: 'alias', headerName: 'Alias', width: 110 },
-  {
-    field: 'uniprot_id',
-    headerName: 'UniProt',
-    width: 110,
-    renderCell: (params) => (
-      <MuiLink
-        href={`https://www.uniprot.org/uniprot/${params.value}`}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        {params.value}
-      </MuiLink>
-    ),
-  },
   { field: 'organism_name', headerName: 'Organism', width: 200 },
   { field: 'ligands', headerName: 'Ligands', width: 200 },
 ];
 
-export default function SensorTableV2({ family }) {
-  const [rows, setRows] = useState([]);
-  const [loading, setLoading] = useState(false);
+const ALL_COLUMNS = [...BASE_COLUMNS.slice(0, 2), UNIPROT_COLUMN, ...BASE_COLUMNS.slice(2)];
 
+export default function SensorTableV2({ family }) {
   const isAllSensors = family === 'all';
   const storeKey = isAllSensors ? 'all' : family.toLowerCase();
 
-  const setV2SensorTable = useSensorStore((s) => s.setV2SensorTable);
-  const v2SensorTable = useSensorStore((s) => s.v2SensorTable[storeKey]);
+  const fetchTable = useV2SensorTableStore((s) => s.fetchTable);
+  const tableData = useV2SensorTableStore((s) => s.tables[storeKey]);
+  const loading = useV2SensorTableStore((s) => s.loading[storeKey]);
 
   useEffect(() => {
-    if (v2SensorTable?.length > 0) return;
-
-    setLoading(true);
     const url = isAllSensors
       ? 'https://groov-api.com/v2/index.json'
       : `https://groov-api.com/v2/indexes/${family.toLowerCase()}.json`;
+    fetchTable(storeKey, url);
+  }, [storeKey, isAllSensors, fetchTable]);
 
-    fetch(url, { headers: { Accept: 'application/json' } })
-      .then((res) => {
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        return res.json();
-      })
-      .then((data) => setV2SensorTable(storeKey, data['data']))
-      .catch(() => console.error('Error fetching v2 sensor data'))
-      .finally(() => setLoading(false));
-  }, [family, isAllSensors]);
-
-  useEffect(() => {
-    if (!v2SensorTable?.length) return;
-
-    setRows(
-      v2SensorTable.map((sensor) => ({
-        id: sensor.id,
-        alias: sensor.alias,
-        uniprot_id: sensor.uniprot_id,
-        organism_name: getFirstTwoWords(sensor.organism_name),
-        ligands: sensor.ligands?.join(', ') || 'None submitted',
-      }))
-    );
-  }, [v2SensorTable]);
+  const rows = useMemo(() => {
+    if (!tableData?.length) return [];
+    return tableData.map((sensor) => ({
+      id: sensor.id,
+      alias: sensor.alias,
+      uniprot_id: sensor.uniprot_id,
+      organism_name: getFirstTwoWords(sensor.organism_name),
+      ligands: sensor.ligands?.join(', ') || 'None submitted',
+    }));
+  }, [tableData]);
 
   return (
     <Grid
@@ -97,9 +84,9 @@ export default function SensorTableV2({ family }) {
           <Skeleton variant="rectangular" width="100%" height={400} animation="pulse" />
         ) : (
           <DataGrid
-            key={isAllSensors ? 'v2-all-sensors' : `v2-${family}`}
+            key={storeKey}
             rows={rows}
-            columns={COLUMNS}
+            columns={isAllSensors ? BASE_COLUMNS : ALL_COLUMNS}
             getRowId={(row) => row.id}
             pageSizeOptions={[10, 20, 30]}
             density="compact"
