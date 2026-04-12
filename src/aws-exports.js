@@ -13,8 +13,8 @@ const awsConfig = {
     oauth: {
       domain: 'groov.auth.us-east-2.amazoncognito.com',
       scope: ['email', 'openid', 'profile'],
-      redirectSignIn: 'https://groov.bio/account/',
-      redirectSignOut: 'https://groov.bio/',
+      redirectSignIn: 'https://www.groov.bio/account/',
+      redirectSignOut: 'https://www.groov.bio/',
       responseType: 'code',
     },
     signUpVerificationMethod: 'code',
