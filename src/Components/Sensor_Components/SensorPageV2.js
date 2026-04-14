@@ -170,7 +170,7 @@ export default function SensorPageV2() {
                   fontSize: { xs: '1.75rem', sm: '2.5rem', md: '3rem' },
                   fontWeight: 500,
                   mb: 0.5,
-                  background: 'linear-gradient(45deg, #1976d2, #42a5f5)',
+                  background: 'black',
                   backgroundClip: 'text',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
@@ -253,7 +253,7 @@ export default function SensorPageV2() {
                   key={protein.uniprot_id}
                   label={
                     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                      <Typography variant="body2" fontWeight={600}>
+                      <Typography variant="body2" fontWeight={500}>
                         {protein.alias}
                       </Typography>
                       <Typography variant="caption" color="text.secondary">
