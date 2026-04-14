@@ -170,7 +170,7 @@ export default function SensorPageV2() {
                   fontSize: { xs: '1.75rem', sm: '2.5rem', md: '3rem' },
                   fontWeight: 500,
                   mb: 0.5,
-                  background: 'black',
+                  background: (theme) => theme.palette.mode === 'dark' ? 'white' : 'black',
                   backgroundClip: 'text',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
