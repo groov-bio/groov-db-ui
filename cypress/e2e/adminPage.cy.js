@@ -89,7 +89,7 @@ describe('Admin page spec', () => {
     cy.get('.MuiTypography-h3').should('have.text', 'AvaR1');
     cy.get('#sensor-metadata-family > .MuiChip-label').should('have.text', 'Family: TETR');
     cy.get('#sensor-page-tab-view-switch').click({force: true});
-    cy.get(':nth-child(1) > .MuiGrid-container > .css-15vo6f1-MuiGrid-root > .MuiTypography-root').should('have.text', 'Apo-repressor');
+    cy.get('[id="metadata-table-Regulation Type"]').should('have.text', 'Apo-repressor');
     cy.get('#sensor-ligands-tab').click({force: true});
     cy.get('.css-t5dqux > [style="width: 100%;"]').click({force: true});
     cy.get('#sensor-ligand-name').should('have.text', 'Avenolide');
@@ -99,7 +99,7 @@ describe('Admin page spec', () => {
     cy.get('.MuiDataGrid-row > [data-field="sequence"]').should('have.text', 'GCAAGATACGTACTAGTACGTATCTTGC');
     cy.get('#sensor-genomes-tab').click({force: true});
     cy.get('#sensor-refs-tab').click({force: true});
-    cy.get('.MuiGrid-container > :nth-child(1) > .MuiTypography-root').should('have.text', 'Regulation TypeUniprot IDRefSeq IDKEGG IDOrganismProtein Length1. Biochemical basis for the regulation of biosynthesis of antiparasitics by bacterial hormones');
+    cy.get('.MuiGrid-container > :nth-child(1) > .MuiTypography-root').should('have.text', '1. Biochemical basis for the regulation of biosynthesis of antiparasitics by bacterial hormones');
     /* ==== End Cypress Studio ==== */
   });
 });

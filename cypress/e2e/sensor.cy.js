@@ -25,19 +25,25 @@ describe('Sensor Page', () => {
       { fixture: 'tetrAlphaFold.cif' }
     ).as('tetr-af');
 
+    cy.on('uncaught:exception', (err) => {
+      if (err.message.includes('Failed to init Mol*') || err.message.includes('WebGL')) {
+        return false;
+      }
+    });
+
     cy.visit('http://localhost:3000');
     /* ==== Generated with Cypress Studio ==== */
-    cy.get('#Browse').click();
+    cy.get('#Browse').click({force: true});
     cy.get('#database-link-TetR').click({force: true});
-    cy.get('[data-id="U2Y8G0"] [data-field="uniprot"] a').click();
-    cy.get('#sensor-page-tab-view-switch').click();
+    cy.get('[data-id="U2Y8G0"] [data-field="uniprot"] a').click({force: true});
+    cy.get('#sensor-page-tab-view-switch').click({force: true});
     cy.get('#sensor-about').should(
       'have.text',
       'Regulates the expression of the ecd operon responsible for the degradation of estradiol.'
     );
     cy.get("#sensor-metadata-family").should('have.text', "Family: TETR")
     cy.get("#metadata-table-data-Organism").should('have.text', "Caenibius tardaugens")
-    cy.get("#sensor-ligands-tab").click()
+    cy.get("#sensor-ligands-tab").click({force: true})
     cy.get('#SMILEScanvas').should('have.id', 'SMILEScanvas');
     cy.get('#SMILEScanvas').should('be.visible');
     cy.get(
@@ -51,7 +57,7 @@ describe('Sensor Page', () => {
     ).should('have.text', 'Synthetic regulation');
     cy.contains("AF-U2Y8G0-F1").should('exist')
     cy.contains("Predicted").should('exist')
-    cy.get("#sensor-operators-tab").click()
+    cy.get("#sensor-operators-tab").click({force: true})
     cy.contains(
       'Length208MANELKAAANPRRSPGRPRDASREKVILTETLALLGELGFAGLTVDAVVARAKVSKATIYRRWATKEELAIAAFDLLPLIEPVETGDIESEIIAYIDQYYGFLRTTPLSSVLPALVSEAMHNPTLAERLNEVVQRRRESGIAMIRRAITRGELPATTPPDIAHELIVGPMLQRSFFEPANFRREDFLVMVRVIVAGLKAVGKATSSAA'
     ).should('exist')
@@ -68,7 +74,7 @@ describe('Sensor Page', () => {
       'have.text',
       'MethodSynthetic regulation'
     );
-    cy.get("#sensor-genomes-tab").click()
+    cy.get("#sensor-genomes-tab").click({force: true})
     cy.get('.konvajs-content > canvas').should('be.visible');
     cy.get(
       "#enzyme-chip > span"

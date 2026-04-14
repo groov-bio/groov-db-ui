@@ -2,22 +2,24 @@ import React, { useState } from 'react';
 import { Button, CircularProgress } from '@mui/material';
 import DownloadIcon from '@mui/icons-material/Download';
 import { useAllSensors } from '../../queries/sensors.js';
+import { useFeatureFlag } from '../../zustand/featureFlags.store';
 
 export default function DownloadAllSensors() {
   const [isDownloading, setIsDownloading] = useState(false);
   const { data: sensorsData = [], isLoading, error } = useAllSensors();
+  const v2SensorTablesEnabled = useFeatureFlag('v2_sensor_tables');
 
   const handleDownload = async () => {
     try {
       setIsDownloading(true);
       
-      // Use cached data if available, otherwise fetch fresh data
       let dataToDownload;
-      if (sensorsData.length > 0) {
-        // Use cached data - wrap in same format as API response
+      if (v2SensorTablesEnabled) {
+        const response = await fetch('https://groov-api.com/v2/all-sensors.json');
+        dataToDownload = await response.json();
+      } else if (sensorsData.length > 0) {
         dataToDownload = { sensors: sensorsData };
       } else {
-        // Fallback to direct fetch if cache is empty
         const response = await fetch('https://groov-api.com/all-sensors.json');
         dataToDownload = await response.json();
       }
@@ -33,7 +35,7 @@ export default function DownloadAllSensors() {
       // Create a link element and trigger download
       const link = document.createElement('a');
       link.href = url;
-      link.download = 'all-sensors.json';
+      link.download = v2SensorTablesEnabled ? 'all-sensors-v2.json' : 'all-sensors.json';
       document.body.appendChild(link);
       link.click();
 

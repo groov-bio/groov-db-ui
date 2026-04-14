@@ -13,7 +13,9 @@ const awsConfig = {
     oauth: {
       domain: 'groov.auth.us-east-2.amazoncognito.com',
       scope: ['email', 'openid', 'profile'],
+      // Should be restored to https://www.groov.bio/account/ after local development
       redirectSignIn: 'https://www.groov.bio/account/',
+      // Should be restored to https://www.groov.bio/ after local development
       redirectSignOut: 'https://www.groov.bio/',
       responseType: 'code',
     },
