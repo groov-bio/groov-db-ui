@@ -13,7 +13,7 @@ import HexagonOutlinedIcon from '@mui/icons-material/HexagonOutlined';
 import SwapCallsOutlinedIcon from '@mui/icons-material/SwapCallsOutlined';
 import ScatterPlotOutlinedIcon from '@mui/icons-material/ScatterPlotOutlined';
 import FeedOutlinedIcon from '@mui/icons-material/FeedOutlined';
-import DataArrayOutlinedIcon from '@mui/icons-material/DataArrayOutlined';
+import ClearAllOutlinedIcon from '@mui/icons-material/ClearAllOutlined';
 
 import StimulusViewer from './StimulusViewer';
 import GenomeContextV2 from './GenomeContextV2';
@@ -157,7 +157,7 @@ export default function ProteinPanel({ protein, isNightingaleLoaded, setIsNighti
         {hasSequence && (
           <Grid container>
             <Grid size={12}>
-              <SectionCard title="Sequence" icon={<DataArrayOutlinedIcon color="primary" />}>
+              <SectionCard title="Sequence" icon={<ClearAllOutlinedIcon color="primary" />}>
                 <SeqViewer sequence={protein.sequence} />
               </SectionCard>
             </Grid>
