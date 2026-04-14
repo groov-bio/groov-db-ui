@@ -33,10 +33,10 @@ const ID_PREFIX_TO_CATEGORY = {
   Y: 'lysr',
   A: 'arac',
   M: 'marr',
-  I: 'laci',
+  L: 'laci',
   G: 'gntr',
-  C: 'iclr',
-  O: 'other',
+  I: 'iclr',
+  Z: 'other',
 };
 
 function getCategoryFromId(id) {
