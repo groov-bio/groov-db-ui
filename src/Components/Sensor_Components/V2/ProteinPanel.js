@@ -26,7 +26,7 @@ import MetadataTable from '../MetadataTable';
 const SectionCard = ({ children, title, icon }) => (
   <Card
     elevation={0}
-    sx={{ height: '100%', borderRadius: 2, border: '1px solid #c5c6fc' }}
+    sx={{ height: '100%', borderRadius: 2, border: '1px solid #696969' }}
   >
     <CardContent
       sx={{
@@ -114,11 +114,11 @@ export default function ProteinPanel({ protein, isNightingaleLoaded, setIsNighti
   const hasSequence = !!protein.sequence;
 
   return (
-    <Container maxWidth="xl" disableGutters sx={{ py: 3 }}>
+    <Container maxWidth="xl" disableGutters sx={{ py: 1 }}>
       <Stack spacing={4}>
 
         {/* Protein metadata */}
-        <Card elevation={0} sx={{ borderRadius: 2, border: '1px solid #c5c6fc' }}>
+        <Card elevation={0} sx={{ borderRadius: 2, border: '1px solid #696969' }}>
           <CardContent sx={{ p: 3, '&:last-child': { pb: 3 } }}>
             <MetadataTable tableData={metadataTableData} />
           </CardContent>
