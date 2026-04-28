@@ -33,6 +33,7 @@ export default function OperatorCard({ index, fieldPrefix = '' }) {
     'Isothermal titration calorimetry',
     'Fluorescence polarization',
     'Synthetic regulation',
+    'ChIP-Seq',
   ];
 
   const collapse = () => {
