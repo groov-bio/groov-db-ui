@@ -32,6 +32,10 @@ export default function LigandCard({ index, fieldPrefix = '' }) {
     'Surface plasmon resonance',
     'Synthetic regulation',
     'Fluorescence polarization',
+    'Thermal shift',
+    'Spectrophotometric competition',
+    'Spectral shift',
+    'DNA affinity chromatography',
   ];
 
   const collapse = () => {
