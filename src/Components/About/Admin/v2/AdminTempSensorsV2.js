@@ -98,6 +98,15 @@ export default function AdminTempSensorsV2({
             { variant: 'error', preventDuplicate: true }
           );
           break;
+        case 503:
+          // API Gateway timed out, but the Lambda is still running. The
+          // processed row will appear once enrichment finishes — refresh in
+          // a few minutes.
+          enqueueSnackbar(
+            `${row.submissionUUID.slice(0, 8)} is still processing in the background — check back in a few minutes and refresh.`,
+            { variant: 'info', preventDuplicate: true, autoHideDuration: 8000 }
+          );
+          break;
         default:
           enqueueSnackbar(
             `Error processing ${row.submissionUUID.slice(0, 8)}: ${
