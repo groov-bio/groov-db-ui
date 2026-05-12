@@ -15,40 +15,42 @@ export default function Preview({ proteinIndex = null }) {
     ligMB: 5,
   };
 
-  // V2 form: Get data from specific protein index
-  // V1 form: Get data from root values
-  const proteinData = proteinIndex !== null ? values.proteins?.[proteinIndex] : values;
+  // V2 form: protein lives at values.proteins[proteinIndex] with flat fields
+  // (alias, uniProtID, accession, mechanism). V1 form: those fields live under
+  // values.about. Detect and normalize so the preview works for both.
+  const isV2 = proteinIndex !== null;
+  const proteinData = isV2 ? values.proteins?.[proteinIndex] : values;
 
   if (!proteinData) {
     return (
       <Box mb={5}>
-        <MetadataTable
-          tableData={{}}
-          sx={{ gridColumn: 'span 12' }}
-        />
+        <MetadataTable tableData={{}} sx={{ gridColumn: 'span 12' }} />
       </Box>
     );
   }
+
+  const about = isV2 ? proteinData : proteinData.about || {};
+  const alias = about.alias || '';
+  const uniProtID = about.uniProtID || '';
+  const accession = about.accession || '';
+  const mechanism = about.mechanism || '';
+  const family = isV2 ? values.sensor?.category || '' : about.family || '';
 
   return (
     <Box mb={5}>
       <MetadataTable
         tableData={{
-          Alias: { name: proteinData.about?.alias || '' },
-          Family: { name: proteinData.about?.family || '' },
+          Alias: { name: alias },
+          Family: { name: family },
           'Uniprot ID': {
-            name: proteinData.about?.uniProtID || '',
-            link: {
-              url: `https://www.uniprot.org/uniprot/$${proteinData.about?.uniProtID || ''}`,
-            },
+            name: uniProtID,
+            link: { url: `https://www.uniprot.org/uniprot/${uniProtID}` },
           },
           'NCBI Accession': {
-            name: proteinData.about?.accession || '',
-            link: {
-              url: `https://www.ncbi.nlm.nih.gov/protein/${proteinData.about?.accession || ''}`,
-            },
+            name: accession,
+            link: { url: `https://www.ncbi.nlm.nih.gov/protein/${accession}` },
           },
-          Mechanism: { name: proteinData.about?.mechanism || '' },
+          Mechanism: { name: mechanism },
         }}
         sx={{ gridColumn: 'span 12' }}
       />
@@ -59,7 +61,7 @@ export default function Preview({ proteinIndex = null }) {
         placement={placement}
       />
       <OperatorViewer
-        uniprotID={proteinData.about?.uniProtID || ''}
+        uniprotID={uniProtID}
         operators={proteinData.operators || []}
       />
     </Box>

@@ -129,13 +129,19 @@ function conditionallyRequiredString(options) {
   return schema;
 }
 
-export const isCompleteEntry = (row) =>
-  row &&
-  !_.isEmpty(row) &&
-  Object.entries(row)
-    // optional fields don't count toward "completeness"
-    .filter(([k]) => !['regulatory_effect', 'kd', 'fig_type'].includes(k))
-    .every(([, val]) => val !== undefined && val !== null && String(val).trim() !== '');
+export const isCompleteEntry = (row) => {
+  if (!row || _.isEmpty(row)) return false;
+  // Optional fields don't count toward "completeness". Yup casts strip
+  // undefined values before this runs, so a row with only an optional default
+  // (e.g. {kd_unit: 'nM'}) must NOT be treated as complete.
+  const required = Object.entries(row).filter(
+    ([k]) => !['regulatory_effect', 'kd', 'kd_unit', 'fig_type'].includes(k)
+  );
+  if (required.length === 0) return false;
+  return required.every(
+    ([, val]) => val !== undefined && val !== null && String(val).trim() !== ''
+  );
+};
 
 const optionalNumber = Yup.mixed().test(
   'optional-number',

@@ -1,9 +1,12 @@
 import { Step, Stepper, StepLabel, Typography } from '@mui/material';
+import { useFormikContext } from 'formik';
 
 const STEPS = ['About', 'Stimuli', 'Operators', 'Mutations'];
 
 export default function ProteinFormStepper({ stepValue, setStepValue, proteinErrors }) {
+  const { submitCount } = useFormikContext();
   const errorAt = (step) => {
+    if (submitCount === 0) return false;
     if (step === 'About') {
       return ['alias', 'accession', 'uniProtID', 'mechanism'].some(
         (k) => proteinErrors?.[k]

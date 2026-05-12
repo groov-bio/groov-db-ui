@@ -24,13 +24,25 @@ export default function AboutProteinTab({ fieldPrefix }) {
         </Typography>
       </Box>
       <Box gridColumn="span 12">
-        <FormikTextInput name={f('alias')} label="Alias" />
+        <FormikTextInput
+          name={f('alias')}
+          label="Alias"
+          helperText="Short identifier shown in the database (letters/digits, max 16)."
+        />
       </Box>
       <Box gridColumn="span 12">
-        <FormikTextInput name={f('accession')} label="RefSeq" />
+        <FormikTextInput
+          name={f('accession')}
+          label="RefSeq"
+          helperText='NCBI accession, e.g. "WP_000123456.1".'
+        />
       </Box>
       <Box gridColumn="span 12">
-        <FormikTextInput name={f('uniProtID')} label="UniProt ID" />
+        <FormikTextInput
+          name={f('uniProtID')}
+          label="UniProt ID"
+          helperText='e.g. "P0ACT4".'
+        />
       </Box>
       <Box gridColumn="span 12">
         <FormikSelectInput

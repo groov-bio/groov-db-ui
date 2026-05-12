@@ -2,6 +2,7 @@ import { Box, Tabs, Tab, IconButton, Button } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
+import { useFormikContext } from 'formik';
 
 export default function ProteinTabs({
   proteins,
@@ -20,7 +21,9 @@ export default function ProteinTabs({
 
   const isSingleProtein = proteins.length === 1;
 
+  const { submitCount } = useFormikContext();
   const hasErrors = (index) => {
+    if (submitCount === 0) return false;
     if (!errors || !Array.isArray(errors)) return false;
     const proteinError = errors[index];
     if (!proteinError) return false;
@@ -107,12 +110,12 @@ export default function ProteinTabs({
       <Button
         onClick={onAddProtein}
         startIcon={<AddIcon />}
-        variant={isSingleProtein ? 'contained' : 'outlined'}
+        variant="outlined"
         color="primary"
         size="small"
         sx={{ mx: 1.5, my: 1, whiteSpace: 'nowrap', flexShrink: 0 }}
       >
-        {isSingleProtein ? 'Add second protein (two-component)' : 'Add protein'}
+        {isSingleProtein ? 'Add second protein' : 'Add protein'}
       </Button>
     </Box>
   );

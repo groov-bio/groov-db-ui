@@ -49,8 +49,22 @@ export default function LigandCard({ index, fieldPrefix }) {
           <Box gridColumn="span 12">
             <Collapse in={open} timeout="auto" unmountOnExit>
               <Box mb={2}><FormikTextInput name={f('name')} label="Ligand Name" fullWidth /></Box>
-              <Box mb={2}><FormikTextInput name={f('SMILES')} label="Ligand SMILES" fullWidth /></Box>
-              <Box mb={2}><FormikTextInput name={f('doi')} label="Ligand DOI" fullWidth /></Box>
+              <Box mb={2}>
+                <FormikTextInput
+                  name={f('SMILES')}
+                  label="Ligand SMILES"
+                  fullWidth
+                  helperText="Rendered in the preview pane as you type."
+                />
+              </Box>
+              <Box mb={2}>
+                <FormikTextInput
+                  name={f('doi')}
+                  label="Ligand DOI"
+                  fullWidth
+                  helperText='e.g. "10.1038/s41586-024-12345-6".'
+                />
+              </Box>
 
               <Box display="flex" mb={2}>
                 <FormControl fullWidth sx={{ mr: 2 }}>

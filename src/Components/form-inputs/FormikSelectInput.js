@@ -5,13 +5,15 @@ import {
   MenuItem,
   FormHelperText,
 } from '@mui/material';
-import { useField } from 'formik';
+import { useField, useFormikContext } from 'formik';
 
 export const FormikSelectInput = ({ label, options, ...props }) => {
   const [field, meta] = useField(props);
+  const { submitCount } = useFormikContext();
+  const showError = submitCount > 0 && !!meta.error;
 
   return (
-    <FormControl fullWidth error={meta.touched && !!meta.error}>
+    <FormControl fullWidth size="small" error={showError}>
       <InputLabel>{label}</InputLabel>
       <Select label={label} {...field} {...props}>
         {options.map((option) => (
@@ -20,9 +22,7 @@ export const FormikSelectInput = ({ label, options, ...props }) => {
           </MenuItem>
         ))}
       </Select>
-      {meta.touched && meta.error && (
-        <FormHelperText>{meta.error}</FormHelperText>
-      )}
+      {showError && <FormHelperText>{meta.error}</FormHelperText>}
     </FormControl>
   );
 };

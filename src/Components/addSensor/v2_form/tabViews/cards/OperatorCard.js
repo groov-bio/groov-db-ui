@@ -47,8 +47,22 @@ export default function OperatorCard({ index, fieldPrefix }) {
 
           <Box gridColumn="span 12">
             <Collapse in={open} timeout="auto" unmountOnExit>
-              <Box mb={2}><FormikTextInput name={f('sequence')} label="Operator Sequence" fullWidth /></Box>
-              <Box mb={2}><FormikTextInput name={f('doi')} label="Operator DOI" fullWidth /></Box>
+              <Box mb={2}>
+                <FormikTextInput
+                  name={f('sequence')}
+                  label="Operator Sequence"
+                  fullWidth
+                  helperText="DNA-binding site — ATCG only."
+                />
+              </Box>
+              <Box mb={2}>
+                <FormikTextInput
+                  name={f('doi')}
+                  label="Operator DOI"
+                  fullWidth
+                  helperText='e.g. "10.1038/s41586-024-12345-6".'
+                />
+              </Box>
 
               <Box display="flex" mb={2}>
                 <FormControl fullWidth sx={{ mr: 2 }}>

@@ -4,16 +4,19 @@ import { useField, useFormikContext } from 'formik';
 export const FormikTextInput = ({ label, id = null, ...props }) => {
   const [field, meta] = useField(props);
   const { submitCount } = useFormikContext();
-  const showError = (meta.touched || submitCount > 0) && !!meta.error;
+  // Hold errors until the user actually tries to submit. Once they have,
+  // Formik marks every field touched and validateOnBlur keeps them current.
+  const showError = submitCount > 0 && !!meta.error;
 
   return (
     <TextField
       fullWidth
+      size="small"
       label={label}
-      error={showError}
-      helperText={showError ? meta.error : undefined}
       {...field}
       {...props}
+      error={showError}
+      helperText={showError ? meta.error : props.helperText}
       {...(id && { id: id })}
     />
   );
