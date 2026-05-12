@@ -38,6 +38,8 @@ const figureTypes = [
   'Supplementary Table',
 ];
 
+const kdUnitValues = ['nM', 'µM', 'mM'];
+
 const mechanismValues = [
   'Apo-repressor',
   'Apo-activator',
@@ -182,6 +184,7 @@ const ligandItemSchema = Yup.object().shape({
   }),
   regulatory_effect: Yup.string().notRequired(),
   kd: optionalNumber,
+  kd_unit: Yup.string().oneOf(kdUnitValues, 'Invalid Kd unit').notRequired(),
 });
 
 const operatorItemSchema = Yup.object().shape({
@@ -217,6 +220,7 @@ const operatorItemSchema = Yup.object().shape({
     requiredMessage: 'Reference figure is required',
   }),
   kd: optionalNumber,
+  kd_unit: Yup.string().oneOf(kdUnitValues, 'Invalid Kd unit').notRequired(),
 });
 
 const lightStimulusSchema = Yup.object().shape({
@@ -254,13 +258,27 @@ const proteinSchema = Yup.object()
       )
       .required('UniProtID is required'),
     mechanism: Yup.string()
-      .oneOf([...mechanismValues, ''], 'Invalid mechanism')
-      .notRequired(),
+      .oneOf(mechanismValues, 'Invalid mechanism')
+      .required('Mechanism is required'),
     ligands: Yup.array().of(ligandItemSchema),
     operators: Yup.array().of(operatorItemSchema),
     light_stimuli: Yup.array().of(lightStimulusSchema),
     temperature_stimuli: Yup.array().of(temperatureStimulusSchema),
-    mutations: Yup.array().of(Yup.string().max(32, 'Mutation must be 32 chars or less')),
+    mutations: Yup.array().of(
+      Yup.object().shape({
+        mutations: conditionallyRequiredString({
+          fieldName: 'mutations',
+          otherFields: ['ref_id'],
+          requiredMessage: 'Mutation(s) required when a reference is provided',
+        }),
+        ref_type: Yup.string().oneOf(['UniProt', 'groovDB', ''], 'Invalid reference type').notRequired(),
+        ref_id: conditionallyRequiredString({
+          fieldName: 'ref_id',
+          otherFields: ['mutations'],
+          requiredMessage: 'Reference protein ID is required',
+        }),
+      })
+    ),
   })
   .test(
     'at-least-one-stimulus-or-operator',

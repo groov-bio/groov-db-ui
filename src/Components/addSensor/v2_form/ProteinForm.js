@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { Box } from '@mui/material';
 import { useFormikContext } from 'formik';
 import AboutProteinTab from './tabViews/AboutProteinTab';
-import LigandTab from './tabViews/LigandTab';
+import StimuliTab from './tabViews/StimuliTab';
 import OperatorTab from './tabViews/OperatorTab';
-import ExtraStimuliTab from './tabViews/ExtraStimuliTab';
+import MutationsTab from './tabViews/MutationsTab';
 import ProteinFormStepper from './ProteinFormStepper';
 import ProteinFormFooter from './ProteinFormFooter';
 
@@ -39,14 +39,14 @@ export default function ProteinForm({ proteinIndex }) {
       <TabPanel value={stepValue} index={0} id={`protein-${proteinIndex}-about-tab`}>
         <AboutProteinTab fieldPrefix={fieldPrefix} />
       </TabPanel>
-      <TabPanel value={stepValue} index={1} id={`protein-${proteinIndex}-ligand-tab`}>
-        <LigandTab fieldPrefix={fieldPrefix} />
+      <TabPanel value={stepValue} index={1} id={`protein-${proteinIndex}-stimuli-tab`}>
+        <StimuliTab fieldPrefix={fieldPrefix} />
       </TabPanel>
       <TabPanel value={stepValue} index={2} id={`protein-${proteinIndex}-operator-tab`}>
         <OperatorTab fieldPrefix={fieldPrefix} />
       </TabPanel>
-      <TabPanel value={stepValue} index={3} id={`protein-${proteinIndex}-extras-tab`}>
-        <ExtraStimuliTab fieldPrefix={fieldPrefix} />
+      <TabPanel value={stepValue} index={3} id={`protein-${proteinIndex}-mutations-tab`}>
+        <MutationsTab fieldPrefix={fieldPrefix} />
       </TabPanel>
 
       <ProteinFormFooter stepValue={stepValue} setStepValue={setStepValue} />

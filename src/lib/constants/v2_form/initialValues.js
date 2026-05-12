@@ -16,6 +16,7 @@ export const createEmptyLigand = () => ({
   method: '',
   regulatory_effect: '',
   kd: '',
+  kd_unit: 'nM',
 });
 
 export const createEmptyOperator = () => ({
@@ -25,6 +26,7 @@ export const createEmptyOperator = () => ({
   fig_type: '',
   doi: '',
   kd: '',
+  kd_unit: 'nM',
 });
 
 export const createEmptyLightStimulus = () => ({
@@ -43,6 +45,12 @@ export const createEmptyTemperatureStimulus = () => ({
   method: '',
   ref_figure: '',
   fig_type: '',
+});
+
+export const createEmptyMutation = () => ({
+  mutations: '',
+  ref_type: 'UniProt',
+  ref_id: '',
 });
 
 export const createEmptyProtein = () => ({

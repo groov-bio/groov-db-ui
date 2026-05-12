@@ -57,6 +57,15 @@ const cleanNumber = (v) => {
 
 const cleanOptionalString = (v) => (v == null || v === '' ? null : v);
 
+// Convert a Kd value to nanomolar based on the input unit (nM/µM/mM).
+// Returns null if the value is missing/invalid so callers can omit the field.
+const kdToNanomolar = (rawValue, unit) => {
+  const n = cleanNumber(rawValue);
+  if (n == null) return null;
+  const factor = unit === 'mM' ? 1_000_000 : unit === 'µM' ? 1_000 : 1;
+  return n * factor;
+};
+
 // Reshape Formik v2 form values into the sensor-shaped payload the v2 BE expects.
 // Only fields whose required keys are filled in pass through; partially-filled
 // optional rows (e.g. light stimuli with no wavelength) are dropped.
@@ -73,7 +82,7 @@ const reshapeForV2Submit = (values, user) => {
           method: out.method,
           ref_figure: out.ref_figure,
           ...(cleanOptionalString(out.regulatory_effect) != null && { regulatory_effect: out.regulatory_effect }),
-          ...(cleanNumber(out.kd) != null && { kd: cleanNumber(out.kd) }),
+          ...(kdToNanomolar(out.kd, out.kd_unit) != null && { kd: kdToNanomolar(out.kd, out.kd_unit) }),
         };
       });
 
@@ -86,7 +95,7 @@ const reshapeForV2Submit = (values, user) => {
           doi: out.doi,
           method: out.method,
           ref_figure: out.ref_figure,
-          ...(cleanNumber(out.kd) != null && { kd: cleanNumber(out.kd) }),
+          ...(kdToNanomolar(out.kd, out.kd_unit) != null && { kd: kdToNanomolar(out.kd, out.kd_unit) }),
         };
       });
 
@@ -116,13 +125,19 @@ const reshapeForV2Submit = (values, user) => {
         };
       });
 
-    const mutations = (p.mutations ?? []).filter((m) => m && m.trim() !== '');
+    const mutations = (p.mutations ?? [])
+      .filter((m) => m && m.mutations && m.mutations.trim() !== '' && m.ref_id && m.ref_id.trim() !== '')
+      .map((m) => ({
+        mutations: m.mutations.split(',').map((s) => s.trim()).filter(Boolean),
+        ref_type: m.ref_type || 'UniProt',
+        ref_id: m.ref_id.trim(),
+      }));
 
     return {
       alias: p.alias,
       uniProtID: p.uniProtID,
       accession: p.accession,
-      ...(p.mechanism && { mechanism: p.mechanism }),
+      mechanism: p.mechanism,
       ...(ligands.length > 0 && { ligands }),
       ...(operators.length > 0 && { operators }),
       ...(light_stimuli.length > 0 && { light_stimuli }),

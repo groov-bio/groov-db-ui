@@ -1,6 +1,6 @@
 import { Step, Stepper, StepLabel, Typography } from '@mui/material';
 
-const STEPS = ['About', 'Ligands', 'Operators', 'Extras'];
+const STEPS = ['About', 'Stimuli', 'Operators', 'Mutations'];
 
 export default function ProteinFormStepper({ stepValue, setStepValue, proteinErrors }) {
   const errorAt = (step) => {
@@ -9,15 +9,15 @@ export default function ProteinFormStepper({ stepValue, setStepValue, proteinErr
         (k) => proteinErrors?.[k]
       );
     }
-    if (step === 'Ligands') return proteinErrors?.form || proteinErrors?.ligands;
-    if (step === 'Operators') return proteinErrors?.form || proteinErrors?.operators;
-    if (step === 'Extras') {
+    if (step === 'Stimuli') {
       return (
+        proteinErrors?.ligands ||
         proteinErrors?.light_stimuli ||
-        proteinErrors?.temperature_stimuli ||
-        proteinErrors?.mutations
+        proteinErrors?.temperature_stimuli
       );
     }
+    if (step === 'Operators') return proteinErrors?.operators;
+    if (step === 'Mutations') return proteinErrors?.mutations;
     return false;
   };
 

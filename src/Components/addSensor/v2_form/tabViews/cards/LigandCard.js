@@ -73,11 +73,18 @@ export default function LigandCard({ index, fieldPrefix }) {
                     placeholder="e.g. induces, represses"
                   />
                 </FormControl>
-                <FormControl fullWidth sx={{ ml: 2 }}>
+                <FormControl fullWidth sx={{ ml: 2, mr: 1 }}>
                   <FormikTextInput
                     name={f('kd')}
                     label="Kd (optional)"
                     type="number"
+                  />
+                </FormControl>
+                <FormControl sx={{ minWidth: 90 }}>
+                  <FormikSelectInput
+                    name={f('kd_unit')}
+                    label="Unit"
+                    options={['nM', 'µM', 'mM']}
                   />
                 </FormControl>
               </Box>

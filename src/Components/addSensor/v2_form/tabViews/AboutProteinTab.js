@@ -35,7 +35,7 @@ export default function AboutProteinTab({ fieldPrefix }) {
       <Box gridColumn="span 12">
         <FormikSelectInput
           name={f('mechanism')}
-          label="Mechanism (optional)"
+          label="Mechanism"
           options={mechanisms}
         />
       </Box>

@@ -63,12 +63,21 @@ export default function OperatorCard({ index, fieldPrefix }) {
                 <FormikSelectInput name={f('method')} label="Experimental evidence" options={operatorMethods} />
               </Box>
 
-              <Box mb={2}>
-                <FormikTextInput
-                  name={f('kd')}
-                  label="Kd (optional)"
-                  type="number"
-                />
+              <Box display="flex" mb={2}>
+                <FormControl fullWidth sx={{ mr: 1 }}>
+                  <FormikTextInput
+                    name={f('kd')}
+                    label="Kd (optional)"
+                    type="number"
+                  />
+                </FormControl>
+                <FormControl sx={{ minWidth: 90 }}>
+                  <FormikSelectInput
+                    name={f('kd_unit')}
+                    label="Unit"
+                    options={['nM', 'µM', 'mM']}
+                  />
+                </FormControl>
               </Box>
             </Collapse>
           </Box>
