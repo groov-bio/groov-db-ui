@@ -13,8 +13,39 @@ import AdminTempSensors from './AdminTempSensors';
 import AdminProcessedSensors from './AdminProcessedSensors';
 import SensorPage from '../../Sensor_Components/SensorPage';
 import useUserStore from './../../../zustand/user.store';
+import useFeatureFlagsStore, { useFeatureFlag } from '../../../zustand/featureFlags.store';
+import AdminV2 from './v2/AdminV2';
+import { Box } from '@mui/material';
 
 export default function Admin() {
+  const v2AdminPortal = useFeatureFlag('v2_admin_portal', false);
+  const flagsLoading = useFeatureFlagsStore((s) => s.loading);
+  const flagsReady = useFeatureFlagsStore(
+    (s) => Object.keys(s.flags).length > 0
+  );
+
+  // Wait for flags before deciding V1 vs V2 — otherwise V1 mounts on the
+  // initial empty-flags render and fires its fetches before the flag arrives.
+  if (flagsLoading || !flagsReady) {
+    return (
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        minHeight="50vh"
+      >
+        <CircularProgress />
+      </Box>
+    );
+  }
+
+  if (v2AdminPortal) {
+    return <AdminV2 />;
+  }
+  return <AdminV1 />;
+}
+
+function AdminV1() {
   const [tempData, setTempData] = useState();
   const [processedData, setProcessedData] = useState();
   const [viewSensorPage, setViewSensorPage] = useState({

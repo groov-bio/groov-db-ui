@@ -1,8 +1,6 @@
 import * as Yup from 'yup';
 import _ from 'lodash';
 
-// TODO - expand this and eventually deprecate v1
-
 const alphaNumericPattern = /^[A-Za-z0-9_.]+$/;
 const dnaSequencePattern = /^[ATCGatcg]+$/;
 const figurePattern = /^[S]?[1-9]?[0-9A-Za-z]?$/;
@@ -16,6 +14,10 @@ const ligandMethods = [
   'Surface plasmon resonance',
   'Fluorescence polarization',
   'Synthetic regulation',
+  'Thermal shift',
+  'Spectrophotometric competition',
+  'Spectral shift',
+  'DNA affinity chromatography',
 ];
 
 const operatorMethods = [
@@ -26,6 +28,7 @@ const operatorMethods = [
   'Isothermal titration calorimetry',
   'Fluorescence polarization',
   'Synthetic regulation',
+  'ChIP-Seq',
 ];
 
 const figureTypes = [
@@ -34,6 +37,17 @@ const figureTypes = [
   'Table',
   'Supplementary Table',
 ];
+
+const kdUnitValues = ['nM', 'µM', 'mM'];
+
+const mechanismValues = [
+  'Apo-repressor',
+  'Apo-activator',
+  'Co-repressor',
+  'Co-activator',
+];
+
+const familyValues = ['TetR', 'LysR', 'AraC', 'MarR', 'LacI', 'GntR', 'LuxR', 'IclR', 'Other'];
 
 function conditionallyRequiredString(options) {
   const {
@@ -53,9 +67,9 @@ function conditionallyRequiredString(options) {
       const parent = this.parent;
       const anySiblingSet = otherFields.some((field) => {
         const val = parent[field];
-        return val && val.trim() !== '';
+        return val && String(val).trim() !== '';
       });
-      if (anySiblingSet && (!value || !value.trim())) {
+      if (anySiblingSet && (!value || !String(value).trim())) {
         return this.createError({
           message:
             requiredMessage ||
@@ -75,9 +89,7 @@ function conditionallyRequiredString(options) {
       `pattern-${fieldName}`,
       invalidMsg || `Invalid ${fieldName}`,
       function (value) {
-        if (!value || !value.trim()) {
-          return true;
-        }
+        if (!value || !value.trim()) return true;
         if (!pattern.test(value)) {
           return this.createError({
             message: invalidMsg || `Invalid ${fieldName}`,
@@ -93,9 +105,7 @@ function conditionallyRequiredString(options) {
       `valid-${fieldName}`,
       invalidMsg || `Invalid ${fieldName}`,
       function (value) {
-        if (!value || !value.trim()) {
-          return true;
-        }
+        if (!value || !value.trim()) return true;
         if (!validValues.includes(value)) {
           return this.createError({
             message: invalidMsg || `Invalid ${fieldName}`,
@@ -109,10 +119,28 @@ function conditionallyRequiredString(options) {
   return schema;
 }
 
-export const isCompleteEntry = (row) =>
-  row &&
-  !_.isEmpty(row) &&
-  Object.values(row).every((val) => val && String(val).trim() !== '');
+export const isCompleteEntry = (row) => {
+  if (!row || _.isEmpty(row)) return false;
+  // Optional fields don't count toward "completeness". Yup casts strip
+  // undefined values before this runs, so a row with only an optional default
+  // (e.g. {kd_unit: 'nM'}) must NOT be treated as complete.
+  const required = Object.entries(row).filter(
+    ([k]) => !['regulatory_effect', 'kd', 'kd_unit', 'fig_type'].includes(k)
+  );
+  if (required.length === 0) return false;
+  return required.every(
+    ([, val]) => val !== undefined && val !== null && String(val).trim() !== ''
+  );
+};
+
+const optionalNumber = Yup.mixed().test(
+  'optional-number',
+  'Must be a valid number',
+  (value) => {
+    if (value === '' || value === null || value === undefined) return true;
+    return !Number.isNaN(Number(value));
+  }
+);
 
 const ligandItemSchema = Yup.object().shape({
   name: conditionallyRequiredString({
@@ -150,11 +178,11 @@ const ligandItemSchema = Yup.object().shape({
     pattern: figurePattern,
     requiredMessage: 'Reference figure is required',
   }),
+  regulatory_effect: Yup.string().oneOf(['activates', 'represses', ''], 'Must be "activates" or "represses"').notRequired(),
+  kd: optionalNumber,
+  kd_unit: Yup.string().oneOf(kdUnitValues, 'Invalid Kd unit').notRequired(),
 });
 
-/**
- * Operator item schema (copied from v1)
- */
 const operatorItemSchema = Yup.object().shape({
   sequence: conditionallyRequiredString({
     fieldName: 'sequence',
@@ -187,80 +215,119 @@ const operatorItemSchema = Yup.object().shape({
     pattern: figurePattern,
     requiredMessage: 'Reference figure is required',
   }),
+  kd: optionalNumber,
+  kd_unit: Yup.string().oneOf(kdUnitValues, 'Invalid Kd unit').notRequired(),
 });
 
-/**
- * About section schema (copied from v1)
- */
-const aboutSchema = Yup.object().shape({
-  alias: Yup.string()
-    .max(16, 'Must be 16 characters or less')
-    .matches(/^[A-Za-z0-9_.]+$/, 'Must contain only letters or numbers')
-    .required('Alias is required'),
-
-  accession: Yup.string()
-    .matches(alphaNumericPattern, 'Must contain only letters and underscores')
-    .required('Accession is required'),
-
-  uniProtID: Yup.string()
-    .matches(
-      alphaNumericPattern,
-      'Must contain only letters, numbers, and underscores'
-    )
-    .required('UniProtID is required'),
-
-  family: Yup.string()
-    .oneOf(
-      [
-        'TetR',
-        'LysR',
-        'AraC',
-        'MarR',
-        'LacI',
-        'GntR',
-        'LuxR',
-        'IclR',
-        'Other',
-      ],
-      'Invalid family'
-    )
-    .required('Family is required'),
+const lightStimulusSchema = Yup.object().shape({
+  wavelength: optionalNumber,
+  regulatory_effect: Yup.string().oneOf(['activates', 'represses', ''], 'Must be "activates" or "represses"').notRequired(),
+  doi: Yup.string().matches(doiValidation, { message: 'Invalid DOI', excludeEmptyString: true }),
+  method: Yup.string().notRequired(),
+  ref_figure: Yup.string().matches(figurePattern, { message: 'Invalid figure', excludeEmptyString: true }),
+  fig_type: Yup.string().oneOf([...figureTypes, ''], 'Invalid figure type'),
 });
 
-const stimulusSchema = Yup.object().shape({
-  // Placeholder - add validation rules as fields are added
+const temperatureStimulusSchema = Yup.object().shape({
+  temperature: optionalNumber,
+  regulatory_effect: Yup.string().oneOf(['activates', 'represses', ''], 'Must be "activates" or "represses"').notRequired(),
+  doi: Yup.string().matches(doiValidation, { message: 'Invalid DOI', excludeEmptyString: true }),
+  method: Yup.string().notRequired(),
+  ref_figure: Yup.string().matches(figurePattern, { message: 'Invalid figure', excludeEmptyString: true }),
+  fig_type: Yup.string().oneOf([...figureTypes, ''], 'Invalid figure type'),
 });
 
 const proteinSchema = Yup.object()
   .shape({
     id: Yup.string().required(),
-    about: aboutSchema,
+    alias: Yup.string()
+      .max(16, 'Must be 16 characters or less')
+      .matches(/^[A-Za-z0-9_.]+$/, 'Must contain only letters or numbers')
+      .required('Alias is required'),
+    accession: Yup.string()
+      .matches(alphaNumericPattern, 'Must contain only letters and underscores')
+      .required('Accession is required'),
+    uniProtID: Yup.string()
+      .matches(
+        alphaNumericPattern,
+        'Must contain only letters, numbers, and underscores'
+      )
+      .required('UniProtID is required'),
+    family: Yup.string()
+      .oneOf(familyValues, 'Invalid family')
+      .required('Family is required'),
     ligands: Yup.array().of(ligandItemSchema),
     operators: Yup.array().of(operatorItemSchema),
-    stimulus: stimulusSchema,
+    light_stimuli: Yup.array().of(lightStimulusSchema),
+    temperature_stimuli: Yup.array().of(temperatureStimulusSchema),
+    toggles: Yup.object().shape({
+      ligands: Yup.boolean(),
+      operators: Yup.boolean(),
+      light: Yup.boolean(),
+      temperature: Yup.boolean(),
+    }).notRequired(),
+    mutations: Yup.array().of(
+      Yup.object().shape({
+        mutations: conditionallyRequiredString({
+          fieldName: 'mutations',
+          otherFields: ['ref_id'],
+          requiredMessage: 'Mutation(s) required when a reference is provided',
+        }),
+        ref_type: Yup.string().oneOf(['UniProt', 'groovDB', ''], 'Invalid reference type').notRequired(),
+        ref_id: conditionallyRequiredString({
+          fieldName: 'ref_id',
+          otherFields: ['mutations'],
+          requiredMessage: 'Reference protein ID is required',
+        }),
+      })
+    ),
   })
   .test(
-    'at-least-one-complete',
-    'At least one complete ligand or operator is required',
+    'at-least-one-stimulus-or-operator',
+    'At least one complete ligand, operator, or alternative stimulus is required',
     function (protein) {
-      const hasCompleteLigand = protein.ligands?.some(isCompleteEntry);
-      const hasCompleteOperator = protein.operators?.some(isCompleteEntry);
-
-      if (!hasCompleteLigand && !hasCompleteOperator) {
+      // Toggled-off sections have their arrays cleared, so the array length
+      // check is sufficient — but we also guard explicitly via toggles so that
+      // a section disabled by the user never fails the "needs entries" rule.
+      const toggles = protein.toggles ?? {};
+      const hasLigand =
+        toggles.ligands !== false && protein.ligands?.some(isCompleteEntry);
+      const hasOperator =
+        toggles.operators !== false && protein.operators?.some(isCompleteEntry);
+      const hasLight =
+        toggles.light !== false &&
+        protein.light_stimuli?.some(
+          (s) => s?.wavelength !== '' && s?.wavelength != null
+        );
+      const hasTemp =
+        toggles.temperature !== false &&
+        protein.temperature_stimuli?.some(
+          (s) => s?.temperature !== '' && s?.temperature != null
+        );
+      if (!hasLigand && !hasOperator && !hasLight && !hasTemp) {
         return this.createError({
           path: `${this.path}.form`,
-          message: 'At least one complete ligand or operator is required for this protein',
+          message:
+            'Each protein needs at least one complete stimulus or operator',
         });
       }
       return true;
     }
   );
 
+const sensorSchema = Yup.object().shape({
+  mechanism: Yup.string()
+    .oneOf(mechanismValues, 'Invalid mechanism')
+    .required('Mechanism is required'),
+  about: Yup.string().max(500, 'Must be 500 characters or less').notRequired(),
+});
+
 const sharedExperimentSchema = Yup.object().shape({
-  // Placeholder - add validation rules as fields are added
+  // Placeholder
 });
 
 export const v2_validationSchema = Yup.object().shape({
+  sensor: sensorSchema,
   shared: Yup.object().shape({
     experiment: sharedExperimentSchema,
   }),

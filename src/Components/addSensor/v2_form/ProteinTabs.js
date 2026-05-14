@@ -1,7 +1,8 @@
-import { Box, Tabs, Tab, IconButton, Tooltip } from '@mui/material';
+import { Box, Tabs, Tab, IconButton, Button } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
+import { useFormikContext } from 'formik';
 
 export default function ProteinTabs({
   proteins,
@@ -12,13 +13,17 @@ export default function ProteinTabs({
   errors = [],
 }) {
   const getProteinLabel = (protein, index) => {
-    if (protein.about?.alias && protein.about.alias.trim() !== '') {
-      return protein.about.alias;
+    if (protein.alias && protein.alias.trim() !== '') {
+      return protein.alias;
     }
     return `Protein ${index + 1}`;
   };
 
+  const isSingleProtein = proteins.length === 1;
+
+  const { submitCount } = useFormikContext();
   const hasErrors = (index) => {
+    if (submitCount === 0) return false;
     if (!errors || !Array.isArray(errors)) return false;
     const proteinError = errors[index];
     if (!proteinError) return false;
@@ -102,16 +107,16 @@ export default function ProteinTabs({
         ))}
       </Tabs>
 
-      <Tooltip title="Add Protein">
-        <IconButton
-          onClick={onAddProtein}
-          color="primary"
-          size="small"
-          sx={{ mx: 1.5 }}
-        >
-          <AddIcon fontSize="small" />
-        </IconButton>
-      </Tooltip>
+      <Button
+        onClick={onAddProtein}
+        startIcon={<AddIcon />}
+        variant="outlined"
+        color="primary"
+        size="small"
+        sx={{ mx: 1.5, my: 1, whiteSpace: 'nowrap', flexShrink: 0 }}
+      >
+        {isSingleProtein ? 'Add second protein' : 'Add protein'}
+      </Button>
     </Box>
   );
 }
