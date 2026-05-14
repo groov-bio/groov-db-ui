@@ -47,17 +47,7 @@ const mechanismValues = [
   'Co-activator',
 ];
 
-const categoryValues = [
-  'TetR',
-  'LysR',
-  'AraC',
-  'MarR',
-  'LacI',
-  'GntR',
-  'LuxR',
-  'IclR',
-  'Other',
-];
+const familyValues = ['TetR', 'LysR', 'AraC', 'MarR', 'LacI', 'GntR', 'LuxR', 'IclR', 'Other'];
 
 function conditionallyRequiredString(options) {
   const {
@@ -188,7 +178,7 @@ const ligandItemSchema = Yup.object().shape({
     pattern: figurePattern,
     requiredMessage: 'Reference figure is required',
   }),
-  regulatory_effect: Yup.string().notRequired(),
+  regulatory_effect: Yup.string().oneOf(['activates', 'represses', ''], 'Must be "activates" or "represses"').notRequired(),
   kd: optionalNumber,
   kd_unit: Yup.string().oneOf(kdUnitValues, 'Invalid Kd unit').notRequired(),
 });
@@ -231,7 +221,7 @@ const operatorItemSchema = Yup.object().shape({
 
 const lightStimulusSchema = Yup.object().shape({
   wavelength: optionalNumber,
-  regulatory_effect: Yup.string().notRequired(),
+  regulatory_effect: Yup.string().oneOf(['activates', 'represses', ''], 'Must be "activates" or "represses"').notRequired(),
   doi: Yup.string().matches(doiValidation, { message: 'Invalid DOI', excludeEmptyString: true }),
   method: Yup.string().notRequired(),
   ref_figure: Yup.string().matches(figurePattern, { message: 'Invalid figure', excludeEmptyString: true }),
@@ -240,7 +230,7 @@ const lightStimulusSchema = Yup.object().shape({
 
 const temperatureStimulusSchema = Yup.object().shape({
   temperature: optionalNumber,
-  regulatory_effect: Yup.string().notRequired(),
+  regulatory_effect: Yup.string().oneOf(['activates', 'represses', ''], 'Must be "activates" or "represses"').notRequired(),
   doi: Yup.string().matches(doiValidation, { message: 'Invalid DOI', excludeEmptyString: true }),
   method: Yup.string().notRequired(),
   ref_figure: Yup.string().matches(figurePattern, { message: 'Invalid figure', excludeEmptyString: true }),
@@ -263,13 +253,19 @@ const proteinSchema = Yup.object()
         'Must contain only letters, numbers, and underscores'
       )
       .required('UniProtID is required'),
-    mechanism: Yup.string()
-      .oneOf(mechanismValues, 'Invalid mechanism')
-      .required('Mechanism is required'),
+    family: Yup.string()
+      .oneOf(familyValues, 'Invalid family')
+      .required('Family is required'),
     ligands: Yup.array().of(ligandItemSchema),
     operators: Yup.array().of(operatorItemSchema),
     light_stimuli: Yup.array().of(lightStimulusSchema),
     temperature_stimuli: Yup.array().of(temperatureStimulusSchema),
+    toggles: Yup.object().shape({
+      ligands: Yup.boolean(),
+      operators: Yup.boolean(),
+      light: Yup.boolean(),
+      temperature: Yup.boolean(),
+    }).notRequired(),
     mutations: Yup.array().of(
       Yup.object().shape({
         mutations: conditionallyRequiredString({
@@ -290,19 +286,29 @@ const proteinSchema = Yup.object()
     'at-least-one-stimulus-or-operator',
     'At least one complete ligand, operator, or alternative stimulus is required',
     function (protein) {
-      const hasLigand = protein.ligands?.some(isCompleteEntry);
-      const hasOperator = protein.operators?.some(isCompleteEntry);
-      const hasLight = protein.light_stimuli?.some(
-        (s) => s?.wavelength !== '' && s?.wavelength != null
-      );
-      const hasTemp = protein.temperature_stimuli?.some(
-        (s) => s?.temperature !== '' && s?.temperature != null
-      );
+      // Toggled-off sections have their arrays cleared, so the array length
+      // check is sufficient — but we also guard explicitly via toggles so that
+      // a section disabled by the user never fails the "needs entries" rule.
+      const toggles = protein.toggles ?? {};
+      const hasLigand =
+        toggles.ligands !== false && protein.ligands?.some(isCompleteEntry);
+      const hasOperator =
+        toggles.operators !== false && protein.operators?.some(isCompleteEntry);
+      const hasLight =
+        toggles.light !== false &&
+        protein.light_stimuli?.some(
+          (s) => s?.wavelength !== '' && s?.wavelength != null
+        );
+      const hasTemp =
+        toggles.temperature !== false &&
+        protein.temperature_stimuli?.some(
+          (s) => s?.temperature !== '' && s?.temperature != null
+        );
       if (!hasLigand && !hasOperator && !hasLight && !hasTemp) {
         return this.createError({
           path: `${this.path}.form`,
           message:
-            'Each protein needs at least one complete ligand, operator, light, or temperature entry',
+            'Each protein needs at least one complete stimulus or operator',
         });
       }
       return true;
@@ -310,9 +316,9 @@ const proteinSchema = Yup.object()
   );
 
 const sensorSchema = Yup.object().shape({
-  category: Yup.string()
-    .oneOf(categoryValues, 'Invalid category')
-    .required('Category is required'),
+  mechanism: Yup.string()
+    .oneOf(mechanismValues, 'Invalid mechanism')
+    .required('Mechanism is required'),
   about: Yup.string().max(500, 'Must be 500 characters or less').notRequired(),
 });
 

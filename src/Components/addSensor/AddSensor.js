@@ -137,7 +137,7 @@ const reshapeForV2Submit = (values, user) => {
       alias: p.alias,
       uniProtID: p.uniProtID,
       accession: p.accession,
-      mechanism: p.mechanism,
+      family: p.family,
       ...(ligands.length > 0 && { ligands }),
       ...(operators.length > 0 && { operators }),
       ...(light_stimuli.length > 0 && { light_stimuli }),
@@ -148,7 +148,7 @@ const reshapeForV2Submit = (values, user) => {
 
   return {
     sensor: {
-      category: values.sensor.category,
+      mechanism: values.sensor.mechanism,
       ...(values.sensor.about && { about: values.sensor.about }),
       proteins,
     },

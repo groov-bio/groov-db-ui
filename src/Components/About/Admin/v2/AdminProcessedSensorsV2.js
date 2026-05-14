@@ -26,7 +26,6 @@ export default function AdminProcessedSensorsV2({ processed }) {
       return {
         id: idx,
         submissionUUID: p.submissionUUID,
-        category: p.category,
         type: p.data?.type ?? '—',
         aliases: aliases || '(no alias)',
         proteinCount: proteins.length,
@@ -37,7 +36,6 @@ export default function AdminProcessedSensorsV2({ processed }) {
   }, [processed]);
 
   const columns = [
-    { field: 'category', headerName: 'Category', width: 110 },
     { field: 'type', headerName: 'Type', width: 140 },
     { field: 'aliases', headerName: 'Aliases', flex: 1, minWidth: 200 },
     { field: 'proteinCount', headerName: 'Proteins', width: 100 },

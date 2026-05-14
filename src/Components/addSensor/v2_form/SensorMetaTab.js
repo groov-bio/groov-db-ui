@@ -2,8 +2,11 @@ import { Box, Typography } from '@mui/material';
 import { FormikTextInput } from '../../form-inputs/FormikTextInput';
 import { FormikSelectInput } from '../../form-inputs/FormikSelectInput';
 
-const categoryOptions = [
-  'TetR', 'LysR', 'AraC', 'MarR', 'LacI', 'GntR', 'LuxR', 'IclR', 'Other',
+const mechanismOptions = [
+  'Apo-repressor',
+  'Co-repressor',
+  'Apo-activator',
+  'Co-activator',
 ];
 
 export default function SensorMetaTab() {
@@ -24,9 +27,9 @@ export default function SensorMetaTab() {
       </Box>
       <Box gridColumn="span 12">
         <FormikSelectInput
-          name="sensor.category"
-          label="Category"
-          options={categoryOptions}
+          name="sensor.mechanism"
+          label="Mechanism"
+          options={mechanismOptions}
         />
       </Box>
       <Box gridColumn="span 12">

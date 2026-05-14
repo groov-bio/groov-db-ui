@@ -19,7 +19,7 @@ import {
 
 /**
  * Preview component for raw V2 submissions — renders the un-enriched
- * { sensor: { category, about, proteins: [...] } } shape produced by
+ * { sensor: { mechanism, about, proteins: [...] } } shape produced by
  * /v2/insertForm. Used in the admin temp queue before the admin clicks
  * "Approve" to run enrichment.
  *
@@ -40,10 +40,9 @@ export default function TempSensorPreviewV2({ submission }) {
     <Stack spacing={3}>
       <Paper sx={{ p: 3, borderRadius: 2 }}>
         <Stack direction="row" spacing={1} sx={{ mb: 1, flexWrap: 'wrap' }}>
-          {sensor?.category && (
+          {sensor?.mechanism && (
             <Chip
-              label={sensor.category}
-              color="primary"
+              label={sensor.mechanism}
               size="small"
               variant="outlined"
             />
@@ -103,7 +102,7 @@ function ProteinSection({ protein }) {
               <TableRow>
                 <TableCell>UniProt ID</TableCell>
                 <TableCell>NCBI Accession</TableCell>
-                <TableCell>Mechanism</TableCell>
+                <TableCell>Family</TableCell>
                 <TableCell>Mutations</TableCell>
               </TableRow>
             </TableHead>
@@ -135,7 +134,7 @@ function ProteinSection({ protein }) {
                     '—'
                   )}
                 </TableCell>
-                <TableCell>{protein.mechanism || '—'}</TableCell>
+                <TableCell>{protein.family || '—'}</TableCell>
                 <TableCell>
                   {protein.mutations?.length
                     ? protein.mutations.join(', ')

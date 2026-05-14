@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import {
   Box, Button, Typography, FormControl, InputLabel, Select, MenuItem,
+  Switch, FormControlLabel,
 } from '@mui/material';
 import { FieldArray, useFormikContext } from 'formik';
 import _ from 'lodash';
@@ -13,9 +14,9 @@ import {
 } from '../../../../lib/constants/v2_form/initialValues';
 
 const STIMULUS_TYPES = [
-  { value: 'ligand', label: 'Ligand', arrayField: 'ligands' },
-  { value: 'light', label: 'Light', arrayField: 'light_stimuli' },
-  { value: 'temperature', label: 'Temperature', arrayField: 'temperature_stimuli' },
+  { value: 'ligand', label: 'Ligand', arrayField: 'ligands', toggleKey: 'ligands' },
+  { value: 'light', label: 'Light', arrayField: 'light_stimuli', toggleKey: 'light' },
+  { value: 'temperature', label: 'Temperature', arrayField: 'temperature_stimuli', toggleKey: 'temperature' },
 ];
 
 // Picks an initial stimulus type based on which array already has entries,
@@ -29,7 +30,7 @@ function initialStimulusType(values, fieldPrefix) {
 }
 
 export default function StimuliTab({ fieldPrefix }) {
-  const { values } = useFormikContext();
+  const { values, setFieldValue } = useFormikContext();
   const [stimulusType, setStimulusType] = useState(() =>
     initialStimulusType(values, fieldPrefix)
   );
@@ -37,11 +38,40 @@ export default function StimuliTab({ fieldPrefix }) {
   const ligands = _.get(values, `${fieldPrefix}.ligands`, []);
   const lights = _.get(values, `${fieldPrefix}.light_stimuli`, []);
   const temps = _.get(values, `${fieldPrefix}.temperature_stimuli`, []);
+  const toggles = _.get(values, `${fieldPrefix}.toggles`, {});
 
   const counts = useMemo(
     () => ({ ligand: ligands.length, light: lights.length, temperature: temps.length }),
     [ligands.length, lights.length, temps.length]
   );
+
+  const currentType = STIMULUS_TYPES.find((t) => t.value === stimulusType);
+  const isEnabled = currentType ? (toggles[currentType.toggleKey] !== false) : true;
+
+  function handleToggle(checked) {
+    const { arrayField, toggleKey } = currentType;
+    setFieldValue(`${fieldPrefix}.toggles.${toggleKey}`, checked);
+    if (!checked) {
+      // Clear the array when toggling off
+      setFieldValue(`${fieldPrefix}.${arrayField}`, []);
+    } else {
+      // Add one empty entry when toggling on
+      const empty =
+        stimulusType === 'ligand'
+          ? createEmptyLigand()
+          : stimulusType === 'light'
+          ? createEmptyLightStimulus()
+          : createEmptyTemperatureStimulus();
+      setFieldValue(`${fieldPrefix}.${arrayField}`, [empty]);
+    }
+  }
+
+  const toggleLabel =
+    stimulusType === 'ligand'
+      ? 'This protein has a ligand'
+      : stimulusType === 'light'
+      ? 'This protein has a light stimulus'
+      : 'This protein has a temperature stimulus';
 
   return (
     <Box
@@ -70,7 +100,20 @@ export default function StimuliTab({ fieldPrefix }) {
         </FormControl>
       </Box>
 
-      {stimulusType === 'ligand' && (
+      <Box gridColumn="span 12" mb={1}>
+        <FormControlLabel
+          control={
+            <Switch
+              checked={isEnabled}
+              onChange={(e) => handleToggle(e.target.checked)}
+              color="primary"
+            />
+          }
+          label={toggleLabel}
+        />
+      </Box>
+
+      {stimulusType === 'ligand' && isEnabled && (
         <FieldArray name={`${fieldPrefix}.ligands`}>
           {({ push }) => (
             <>
@@ -87,7 +130,7 @@ export default function StimuliTab({ fieldPrefix }) {
         </FieldArray>
       )}
 
-      {stimulusType === 'light' && (
+      {stimulusType === 'light' && isEnabled && (
         <FieldArray name={`${fieldPrefix}.light_stimuli`}>
           {({ push, remove }) => (
             <>
@@ -112,7 +155,7 @@ export default function StimuliTab({ fieldPrefix }) {
         </FieldArray>
       )}
 
-      {stimulusType === 'temperature' && (
+      {stimulusType === 'temperature' && isEnabled && (
         <FieldArray name={`${fieldPrefix}.temperature_stimuli`}>
           {({ push, remove }) => (
             <>

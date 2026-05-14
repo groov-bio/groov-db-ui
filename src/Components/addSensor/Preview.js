@@ -16,8 +16,9 @@ export default function Preview({ proteinIndex = null }) {
   };
 
   // V2 form: protein lives at values.proteins[proteinIndex] with flat fields
-  // (alias, uniProtID, accession, mechanism). V1 form: those fields live under
-  // values.about. Detect and normalize so the preview works for both.
+  // (alias, uniProtID, accession). Mechanism lives on values.sensor.
+  // V1 form: those fields live under values.about. Detect and normalize so the
+  // preview works for both.
   const isV2 = proteinIndex !== null;
   const proteinData = isV2 ? values.proteins?.[proteinIndex] : values;
 
@@ -33,15 +34,17 @@ export default function Preview({ proteinIndex = null }) {
   const alias = about.alias || '';
   const uniProtID = about.uniProtID || '';
   const accession = about.accession || '';
-  const mechanism = about.mechanism || '';
-  const family = isV2 ? values.sensor?.category || '' : about.family || '';
+  const mechanism = isV2
+    ? values.sensor?.mechanism || ''
+    : about.mechanism || '';
+  const family = isV2 ? proteinData.family || '' : about.family || '';
 
   return (
     <Box mb={5}>
       <MetadataTable
         tableData={{
           Alias: { name: alias },
-          Family: { name: family },
+          ...(family && { Family: { name: family } }),
           'Uniprot ID': {
             name: uniProtID,
             link: { url: `https://www.uniprot.org/uniprot/${uniProtID}` },
@@ -54,16 +57,20 @@ export default function Preview({ proteinIndex = null }) {
         }}
         sx={{ gridColumn: 'span 12' }}
       />
-      <LigandViewer
-        sx={{ mt: '50px' }}
-        ligand={proteinData.ligands || []}
-        key={new Date().getTime()}
-        placement={placement}
-      />
-      <OperatorViewer
-        uniprotID={uniProtID}
-        operators={proteinData.operators || []}
-      />
+      {proteinData.ligands?.length > 0 && (
+        <LigandViewer
+          sx={{ mt: '50px' }}
+          ligand={proteinData.ligands}
+          key={new Date().getTime()}
+          placement={placement}
+        />
+      )}
+      {proteinData.operators?.length > 0 && (
+        <OperatorViewer
+          uniprotID={uniProtID}
+          operators={proteinData.operators}
+        />
+      )}
     </Box>
   );
 }

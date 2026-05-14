@@ -62,9 +62,9 @@ export async function getAllProcessedTempV2(user) {
   return res.json();
 }
 
-export async function getProcessedTempV2(user, category, submissionUUID) {
+export async function getProcessedTempV2(user, submissionUUID) {
   const res = await fetch(
-    `${V2_API_BASE}/v2/getProcessedTemp?category=${encodeURIComponent(category)}&submissionUUID=${encodeURIComponent(submissionUUID)}`,
+    `${V2_API_BASE}/v2/getProcessedTemp?submissionUUID=${encodeURIComponent(submissionUUID)}`,
     { headers: authHeaders(user) }
   );
   if (!res.ok) {

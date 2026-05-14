@@ -2,7 +2,7 @@
  * V2 Form Initial Values — Sensor-as-Container model
  *
  * A submission represents ONE sensor that contains N proteins (typically 1, or 2
- * for two-component systems). Sensor-level fields (category, about) live at the
+ * for two-component systems). Sensor-level fields (mechanism, about) live at the
  * top; protein-level fields (alias, uniProtID, ligands, operators, stimuli,
  * mutations, etc.) live inside each entry of `proteins[]`.
  */
@@ -58,16 +58,22 @@ export const createEmptyProtein = () => ({
   alias: '',
   uniProtID: '',
   accession: '',
-  mechanism: '',
+  family: '',
   ligands: [createEmptyLigand()],
   operators: [createEmptyOperator()],
   light_stimuli: [],
   temperature_stimuli: [],
   mutations: [],
+  toggles: {
+    ligands: true,
+    operators: true,
+    light: false,
+    temperature: false,
+  },
 });
 
 export const createEmptySensor = () => ({
-  category: '',
+  mechanism: '',
   about: '',
 });
 

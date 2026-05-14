@@ -36,10 +36,13 @@ export default function SensorPageV2View({
 
   const proteins = sensor?.proteins ?? [];
   const isMultiProtein = proteins.length > 1;
-  const primaryAlias = proteins[0]?.alias;
 
-  const displayTitle =
-    proteins.length === 1 ? primaryAlias : `${sensor?.category} Sensor`;
+  const proteinAliasLabel = proteins
+    .map((p) => p.alias)
+    .filter(Boolean)
+    .join('/');
+
+  const displayTitle = proteinAliasLabel || `${sensor?.category} Sensor`;
 
   return (
     <Container sx={{ py: 3 }}>

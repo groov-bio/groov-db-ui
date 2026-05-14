@@ -8,7 +8,7 @@ export default function ProteinFormStepper({ stepValue, setStepValue, proteinErr
   const errorAt = (step) => {
     if (submitCount === 0) return false;
     if (step === 'About') {
-      return ['alias', 'accession', 'uniProtID', 'mechanism'].some(
+      return ['alias', 'accession', 'uniProtID', 'family'].some(
         (k) => proteinErrors?.[k]
       );
     }

@@ -43,7 +43,7 @@ export default function StimulusCard({
             <FormikTextInput name={f(valueFieldName)} label={valueLabel} type="number" />
           </Box>
           <Box mb={2}>
-            <FormikTextInput name={f('regulatory_effect')} label="Regulatory effect (optional)" placeholder="e.g. activates" />
+            <FormikSelectInput name={f('regulatory_effect')} label="Regulatory effect (optional)" options={['activates', 'represses']} />
           </Box>
           <Box mb={2}><FormikTextInput name={f('doi')} label="DOI (optional)" /></Box>
           <Box display="flex" mb={2}>

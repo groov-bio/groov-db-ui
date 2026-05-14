@@ -60,24 +60,17 @@ export default function AdminV2() {
   const handleApproved = async (submissionUUID) => {
     // Optimistically reload processed list so the new row shows up and the
     // temp row's "Approve" button flips to "Processed".
-    const submission = submissions?.find(
-      (s) => s.submissionUUID === submissionUUID
-    );
-    const category = submission?.sensor?.category;
-
-    if (category) {
-      try {
-        const row = await getProcessedTempV2(user, category, submissionUUID);
-        setProcessed((prev) => {
-          const without = (prev ?? []).filter(
-            (p) => p.submissionUUID !== submissionUUID
-          );
-          return [...without, row];
-        });
-        return;
-      } catch {
-        // fall through to full refetch
-      }
+    try {
+      const row = await getProcessedTempV2(user, submissionUUID);
+      setProcessed((prev) => {
+        const without = (prev ?? []).filter(
+          (p) => p.submissionUUID !== submissionUUID
+        );
+        return [...without, row];
+      });
+      return;
+    } catch {
+      // fall through to full refetch
     }
 
     try {

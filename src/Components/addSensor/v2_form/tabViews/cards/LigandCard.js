@@ -81,10 +81,10 @@ export default function LigandCard({ index, fieldPrefix }) {
 
               <Box display="flex" mb={2}>
                 <FormControl fullWidth sx={{ mr: 2 }}>
-                  <FormikTextInput
+                  <FormikSelectInput
                     name={f('regulatory_effect')}
                     label="Regulatory effect (optional)"
-                    placeholder="e.g. induces, represses"
+                    options={['activates', 'represses']}
                   />
                 </FormControl>
                 <FormControl fullWidth sx={{ ml: 2, mr: 1 }}>

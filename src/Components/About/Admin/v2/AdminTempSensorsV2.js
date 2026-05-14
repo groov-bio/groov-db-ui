@@ -55,7 +55,6 @@ export default function AdminTempSensorsV2({
       return {
         id: idx,
         submissionUUID: s.submissionUUID,
-        category: s.sensor?.category ?? '—',
         aliases: aliases || '(no alias)',
         proteinCount: proteins.length,
         user: s.user ?? '—',
@@ -157,7 +156,6 @@ export default function AdminTempSensorsV2({
   };
 
   const columns = [
-    { field: 'category', headerName: 'Category', width: 110 },
     {
       field: 'aliases',
       headerName: 'Aliases',

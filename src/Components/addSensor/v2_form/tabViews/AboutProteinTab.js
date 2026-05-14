@@ -2,12 +2,7 @@ import { Box, Typography } from '@mui/material';
 import { FormikTextInput } from '../../../form-inputs/FormikTextInput';
 import { FormikSelectInput } from '../../../form-inputs/FormikSelectInput';
 
-const mechanisms = [
-  'Apo-repressor',
-  'Co-repressor',
-  'Apo-activator',
-  'Co-activator',
-];
+const FAMILY_OPTIONS = ['TetR', 'LysR', 'AraC', 'MarR', 'LacI', 'GntR', 'LuxR', 'IclR', 'Other'];
 
 export default function AboutProteinTab({ fieldPrefix }) {
   const f = (name) => `${fieldPrefix}.${name}`;
@@ -46,9 +41,10 @@ export default function AboutProteinTab({ fieldPrefix }) {
       </Box>
       <Box gridColumn="span 12">
         <FormikSelectInput
-          name={f('mechanism')}
-          label="Mechanism"
-          options={mechanisms}
+          name={f('family')}
+          label="Family"
+          options={FAMILY_OPTIONS}
+          helperText="Transcription factor family this protein belongs to."
         />
       </Box>
     </Box>
