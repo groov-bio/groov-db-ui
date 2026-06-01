@@ -18,6 +18,7 @@ import {
 } from '../../../../lib/api/v2Admin';
 import AdminTempSensorsV2 from './AdminTempSensorsV2';
 import AdminProcessedSensorsV2 from './AdminProcessedSensorsV2';
+import AdminPublishedSensorsV2 from './AdminPublishedSensorsV2';
 
 export default function AdminV2() {
   const user = useUserStore((s) => s.user);
@@ -87,6 +88,18 @@ export default function AdminV2() {
     );
   };
 
+  const handlePromoted = (submissionUUID) => {
+    setProcessed((prev) =>
+      (prev ?? []).filter((p) => p.submissionUUID !== submissionUUID)
+    );
+  };
+
+  const handleProcessedRejected = (submissionUUID) => {
+    setProcessed((prev) =>
+      (prev ?? []).filter((p) => p.submissionUUID !== submissionUUID)
+    );
+  };
+
   const isLoading = submissions === null || processed === null;
 
   return (
@@ -126,7 +139,12 @@ export default function AdminV2() {
           </Box>
         ) : (
           <>
-            <AdminProcessedSensorsV2 processed={processed} />
+            <AdminProcessedSensorsV2
+              processed={processed}
+              user={user}
+              onPromoted={handlePromoted}
+              onRejected={handleProcessedRejected}
+            />
             <AdminTempSensorsV2
               user={user}
               submissions={submissions}
@@ -135,6 +153,7 @@ export default function AdminV2() {
               onRejected={handleRejected}
               setApproveIsLoading={setApproveIsLoading}
             />
+            <AdminPublishedSensorsV2 user={user} />
           </>
         )}
       </Container>

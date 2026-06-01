@@ -101,3 +101,60 @@ export async function deleteTempV2(user, submissionUUID) {
   });
   return { status: res.status, body: await parseJsonOrEmpty(res) };
 }
+
+/**
+ * Promote a processed temp sensor into the live published database.
+ * Returns { status, body } so the caller can branch on:
+ *   200 success { message, grv_id, category }
+ *   404 not found | 409 already promoted | 400 bad input | 500 error
+ */
+export async function approveProcessedSensorV2(user, category, submissionUUID) {
+  const res = await fetch(`${V2_API_BASE}/v2/approveProcessedSensor`, {
+    method: 'POST',
+    headers: { ...authHeaders(user), 'Content-Type': 'application/json' },
+    body: JSON.stringify({ category, submissionUUID }),
+  });
+  return { status: res.status, body: await parseJsonOrEmpty(res) };
+}
+
+/**
+ * Reject (delete) a processed temp sensor without promoting it.
+ * Returns { status, body } — 204 success, 404 already gone.
+ */
+export async function rejectProcessedSensorV2(user, category, submissionUUID) {
+  const res = await fetch(`${V2_API_BASE}/v2/rejectProcessedSensor`, {
+    method: 'POST',
+    headers: { ...authHeaders(user), 'Content-Type': 'application/json' },
+    body: JSON.stringify({ category, submissionUUID }),
+  });
+  return { status: res.status, body: await parseJsonOrEmpty(res) };
+}
+
+/**
+ * Delete a live published sensor by grv_id.
+ * Returns { status, body } so the caller can branch on:
+ *   200 success { message, grv_id, category }
+ *   404 not found | 400 bad input | 500 error
+ */
+export async function deleteSensorV2(user, category, grv_id) {
+  const res = await fetch(`${V2_API_BASE}/v2/deleteSensor`, {
+    method: 'POST',
+    headers: { ...authHeaders(user), 'Content-Type': 'application/json' },
+    body: JSON.stringify({ category, grv_id }),
+  });
+  return { status: res.status, body: await parseJsonOrEmpty(res) };
+}
+
+/**
+ * Fetch the public R2 CDN index of all published sensors — same source the
+ * public sensor tables use. No auth required.
+ * Returns { stats: { regulators, ligands }, sensors: [ { id, alias,
+ *   uniprot_id, organism_name, category, ligands[] } ] }
+ */
+export async function fetchPublishedSensorsV2() {
+  const res = await fetch('https://groov-api.com/v2/index.json');
+  if (!res.ok) {
+    throw new Error(`Failed to load published sensors (${res.status})`);
+  }
+  return res.json();
+}

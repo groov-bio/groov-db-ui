@@ -4,19 +4,32 @@ import {
   Paper,
   Typography,
   Button,
-  Alert,
   Dialog,
   DialogContent,
   DialogTitle,
+  DialogActions,
   IconButton,
 } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import CloseIcon from '@mui/icons-material/Close';
+import { useSnackbar } from 'notistack';
 
 import SensorPageV2View from '../../../Sensor_Components/SensorPageV2View';
+import {
+  approveProcessedSensorV2,
+  rejectProcessedSensorV2,
+} from '../../../../lib/api/v2Admin';
 
-export default function AdminProcessedSensorsV2({ processed }) {
+export default function AdminProcessedSensorsV2({
+  processed,
+  user,
+  onPromoted,
+  onRejected,
+}) {
   const [viewing, setViewing] = useState(null);
+  const [actingUUID, setActingUUID] = useState(null);
+  const [confirm, setConfirm] = useState(null); // { action: 'promote'|'reject', row }
+  const { enqueueSnackbar } = useSnackbar();
 
   const rows = useMemo(() => {
     if (!processed) return [];
@@ -26,6 +39,7 @@ export default function AdminProcessedSensorsV2({ processed }) {
       return {
         id: idx,
         submissionUUID: p.submissionUUID,
+        category: p.category,
         type: p.data?.type ?? '—',
         aliases: aliases || '(no alias)',
         proteinCount: proteins.length,
@@ -34,6 +48,97 @@ export default function AdminProcessedSensorsV2({ processed }) {
       };
     });
   }, [processed]);
+
+  const doPromote = async (row) => {
+    setActingUUID(row.submissionUUID);
+    try {
+      const { status, body } = await approveProcessedSensorV2(
+        user,
+        row.category,
+        row.submissionUUID
+      );
+      switch (status) {
+        case 200:
+          enqueueSnackbar(
+            `Promoted ${row.aliases} → ${body.grv_id}`,
+            { variant: 'success', preventDuplicate: true }
+          );
+          onPromoted?.(row.submissionUUID);
+          break;
+        case 409:
+          enqueueSnackbar(
+            `Already promoted: ${row.aliases}`,
+            { variant: 'warning', preventDuplicate: true }
+          );
+          onPromoted?.(row.submissionUUID);
+          break;
+        case 404:
+          enqueueSnackbar(
+            `Not found: ${row.submissionUUID.slice(0, 8)}`,
+            { variant: 'error', preventDuplicate: true }
+          );
+          break;
+        case 400:
+          enqueueSnackbar(
+            `Invalid: ${body.message || 'bad input'}`,
+            { variant: 'error', preventDuplicate: true }
+          );
+          break;
+        default:
+          enqueueSnackbar(
+            `Error promoting: ${body.message || 'HTTP ' + status}`,
+            { variant: 'error', preventDuplicate: true }
+          );
+      }
+    } catch (err) {
+      enqueueSnackbar(`Network error: ${err.message}`, {
+        variant: 'error',
+        preventDuplicate: true,
+      });
+    } finally {
+      setActingUUID(null);
+      setConfirm(null);
+    }
+  };
+
+  const doReject = async (row) => {
+    setActingUUID(row.submissionUUID);
+    try {
+      const { status, body } = await rejectProcessedSensorV2(
+        user,
+        row.category,
+        row.submissionUUID
+      );
+      if (status === 204) {
+        enqueueSnackbar(
+          `Rejected ${row.aliases} (${row.submissionUUID.slice(0, 8)})`,
+          { variant: 'success', preventDuplicate: true }
+        );
+        onRejected?.(row.submissionUUID);
+      } else if (status === 404) {
+        enqueueSnackbar(
+          `Already gone: ${row.submissionUUID.slice(0, 8)}`,
+          { variant: 'info', preventDuplicate: true }
+        );
+        onRejected?.(row.submissionUUID);
+      } else {
+        enqueueSnackbar(
+          `Error rejecting ${row.submissionUUID.slice(0, 8)}: ${
+            body.message || `HTTP ${status}`
+          }`,
+          { variant: 'error', preventDuplicate: true }
+        );
+      }
+    } catch (err) {
+      enqueueSnackbar(`Network error: ${err.message}`, {
+        variant: 'error',
+        preventDuplicate: true,
+      });
+    } finally {
+      setActingUUID(null);
+      setConfirm(null);
+    }
+  };
 
   const columns = [
     { field: 'type', headerName: 'Type', width: 140 },
@@ -71,6 +176,40 @@ export default function AdminProcessedSensorsV2({ processed }) {
         </Button>
       ),
     },
+    {
+      field: 'promote',
+      headerName: 'Promote',
+      width: 120,
+      sortable: false,
+      renderCell: (params) => (
+        <Button
+          variant="contained"
+          color="success"
+          size="small"
+          disabled={actingUUID === params.row.submissionUUID}
+          onClick={() => setConfirm({ action: 'promote', row: params.row })}
+        >
+          Promote
+        </Button>
+      ),
+    },
+    {
+      field: 'reject',
+      headerName: 'Reject',
+      width: 110,
+      sortable: false,
+      renderCell: (params) => (
+        <Button
+          variant="contained"
+          color="error"
+          size="small"
+          disabled={actingUUID === params.row.submissionUUID}
+          onClick={() => setConfirm({ action: 'reject', row: params.row })}
+        >
+          Reject
+        </Button>
+      ),
+    },
   ];
 
   return (
@@ -92,11 +231,6 @@ export default function AdminProcessedSensorsV2({ processed }) {
         </Typography>
       </Paper>
 
-      <Alert severity="info" sx={{ mb: 2 }}>
-        Production promotion is not yet enabled for V2. These rows are
-        read-only previews of <code>groov-temp-v2-processed</code>.
-      </Alert>
-
       <Box sx={{ height: 320, width: '100%' }}>
         <DataGrid
           rows={rows}
@@ -108,6 +242,7 @@ export default function AdminProcessedSensorsV2({ processed }) {
         />
       </Box>
 
+      {/* View dialog */}
       <Dialog
         open={Boolean(viewing)}
         onClose={() => setViewing(null)}
@@ -128,6 +263,61 @@ export default function AdminProcessedSensorsV2({ processed }) {
             <SensorPageV2View sensor={viewing.data} hideEditButton />
           )}
         </DialogContent>
+      </Dialog>
+
+      {/* Confirmation dialog */}
+      <Dialog
+        open={Boolean(confirm)}
+        onClose={() => setConfirm(null)}
+        maxWidth="sm"
+        fullWidth
+      >
+        <DialogTitle>
+          {confirm?.action === 'promote'
+            ? 'Promote to production?'
+            : 'Reject submission?'}
+        </DialogTitle>
+        <DialogContent dividers>
+          {confirm && (
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+              <Typography variant="body2">
+                <strong>Aliases:</strong> {confirm.row.aliases}
+              </Typography>
+              <Typography variant="body2">
+                <strong>Type:</strong> {confirm.row.type}
+              </Typography>
+              <Typography variant="body2">
+                <strong>Proposed GRV ID:</strong> {confirm.row.proposed_grv_id}
+              </Typography>
+              <Typography
+                variant="body2"
+                color="text.secondary"
+                sx={{ mt: 1 }}
+              >
+                {confirm.action === 'promote'
+                  ? 'This will write the sensor to the live database and regenerate the public index and fingerprints.'
+                  : 'This discards the processed row. The original raw submission is unaffected.'}
+              </Typography>
+            </Box>
+          )}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setConfirm(null)}>Cancel</Button>
+          <Button
+            variant="contained"
+            color={confirm?.action === 'promote' ? 'success' : 'error'}
+            disabled={actingUUID === confirm?.row?.submissionUUID}
+            onClick={() => {
+              if (confirm?.action === 'promote') {
+                doPromote(confirm.row);
+              } else {
+                doReject(confirm.row);
+              }
+            }}
+          >
+            {confirm?.action === 'promote' ? 'Promote' : 'Reject'}
+          </Button>
+        </DialogActions>
       </Dialog>
     </Box>
   );
