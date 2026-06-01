@@ -104,28 +104,31 @@ export async function deleteTempV2(user, submissionUUID) {
 
 /**
  * Promote a processed temp sensor into the live published database.
+ * Processed-temp rows are keyed by submissionUUID alone (PK="PROCESSED"); the
+ * backend derives the category from the row's data, so no category is sent.
  * Returns { status, body } so the caller can branch on:
  *   200 success { message, grv_id, category }
  *   404 not found | 409 already promoted | 400 bad input | 500 error
  */
-export async function approveProcessedSensorV2(user, category, submissionUUID) {
+export async function approveProcessedSensorV2(user, submissionUUID) {
   const res = await fetch(`${V2_API_BASE}/v2/approveProcessedSensor`, {
     method: 'POST',
     headers: { ...authHeaders(user), 'Content-Type': 'application/json' },
-    body: JSON.stringify({ category, submissionUUID }),
+    body: JSON.stringify({ submissionUUID }),
   });
   return { status: res.status, body: await parseJsonOrEmpty(res) };
 }
 
 /**
  * Reject (delete) a processed temp sensor without promoting it.
+ * Keyed by submissionUUID alone (PK="PROCESSED").
  * Returns { status, body } — 204 success, 404 already gone.
  */
-export async function rejectProcessedSensorV2(user, category, submissionUUID) {
+export async function rejectProcessedSensorV2(user, submissionUUID) {
   const res = await fetch(`${V2_API_BASE}/v2/rejectProcessedSensor`, {
     method: 'POST',
     headers: { ...authHeaders(user), 'Content-Type': 'application/json' },
-    body: JSON.stringify({ category, submissionUUID }),
+    body: JSON.stringify({ submissionUUID }),
   });
   return { status: res.status, body: await parseJsonOrEmpty(res) };
 }
@@ -148,11 +151,18 @@ export async function deleteSensorV2(user, category, grv_id) {
 /**
  * Fetch the public R2 CDN index of all published sensors — same source the
  * public sensor tables use. No auth required.
+ *
+ * The admin delete console must reflect current production state, so we bypass
+ * the browser + Cloudflare edge cache: `cache: 'no-store'` skips the browser
+ * cache, and the unique `?t=` query string forces a CDN cache miss (the public
+ * tables intentionally use the cached URL without the buster).
  * Returns { stats: { regulators, ligands }, sensors: [ { id, alias,
  *   uniprot_id, organism_name, category, ligands[] } ] }
  */
 export async function fetchPublishedSensorsV2() {
-  const res = await fetch('https://groov-api.com/v2/index.json');
+  const res = await fetch(`https://groov-api.com/v2/index.json?t=${Date.now()}`, {
+    cache: 'no-store',
+  });
   if (!res.ok) {
     throw new Error(`Failed to load published sensors (${res.status})`);
   }

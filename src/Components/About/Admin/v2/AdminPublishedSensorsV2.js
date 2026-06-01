@@ -59,15 +59,19 @@ export default function AdminPublishedSensorsV2({ user }) {
     return cleanup;
   }, [loadSensors]);
 
-  const rows = sensors.map((s) => ({
-    id: s.id,
-    grv_id: s.id,
-    alias: s.alias,
-    uniprot_id: s.uniprot_id,
-    organism_name: s.organism_name,
-    category: s.category,
-    ligands: (s.ligands || []).join(', ') || 'None',
-  }));
+  // index.json appends new sensors at the end; sort by GRV ID so rows slot in
+  // by prefix/number (zero-padded IDs sort correctly as strings: A < D < G).
+  const rows = sensors
+    .map((s) => ({
+      id: s.id,
+      grv_id: s.id,
+      alias: s.alias,
+      uniprot_id: s.uniprot_id,
+      organism_name: s.organism_name,
+      category: s.category,
+      ligands: (s.ligands || []).join(', ') || 'None',
+    }))
+    .sort((a, b) => a.grv_id.localeCompare(b.grv_id));
 
   const openDelete = (row) => {
     setDeleteTarget(row);

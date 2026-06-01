@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { produce } from 'immer';
 
-const FAMILY_KEYS = ['all', 'tetr', 'lysr', 'arac', 'marr', 'laci', 'gntr', 'luxr', 'iclr', 'other'];
+const FAMILY_KEYS = ['all', 'tetr', 'lysr', 'arac', 'marr', 'laci', 'gntr', 'luxr', 'iclr', 'other', 'dual'];
 
 const useV2SensorTableStore = create((set, get) => ({
   tables: Object.fromEntries(FAMILY_KEYS.map((k) => [k, null])), // null = not fetched

@@ -44,7 +44,14 @@ export default function RegFamilyTiles() {
     { image: '/LuxR-family.png', family: 'LuxR' },
     { image: '/IclR-family.png', family: 'IclR' },
     { image: '/Other-family.png', family: 'Other' },
+    // Two-component systems collapse into a single "Dual" bucket on the backend
+    // (R2 family index v2/indexes/dual.json). No dedicated artwork yet, so reuse Other.
+    { image: '/Other-family.png', family: 'Dual', label: 'Two-Component' },
   ];
+
+  // Display label overrides where the backend category name isn't the friendliest UI label.
+  const FAMILY_LABELS = { Dual: 'Two-Component' };
+  const labelFor = (fam) => FAMILY_LABELS[fam] ?? fam;
 
   const familyDescriptions = {
     "TetR": "Highly represented. Oftentimes dimeric repressors that bind to structurally diverse ligands",
@@ -55,7 +62,8 @@ export default function RegFamilyTiles() {
     "GntR": "Oftentimes dimeric repressors that bind to structurally diverse ligands",
     "LuxR": "Oftentimes dimeric activators involved in quorum sensing that bind to homoserine lactones",
     "IclR": "Oftentimes dimeric repressors that bind to organic acids and small aromatic ligands",
-    "Other": "All other families, including ROK, AsnC, TrpR, and DeoR"
+    "Other": "All other families, including ROK, AsnC, TrpR, and DeoR",
+    "Dual": ""
   }
 
   const MainContent = ({ family = "all" }) => {
@@ -75,7 +83,9 @@ export default function RegFamilyTiles() {
               mt:3, 
             }}
           >
-            {family === "all" ? "All Sensor Families" : `${family} Family Sensors`}
+            {family === "all"
+              ? "All Sensor Families"
+              : `${labelFor(family)}${family === "Dual" ? "" : " Family"} Sensors`}
           </Typography>
           <Typography
             variant="body1"
@@ -189,7 +199,7 @@ export default function RegFamilyTiles() {
                       color: 'text.primary',
                     }}
                   >
-                    {item.family}
+                    {labelFor(item.family)}
                   </Typography>
                 </CardActionArea>
               </Card>
@@ -245,7 +255,7 @@ export default function RegFamilyTiles() {
                   pb: 1,
                 }}
               >
-                {item.family}
+                {labelFor(item.family)}
               </Typography>
             </CardActionArea>
           </Card>

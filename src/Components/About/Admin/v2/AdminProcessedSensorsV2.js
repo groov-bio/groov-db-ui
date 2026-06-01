@@ -54,7 +54,6 @@ export default function AdminProcessedSensorsV2({
     try {
       const { status, body } = await approveProcessedSensorV2(
         user,
-        row.category,
         row.submissionUUID
       );
       switch (status) {
@@ -106,7 +105,6 @@ export default function AdminProcessedSensorsV2({
     try {
       const { status, body } = await rejectProcessedSensorV2(
         user,
-        row.category,
         row.submissionUUID
       );
       if (status === 204) {
