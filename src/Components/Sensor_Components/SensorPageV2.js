@@ -31,6 +31,7 @@ const ID_PREFIX_TO_CATEGORY = {
   G: 'gntr',
   I: 'iclr',
   Z: 'other',
+  D: 'dual',
 };
 
 function getCategoryFromId(id) {

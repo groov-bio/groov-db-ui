@@ -87,6 +87,18 @@ export default function AdminV2() {
     );
   };
 
+  const handleProcessedApproved = (submissionUUID) => {
+    setProcessed((prev) =>
+      (prev ?? []).filter((p) => p.submissionUUID !== submissionUUID)
+    );
+  };
+
+  const handleProcessedRejected = (submissionUUID) => {
+    setProcessed((prev) =>
+      (prev ?? []).filter((p) => p.submissionUUID !== submissionUUID)
+    );
+  };
+
   const isLoading = submissions === null || processed === null;
 
   return (
@@ -126,7 +138,12 @@ export default function AdminV2() {
           </Box>
         ) : (
           <>
-            <AdminProcessedSensorsV2 processed={processed} />
+            <AdminProcessedSensorsV2
+              user={user}
+              processed={processed}
+              onApproved={handleProcessedApproved}
+              onRejected={handleProcessedRejected}
+            />
             <AdminTempSensorsV2
               user={user}
               submissions={submissions}
@@ -144,7 +161,7 @@ export default function AdminV2() {
           sx={{ display: 'flex', alignItems: 'center', gap: 2, py: 4 }}
         >
           <CircularProgress />
-          <Typography>Running enrichment pipeline…</Typography>
+          <Typography>Processing submission…</Typography>
         </DialogContent>
       </Dialog>
     </>

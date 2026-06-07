@@ -101,3 +101,48 @@ export async function deleteTempV2(user, submissionUUID) {
   });
   return { status: res.status, body: await parseJsonOrEmpty(res) };
 }
+
+/**
+ * Submit a full-object edit for an existing sensor (logged-in user call).
+ * Returns { status, body } — 202 queued, 400 validation, 404 not found, 401 unauth.
+ */
+export async function editSensorV2(user, { category, grv_id, data }) {
+  const res = await fetch(`${V2_API_BASE}/v2/editSensor`, {
+    method: 'POST',
+    headers: { ...authHeaders(user), 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      category,
+      grv_id,
+      data,
+      user: user.cognitoUser.getUsername(),
+      timeSubmit: Date.now(),
+    }),
+  });
+  return { status: res.status, body: await parseJsonOrEmpty(res) };
+}
+
+/**
+ * Approve a processed sensor (edit or new) — writes to production.
+ * Returns { status, body } — 200 approved, 404 not found, 400/500 error.
+ */
+export async function approveProcessedSensorV2(user, submissionUUID) {
+  const res = await fetch(`${V2_API_BASE}/v2/approveProcessedSensor`, {
+    method: 'POST',
+    headers: { ...authHeaders(user), 'Content-Type': 'application/json' },
+    body: JSON.stringify({ submissionUUID }),
+  });
+  return { status: res.status, body: await parseJsonOrEmpty(res) };
+}
+
+/**
+ * Reject a processed sensor — discards the queued entry, prod is untouched.
+ * Returns { status, body } — 200/204 success, 404 already gone.
+ */
+export async function rejectProcessedSensorV2(user, submissionUUID) {
+  const res = await fetch(`${V2_API_BASE}/v2/rejectProcessedSensor`, {
+    method: 'POST',
+    headers: { ...authHeaders(user), 'Content-Type': 'application/json' },
+    body: JSON.stringify({ submissionUUID }),
+  });
+  return { status: res.status, body: await parseJsonOrEmpty(res) };
+}

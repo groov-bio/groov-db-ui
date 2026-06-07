@@ -7,6 +7,7 @@ import CookieConsent, { Cookies, getCookieConsentValue } from 'react-cookie-cons
 import NavigationBar from './Components/NavigationBar.js';
 import AddSensor from './Components/addSensor/AddSensor.js';
 import EditSensor from './Components/EditSensor.js';
+import EditSensorV2 from './Components/EditSensorV2.js';
 import Home from './Components/Home.js';
 import RegFamilyTiles from './Components/RegFamilyTiles.js';
 import SensorPage from './Components/Sensor_Components/SensorPage.js';
@@ -156,6 +157,14 @@ export default function App() {
                 element={
                   <RequireAuth>
                     <AddSensor />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path="/editSensor/v2/:id"
+                element={
+                  <RequireAuth>
+                    <EditSensorV2 />
                   </RequireAuth>
                 }
               />
