@@ -1,11 +1,17 @@
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button, TextField, Typography } from '@mui/material';
+import { useState } from 'react';
 import { Auth } from 'aws-amplify';
 import { useSnackbar } from 'notistack';
 import useUserStore from '../../../zustand/user.store';
 
+const CONFIRM_WORD = 'DELETE';
+
 export default function DeleteAccount() {
   const { enqueueSnackbar } = useSnackbar();
   const setUser = useUserStore((context) => context.setUser);
+
+  const [confirmText, setConfirmText] = useState('');
+  const confirmed = confirmText.trim().toUpperCase() === CONFIRM_WORD;
 
   const deleteAccount = () => {
     // User has confirmed they wish their account to be deleted
@@ -31,19 +37,29 @@ export default function DeleteAccount() {
   return (
     <Box>
       <Typography>
-        Are you sure you want to delete your account? This cannot be undone.
+        Are you sure you want to delete your account? This permanently removes
+        your account and cannot be undone.
       </Typography>
+      <Typography variant="body2" color="text.secondary" sx={{ mt: 2 }}>
+        Type <strong>{CONFIRM_WORD}</strong> to confirm.
+      </Typography>
+      <TextField
+        fullWidth
+        variant="outlined"
+        placeholder={CONFIRM_WORD}
+        value={confirmText}
+        onChange={(e) => setConfirmText(e.target.value)}
+        sx={{ mt: 1 }}
+      />
       <Button
-        sx={{
-          border: '1px solid red',
-          borderRadius: '3px',
-          width: '100%',
-          color: 'red',
-          marginTop: 3,
-        }}
+        variant="contained"
+        color="error"
+        fullWidth
+        disabled={!confirmed}
         onClick={deleteAccount}
+        sx={{ mt: 3, py: 1.25 }}
       >
-        Yes - I understand this cannot be undone.
+        Delete my account
       </Button>
     </Box>
   );

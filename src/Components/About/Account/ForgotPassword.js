@@ -80,11 +80,8 @@ export default function ForgotPassword({ setShowForgotPassword }) {
             margin="normal"
           />
           <Button
-            sx={{
-              border: '1px solid blue',
-              borderRadius: '3px',
-              marginTop: 3,
-            }}
+            variant="contained"
+            sx={{ marginTop: 3, py: 1.25 }}
             fullWidth
             onClick={handleRequestCode}
           >
@@ -111,11 +108,8 @@ export default function ForgotPassword({ setShowForgotPassword }) {
             margin="normal"
           />
           <Button
-            sx={{
-              border: '1px solid blue',
-              borderRadius: '3px',
-              marginTop: 3,
-            }}
+            variant="contained"
+            sx={{ marginTop: 3, py: 1.25 }}
             fullWidth
             onClick={handleResetPassword}
           >
