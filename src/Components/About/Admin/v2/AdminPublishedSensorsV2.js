@@ -28,6 +28,7 @@ export default function AdminPublishedSensorsV2({ user }) {
   const [deleteTarget, setDeleteTarget] = useState(null); // row | null
   const [confirmText, setConfirmText] = useState('');
   const [deleting, setDeleting] = useState(false);
+  const [search, setSearch] = useState('');
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -72,6 +73,16 @@ export default function AdminPublishedSensorsV2({ user }) {
       ligands: (s.ligands || []).join(', ') || 'None',
     }))
     .sort((a, b) => a.grv_id.localeCompare(b.grv_id));
+
+  // Text filter across every visible column so admins can quickly find a sensor
+  // (e.g. "D" test sensors, an organism, or a ligand) before deleting.
+  const query = search.trim().toLowerCase();
+  const filteredRows = query
+    ? rows.filter((r) =>
+        [r.grv_id, r.alias, r.uniprot_id, r.organism_name, r.category, r.ligands]
+          .some((v) => String(v ?? '').toLowerCase().includes(query))
+      )
+    : rows;
 
   const openDelete = (row) => {
     setDeleteTarget(row);
@@ -209,16 +220,41 @@ export default function AdminPublishedSensorsV2({ user }) {
       )}
 
       {!loading && !error && (
-        <Box sx={{ height: 360, width: '100%' }}>
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            autoPageSize
-            rowsPerPageOptions={[5, 10, 25]}
-            density="compact"
-            getRowId={(r) => r.id}
-          />
-        </Box>
+        <>
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: 2,
+              mb: 1.5,
+              flexWrap: 'wrap',
+            }}
+          >
+            <TextField
+              size="small"
+              label="Search sensors"
+              placeholder="GRV ID, alias, UniProt, organism, category, ligand…"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              autoComplete="off"
+              sx={{ minWidth: { xs: '100%', sm: 360 } }}
+            />
+            <Typography variant="body2" color="text.secondary">
+              {filteredRows.length} of {rows.length} shown
+            </Typography>
+          </Box>
+          <Box sx={{ height: 360, width: '100%' }}>
+            <DataGrid
+              rows={filteredRows}
+              columns={columns}
+              autoPageSize
+              rowsPerPageOptions={[5, 10, 25]}
+              density="compact"
+              getRowId={(r) => r.id}
+            />
+          </Box>
+        </>
       )}
 
       {/* Delete confirmation dialog */}

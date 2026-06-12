@@ -45,6 +45,8 @@ const mechanismValues = [
   'Apo-activator',
   'Co-repressor',
   'Co-activator',
+  // Multi-component (two-component) systems — auto-selected when 2+ proteins.
+  'Signal transduction',
 ];
 
 const familyValues = ['TetR', 'LysR', 'AraC', 'MarR', 'LacI', 'GntR', 'LuxR', 'IclR', 'Other'];
@@ -219,22 +221,25 @@ const operatorItemSchema = Yup.object().shape({
   kd_unit: Yup.string().oneOf(kdUnitValues, 'Invalid Kd unit').notRequired(),
 });
 
+// Light/temperature entries only exist when the user toggles the section on, so
+// every field is required for a present entry (DOI, figure, and method included
+// — they reference the same evidence we require for ligands/operators).
 const lightStimulusSchema = Yup.object().shape({
-  wavelength: optionalNumber,
+  wavelength: Yup.number().typeError('Wavelength is required').required('Wavelength is required'),
   regulatory_effect: Yup.string().oneOf(['activates', 'represses', ''], 'Must be "activates" or "represses"').notRequired(),
-  doi: Yup.string().matches(doiValidation, { message: 'Invalid DOI', excludeEmptyString: true }),
-  method: Yup.string().notRequired(),
-  ref_figure: Yup.string().matches(figurePattern, { message: 'Invalid figure', excludeEmptyString: true }),
-  fig_type: Yup.string().oneOf([...figureTypes, ''], 'Invalid figure type'),
+  doi: Yup.string().required('DOI reference is required').matches(doiValidation, { message: 'Invalid DOI', excludeEmptyString: true }),
+  method: Yup.string().required('Method is required'),
+  fig_type: Yup.string().oneOf(figureTypes, 'Invalid figure type').required('Figure type is required'),
+  ref_figure: Yup.string().required('Figure number is required').matches(figurePattern, { message: 'Invalid figure', excludeEmptyString: true }),
 });
 
 const temperatureStimulusSchema = Yup.object().shape({
-  temperature: optionalNumber,
+  temperature: Yup.number().typeError('Temperature is required').required('Temperature is required'),
   regulatory_effect: Yup.string().oneOf(['activates', 'represses', ''], 'Must be "activates" or "represses"').notRequired(),
-  doi: Yup.string().matches(doiValidation, { message: 'Invalid DOI', excludeEmptyString: true }),
-  method: Yup.string().notRequired(),
-  ref_figure: Yup.string().matches(figurePattern, { message: 'Invalid figure', excludeEmptyString: true }),
-  fig_type: Yup.string().oneOf([...figureTypes, ''], 'Invalid figure type'),
+  doi: Yup.string().required('DOI reference is required').matches(doiValidation, { message: 'Invalid DOI', excludeEmptyString: true }),
+  method: Yup.string().required('Method is required'),
+  fig_type: Yup.string().oneOf(figureTypes, 'Invalid figure type').required('Figure type is required'),
+  ref_figure: Yup.string().required('Figure number is required').matches(figurePattern, { message: 'Invalid figure', excludeEmptyString: true }),
 });
 
 const proteinSchema = Yup.object()

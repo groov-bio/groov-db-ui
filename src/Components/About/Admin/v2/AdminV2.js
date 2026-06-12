@@ -104,7 +104,10 @@ export default function AdminV2() {
 
   return (
     <>
-      <Container maxWidth="xl" sx={{ py: 4 }}>
+      <Container
+        maxWidth={false}
+        sx={{ py: 4, width: { xs: '100%', lg: '60%' }, mx: 'auto' }}
+      >
         <Typography
           variant="h2"
           component="h1"

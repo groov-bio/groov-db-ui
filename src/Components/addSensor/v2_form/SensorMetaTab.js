@@ -1,15 +1,41 @@
+import { useEffect } from 'react';
 import { Box, Typography } from '@mui/material';
+import { useFormikContext } from 'formik';
 import { FormikTextInput } from '../../form-inputs/FormikTextInput';
 import { FormikSelectInput } from '../../form-inputs/FormikSelectInput';
 
-const mechanismOptions = [
+// Single-component transcription factors pick one of the apo/co mechanisms.
+const SINGLE_COMPONENT_MECHANISMS = [
   'Apo-repressor',
   'Co-repressor',
   'Apo-activator',
   'Co-activator',
 ];
 
+// A two-/multi-component system (2+ proteins) always works via signal
+// transduction — the apo/co-repressor distinction doesn't apply.
+const MULTI_COMPONENT_MECHANISM = 'Signal transduction';
+
 export default function SensorMetaTab() {
+  const { values, setFieldValue } = useFormikContext();
+  const isMultiComponent = (values.proteins?.length ?? 1) >= 2;
+  const mechanism = values.sensor?.mechanism;
+
+  // Keep the mechanism consistent with the protein count: lock multi-component
+  // sensors to "Signal transduction", and clear it when dropping back to a
+  // single protein so the user re-picks a valid single-component mechanism.
+  useEffect(() => {
+    if (isMultiComponent && mechanism !== MULTI_COMPONENT_MECHANISM) {
+      setFieldValue('sensor.mechanism', MULTI_COMPONENT_MECHANISM);
+    } else if (!isMultiComponent && mechanism === MULTI_COMPONENT_MECHANISM) {
+      setFieldValue('sensor.mechanism', '');
+    }
+  }, [isMultiComponent, mechanism, setFieldValue]);
+
+  const mechanismOptions = isMultiComponent
+    ? [MULTI_COMPONENT_MECHANISM]
+    : SINGLE_COMPONENT_MECHANISMS;
+
   return (
     <Box
       display="grid"
@@ -30,7 +56,14 @@ export default function SensorMetaTab() {
           name="sensor.mechanism"
           label="Mechanism"
           options={mechanismOptions}
+          disabled={isMultiComponent}
         />
+        {isMultiComponent && (
+          <Typography variant="caption" color="text.secondary">
+            Multi-component sensor (2+ proteins) — mechanism is set to
+            “Signal transduction” automatically.
+          </Typography>
+        )}
       </Box>
       <Box gridColumn="span 12">
         <FormikTextInput

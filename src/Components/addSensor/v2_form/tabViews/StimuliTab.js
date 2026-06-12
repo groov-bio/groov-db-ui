@@ -93,7 +93,7 @@ export default function StimuliTab({ fieldPrefix }) {
           >
             {STIMULUS_TYPES.map((t) => (
               <MenuItem key={t.value} value={t.value}>
-                {t.label}{counts[t.value] > 0 ? ` (${counts[t.value]})` : ''}
+                {t.label}{counts[t.value] > 1 ? ` (${counts[t.value]})` : ''}
               </MenuItem>
             ))}
           </Select>

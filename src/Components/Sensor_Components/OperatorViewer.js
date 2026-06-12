@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
+import { DNALogo } from 'logojs-react';
+
 import {
   Box,
   Grid,
@@ -9,6 +11,20 @@ import {
   Pagination,
   Stack,
 } from '@mui/material';
+
+// Build a position-probability matrix (A, C, G, T) for a single operator
+// sequence so we can render the same DNA logo shown on the sensor page. Each
+// position is a definite base for one sequence, so the probability is 1.0.
+const BASE_INDEX = { A: 0, C: 1, G: 2, T: 3 };
+const buildSingleSequencePPM = (sequence) => {
+  const seq = (sequence || '').toUpperCase();
+  if (!seq || !/^[ATCG]+$/.test(seq)) return null;
+  return [...seq].map((char) => {
+    const base = [0, 0, 0, 0];
+    base[BASE_INDEX[char]] = 1;
+    return base;
+  });
+};
 
 export default function OperatorViewer(props) {
   const [operatorNumber, setOperatorNumber] = useState(1);
@@ -24,6 +40,8 @@ export default function OperatorViewer(props) {
       setOperator(props.operators[operatorNumber - 1]);
     }
   }, [operatorNumber, props.operators]);
+
+  const logoMatrix = buildSingleSequencePPM(operator['sequence']);
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -65,6 +83,15 @@ export default function OperatorViewer(props) {
                 Method: {operator['method']}
               </Typography>
             </Box>
+
+            {/* DNA logo (same render as the sensor page) */}
+            {logoMatrix && (
+              <Grid container>
+                <Grid item xs={12} sx={{ overflowX: 'auto' }}>
+                  <DNALogo ppm={logoMatrix} height="90px" yAxisMax={2.5} />
+                </Grid>
+              </Grid>
+            )}
 
             {/* Operator Sequence */}
             <Grid container>
