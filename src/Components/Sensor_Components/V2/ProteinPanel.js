@@ -68,16 +68,28 @@ const MissingDataCard = ({ title, message }) => (
  */
 export default function ProteinPanel({ protein, isNightingaleLoaded, setIsNightingaleLoaded }) {
   const origin = protein.origin?.[0];
+  // uniprot_id / refseq_id are optional (item 7) — mutant/engineered proteins
+  // may lack them. Fall back to the alias for keys/canvas ids that must be
+  // stable & unique across proteins, and omit ID rows/links when absent.
+  const keyId = protein.uniprot_id || protein.alias;
 
   const metadataTableData = {
-    'UniProt ID': {
-      name: protein.uniprot_id,
-      link: { url: `https://www.uniprot.org/uniprot/${protein.uniprot_id}` },
-    },
-    'RefSeq ID': {
-      name: protein.refseq_id,
-      link: { url: `https://www.ncbi.nlm.nih.gov/protein/${protein.refseq_id}` },
-    },
+    ...(protein.uniprot_id
+      ? {
+          'UniProt ID': {
+            name: protein.uniprot_id,
+            link: { url: `https://www.uniprot.org/uniprot/${protein.uniprot_id}` },
+          },
+        }
+      : {}),
+    ...(protein.refseq_id
+      ? {
+          'RefSeq ID': {
+            name: protein.refseq_id,
+            link: { url: `https://www.ncbi.nlm.nih.gov/protein/${protein.refseq_id}` },
+          },
+        }
+      : {}),
     'KEGG ID': {
       name: protein.kegg_id || 'None',
       ...(protein.kegg_id && protein.kegg_id !== 'None'
@@ -104,7 +116,8 @@ export default function ProteinPanel({ protein, isNightingaleLoaded, setIsNighti
 
   const structureIDs = [
     ...(protein.structures?.map((s) => s.ID) ?? []),
-    `AF-${protein.uniprot_id}-F1`,
+    // AlphaFold prediction only exists when there's a UniProt accession.
+    ...(protein.uniprot_id ? [`AF-${protein.uniprot_id}-F1`] : []),
   ];
 
   const hasDNA = protein.dna?.length > 0;
@@ -112,6 +125,9 @@ export default function ProteinPanel({ protein, isNightingaleLoaded, setIsNighti
   const hasContext = protein.context?.length > 0 && protein.context[0]?.operon_dir?.length > 0;
   const hasReferences = protein.references?.length > 0;
   const hasSequence = !!protein.sequence;
+  // ProteinStructure assumes at least one ID — with no PDB and no UniProt
+  // (hence no AlphaFold) the list is empty, so show the missing-data card.
+  const hasStructure = structureIDs.length > 0;
 
   return (
     <Container maxWidth="xl" disableGutters sx={{ py: 1 }}>
@@ -131,8 +147,8 @@ export default function ProteinPanel({ protein, isNightingaleLoaded, setIsNighti
               <SectionCard title="Stimulus" icon={<HexagonOutlinedIcon color="primary" />}>
                 <StimulusViewer
                   stimulus={protein.stimulus}
-                  canvasId={protein.uniprot_id}
-                  key={protein.uniprot_id}
+                  canvasId={keyId}
+                  key={keyId}
                 />
               </SectionCard>
             ) : (
@@ -141,15 +157,19 @@ export default function ProteinPanel({ protein, isNightingaleLoaded, setIsNighti
           </Grid>
 
           <Grid size={{ xs: 12, md: 6 }}>
-            <SectionCard title="Structure" icon={<SwapCallsOutlinedIcon color="primary" />}>
-              <ProteinStructure
-                key={protein.uniprot_id}
-                structureIDs={structureIDs}
-                uniprotID={protein.uniprot_id}
-                isComponentLoaded={isNightingaleLoaded}
-                setIsComponentLoaded={setIsNightingaleLoaded}
-              />
-            </SectionCard>
+            {hasStructure ? (
+              <SectionCard title="Structure" icon={<SwapCallsOutlinedIcon color="primary" />}>
+                <ProteinStructure
+                  key={keyId}
+                  structureIDs={structureIDs}
+                  uniprotID={protein.uniprot_id}
+                  isComponentLoaded={isNightingaleLoaded}
+                  setIsComponentLoaded={setIsNightingaleLoaded}
+                />
+              </SectionCard>
+            ) : (
+              <MissingDataCard title="Structure" message="No structure available" />
+            )}
           </Grid>
         </Grid>
 
@@ -183,7 +203,7 @@ export default function ProteinPanel({ protein, isNightingaleLoaded, setIsNighti
                 <GenomeContextV2
                   context={protein.context}
                   alias={protein.alias}
-                  key={protein.uniprot_id}
+                  key={keyId}
                 />
               </SectionCard>
             ) : (
@@ -198,7 +218,7 @@ export default function ProteinPanel({ protein, isNightingaleLoaded, setIsNighti
           <Grid container>
             <Grid size={12}>
               <SectionCard title="References" icon={<FeedOutlinedIcon color="primary" />}>
-                <ReferenceViewerV2 references={protein.references} key={protein.uniprot_id} />
+                <ReferenceViewerV2 references={protein.references} key={keyId} />
               </SectionCard>
             </Grid>
           </Grid>

@@ -28,15 +28,15 @@ export default function AboutProteinTab({ fieldPrefix }) {
       <Box gridColumn="span 12">
         <FormikTextInput
           name={f('accession')}
-          label="RefSeq"
-          helperText='NCBI accession, e.g. "WP_000123456.1".'
+          label="RefSeq (optional)"
+          helperText='NCBI accession, e.g. "WP_000123456.1". Optional — leave blank for engineered/mutant proteins without one (no operon will be resolved).'
         />
       </Box>
       <Box gridColumn="span 12">
         <FormikTextInput
           name={f('uniProtID')}
-          label="UniProt ID"
-          helperText='e.g. "P0ACT4".'
+          label="UniProt ID (optional)"
+          helperText='e.g. "P0ACT4". Optional — leave blank if the protein has no UniProt entry (no sequence or structure will be fetched).'
         />
       </Box>
       <Box gridColumn="span 12">

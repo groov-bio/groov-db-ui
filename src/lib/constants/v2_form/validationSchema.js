@@ -249,15 +249,21 @@ const proteinSchema = Yup.object()
       .max(16, 'Must be 16 characters or less')
       .matches(/^[A-Za-z0-9_.]+$/, 'Must contain only letters or numbers')
       .required('Alias is required'),
+    // Optional (item 7): mutant / engineered proteins legitimately lack a
+    // UniProt or RefSeq ID. The pattern still applies when a value is given,
+    // but an empty field is allowed.
     accession: Yup.string()
-      .matches(alphaNumericPattern, 'Must contain only letters and underscores')
-      .required('Accession is required'),
+      .matches(alphaNumericPattern, {
+        message: 'Must contain only letters and underscores',
+        excludeEmptyString: true,
+      })
+      .notRequired(),
     uniProtID: Yup.string()
-      .matches(
-        alphaNumericPattern,
-        'Must contain only letters, numbers, and underscores'
-      )
-      .required('UniProtID is required'),
+      .matches(alphaNumericPattern, {
+        message: 'Must contain only letters, numbers, and underscores',
+        excludeEmptyString: true,
+      })
+      .notRequired(),
     family: Yup.string()
       .oneOf(familyValues, 'Invalid family')
       .required('Family is required'),
