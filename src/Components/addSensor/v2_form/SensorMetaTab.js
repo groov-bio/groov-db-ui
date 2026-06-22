@@ -16,6 +16,9 @@ const SINGLE_COMPONENT_MECHANISMS = [
 // transduction — the apo/co-repressor distinction doesn't apply.
 const MULTI_COMPONENT_MECHANISM = 'Signal transduction';
 
+// Structural families that only apply to proteins within a two-component system.
+const TWO_COMPONENT_FAMILIES = ['OmpR', 'HisKA'];
+
 export default function SensorMetaTab() {
   const { values, setFieldValue } = useFormikContext();
   const isMultiComponent = (values.proteins?.length ?? 1) >= 2;
@@ -31,6 +34,18 @@ export default function SensorMetaTab() {
       setFieldValue('sensor.mechanism', '');
     }
   }, [isMultiComponent, mechanism, setFieldValue]);
+
+  // OmpR/HisKA are only offered for two-component systems. If the user drops back
+  // to a single protein, clear any protein still set to one of those families so
+  // the now-invalid value doesn't linger (the dropdown hides it at that point).
+  useEffect(() => {
+    if (isMultiComponent) return;
+    (values.proteins ?? []).forEach((protein, i) => {
+      if (TWO_COMPONENT_FAMILIES.includes(protein?.family)) {
+        setFieldValue(`proteins.${i}.family`, '');
+      }
+    });
+  }, [isMultiComponent, values.proteins, setFieldValue]);
 
   const mechanismOptions = isMultiComponent
     ? [MULTI_COMPONENT_MECHANISM]

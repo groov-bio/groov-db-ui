@@ -1,10 +1,19 @@
 import { Box, Typography } from '@mui/material';
+import { useFormikContext } from 'formik';
 import { FormikTextInput } from '../../../form-inputs/FormikTextInput';
 import { FormikSelectInput } from '../../../form-inputs/FormikSelectInput';
 
 const FAMILY_OPTIONS = ['TetR', 'LysR', 'AraC', 'MarR', 'LacI', 'GntR', 'LuxR', 'IclR', 'Other'];
+// OmpR/HisKA describe individual proteins within a two-component system, so they
+// only appear once the submission has a second protein.
+const TWO_COMPONENT_FAMILY_OPTIONS = ['OmpR', 'HisKA'];
 
 export default function AboutProteinTab({ fieldPrefix }) {
+  const { values } = useFormikContext();
+  const isMultiProtein = (values?.proteins?.length ?? 1) >= 2;
+  const familyOptions = isMultiProtein
+    ? [...FAMILY_OPTIONS, ...TWO_COMPONENT_FAMILY_OPTIONS]
+    : FAMILY_OPTIONS;
   const f = (name) => `${fieldPrefix}.${name}`;
   return (
     <Box
@@ -43,7 +52,7 @@ export default function AboutProteinTab({ fieldPrefix }) {
         <FormikSelectInput
           name={f('family')}
           label="Family"
-          options={FAMILY_OPTIONS}
+          options={familyOptions}
           helperText="Transcription factor family this protein belongs to."
         />
       </Box>

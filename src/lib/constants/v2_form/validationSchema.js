@@ -18,6 +18,7 @@ const ligandMethods = [
   'Spectrophotometric competition',
   'Spectral shift',
   'DNA affinity chromatography',
+  'Autophosphorylation assay',
 ];
 
 const operatorMethods = [
@@ -49,7 +50,13 @@ const mechanismValues = [
   'Signal transduction',
 ];
 
-const familyValues = ['TetR', 'LysR', 'AraC', 'MarR', 'LacI', 'GntR', 'LuxR', 'IclR', 'Other'];
+const baseFamilyValues = ['TetR', 'LysR', 'AraC', 'MarR', 'LacI', 'GntR', 'LuxR', 'IclR', 'Other'];
+// OmpR and HisKA are structural families for the individual proteins that make
+// up a two-component system. A lone protein in one of these families is an
+// incomplete entry, so they're only valid when the sensor has 2+ proteins
+// (enforced by the `two-component-only-families` test below).
+const twoComponentFamilyValues = ['OmpR', 'HisKA'];
+const familyValues = [...baseFamilyValues, ...twoComponentFamilyValues];
 
 function conditionallyRequiredString(options) {
   const {
@@ -337,15 +344,36 @@ const sharedExperimentSchema = Yup.object().shape({
   // Placeholder
 });
 
-export const v2_validationSchema = Yup.object().shape({
-  sensor: sensorSchema,
-  shared: Yup.object().shape({
-    experiment: sharedExperimentSchema,
-  }),
-  proteins: Yup.array()
-    .of(proteinSchema)
-    .min(1, 'At least one protein is required')
-    .required('Proteins array is required'),
-});
+export const v2_validationSchema = Yup.object()
+  .shape({
+    sensor: sensorSchema,
+    shared: Yup.object().shape({
+      experiment: sharedExperimentSchema,
+    }),
+    proteins: Yup.array()
+      .of(proteinSchema)
+      .min(1, 'At least one protein is required')
+      .required('Proteins array is required'),
+  })
+  // OmpR/HisKA only make sense for a two-component system, so a single-protein
+  // submission can't use them. The error is attached to the offending protein's
+  // family field so it surfaces inline on the About tab.
+  .test(
+    'two-component-only-families',
+    'OmpR and HisKA are only valid for two-component systems',
+    function (value) {
+      const proteins = value?.proteins ?? [];
+      if (proteins.length >= 2) return true;
+      const offenderIndex = proteins.findIndex((p) =>
+        twoComponentFamilyValues.includes(p?.family)
+      );
+      if (offenderIndex === -1) return true;
+      return this.createError({
+        path: `proteins[${offenderIndex}].family`,
+        message:
+          'OmpR and HisKA are only valid for two-component systems — add a second protein',
+      });
+    }
+  );
 
 export default v2_validationSchema;
