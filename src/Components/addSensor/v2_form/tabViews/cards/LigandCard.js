@@ -8,15 +8,7 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 import { FieldArray } from 'formik';
 import { FormikTextInput } from '../../../../form-inputs/FormikTextInput';
 import { FormikSelectInput } from '../../../../form-inputs/FormikSelectInput';
-
-const figureTypes = ['Figure', 'Supplementary Figure', 'Table', 'Supplementary Table'];
-
-const ligandMethods = [
-  'EMSA', 'DNase footprinting', 'Isothermal titration calorimetry',
-  'Surface plasmon resonance', 'Synthetic regulation', 'Fluorescence polarization',
-  'Thermal shift', 'Spectrophotometric competition', 'Spectral shift',
-  'DNA affinity chromatography', 'Autophosphorylation assay',
-];
+import { ligandMethods, figureTypes } from '../../../../../lib/constants/v2_form/experimentalMethods';
 
 export default function LigandCard({ index, fieldPrefix }) {
   const [open, setOpen] = useState(true);

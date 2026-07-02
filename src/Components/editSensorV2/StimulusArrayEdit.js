@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import {
   Box, Button, Typography, Accordion, AccordionSummary, AccordionDetails,
   TextField, Stack, IconButton, Chip, Divider,
+  FormControl, InputLabel, Select, MenuItem, Checkbox, ListItemText, OutlinedInput,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
+import { ligandMethods } from '../../lib/constants/v2_form/experimentalMethods';
 
 function createEmptyStimulus() {
   return {
@@ -106,16 +108,43 @@ function TemperatureEdit({ item, onChange, onRemove }) {
 }
 
 function EvidenceEdit({ item, onChange, onRemove }) {
-  const methodStr = Array.isArray(item.method) ? item.method.join(', ') : (item.method ?? '');
+  // Normalize method to an array of selected values. Preserve any legacy values
+  // that aren't in the shared option list so nothing is silently dropped.
+  const selectedMethods = Array.isArray(item.method)
+    ? item.method
+    : (item.method ? [item.method] : []);
+  const methodOptions = [
+    ...ligandMethods,
+    ...selectedMethods.filter((m) => !ligandMethods.includes(m)),
+  ];
   return (
     <Box sx={{ border: 1, borderColor: 'divider', borderRadius: 1, p: 1.5, mb: 1 }}>
       <Box display="grid" gridTemplateColumns="1fr 1fr" gap={1}>
-        <TextField
-          label="Method(s)" size="small" fullWidth
-          helperText="Comma-separated"
-          value={methodStr}
-          onChange={(e) => onChange({ ...item, method: e.target.value ? e.target.value.split(',').map((s) => s.trim()) : [] })}
-        />
+        <FormControl size="small" fullWidth>
+          <InputLabel>Method(s)</InputLabel>
+          <Select
+            multiple
+            label="Method(s)"
+            value={selectedMethods}
+            onChange={(e) => {
+              const val = typeof e.target.value === 'string' ? e.target.value.split(',') : e.target.value;
+              onChange({ ...item, method: val });
+            }}
+            input={<OutlinedInput label="Method(s)" />}
+            renderValue={(selected) => (
+              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                {selected.map((v) => <Chip key={v} label={v} size="small" />)}
+              </Box>
+            )}
+          >
+            {methodOptions.map((option) => (
+              <MenuItem key={option} value={option}>
+                <Checkbox checked={selectedMethods.includes(option)} size="small" />
+                <ListItemText primary={option} />
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
         <TextField
           label="Ref figure" size="small" fullWidth
           value={item.ref_figure ?? ''}

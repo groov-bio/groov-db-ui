@@ -7,8 +7,7 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import { FormikTextInput } from '../../../../form-inputs/FormikTextInput';
 import { FormikSelectInput } from '../../../../form-inputs/FormikSelectInput';
-
-const figureTypes = ['Figure', 'Supplementary Figure', 'Table', 'Supplementary Table'];
+import { figureTypes } from '../../../../../lib/constants/v2_form/experimentalMethods';
 
 // Shared card for light/temperature stimuli — same shape, different scalar field.
 export default function StimulusCard({

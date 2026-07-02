@@ -8,14 +8,7 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 import { FieldArray } from 'formik';
 import { FormikTextInput } from '../../../../form-inputs/FormikTextInput';
 import { FormikSelectInput } from '../../../../form-inputs/FormikSelectInput';
-
-const figureTypes = ['Figure', 'Supplementary Figure', 'Table', 'Supplementary Table'];
-
-const operatorMethods = [
-  'EMSA', 'DNase footprinting', 'Surface plasmon resonance', 'Crystal structure',
-  'Isothermal titration calorimetry', 'Fluorescence polarization',
-  'Synthetic regulation', 'ChIP-Seq',
-];
+import { operatorMethods, figureTypes } from '../../../../../lib/constants/v2_form/experimentalMethods';
 
 export default function OperatorCard({ index, fieldPrefix }) {
   const [open, setOpen] = useState(true);
