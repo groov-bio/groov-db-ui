@@ -15,7 +15,7 @@ const ligandMethods = [
   'EMSA', 'DNase footprinting', 'Isothermal titration calorimetry',
   'Surface plasmon resonance', 'Synthetic regulation', 'Fluorescence polarization',
   'Thermal shift', 'Spectrophotometric competition', 'Spectral shift',
-  'DNA affinity chromatography',
+  'DNA affinity chromatography', 'Autophosphorylation assay',
 ];
 
 export default function LigandCard({ index, fieldPrefix }) {

@@ -8,6 +8,7 @@ import {
   Dialog,
   DialogContent,
   DialogTitle,
+  DialogActions,
   IconButton,
 } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
@@ -15,15 +16,20 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useSnackbar } from 'notistack';
 
 import SensorPageV2View from '../../../Sensor_Components/SensorPageV2View';
-import { approveProcessedSensorV2, rejectProcessedSensorV2 } from '../../../../lib/api/v2Admin';
+import {
+  approveProcessedSensorV2,
+  rejectProcessedSensorV2,
+} from '../../../../lib/api/v2Admin';
 
 export default function AdminProcessedSensorsV2({
-  user,
   processed,
-  onApproved,
+  user,
+  onPromoted,
   onRejected,
 }) {
   const [viewing, setViewing] = useState(null);
+  const [actingUUID, setActingUUID] = useState(null);
+  const [confirm, setConfirm] = useState(null); // { action: 'promote'|'reject', row }
   const { enqueueSnackbar } = useSnackbar();
 
   const rows = useMemo(() => {
@@ -34,6 +40,7 @@ export default function AdminProcessedSensorsV2({
       return {
         id: idx,
         submissionUUID: p.submissionUUID,
+        category: p.category,
         type: p.data?.type ?? '—',
         aliases: aliases || '(no alias)',
         proteinCount: proteins.length,
@@ -45,46 +52,92 @@ export default function AdminProcessedSensorsV2({
     });
   }, [processed]);
 
-  const approveRow = async (row) => {
+  const doPromote = async (row) => {
+    setActingUUID(row.submissionUUID);
     try {
-      const { status, body } = await approveProcessedSensorV2(user, row.submissionUUID);
-      if (status === 200) {
-        enqueueSnackbar(
-          `Approved edit for ${row.editTargetGrvId ?? row.submissionUUID.slice(0, 8)}`,
-          { variant: 'success', preventDuplicate: true }
-        );
-        onApproved?.(row.submissionUUID);
-      } else {
-        enqueueSnackbar(
-          `Error approving: ${body.message || `HTTP ${status}`}`,
-          { variant: 'error', preventDuplicate: true }
-        );
+      const { status, body } = await approveProcessedSensorV2(
+        user,
+        row.submissionUUID
+      );
+      switch (status) {
+        case 200:
+          enqueueSnackbar(
+            `Promoted ${row.aliases} → ${body.grv_id}`,
+            { variant: 'success', preventDuplicate: true }
+          );
+          onPromoted?.(row.submissionUUID);
+          break;
+        case 409:
+          enqueueSnackbar(
+            `Already promoted: ${row.aliases}`,
+            { variant: 'warning', preventDuplicate: true }
+          );
+          onPromoted?.(row.submissionUUID);
+          break;
+        case 404:
+          enqueueSnackbar(
+            `Not found: ${row.submissionUUID.slice(0, 8)}`,
+            { variant: 'error', preventDuplicate: true }
+          );
+          break;
+        case 400:
+          enqueueSnackbar(
+            `Invalid: ${body.message || 'bad input'}`,
+            { variant: 'error', preventDuplicate: true }
+          );
+          break;
+        default:
+          enqueueSnackbar(
+            `Error promoting: ${body.message || 'HTTP ' + status}`,
+            { variant: 'error', preventDuplicate: true }
+          );
       }
     } catch (err) {
-      enqueueSnackbar(`Network error: ${err.message}`, { variant: 'error', preventDuplicate: true });
+      enqueueSnackbar(`Network error: ${err.message}`, {
+        variant: 'error',
+        preventDuplicate: true,
+      });
+    } finally {
+      setActingUUID(null);
+      setConfirm(null);
     }
   };
 
-  const rejectRow = async (row) => {
+  const doReject = async (row) => {
+    setActingUUID(row.submissionUUID);
     try {
-      const { status, body } = await rejectProcessedSensorV2(user, row.submissionUUID);
-      if (status === 200 || status === 204) {
+      const { status, body } = await rejectProcessedSensorV2(
+        user,
+        row.submissionUUID
+      );
+      if (status === 204) {
         enqueueSnackbar(
-          `Rejected edit for ${row.editTargetGrvId ?? row.submissionUUID.slice(0, 8)}`,
+          `Rejected ${row.aliases} (${row.submissionUUID.slice(0, 8)})`,
           { variant: 'success', preventDuplicate: true }
         );
         onRejected?.(row.submissionUUID);
       } else if (status === 404) {
-        enqueueSnackbar('Already gone', { variant: 'info', preventDuplicate: true });
+        enqueueSnackbar(
+          `Already gone: ${row.submissionUUID.slice(0, 8)}`,
+          { variant: 'info', preventDuplicate: true }
+        );
         onRejected?.(row.submissionUUID);
       } else {
         enqueueSnackbar(
-          `Error rejecting: ${body.message || `HTTP ${status}`}`,
+          `Error rejecting ${row.submissionUUID.slice(0, 8)}: ${
+            body.message || `HTTP ${status}`
+          }`,
           { variant: 'error', preventDuplicate: true }
         );
       }
     } catch (err) {
-      enqueueSnackbar(`Network error: ${err.message}`, { variant: 'error', preventDuplicate: true });
+      enqueueSnackbar(`Network error: ${err.message}`, {
+        variant: 'error',
+        preventDuplicate: true,
+      });
+    } finally {
+      setActingUUID(null);
+      setConfirm(null);
     }
   };
 
@@ -141,38 +194,38 @@ export default function AdminProcessedSensorsV2({
       ),
     },
     {
-      field: 'approve',
-      headerName: 'Approve',
-      width: 110,
+      field: 'promote',
+      headerName: 'Promote',
+      width: 120,
       sortable: false,
-      renderCell: (params) =>
-        params.row.isEdit ? (
-          <Button
-            variant="contained"
-            color="success"
-            size="small"
-            onClick={() => approveRow(params.row)}
-          >
-            Approve
-          </Button>
-        ) : null,
+      renderCell: (params) => (
+        <Button
+          variant="contained"
+          color="success"
+          size="small"
+          disabled={actingUUID === params.row.submissionUUID}
+          onClick={() => setConfirm({ action: 'promote', row: params.row })}
+        >
+          Promote
+        </Button>
+      ),
     },
     {
       field: 'reject',
       headerName: 'Reject',
-      width: 90,
+      width: 110,
       sortable: false,
-      renderCell: (params) =>
-        params.row.isEdit ? (
-          <Button
-            variant="contained"
-            color="error"
-            size="small"
-            onClick={() => rejectRow(params.row)}
-          >
-            Reject
-          </Button>
-        ) : null,
+      renderCell: (params) => (
+        <Button
+          variant="contained"
+          color="error"
+          size="small"
+          disabled={actingUUID === params.row.submissionUUID}
+          onClick={() => setConfirm({ action: 'reject', row: params.row })}
+        >
+          Reject
+        </Button>
+      ),
     },
   ];
 
@@ -196,7 +249,7 @@ export default function AdminProcessedSensorsV2({
         </Typography>
       </Paper>
 
-      <Box sx={{ height: 360, width: '100%' }}>
+      <Box sx={{ height: 320, width: '100%' }}>
         <DataGrid
           rows={rows}
           columns={columns}
@@ -208,7 +261,13 @@ export default function AdminProcessedSensorsV2({
         />
       </Box>
 
-      <Dialog open={Boolean(viewing)} onClose={() => setViewing(null)} fullWidth maxWidth="lg">
+      {/* View dialog */}
+      <Dialog
+        open={Boolean(viewing)}
+        onClose={() => setViewing(null)}
+        fullWidth
+        maxWidth="lg"
+      >
         <DialogTitle sx={{ pr: 6 }}>
           {viewing?.isEdit
             ? `Edit preview — ${viewing.editTargetGrvId}`
@@ -220,6 +279,61 @@ export default function AdminProcessedSensorsV2({
         <DialogContent dividers>
           {viewing && <SensorPageV2View sensor={viewing.data} hideEditButton />}
         </DialogContent>
+      </Dialog>
+
+      {/* Confirmation dialog */}
+      <Dialog
+        open={Boolean(confirm)}
+        onClose={() => setConfirm(null)}
+        maxWidth="sm"
+        fullWidth
+      >
+        <DialogTitle>
+          {confirm?.action === 'promote'
+            ? 'Promote to production?'
+            : 'Reject submission?'}
+        </DialogTitle>
+        <DialogContent dividers>
+          {confirm && (
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+              <Typography variant="body2">
+                <strong>Aliases:</strong> {confirm.row.aliases}
+              </Typography>
+              <Typography variant="body2">
+                <strong>Type:</strong> {confirm.row.type}
+              </Typography>
+              <Typography variant="body2">
+                <strong>Proposed GRV ID:</strong> {confirm.row.proposed_grv_id}
+              </Typography>
+              <Typography
+                variant="body2"
+                color="text.secondary"
+                sx={{ mt: 1 }}
+              >
+                {confirm.action === 'promote'
+                  ? 'This will write the sensor to the live database and regenerate the public index and fingerprints.'
+                  : 'This discards the processed row. The original raw submission is unaffected.'}
+              </Typography>
+            </Box>
+          )}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setConfirm(null)}>Cancel</Button>
+          <Button
+            variant="contained"
+            color={confirm?.action === 'promote' ? 'success' : 'error'}
+            disabled={actingUUID === confirm?.row?.submissionUUID}
+            onClick={() => {
+              if (confirm?.action === 'promote') {
+                doPromote(confirm.row);
+              } else {
+                doReject(confirm.row);
+              }
+            }}
+          >
+            {confirm?.action === 'promote' ? 'Promote' : 'Reject'}
+          </Button>
+        </DialogActions>
       </Dialog>
     </Box>
   );

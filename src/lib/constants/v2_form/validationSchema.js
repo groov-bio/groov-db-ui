@@ -18,6 +18,7 @@ const ligandMethods = [
   'Spectrophotometric competition',
   'Spectral shift',
   'DNA affinity chromatography',
+  'Autophosphorylation assay',
 ];
 
 const operatorMethods = [
@@ -45,9 +46,17 @@ const mechanismValues = [
   'Apo-activator',
   'Co-repressor',
   'Co-activator',
+  // Multi-component (two-component) systems — auto-selected when 2+ proteins.
+  'Signal transduction',
 ];
 
-const familyValues = ['TetR', 'LysR', 'AraC', 'MarR', 'LacI', 'GntR', 'LuxR', 'IclR', 'Other'];
+const baseFamilyValues = ['TetR', 'LysR', 'AraC', 'MarR', 'LacI', 'GntR', 'LuxR', 'IclR', 'Other'];
+// OmpR and HisKA are structural families for the individual proteins that make
+// up a two-component system. A lone protein in one of these families is an
+// incomplete entry, so they're only valid when the sensor has 2+ proteins
+// (enforced by the `two-component-only-families` test below).
+const twoComponentFamilyValues = ['OmpR', 'HisKA'];
+const familyValues = [...baseFamilyValues, ...twoComponentFamilyValues];
 
 function conditionallyRequiredString(options) {
   const {
@@ -219,22 +228,25 @@ const operatorItemSchema = Yup.object().shape({
   kd_unit: Yup.string().oneOf(kdUnitValues, 'Invalid Kd unit').notRequired(),
 });
 
+// Light/temperature entries only exist when the user toggles the section on, so
+// every field is required for a present entry (DOI, figure, and method included
+// — they reference the same evidence we require for ligands/operators).
 const lightStimulusSchema = Yup.object().shape({
-  wavelength: optionalNumber,
+  wavelength: Yup.number().typeError('Wavelength is required').required('Wavelength is required'),
   regulatory_effect: Yup.string().oneOf(['activates', 'represses', ''], 'Must be "activates" or "represses"').notRequired(),
-  doi: Yup.string().matches(doiValidation, { message: 'Invalid DOI', excludeEmptyString: true }),
-  method: Yup.string().notRequired(),
-  ref_figure: Yup.string().matches(figurePattern, { message: 'Invalid figure', excludeEmptyString: true }),
-  fig_type: Yup.string().oneOf([...figureTypes, ''], 'Invalid figure type'),
+  doi: Yup.string().required('DOI reference is required').matches(doiValidation, { message: 'Invalid DOI', excludeEmptyString: true }),
+  method: Yup.string().required('Method is required'),
+  fig_type: Yup.string().oneOf(figureTypes, 'Invalid figure type').required('Figure type is required'),
+  ref_figure: Yup.string().required('Figure number is required').matches(figurePattern, { message: 'Invalid figure', excludeEmptyString: true }),
 });
 
 const temperatureStimulusSchema = Yup.object().shape({
-  temperature: optionalNumber,
+  temperature: Yup.number().typeError('Temperature is required').required('Temperature is required'),
   regulatory_effect: Yup.string().oneOf(['activates', 'represses', ''], 'Must be "activates" or "represses"').notRequired(),
-  doi: Yup.string().matches(doiValidation, { message: 'Invalid DOI', excludeEmptyString: true }),
-  method: Yup.string().notRequired(),
-  ref_figure: Yup.string().matches(figurePattern, { message: 'Invalid figure', excludeEmptyString: true }),
-  fig_type: Yup.string().oneOf([...figureTypes, ''], 'Invalid figure type'),
+  doi: Yup.string().required('DOI reference is required').matches(doiValidation, { message: 'Invalid DOI', excludeEmptyString: true }),
+  method: Yup.string().required('Method is required'),
+  fig_type: Yup.string().oneOf(figureTypes, 'Invalid figure type').required('Figure type is required'),
+  ref_figure: Yup.string().required('Figure number is required').matches(figurePattern, { message: 'Invalid figure', excludeEmptyString: true }),
 });
 
 const proteinSchema = Yup.object()
@@ -244,15 +256,21 @@ const proteinSchema = Yup.object()
       .max(16, 'Must be 16 characters or less')
       .matches(/^[A-Za-z0-9_.]+$/, 'Must contain only letters or numbers')
       .required('Alias is required'),
+    // Optional (item 7): mutant / engineered proteins legitimately lack a
+    // UniProt or RefSeq ID. The pattern still applies when a value is given,
+    // but an empty field is allowed.
     accession: Yup.string()
-      .matches(alphaNumericPattern, 'Must contain only letters and underscores')
-      .required('Accession is required'),
+      .matches(alphaNumericPattern, {
+        message: 'Must contain only letters and underscores',
+        excludeEmptyString: true,
+      })
+      .notRequired(),
     uniProtID: Yup.string()
-      .matches(
-        alphaNumericPattern,
-        'Must contain only letters, numbers, and underscores'
-      )
-      .required('UniProtID is required'),
+      .matches(alphaNumericPattern, {
+        message: 'Must contain only letters, numbers, and underscores',
+        excludeEmptyString: true,
+      })
+      .notRequired(),
     family: Yup.string()
       .oneOf(familyValues, 'Invalid family')
       .required('Family is required'),
@@ -326,15 +344,36 @@ const sharedExperimentSchema = Yup.object().shape({
   // Placeholder
 });
 
-export const v2_validationSchema = Yup.object().shape({
-  sensor: sensorSchema,
-  shared: Yup.object().shape({
-    experiment: sharedExperimentSchema,
-  }),
-  proteins: Yup.array()
-    .of(proteinSchema)
-    .min(1, 'At least one protein is required')
-    .required('Proteins array is required'),
-});
+export const v2_validationSchema = Yup.object()
+  .shape({
+    sensor: sensorSchema,
+    shared: Yup.object().shape({
+      experiment: sharedExperimentSchema,
+    }),
+    proteins: Yup.array()
+      .of(proteinSchema)
+      .min(1, 'At least one protein is required')
+      .required('Proteins array is required'),
+  })
+  // OmpR/HisKA only make sense for a two-component system, so a single-protein
+  // submission can't use them. The error is attached to the offending protein's
+  // family field so it surfaces inline on the About tab.
+  .test(
+    'two-component-only-families',
+    'OmpR and HisKA are only valid for two-component systems',
+    function (value) {
+      const proteins = value?.proteins ?? [];
+      if (proteins.length >= 2) return true;
+      const offenderIndex = proteins.findIndex((p) =>
+        twoComponentFamilyValues.includes(p?.family)
+      );
+      if (offenderIndex === -1) return true;
+      return this.createError({
+        path: `proteins[${offenderIndex}].family`,
+        message:
+          'OmpR and HisKA are only valid for two-component systems — add a second protein',
+      });
+    }
+  );
 
 export default v2_validationSchema;

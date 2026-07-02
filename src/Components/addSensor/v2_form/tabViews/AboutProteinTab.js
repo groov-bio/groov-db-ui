@@ -1,10 +1,19 @@
 import { Box, Typography } from '@mui/material';
+import { useFormikContext } from 'formik';
 import { FormikTextInput } from '../../../form-inputs/FormikTextInput';
 import { FormikSelectInput } from '../../../form-inputs/FormikSelectInput';
 
 const FAMILY_OPTIONS = ['TetR', 'LysR', 'AraC', 'MarR', 'LacI', 'GntR', 'LuxR', 'IclR', 'Other'];
+// OmpR/HisKA describe individual proteins within a two-component system, so they
+// only appear once the submission has a second protein.
+const TWO_COMPONENT_FAMILY_OPTIONS = ['OmpR', 'HisKA'];
 
 export default function AboutProteinTab({ fieldPrefix }) {
+  const { values } = useFormikContext();
+  const isMultiProtein = (values?.proteins?.length ?? 1) >= 2;
+  const familyOptions = isMultiProtein
+    ? [...FAMILY_OPTIONS, ...TWO_COMPONENT_FAMILY_OPTIONS]
+    : FAMILY_OPTIONS;
   const f = (name) => `${fieldPrefix}.${name}`;
   return (
     <Box
@@ -28,22 +37,22 @@ export default function AboutProteinTab({ fieldPrefix }) {
       <Box gridColumn="span 12">
         <FormikTextInput
           name={f('accession')}
-          label="RefSeq"
-          helperText='NCBI accession, e.g. "WP_000123456.1".'
+          label="RefSeq (optional)"
+          helperText='NCBI accession, e.g. "WP_000123456.1". Optional — leave blank for engineered/mutant proteins without one (no operon will be resolved).'
         />
       </Box>
       <Box gridColumn="span 12">
         <FormikTextInput
           name={f('uniProtID')}
-          label="UniProt ID"
-          helperText='e.g. "P0ACT4".'
+          label="UniProt ID (optional)"
+          helperText='e.g. "P0ACT4". Optional — leave blank if the protein has no UniProt entry (no sequence or structure will be fetched).'
         />
       </Box>
       <Box gridColumn="span 12">
         <FormikSelectInput
           name={f('family')}
           label="Family"
-          options={FAMILY_OPTIONS}
+          options={familyOptions}
           helperText="Transcription factor family this protein belongs to."
         />
       </Box>

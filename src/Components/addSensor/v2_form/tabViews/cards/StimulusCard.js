@@ -45,16 +45,16 @@ export default function StimulusCard({
           <Box mb={2}>
             <FormikSelectInput name={f('regulatory_effect')} label="Regulatory effect (optional)" options={['activates', 'represses']} />
           </Box>
-          <Box mb={2}><FormikTextInput name={f('doi')} label="DOI (optional)" /></Box>
+          <Box mb={2}><FormikTextInput name={f('doi')} label="DOI" /></Box>
           <Box display="flex" mb={2}>
             <FormControl fullWidth sx={{ mr: 2 }}>
-              <FormikSelectInput name={f('fig_type')} label="Figure Type (optional)" options={figureTypes} />
+              <FormikSelectInput name={f('fig_type')} label="Figure Type" options={figureTypes} />
             </FormControl>
             <FormControl fullWidth sx={{ ml: 2 }}>
-              <FormikTextInput name={f('ref_figure')} label="Figure Number (optional)" />
+              <FormikTextInput name={f('ref_figure')} label="Figure Number" />
             </FormControl>
           </Box>
-          <Box mb={2}><FormikTextInput name={f('method')} label="Method (optional)" /></Box>
+          <Box mb={2}><FormikTextInput name={f('method')} label="Method" /></Box>
         </Collapse>
       </Box>
     </>
