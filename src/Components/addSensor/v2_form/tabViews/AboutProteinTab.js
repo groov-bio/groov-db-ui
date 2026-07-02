@@ -44,8 +44,8 @@ export default function AboutProteinTab({ fieldPrefix }) {
       <Box gridColumn="span 12">
         <FormikTextInput
           name={f('uniProtID')}
-          label="UniProt ID (optional)"
-          helperText='e.g. "P0ACT4". Optional — leave blank if the protein has no UniProt entry (no sequence or structure will be fetched).'
+          label="UniProt ID"
+          helperText='e.g. "P0ACT4". Required — used to fetch the protein sequence, structures, and cross-references.'
         />
       </Box>
       <Box gridColumn="span 12">
