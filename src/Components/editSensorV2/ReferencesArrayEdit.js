@@ -2,10 +2,28 @@ import React from 'react';
 import {
   Box, Button, TextField, IconButton, Typography,
   Accordion, AccordionSummary, AccordionDetails,
+  FormControl, InputLabel, Select, MenuItem,
+  Checkbox, ListItemText, OutlinedInput, Chip,
+  CircularProgress,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
+import { useSnackbar } from 'notistack';
+import { lookupDoiV2 } from '../../lib/api/v2Admin';
+
+// Canonical interaction tags. Unknown legacy values are preserved (see below).
+const INTERACTION_OPTIONS = ['Stimulus', 'DNA', 'Structure'];
+
+// Normalize interaction to an array of strings. Legacy sensors store objects
+// like { figure, interaction_type, method }; canonical form is a string array.
+function normalizeInteraction(raw) {
+  const arr = Array.isArray(raw) ? raw : [];
+  const strings = arr
+    .map((x) => (x && typeof x === 'object' ? x.interaction_type : x))
+    .filter((x) => x);
+  return [...new Set(strings)];
+}
 
 function createEmptyAuthor() {
   return { last_name: null, first_name: null };
@@ -20,7 +38,7 @@ function createEmptyReference() {
 
 function AuthorEdit({ author, onChange, onRemove }) {
   return (
-    <Box display="grid" gridTemplateColumns="1fr 1fr auto" gap={1} alignItems="center" sx={{ mb: 0.5 }}>
+    <Box display="grid" gridTemplateColumns="1fr 1fr auto" gap={1.5} alignItems="center" sx={{ mb: 1.5 }}>
       <TextField
         label="Last name" size="small"
         value={author.last_name ?? ''}
@@ -38,10 +56,43 @@ function AuthorEdit({ author, onChange, onRemove }) {
   );
 }
 
-function ReferenceEntryEdit({ item, index, onChange, onRemove }) {
+function ReferenceEntryEdit({ item, index, onChange, onRemove, user }) {
   const f = (key, val) => onChange({ ...item, [key]: val });
   const authors = item.authors ?? [];
-  const interactionStr = Array.isArray(item.interaction) ? item.interaction.join(', ') : '';
+  const [looking, setLooking] = React.useState(false);
+  const { enqueueSnackbar } = useSnackbar();
+
+  const handleLookupDoi = async () => {
+    setLooking(true);
+    try {
+      const { status, body } = await lookupDoiV2(user, item.doi);
+      if (status === 200 && body.reference) {
+        const r = body.reference;
+        onChange({
+          ...item,
+          title: r.title ?? item.title,
+          authors: (r.authors && r.authors.length) ? r.authors : item.authors,
+          year: r.year ?? item.year,
+          journal: r.journal ?? item.journal,
+          url: r.url ?? item.url,
+        });
+        enqueueSnackbar('Reference details filled from DOI', { variant: 'success' });
+      } else {
+        enqueueSnackbar(body.message || `DOI lookup failed (${status})`, { variant: 'error' });
+      }
+    } catch (err) {
+      enqueueSnackbar(`DOI lookup error: ${err.message}`, { variant: 'error' });
+    } finally {
+      setLooking(false);
+    }
+  };
+  // Interaction is a string array of evidence tags. Preserve any legacy value
+  // not in the shared option list so nothing is silently dropped.
+  const selectedInteractions = normalizeInteraction(item.interaction);
+  const interactionOptions = [
+    ...INTERACTION_OPTIONS,
+    ...selectedInteractions.filter((x) => !INTERACTION_OPTIONS.includes(x)),
+  ];
 
   const title = (() => {
     if (item.title) return item.title.slice(0, 60) + (item.title.length > 60 ? '…' : '');
@@ -71,31 +122,63 @@ function ReferenceEntryEdit({ item, index, onChange, onRemove }) {
           <TextField
             label="Year" size="small" type="number"
             value={item.year ?? ''}
-            onChange={(e) => f('year', e.target.value !== '' ? Number(e.target.value) : null)}
+            onChange={(e) => f('year', e.target.value || null)}
           />
           <TextField
             label="Journal" size="small" fullWidth
             value={item.journal ?? ''}
             onChange={(e) => f('journal', e.target.value || null)}
           />
-          <TextField
-            label="DOI" size="small" fullWidth
-            value={item.doi ?? ''}
-            onChange={(e) => f('doi', e.target.value || null)}
-          />
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+            <TextField
+              label="DOI" size="small" fullWidth
+              value={item.doi ?? ''}
+              onChange={(e) => f('doi', e.target.value || null)}
+            />
+            <Button
+              size="small"
+              variant="outlined"
+              onClick={handleLookupDoi}
+              disabled={looking || !item.doi}
+              startIcon={looking ? <CircularProgress size={16} /> : null}
+              sx={{ whiteSpace: 'nowrap', flexShrink: 0 }}
+            >
+              Look up
+            </Button>
+          </Box>
           <TextField
             label="URL" size="small" fullWidth
             value={item.url ?? ''}
             onChange={(e) => f('url', e.target.value || null)}
           />
-          <TextField
-            label="Interaction(s)" size="small" fullWidth
-            helperText="Comma-separated"
-            value={interactionStr}
-            onChange={(e) => f('interaction', e.target.value ? e.target.value.split(',').map((s) => s.trim()) : [])}
-            sx={{ gridColumn: 'span 2' }}
-          />
         </Box>
+
+        <Typography variant="subtitle2" sx={{ mt: 2, mb: 1 }}>Interactions</Typography>
+        <FormControl size="small" fullWidth>
+          <InputLabel>Interaction(s)</InputLabel>
+          <Select
+            multiple
+            label="Interaction(s)"
+            value={selectedInteractions}
+            onChange={(e) => {
+              const val = typeof e.target.value === 'string' ? e.target.value.split(',') : e.target.value;
+              f('interaction', val);
+            }}
+            input={<OutlinedInput label="Interaction(s)" />}
+            renderValue={(selected) => (
+              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                {selected.map((v) => <Chip key={v} label={v} size="small" />)}
+              </Box>
+            )}
+          >
+            {interactionOptions.map((option) => (
+              <MenuItem key={option} value={option}>
+                <Checkbox checked={selectedInteractions.includes(option)} size="small" />
+                <ListItemText primary={option} />
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
 
         <Typography variant="subtitle2" sx={{ mt: 2, mb: 1 }}>Authors</Typography>
         {authors.map((author, i) => (
@@ -114,7 +197,7 @@ function ReferenceEntryEdit({ item, index, onChange, onRemove }) {
   );
 }
 
-export default function ReferencesArrayEdit({ items, onChange }) {
+export default function ReferencesArrayEdit({ items, onChange, user }) {
   return (
     <Box>
       {items.length === 0 && (
@@ -124,7 +207,7 @@ export default function ReferencesArrayEdit({ items, onChange }) {
       )}
       {items.map((item, i) => (
         <ReferenceEntryEdit
-          key={i} item={item} index={i}
+          key={i} item={item} index={i} user={user}
           onChange={(updated) => onChange(items.map((x, idx) => idx === i ? updated : x))}
           onRemove={() => onChange(items.filter((_, idx) => idx !== i))}
         />

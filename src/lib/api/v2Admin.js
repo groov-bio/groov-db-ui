@@ -167,6 +167,14 @@ export async function deleteSensorV2(user, category, grv_id) {
   return { status: res.status, body: await parseJsonOrEmpty(res) };
 }
 
+/** Resolve a DOI to reference metadata via citation-js on the backend. */
+export async function lookupDoiV2(user, doi) {
+  const res = await fetch(`${V2_API_BASE}/v2/doiLookup?doi=${encodeURIComponent(doi)}`, {
+    headers: authHeaders(user),
+  });
+  return { status: res.status, body: await parseJsonOrEmpty(res) };
+}
+
 /**
  * Fetch the public R2 CDN index of all published sensors — same source the
  * public sensor tables use. No auth required.

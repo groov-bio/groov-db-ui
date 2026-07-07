@@ -3,15 +3,13 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { produce } from 'immer';
 import {
   Box, Container, Typography, Button, Alert, CircularProgress,
-  Paper, Stack, Chip, TextField, MenuItem, Select, FormControl, InputLabel,
+  Paper, Stack, Chip, TextField,
 } from '@mui/material';
 import { useSnackbar } from 'notistack';
 import useUserStore from '../zustand/user.store';
 import useSensorStore from '../zustand/sensor.store';
 import { editSensorV2 } from '../lib/api/v2Admin';
 import ProteinEditSection from './editSensorV2/ProteinEditSection';
-
-const TYPE_OPTIONS = ['One Component', 'Two Component', 'Riboswitch'];
 
 // Same mapping as SensorPageV2.js — keep in sync.
 const ID_PREFIX_TO_CATEGORY = {
@@ -40,6 +38,26 @@ function normalizeStimulusKeys(data) {
         } else {
           stim._stimKey = 'stimulusType';
         }
+      });
+    });
+  });
+}
+
+/**
+ * Normalize reference interaction fields to a string array of evidence tags.
+ * Legacy sensors store objects like { figure, interaction_type, method };
+ * convert those to their interaction_type string (deduped) so the value always
+ * matches the string-only shape the editSensorV2 API validates against.
+ */
+function normalizeInteractionShape(data) {
+  return produce(data, (draft) => {
+    (draft.proteins ?? []).forEach((protein) => {
+      (protein.references ?? []).forEach((ref) => {
+        const raw = Array.isArray(ref.interaction) ? ref.interaction : [];
+        const strings = raw
+          .map((x) => (x && typeof x === 'object' ? x.interaction_type : x))
+          .filter((x) => x);
+        ref.interaction = [...new Set(strings)];
       });
     });
   });
@@ -80,7 +98,7 @@ export default function EditSensorV2() {
     if (!id) return;
 
     const load = (data) => {
-      setFormData(normalizeStimulusKeys(data));
+      setFormData(normalizeInteractionShape(normalizeStimulusKeys(data)));
       setLoading(false);
     };
 
@@ -96,18 +114,43 @@ export default function EditSensorV2() {
       return;
     }
 
-    fetch(`https://groov-api.com/v2/sensors/${categorySegment}/${id}.json`, {
-      headers: { Accept: 'application/json' },
-    })
-      .then((res) => {
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        return res.json();
+    let cancelled = false;
+    const url = `https://groov-api.com/v2/sensors/${categorySegment}/${id}.json`;
+    const MAX_ATTEMPTS = 3;
+    const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+    const fetchWithRetry = async () => {
+      let lastError;
+      for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt += 1) {
+        try {
+          const res = await fetch(url, { headers: { Accept: 'application/json' } });
+          // Don't retry client errors (e.g. 404) — the sensor genuinely isn't there.
+          if (res.status >= 400 && res.status < 500) {
+            throw new Error(`HTTP ${res.status}`);
+          }
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          return res.json();
+        } catch (err) {
+          lastError = err;
+          const isClientError = /^HTTP 4\d\d$/.test(err.message);
+          if (isClientError || attempt === MAX_ATTEMPTS) throw err;
+          await delay(500 * attempt); // linear backoff: 500ms, 1000ms
+        }
+      }
+      throw lastError;
+    };
+
+    fetchWithRetry()
+      .then((data) => {
+        if (!cancelled) load(data);
       })
-      .then(load)
       .catch((err) => {
+        if (cancelled) return;
         setFetchError(err.message);
         setLoading(false);
       });
+
+    return () => { cancelled = true; };
   }, [id, cachedData]);
 
   const handleProteinChange = (pi, updatedProtein) => {
@@ -196,27 +239,21 @@ export default function EditSensorV2() {
       </Stack>
 
       <Alert severity="info" sx={{ mb: 3 }}>
-        Changes require admin approval before going live. Sensor ID, category, and protein UniProt IDs are read-only.
+        Changes require admin approval before going live. Sensor ID, category, and Type are read-only, as are each protein's UniProt ID, RefSeq ID, Family, KEGG ID, and sequence. Only About, Alias, and Regulation type can be edited.
       </Alert>
 
       {/* Sensor-level fields */}
       <Paper sx={{ p: 3, mb: 3, borderRadius: 2 }}>
         <Typography variant="h6" sx={{ mb: 2 }}>Sensor Information</Typography>
         <Stack spacing={2}>
-          <FormControl fullWidth size="small">
-            <InputLabel>Type</InputLabel>
-            <Select
-              value={formData.type ?? ''}
-              label="Type"
-              onChange={(e) =>
-                setFormData((prev) => produce(prev, (d) => { d.type = e.target.value; }))
-              }
-            >
-              {TYPE_OPTIONS.map((opt) => (
-                <MenuItem key={opt} value={opt}>{opt}</MenuItem>
-              ))}
-            </Select>
-          </FormControl>
+          <TextField
+            label="Type"
+            value={formData.type ?? ''}
+            InputProps={{ readOnly: true }}
+            disabled
+            size="small"
+            fullWidth
+          />
           <TextField
             label="About"
             multiline
@@ -237,6 +274,7 @@ export default function EditSensorV2() {
           key={protein.uniprot_id ?? pi}
           protein={protein}
           proteinIndex={pi}
+          user={user}
           onChange={(updated) => handleProteinChange(pi, updated)}
         />
       ))}

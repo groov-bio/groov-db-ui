@@ -23,9 +23,24 @@ function IdentityFields({ protein, onChange }) {
     <Stack spacing={2}>
       <Box display="grid" gridTemplateColumns={{ xs: '1fr', sm: '1fr 1fr' }} gap={2}>
         <TextField label="Alias" {...f('alias')} />
-        <TextField label="RefSeq ID" {...f('refseq_id')} />
-        <TextField label="Family" {...f('family')} />
-        <TextField label="KEGG ID" {...f('kegg_id')} />
+        <TextField
+          label="RefSeq ID" size="small" fullWidth
+          value={protein.refseq_id ?? ''}
+          InputProps={{ readOnly: true }}
+          disabled
+        />
+        <TextField
+          label="Family" size="small" fullWidth
+          value={protein.family ?? ''}
+          InputProps={{ readOnly: true }}
+          disabled
+        />
+        <TextField
+          label="KEGG ID" size="small" fullWidth
+          value={protein.kegg_id ?? ''}
+          InputProps={{ readOnly: true }}
+          disabled
+        />
         <TextField
           label="Regulation type" size="small"
           value={protein.regulation_type ?? ''}
@@ -37,14 +52,15 @@ function IdentityFields({ protein, onChange }) {
       <TextField
         label="Sequence" size="small" fullWidth multiline rows={4}
         inputProps={{ style: { fontFamily: 'monospace', fontSize: '0.8rem' } }}
+        InputProps={{ readOnly: true }}
+        disabled
         value={protein.sequence ?? ''}
-        onChange={(e) => onChange({ ...protein, sequence: e.target.value || null })}
       />
     </Stack>
   );
 }
 
-export default function ProteinEditSection({ protein, proteinIndex, onChange }) {
+export default function ProteinEditSection({ protein, proteinIndex, onChange, user }) {
   const [tab, setTab] = useState(0);
 
   return (
@@ -96,6 +112,7 @@ export default function ProteinEditSection({ protein, proteinIndex, onChange }) 
         {tab === 3 && (
           <ReferencesArrayEdit
             items={protein.references ?? []}
+            user={user}
             onChange={(newArr) => onChange({ ...protein, references: newArr })}
           />
         )}
