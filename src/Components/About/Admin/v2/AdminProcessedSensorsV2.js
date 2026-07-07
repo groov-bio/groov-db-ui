@@ -10,12 +10,15 @@ import {
   DialogTitle,
   DialogActions,
   IconButton,
+  Tabs,
+  Tab,
 } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import CloseIcon from '@mui/icons-material/Close';
 import { useSnackbar } from 'notistack';
 
 import SensorPageV2View from '../../../Sensor_Components/SensorPageV2View';
+import EditDiffView from './EditDiffView';
 import {
   approveProcessedSensorV2,
   rejectProcessedSensorV2,
@@ -28,6 +31,7 @@ export default function AdminProcessedSensorsV2({
   onRejected,
 }) {
   const [viewing, setViewing] = useState(null);
+  const [viewTab, setViewTab] = useState('changes');
   const [actingUUID, setActingUUID] = useState(null);
   const [confirm, setConfirm] = useState(null); // { action: 'promote'|'reject', row }
   const { enqueueSnackbar } = useSnackbar();
@@ -48,6 +52,7 @@ export default function AdminProcessedSensorsV2({
         isEdit: p.isEdit === true,
         editTargetGrvId: p.editTarget?.grv_id ?? null,
         data: p.data,
+        previousData: p.previousData ?? null,
       };
     });
   }, [processed]);
@@ -186,7 +191,14 @@ export default function AdminProcessedSensorsV2({
       width: 80,
       sortable: false,
       renderCell: (params) => (
-        <Button variant="contained" size="small" onClick={() => setViewing(params.row)}>
+        <Button
+          variant="contained"
+          size="small"
+          onClick={() => {
+            setViewTab(params.row.isEdit ? 'changes' : 'preview');
+            setViewing(params.row);
+          }}
+        >
           View
         </Button>
       ),
@@ -274,8 +286,22 @@ export default function AdminProcessedSensorsV2({
             <CloseIcon />
           </IconButton>
         </DialogTitle>
+        {viewing?.isEdit && (
+          <Tabs
+            value={viewTab}
+            onChange={(_e, v) => setViewTab(v)}
+            sx={{ px: 2, borderBottom: 1, borderColor: 'divider' }}
+          >
+            <Tab label="Changes" value="changes" />
+            <Tab label="Full preview" value="preview" />
+          </Tabs>
+        )}
         <DialogContent dividers>
-          {viewing && <SensorPageV2View sensor={viewing.data} hideEditButton />}
+          {viewing && viewing.isEdit && viewTab === 'changes' ? (
+            <EditDiffView previous={viewing.previousData} proposed={viewing.data} />
+          ) : (
+            viewing && <SensorPageV2View sensor={viewing.data} hideEditButton />
+          )}
         </DialogContent>
       </Dialog>
 
