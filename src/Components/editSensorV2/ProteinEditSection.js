@@ -1,23 +1,42 @@
 import React, { useState } from 'react';
 import {
-  Box, Paper, Typography, Tabs, Tab, TextField, Stack, Chip,
+  Box, Paper, Typography, Tabs, Tab, TextField, Stack, Chip, MenuItem,
 } from '@mui/material';
 import StimulusArrayEdit from './StimulusArrayEdit';
 import DnaArrayEdit from './DnaArrayEdit';
 import ReferencesArrayEdit from './ReferencesArrayEdit';
-import StructuresArrayEdit from './StructuresArrayEdit';
 import OriginArrayEdit from './OriginArrayEdit';
-import ContextArrayEdit from './ContextArrayEdit';
+import MutationsArrayEdit from './MutationsArrayEdit';
 
-const TABS = ['Identity', 'Stimulus', 'DNA Binding', 'References', 'Structures', 'Origin', 'Context'];
+// Structures and Context are intentionally omitted from the edit form: context is
+// determined by genome biology, and structures aren't user-editable until a
+// structure-file upload feature exists.
+const TABS = ['Identity', 'Stimulus', 'DNA Binding', 'References', 'Origin', 'Mutations'];
 
-function IdentityFields({ protein, onChange }) {
+// Canonical regulation mechanisms — keep in sync with the add-sensor form
+// (SensorMetaTab.js). Signal transduction covers two-/multi-component systems.
+const REGULATION_TYPES = [
+  'Apo-repressor',
+  'Co-repressor',
+  'Apo-activator',
+  'Co-activator',
+  'Signal transduction',
+];
+
+function IdentityFields({ protein, family, onChange }) {
   const f = (key) => ({
     size: 'small',
     fullWidth: true,
     value: protein[key] ?? '',
     onChange: (e) => onChange({ ...protein, [key]: e.target.value || null }),
   });
+
+  // Preserve any existing (possibly non-canonical) value so the dropdown still
+  // shows it instead of rendering blank.
+  const currentRegType = protein.regulation_type ?? '';
+  const regTypeOptions = currentRegType && !REGULATION_TYPES.includes(currentRegType)
+    ? [currentRegType, ...REGULATION_TYPES]
+    : REGULATION_TYPES;
 
   return (
     <Stack spacing={2}>
@@ -31,7 +50,7 @@ function IdentityFields({ protein, onChange }) {
         />
         <TextField
           label="Family" size="small" fullWidth
-          value={protein.family ?? ''}
+          value={family ?? ''}
           InputProps={{ readOnly: true }}
           disabled
         />
@@ -42,12 +61,17 @@ function IdentityFields({ protein, onChange }) {
           disabled
         />
         <TextField
+          select
           label="Regulation type" size="small"
-          value={protein.regulation_type ?? ''}
+          value={currentRegType}
           onChange={(e) => onChange({ ...protein, regulation_type: e.target.value || null })}
           sx={{ gridColumn: { sm: 'span 2' } }}
           fullWidth
-        />
+        >
+          {regTypeOptions.map((opt) => (
+            <MenuItem key={opt} value={opt}>{opt}</MenuItem>
+          ))}
+        </TextField>
       </Box>
       <TextField
         label="Sequence" size="small" fullWidth multiline rows={4}
@@ -60,7 +84,7 @@ function IdentityFields({ protein, onChange }) {
   );
 }
 
-export default function ProteinEditSection({ protein, proteinIndex, onChange, user }) {
+export default function ProteinEditSection({ protein, proteinIndex, family, onChange, user }) {
   const [tab, setTab] = useState(0);
 
   return (
@@ -95,7 +119,7 @@ export default function ProteinEditSection({ protein, proteinIndex, onChange, us
 
       <Box sx={{ p: 3 }}>
         {tab === 0 && (
-          <IdentityFields protein={protein} onChange={onChange} />
+          <IdentityFields protein={protein} family={family} onChange={onChange} />
         )}
         {tab === 1 && (
           <StimulusArrayEdit
@@ -117,21 +141,15 @@ export default function ProteinEditSection({ protein, proteinIndex, onChange, us
           />
         )}
         {tab === 4 && (
-          <StructuresArrayEdit
-            items={protein.structures ?? []}
-            onChange={(newArr) => onChange({ ...protein, structures: newArr })}
-          />
-        )}
-        {tab === 5 && (
           <OriginArrayEdit
             items={protein.origin ?? []}
             onChange={(newArr) => onChange({ ...protein, origin: newArr })}
           />
         )}
-        {tab === 6 && (
-          <ContextArrayEdit
-            items={protein.context ?? []}
-            onChange={(newArr) => onChange({ ...protein, context: newArr })}
+        {tab === 5 && (
+          <MutationsArrayEdit
+            items={protein.mutations ?? []}
+            onChange={(newArr) => onChange({ ...protein, mutations: newArr })}
           />
         )}
       </Box>

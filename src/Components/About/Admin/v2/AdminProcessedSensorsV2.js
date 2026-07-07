@@ -170,8 +170,6 @@ export default function AdminProcessedSensorsV2({
         </Box>
       ),
     },
-    { field: 'proteinCount', headerName: 'Proteins', width: 100 },
-    { field: 'proposed_grv_id', headerName: 'Proposed GRV ID', width: 160 },
     {
       field: 'submissionUUID',
       headerName: 'UUID',

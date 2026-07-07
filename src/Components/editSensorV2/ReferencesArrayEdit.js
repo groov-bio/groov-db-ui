@@ -2,8 +2,6 @@ import React from 'react';
 import {
   Box, Button, TextField, IconButton, Typography,
   Accordion, AccordionSummary, AccordionDetails,
-  FormControl, InputLabel, Select, MenuItem,
-  Checkbox, ListItemText, OutlinedInput, Chip,
   CircularProgress,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -11,19 +9,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import { useSnackbar } from 'notistack';
 import { lookupDoiV2 } from '../../lib/api/v2Admin';
-
-// Canonical interaction tags. Unknown legacy values are preserved (see below).
-const INTERACTION_OPTIONS = ['Stimulus', 'DNA', 'Structure'];
-
-// Normalize interaction to an array of strings. Legacy sensors store objects
-// like { figure, interaction_type, method }; canonical form is a string array.
-function normalizeInteraction(raw) {
-  const arr = Array.isArray(raw) ? raw : [];
-  const strings = arr
-    .map((x) => (x && typeof x === 'object' ? x.interaction_type : x))
-    .filter((x) => x);
-  return [...new Set(strings)];
-}
 
 function createEmptyAuthor() {
   return { last_name: null, first_name: null };
@@ -86,14 +71,6 @@ function ReferenceEntryEdit({ item, index, onChange, onRemove, user }) {
       setLooking(false);
     }
   };
-  // Interaction is a string array of evidence tags. Preserve any legacy value
-  // not in the shared option list so nothing is silently dropped.
-  const selectedInteractions = normalizeInteraction(item.interaction);
-  const interactionOptions = [
-    ...INTERACTION_OPTIONS,
-    ...selectedInteractions.filter((x) => !INTERACTION_OPTIONS.includes(x)),
-  ];
-
   const title = (() => {
     if (item.title) return item.title.slice(0, 60) + (item.title.length > 60 ? '…' : '');
     if (item.doi) return `DOI: ${item.doi}`;
@@ -152,33 +129,6 @@ function ReferenceEntryEdit({ item, index, onChange, onRemove, user }) {
             onChange={(e) => f('url', e.target.value || null)}
           />
         </Box>
-
-        <Typography variant="subtitle2" sx={{ mt: 2, mb: 1 }}>Interactions</Typography>
-        <FormControl size="small" fullWidth>
-          <InputLabel>Interaction(s)</InputLabel>
-          <Select
-            multiple
-            label="Interaction(s)"
-            value={selectedInteractions}
-            onChange={(e) => {
-              const val = typeof e.target.value === 'string' ? e.target.value.split(',') : e.target.value;
-              f('interaction', val);
-            }}
-            input={<OutlinedInput label="Interaction(s)" />}
-            renderValue={(selected) => (
-              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                {selected.map((v) => <Chip key={v} label={v} size="small" />)}
-              </Box>
-            )}
-          >
-            {interactionOptions.map((option) => (
-              <MenuItem key={option} value={option}>
-                <Checkbox checked={selectedInteractions.includes(option)} size="small" />
-                <ListItemText primary={option} />
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
 
         <Typography variant="subtitle2" sx={{ mt: 2, mb: 1 }}>Authors</Typography>
         {authors.map((author, i) => (

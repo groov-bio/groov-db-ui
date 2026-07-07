@@ -4,12 +4,11 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 
 function createEmptyOrigin() {
-  return { type: '', organism_id: null, organism_name: '', parent_id: null, mutations: [] };
+  return { type: '', organism_id: null, organism_name: '', parent_id: null };
 }
 
 function OriginEntryEdit({ item, onChange, onRemove }) {
   const f = (key, val) => onChange({ ...item, [key]: val });
-  const mutationsStr = Array.isArray(item.mutations) ? item.mutations.join(', ') : '';
 
   return (
     <Box sx={{ border: 1, borderColor: 'divider', borderRadius: 1, p: 1.5, mb: 1.5 }}>
@@ -33,13 +32,6 @@ function OriginEntryEdit({ item, onChange, onRemove }) {
           label="Parent ID" size="small" fullWidth
           value={item.parent_id ?? ''}
           onChange={(e) => f('parent_id', e.target.value || null)}
-        />
-        <TextField
-          label="Mutations" size="small" fullWidth
-          helperText="Comma-separated"
-          value={mutationsStr}
-          onChange={(e) => f('mutations', e.target.value ? e.target.value.split(',').map((s) => s.trim()) : [])}
-          sx={{ gridColumn: 'span 2' }}
         />
         <Box sx={{ display: 'flex', justifyContent: 'flex-end', gridColumn: 'span 2' }}>
           <IconButton size="small" onClick={onRemove} color="error">
