@@ -44,26 +44,6 @@ function normalizeStimulusKeys(data) {
 }
 
 /**
- * Normalize reference interaction fields to a string array of evidence tags.
- * Legacy sensors store objects like { figure, interaction_type, method };
- * convert those to their interaction_type string (deduped) so the value always
- * matches the string-only shape the editSensorV2 API validates against.
- */
-function normalizeInteractionShape(data) {
-  return produce(data, (draft) => {
-    (draft.proteins ?? []).forEach((protein) => {
-      (protein.references ?? []).forEach((ref) => {
-        const raw = Array.isArray(ref.interaction) ? ref.interaction : [];
-        const strings = raw
-          .map((x) => (x && typeof x === 'object' ? x.interaction_type : x))
-          .filter((x) => x);
-        ref.interaction = [...new Set(strings)];
-      });
-    });
-  });
-}
-
-/**
  * Before submission: drop incomplete mutation sets and normalize the shape to
  * match addNewSensorV2 — a set needs at least one mutation and a reference id.
  * Proteins with no valid sets have the `mutations` key removed entirely.
@@ -124,7 +104,11 @@ export default function EditSensorV2() {
     if (!id) return;
 
     const load = (data) => {
-      setFormData(normalizeInteractionShape(normalizeStimulusKeys(data)));
+      // `references[].interaction[]` is deprecated dead data (no longer rendered
+      // or editable). Load it untouched so the rich legacy objects round-trip
+      // byte-for-byte through the form model and outgoing payload — never
+      // rewriting it means it can't surface as a spurious change in the edit diff.
+      setFormData(normalizeStimulusKeys(data));
       setLoading(false);
     };
 
