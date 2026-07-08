@@ -44,32 +44,6 @@ function normalizeStimulusKeys(data) {
 }
 
 /**
- * Before submission: drop incomplete mutation sets and normalize the shape to
- * match addNewSensorV2 — a set needs at least one mutation and a reference id.
- * Proteins with no valid sets have the `mutations` key removed entirely.
- */
-function cleanMutations(data) {
-  return produce(data, (draft) => {
-    (draft.proteins ?? []).forEach((protein) => {
-      if (!Array.isArray(protein.mutations)) return;
-      const cleaned = protein.mutations
-        .filter((m) => Array.isArray(m?.mutations) && m.mutations.length > 0
-          && typeof m.ref_id === 'string' && m.ref_id.trim() !== '')
-        .map((m) => ({
-          mutations: m.mutations,
-          ref_type: m.ref_type || 'UniProt',
-          ref_id: m.ref_id.trim(),
-        }));
-      if (cleaned.length > 0) {
-        protein.mutations = cleaned;
-      } else {
-        delete protein.mutations;
-      }
-    });
-  });
-}
-
-/**
  * Before submission: restore original stimulus key and strip _stimKey metadata.
  */
 function denormalizeStimulusKeys(data) {
@@ -173,7 +147,7 @@ export default function EditSensorV2() {
     if (!user || !formData) return;
     setSubmitting(true);
 
-    const dataToSubmit = cleanMutations(denormalizeStimulusKeys(formData));
+    const dataToSubmit = denormalizeStimulusKeys(formData);
 
     try {
       const { status, body } = await editSensorV2(user, {
@@ -249,7 +223,7 @@ export default function EditSensorV2() {
       </Stack>
 
       <Alert severity="info" sx={{ mb: 3 }}>
-        Changes require admin approval before going live. Sensor ID, category, and Type are read-only, as are each protein's UniProt ID, RefSeq ID, Family, KEGG ID, and sequence. Only About, Alias, and Regulation type can be edited.
+        Changes require admin approval before going live. You can edit About, Alias, Regulation type, Stimulus, DNA binding, and References. Sensor identity fields are read-only: ID, category, Type, and each protein's UniProt ID, RefSeq ID, Family, KEGG ID, sequence, origin, and mutations — changing those means creating a new sensor.
       </Alert>
 
       {/* Sensor-level fields */}

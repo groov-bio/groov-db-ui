@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Box, Button, Typography, Accordion, AccordionSummary, AccordionDetails,
-  TextField, Stack, IconButton, Chip, Divider,
-  FormControl, InputLabel, Select, MenuItem, Checkbox, ListItemText, OutlinedInput,
+  TextField, Stack, IconButton, Chip, Divider, MenuItem,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -14,6 +13,10 @@ import {
   stimulusToCards, cardsToStimulus, createEmptyCard, createEmptyItem,
   STIMULUS_KINDS, STIMULUS_KIND_LABELS,
 } from '../../lib/constants/v2_form/stimulusShape';
+
+// Kd is always stored in nanomolar. These factors convert a value entered in the
+// chosen unit back to nM, matching the add-sensor form's kdToNanomolar helper.
+const KD_UNITS = { nM: 1, 'µM': 1_000, mM: 1_000_000 };
 
 // Regulatory effect is a controlled dropdown (activates/represses), matching the
 // add-sensor form. Any legacy free-text value is preserved as an extra option.
@@ -112,41 +115,35 @@ function StimulusItemFields({ kind, item, onChange }) {
 
 // Literature evidence for the stimulus — one block per stimulus.
 function EvidenceFields({ evidence, onChange }) {
-  const selectedMethods = Array.isArray(evidence.method)
-    ? evidence.method
-    : (evidence.method ? [evidence.method] : []);
-  const methodOptions = [
-    ...ligandMethods,
-    ...selectedMethods.filter((m) => !ligandMethods.includes(m)),
-  ];
+  // Kd is stored in nM; the unit is a display-only choice (like the add-sensor
+  // form) and never persisted — the value is converted to nM on every edit.
+  const [kdUnit, setKdUnit] = useState('nM');
+  const kdFactor = KD_UNITS[kdUnit] ?? 1;
+  const kdDisplay = evidence.kd != null ? String(evidence.kd / kdFactor) : '';
+
+  // Method is single-select, matching the add-sensor form. The stored shape is a
+  // single-element array (addNewSensorV2 wraps the chosen method as [method] and
+  // the edit API validates an array), so we read the first value for display and
+  // write it back as a one-element array. Any non-canonical value is preserved.
+  const currentMethod = Array.isArray(evidence.method)
+    ? (evidence.method[0] ?? '')
+    : (evidence.method ?? '');
+  const methodOptions = currentMethod && !ligandMethods.includes(currentMethod)
+    ? [currentMethod, ...ligandMethods]
+    : ligandMethods;
 
   return (
     <Box display="grid" gridTemplateColumns="1fr 1fr" gap={1.5}>
-      <FormControl size="small" fullWidth sx={{ gridColumn: 'span 2' }}>
-        <InputLabel>Method(s)</InputLabel>
-        <Select
-          multiple
-          label="Method(s)"
-          value={selectedMethods}
-          onChange={(e) => {
-            const val = typeof e.target.value === 'string' ? e.target.value.split(',') : e.target.value;
-            onChange({ ...evidence, method: val });
-          }}
-          input={<OutlinedInput label="Method(s)" />}
-          renderValue={(selected) => (
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-              {selected.map((v) => <Chip key={v} label={v} size="small" />)}
-            </Box>
-          )}
-        >
-          {methodOptions.map((option) => (
-            <MenuItem key={option} value={option}>
-              <Checkbox checked={selectedMethods.includes(option)} size="small" />
-              <ListItemText primary={option} />
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
+      <TextField
+        select label="Method" size="small" fullWidth sx={{ gridColumn: 'span 2' }}
+        value={currentMethod}
+        onChange={(e) => onChange({ ...evidence, method: e.target.value ? [e.target.value] : [] })}
+      >
+        <MenuItem value=""><em>None</em></MenuItem>
+        {methodOptions.map((option) => (
+          <MenuItem key={option} value={option}>{option}</MenuItem>
+        ))}
+      </TextField>
       <Box sx={{ gridColumn: 'span 2' }}>
         <FigureRefEdit
           value={evidence.ref_figure}
@@ -158,11 +155,23 @@ function EvidenceFields({ evidence, onChange }) {
         value={evidence.doi ?? ''}
         onChange={(e) => onChange({ ...evidence, doi: e.target.value || null })}
       />
-      <TextField
-        label="Kd" size="small" type="number" fullWidth
-        value={evidence.kd ?? ''}
-        onChange={(e) => onChange({ ...evidence, kd: e.target.value !== '' ? Number(e.target.value) : null })}
-      />
+      <Box display="grid" gridTemplateColumns="1fr auto" gap={1}>
+        <TextField
+          label="Kd" size="small" type="number" fullWidth
+          value={kdDisplay}
+          onChange={(e) => onChange({
+            ...evidence,
+            kd: e.target.value !== '' ? Number(e.target.value) * kdFactor : null,
+          })}
+        />
+        <TextField
+          select label="Unit" size="small" sx={{ minWidth: 90 }}
+          value={kdUnit}
+          onChange={(e) => setKdUnit(e.target.value)}
+        >
+          {Object.keys(KD_UNITS).map((u) => <MenuItem key={u} value={u}>{u}</MenuItem>)}
+        </TextField>
+      </Box>
     </Box>
   );
 }

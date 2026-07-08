@@ -5,13 +5,13 @@ import {
 import StimulusArrayEdit from './StimulusArrayEdit';
 import DnaArrayEdit from './DnaArrayEdit';
 import ReferencesArrayEdit from './ReferencesArrayEdit';
-import OriginArrayEdit from './OriginArrayEdit';
-import MutationsArrayEdit from './MutationsArrayEdit';
 
 // Structures and Context are intentionally omitted from the edit form: context is
 // determined by genome biology, and structures aren't user-editable until a
-// structure-file upload feature exists.
-const TABS = ['Identity', 'Stimulus', 'DNA Binding', 'References', 'Origin', 'Mutations'];
+// structure-file upload feature exists. Origin and Mutations are also read-only:
+// both are tied to the identity of the sensor, so changing them means creating a
+// new sensor rather than editing this one.
+const TABS = ['Identity', 'Stimulus', 'DNA Binding', 'References'];
 
 // Canonical regulation mechanisms — keep in sync with the add-sensor form
 // (SensorMetaTab.js). Signal transduction covers two-/multi-component systems.
@@ -31,9 +31,15 @@ function IdentityFields({ protein, family, onChange }) {
     onChange: (e) => onChange({ ...protein, [key]: e.target.value || null }),
   });
 
-  // Preserve any existing (possibly non-canonical) value so the dropdown still
-  // shows it instead of rendering blank.
-  const currentRegType = protein.regulation_type ?? '';
+  // Preserve any existing value so the dropdown shows it instead of rendering
+  // blank. Match canonical options case-insensitively so a value that only
+  // differs in case (e.g. a stored "Co-Activator" vs the canonical
+  // "Co-activator") selects the canonical option instead of appearing twice.
+  const rawRegType = protein.regulation_type ?? '';
+  const canonicalRegType = REGULATION_TYPES.find(
+    (t) => t.toLowerCase() === rawRegType.toLowerCase(),
+  );
+  const currentRegType = canonicalRegType ?? rawRegType;
   const regTypeOptions = currentRegType && !REGULATION_TYPES.includes(currentRegType)
     ? [currentRegType, ...REGULATION_TYPES]
     : REGULATION_TYPES;
@@ -138,18 +144,6 @@ export default function ProteinEditSection({ protein, proteinIndex, family, onCh
             items={protein.references ?? []}
             user={user}
             onChange={(newArr) => onChange({ ...protein, references: newArr })}
-          />
-        )}
-        {tab === 4 && (
-          <OriginArrayEdit
-            items={protein.origin ?? []}
-            onChange={(newArr) => onChange({ ...protein, origin: newArr })}
-          />
-        )}
-        {tab === 5 && (
-          <MutationsArrayEdit
-            items={protein.mutations ?? []}
-            onChange={(newArr) => onChange({ ...protein, mutations: newArr })}
           />
         )}
       </Box>
