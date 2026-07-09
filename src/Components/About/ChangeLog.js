@@ -62,7 +62,8 @@ export default function ChangeLog() {
         sx={{
           gridColumn: '1 / 12',
           display: 'grid',
-          gridTemplateRows: 'repeat(12, 1fr)',
+          gridAutoRows: 'auto',
+          rowGap: 4,
           fontSize: { xs: 14, sm: 16 },
         }}
       >
@@ -74,7 +75,6 @@ export default function ChangeLog() {
         </Box> */}
 
         <Box
-          mb={5}
           sx={{ gridColumn: 'span 12', borderBottom: '1px solid black' }}
           // sx={{
           //   marginLeft: { xs: '10vw', sm: '35vw', md: '30vw' },
@@ -93,6 +93,71 @@ export default function ChangeLog() {
             We are always looking for ways to improve groov<sup>DB</sup>. If you
             have any suggestions, please <Link href="contact">contact us</Link>.
           </Typography>
+        </Box>
+        <Box id="v2.3" sx={{ gridColumn: 'span 12' }}>
+          <Box>
+            {getHeader('08 July, 2026', '2.3', 'Feature')}
+            {createList([
+              `Spot the difference`,
+              `You can now fully edit V2 sensors. Reviewers get a side-by-side diff viewer that highlights exactly what changed before an edit goes live.`,
+            ])}
+          </Box>
+        </Box>
+        <Box id="v2.2" sx={{ gridColumn: 'span 12' }}>
+          <Box>
+            {getHeader('21 June, 2026', '2.2', 'Enhancement')}
+            {createList([
+              `More signals, more families, more everything`,
+              `Sensors can now capture light and temperature stimuli, binding constants (Kd), and signal transduction mechanism.`,
+              `We also expanded the regulator families and categories groov recognizes.`,
+            ])}
+          </Box>
+        </Box>
+        <Box id="v2.1" sx={{ gridColumn: 'span 12' }}>
+          <Box>
+            {getHeader('14 May, 2026', '2.1', 'Feature')}
+            {createList([
+              `Now you can groov in V2, too`,
+              `The redesigned add-sensor form brings community contributions into the V2 world.`,
+            ])}
+          </Box>
+        </Box>
+        <Box id="v2.0" sx={{ gridColumn: 'span 12' }}>
+          <Box>
+            {getHeader('14 April, 2026', '2.0', 'Feature')}
+            {createList([
+              `V2 has entered the chat`,
+              `We rebuilt groov from the data model up. A sensor can now hold one or more proteins working together, and shiny new sensor pages and browse tables show it all off.`,
+              `Want the full story? Check out "What's new in V2" under About.`,
+            ])}
+          </Box>
+        </Box>
+        <Box id="v1.20" sx={{ gridColumn: 'span 12' }}>
+          <Box>
+            {getHeader('22 February, 2026', '1.20', 'Enhancement')}
+            {createList([
+              `Care for a cookie? Only if you say so`,
+              `We added a cookie consent banner, so you're in control of which analytics cookies we set.`,
+            ])}
+          </Box>
+        </Box>
+        <Box id="v1.19" sx={{ gridColumn: 'span 12' }}>
+          <Box>
+            {getHeader('04 November, 2025', '1.19', 'Feature')}
+            {createList([
+              `Read all about us`,
+              `groov is now published in Nucleic Acids Research! Head to Citing groovDB for the reference.`,
+            ])}
+          </Box>
+        </Box>
+        <Box id="v1.18" sx={{ gridColumn: 'span 12' }}>
+          <Box>
+            {getHeader('14 September, 2025', '1.18', 'Enhancement')}
+            {createList([
+              `A fresh coat of paint`,
+              `We gave the UI a broad overhaul with cleaner visuals and refreshed family artwork across the site.`,
+            ])}
+          </Box>
         </Box>
         <Box id="v1.17" sx={{ gridColumn: 'span 12' }}>
           <Box>

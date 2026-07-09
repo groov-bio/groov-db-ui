@@ -165,8 +165,10 @@ export default function AdminProcessedSensorsV2({
       flex: 1,
       minWidth: 200,
       renderCell: (params) => (
-        <Box>
-          <Typography variant="body2">{params.value}</Typography>
+        <Box sx={{ display: 'flex', alignItems: 'baseline', gap: 1, minWidth: 0 }}>
+          <Typography variant="body2" noWrap>
+            {params.value}
+          </Typography>
           {params.row.editTargetGrvId && (
             <Typography variant="caption" color="text.secondary" sx={{ fontFamily: 'monospace' }}>
               {params.row.editTargetGrvId}
