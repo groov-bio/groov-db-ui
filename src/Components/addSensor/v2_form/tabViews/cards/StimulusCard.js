@@ -7,7 +7,7 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import { FormikTextInput } from '../../../../form-inputs/FormikTextInput';
 import { FormikSelectInput } from '../../../../form-inputs/FormikSelectInput';
-import { figureTypes } from '../../../../../lib/constants/v2_form/experimentalMethods';
+import { ligandMethods, figureTypes } from '../../../../../lib/constants/v2_form/experimentalMethods';
 
 // Shared card for light/temperature stimuli — same shape, different scalar field.
 export default function StimulusCard({
@@ -53,7 +53,9 @@ export default function StimulusCard({
               <FormikTextInput name={f('ref_figure')} label="Figure Number" />
             </FormControl>
           </Box>
-          <Box mb={2}><FormikTextInput name={f('method')} label="Method" /></Box>
+          <Box mb={2}>
+            <FormikSelectInput name={f('method')} label="Experimental evidence" options={ligandMethods} />
+          </Box>
         </Collapse>
       </Box>
     </>
