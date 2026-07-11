@@ -14,7 +14,9 @@ const awsConfig = {
       domain: 'groov.auth.us-east-2.amazoncognito.com',
       scope: ['email', 'openid', 'profile'],
       // Should be restored to https://www.groov.bio/account/ after local development
+      // Should be http://localhost:3000/account/ for local development
       redirectSignIn: 'https://www.groov.bio/account/',
+      // should be http://localhost:3000/ for local development
       // Should be restored to https://www.groov.bio/ after local development
       redirectSignOut: 'https://www.groov.bio/',
       responseType: 'code',

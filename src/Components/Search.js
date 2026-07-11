@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import useSearchStore from '../zustand/search.store.js';
+import useFeatureFlagsStore, {
+  useFeatureFlag,
+} from '../zustand/featureFlags.store.js';
 
 import {
   Autocomplete,
@@ -32,19 +35,36 @@ export default function Search() {
   //State used to hold labels for dropdown
   const labels = useSearchStore((context) => context.data);
 
+  // The V2 sensor page lives at /sensor/:id (GRV id); when enabled the search
+  // must point there instead of the legacy /entry/:family/:uniprot pages.
+  const v2Enabled = useFeatureFlag('v2_sensor_page');
+  const flagsReady = useFeatureFlagsStore(
+    (s) => Object.keys(s.flags).length > 0
+  );
+  const flagsError = useFeatureFlagsStore((s) => s.error);
+
   // Fetch data on initial load
   useEffect(() => {
+    // Wait until feature flags resolve so we fetch the correct index shape.
+    // If the flag fetch failed, fall back to the legacy (V1) index rather
+    // than blocking the home-page search indefinitely.
+    if (!flagsReady && !flagsError) return;
     // Only fetch if the data isn't already loaded in the zustand store
-    if (labels.length === 0) {
-      fetch(
-        'https://groov-api.com/index.json',
+    if (labels.length > 0) return;
 
-        {
-          headers: {
-            Accept: 'application/json',
-          },
-        }
-      )
+    if (v2Enabled) {
+      fetch('https://groov-api.com/v2/index.json', {
+        headers: { Accept: 'application/json' },
+      })
+        .then((res) => res.json())
+        .then((indexData) => {
+          setData(generateV2Labels(indexData.sensors || []));
+          setStats(indexData.stats);
+        });
+    } else {
+      fetch('https://groov-api.com/index.json', {
+        headers: { Accept: 'application/json' },
+      })
         .then((res) => res.json())
         .then((indexData) => {
           const processedData = processIndexData(indexData);
@@ -53,7 +73,7 @@ export default function Search() {
           setStats(indexData.stats);
         });
     }
-  }, []);
+  }, [flagsReady, flagsError, v2Enabled]);
 
   // Process raw index data to match the old API format
   const processIndexData = (indexData) => {
@@ -116,6 +136,36 @@ export default function Search() {
             link: `/entry/${value.family}/${value.uniprot}`,
           });
         }
+      }
+    });
+
+    return tempLabels;
+  };
+
+  // Build Autocomplete labels from the V2 index shape ({ stats, sensors: [...] }).
+  // Each sensor carries its GRV id, so links target the V2 route /sensor/:id.
+  const generateV2Labels = (sensors) => {
+    let tempLabels = [];
+
+    sensors.forEach((sensor) => {
+      const ligands = Array.isArray(sensor.ligands) ? sensor.ligands : [];
+      const link = `/sensor/${sensor.id}`;
+
+      // Show the GRV id in each row so an id search visibly matches its
+      // results (and so the default filter matches on the id text too).
+      ligands.forEach((ligand) => {
+        tempLabels.push({
+          label: `${sensor.id} — ${ligand} (${sensor.alias}/${sensor.category})`,
+          link,
+        });
+      });
+
+      // Keep ligand-less sensors reachable (e.g. by GRV id or regulator name).
+      if (ligands.length === 0) {
+        tempLabels.push({
+          label: `${sensor.id} — ${sensor.alias} (${sensor.category})`,
+          link,
+        });
       }
     });
 

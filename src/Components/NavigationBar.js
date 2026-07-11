@@ -36,13 +36,14 @@ import '@aws-amplify/ui-react/styles.css';
 import useUserStore from '../zustand/user.store';
 import { checkAuthStatus, signOutUser, signIn } from '../utils/auth';
 import { useThemeMode } from '../contexts/ThemeContext';
+import { useFeatureFlag } from '../zustand/featureFlags.store';
 
 const navItems = ['Browse', 'Tools', 'About'];
 const linkItems = ['/database', '/tools', '/about/about-groovdb'];
 
 // TODO: These shouldn't be listed here AND in the About.js component.
 // only one place.
-const aboutTitles = [
+const baseAboutTitles = [
   'About groovDB',
   'Citing',
   'Contributing',
@@ -51,7 +52,7 @@ const aboutTitles = [
   'Programmatic Access',
   'FAQ',
 ];
-const aboutLinks = [
+const baseAboutLinks = [
   '/about/about-groovdb',
   '/about/cite',
   '/about/contributing',
@@ -72,6 +73,15 @@ export default function NavigationBar(props) {
   //To detect size of screen
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+
+  // Conditionally surface the V2 "What's new" page, gated by the feature flag.
+  const showV2Page = useFeatureFlag('v2_sensor_page');
+  const aboutTitles = showV2Page
+    ? [baseAboutTitles[0], "What's new in V2", ...baseAboutTitles.slice(1)]
+    : baseAboutTitles;
+  const aboutLinks = showV2Page
+    ? [baseAboutLinks[0], '/about/v2', ...baseAboutLinks.slice(1)]
+    : baseAboutLinks;
 
   // Open or close side bar menu in mobile format.
   const handleDrawerToggle = () => {

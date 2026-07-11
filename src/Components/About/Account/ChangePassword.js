@@ -80,15 +80,12 @@ export default function ChangePassword({ setShowChangePwd }) {
         onChange={(e) => updatePassword(e.target.value, 'newPassword')}
       />
       <Button
-        sx={{
-          border: '1px solid blue',
-          borderRadius: '3px',
-          marginTop: 3,
-        }}
+        variant="contained"
+        sx={{ marginTop: 3, py: 1.25 }}
         fullWidth
         onClick={sendChangeRequest}
       >
-        Submit
+        Update password
       </Button>
     </Box>
   );

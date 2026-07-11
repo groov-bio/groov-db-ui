@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import SmilesDrawer from 'smiles-drawer';
 import {
   Box,
@@ -22,36 +22,55 @@ import {
 export default function StimulusViewer({ stimulus, canvasId }) {
   const [currentIndex, setCurrentIndex] = useState(1);
 
-  const current = stimulus?.[currentIndex - 1];
-  const stimType = current?.stimulus_type?.[0];
-  const evidence = current?.stimulus_evidence?.[0];
-  const smallMolecule = stimType?.small_molecule?.[0];
-  const light = stimType?.light;
-  const temperature = stimType?.temperature;
+  // Flatten every displayable stimulus item (each small molecule / light /
+  // temperature across every stimulus entry and type entry) into its own page,
+  // carrying the evidence from its parent stimulus entry. A single type entry
+  // can hold multiple molecules (e.g. Estradiol + Estrone), so we can't index [0].
+  const items = useMemo(() => {
+    const asArray = (v) => (Array.isArray(v) ? v : v ? [v] : []);
+    const out = [];
+    for (const entry of stimulus ?? []) {
+      const types = entry?.stimulusType ?? entry?.stimulus_type ?? [];
+      const evidence = entry?.stimulus_evidence ?? [];
+      for (const t of types) {
+        for (const data of asArray(t?.small_molecule)) out.push({ kind: 'molecule', data, evidence });
+        for (const data of asArray(t?.light)) out.push({ kind: 'light', data, evidence });
+        for (const data of asArray(t?.temperature)) out.push({ kind: 'temperature', data, evidence });
+      }
+    }
+    return out;
+  }, [stimulus]);
+
+  const pageCount = items.length;
+  const safeIndex = Math.min(currentIndex, pageCount) || 1;
+  const current = items[safeIndex - 1];
+  const smallMolecule = current?.kind === 'molecule' ? current.data : null;
+  const light = current?.kind === 'light' ? current.data : null;
+  const temperature = current?.kind === 'temperature' ? current.data : null;
+  const evidence = current?.evidence?.[0];
+  const smiles = smallMolecule?.smiles ?? smallMolecule?.SMILES;
 
   const stableCanvasId = `SMILEScanvas-${canvasId}`;
 
   useEffect(() => {
-    if (!stimType) return;
-
     const canvas = document.getElementById(stableCanvasId);
     if (canvas) {
       const ctx = canvas.getContext('2d');
       ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
 
-    if (smallMolecule?.smiles) {
+    if (smiles) {
       const options = { compactDrawing: false, bondThickness: 1.2 };
       const drawer = new SmilesDrawer.Drawer(options);
       SmilesDrawer.parse(
-        smallMolecule.smiles,
+        smiles,
         (tree) => { drawer.draw(tree, stableCanvasId); },
         () => {}
       );
     }
-  }, [currentIndex, smallMolecule?.smiles, stableCanvasId, stimType]);
+  }, [safeIndex, smiles, stableCanvasId]);
 
-  if (!stimulus?.length) {
+  if (!pageCount) {
     return (
       <Typography color="text.secondary" textAlign="center" py={4}>
         No stimulus data submitted
@@ -143,8 +162,8 @@ export default function StimulusViewer({ stimulus, canvasId }) {
       {/* Pagination — always shown to match Structure card alignment */}
       <Stack spacing={2} alignItems="center" sx={{ mt: 4, mb: 3 }}>
         <Pagination
-          count={stimulus.length}
-          page={currentIndex}
+          count={pageCount}
+          page={safeIndex}
           onChange={(_, v) => setCurrentIndex(v)}
           size="small"
         />

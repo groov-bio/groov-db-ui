@@ -31,6 +31,7 @@ const ID_PREFIX_TO_CATEGORY = {
   G: 'gntr',
   I: 'iclr',
   Z: 'other',
+  D: 'dual', // two-component systems (TWO_COMPONENT_PREFIX on the backend)
 };
 
 function getCategoryFromId(id) {
