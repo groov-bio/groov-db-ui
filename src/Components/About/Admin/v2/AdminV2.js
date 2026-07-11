@@ -10,7 +10,6 @@ import {
 } from '@mui/material';
 
 import useUserStore from '../../../../zustand/user.store';
-import { useFeatureFlag } from '../../../../zustand/featureFlags.store';
 import {
   getAllProcessedTempV2,
   getAllTempSensorsV2,
@@ -22,7 +21,6 @@ import AdminPublishedSensorsV2 from './AdminPublishedSensorsV2';
 
 export default function AdminV2() {
   const user = useUserStore((s) => s.user);
-  const v2ApiEnabled = useFeatureFlag('v2_api', false);
 
   const [submissions, setSubmissions] = useState(null);
   const [processed, setProcessed] = useState(null);
@@ -122,13 +120,6 @@ export default function AdminV2() {
         >
           Administrator page (V2)
         </Typography>
-
-        {!v2ApiEnabled && (
-          <Alert severity="warning" sx={{ mb: 3 }}>
-            <code>v2_api</code> is off — approve/reject calls will fail. Enable
-            it in <code>feature-flags.json</code> to use this page.
-          </Alert>
-        )}
 
         {loadError && (
           <Alert severity="error" sx={{ mb: 3 }}>

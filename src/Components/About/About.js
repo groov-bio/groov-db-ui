@@ -19,14 +19,12 @@ import Cite from './Cite.js';
 import Contribute from './Contribute.js';
 import FAQ_Tutorial from './FAQ_Tutorial.js';
 import ProgrammaticAccess from './ProgrammaticAccess.js';
-import { useFeatureFlag } from '../../zustand/featureFlags.store.js';
 
 import { Route, Routes, Link } from 'react-router-dom';
 
 export default function About() {
   const theme = useTheme();
   const isNotSmallScreen = useMediaQuery(theme.breakpoints.up('sm'));
-  const showV2Page = useFeatureFlag('v2_sensor_page');
 
   const topics = [
     {
@@ -35,16 +33,12 @@ export default function About() {
       path: 'about-groovdb',
       component: <AboutGroovDB />,
     },
-    ...(showV2Page
-      ? [
-          {
-            id: 8,
-            label: "What's new in V2",
-            path: 'v2',
-            component: <GroovDBV2 />,
-          },
-        ]
-      : []),
+    {
+      id: 8,
+      label: "What's new in V2",
+      path: 'v2',
+      component: <GroovDBV2 />,
+    },
     { id: 2, label: 'Citing groovDB', path: 'cite', component: <Cite /> },
     {
       id: 3,

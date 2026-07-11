@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Auth } from 'aws-amplify';
 import { useNavigate } from 'react-router-dom';
-import Admin from '../About/Admin/Admin';
 
 export function RequireAdminAuth({ children }) {
   //Admin auth wrapper
@@ -26,5 +25,5 @@ export function RequireAdminAuth({ children }) {
       });
   }, []);
 
-  return isAuth && <Admin />;
+  return isAuth && children;
 }
