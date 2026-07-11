@@ -35,7 +35,7 @@ const NARBanner = () => {
             fontWeight: 400,
           }}
         >
-          Now published in{' '}
+          Published in{' '}
           <Link
             href="https://doi.org/10.1093/nar/gkaf1074"
             target="_blank"
