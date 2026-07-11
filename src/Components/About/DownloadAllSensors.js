@@ -3,6 +3,7 @@ import { Button, CircularProgress } from '@mui/material';
 import DownloadIcon from '@mui/icons-material/Download';
 import { useAllSensors } from '../../queries/sensors.js';
 import { useFeatureFlag } from '../../zustand/featureFlags.store';
+import { withCacheBust } from '../../lib/utils.js';
 
 export default function DownloadAllSensors() {
   const [isDownloading, setIsDownloading] = useState(false);
@@ -15,12 +16,12 @@ export default function DownloadAllSensors() {
       
       let dataToDownload;
       if (v2SensorTablesEnabled) {
-        const response = await fetch('https://groov-api.com/v2/all-sensors.json');
+        const response = await fetch(withCacheBust('https://groov-api.com/v2/all-sensors.json'));
         dataToDownload = await response.json();
       } else if (sensorsData.length > 0) {
         dataToDownload = { sensors: sensorsData };
       } else {
-        const response = await fetch('https://groov-api.com/all-sensors.json');
+        const response = await fetch(withCacheBust('https://groov-api.com/all-sensors.json'));
         dataToDownload = await response.json();
       }
 

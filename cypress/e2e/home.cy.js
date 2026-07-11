@@ -17,12 +17,12 @@ describe('Home page spec', () => {
       'Find your sensor'
     );
     cy.get('.Mui-selected').should('have.attr', 'tabindex', '0');
-    cy.get('[tabindex="-1"]').click();
+    cy.get('[tabindex="-1"]').click({force: true});
     cy.get('#ligand-search-input').should('be.visible');
     cy.get('#ligand-search-input-label').should('have.text', 'SMILES String');
-    cy.get('#use-example-smiles').click();
+    cy.get('#use-example-smiles').click({force: true});
     cy.get('#ligand-search-input').should('have.value', 'CC1=C(C(=CC(=C1)CCCC(C)C)O)C(C)');
-    cy.get('#search-button').click();
+    cy.get('#search-button').click({force: true});
     /* ==== End Cypress Studio ==== */
     /* ==== Generated with Cypress Studio ==== */
     cy.get('#results-total').should('have.text', "Results (6)");

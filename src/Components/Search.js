@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import useSearchStore from '../zustand/search.store.js';
+import { withCacheBust } from '../lib/utils.js';
 import useFeatureFlagsStore, {
   useFeatureFlag,
 } from '../zustand/featureFlags.store.js';
@@ -53,7 +54,7 @@ export default function Search() {
     if (labels.length > 0) return;
 
     if (v2Enabled) {
-      fetch('https://groov-api.com/v2/index.json', {
+      fetch(withCacheBust('https://groov-api.com/v2/index.json'), {
         headers: { Accept: 'application/json' },
       })
         .then((res) => res.json())
@@ -62,7 +63,7 @@ export default function Search() {
           setStats(indexData.stats);
         });
     } else {
-      fetch('https://groov-api.com/index.json', {
+      fetch(withCacheBust('https://groov-api.com/index.json'), {
         headers: { Accept: 'application/json' },
       })
         .then((res) => res.json())
