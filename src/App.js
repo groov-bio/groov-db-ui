@@ -22,6 +22,7 @@ import { useMediaQuery, useTheme } from '@mui/material';
 import { CustomThemeProvider } from './contexts/ThemeContext';
 import { RequireAuth } from './Components/Auth/RequireAuth';
 import { RequireAdminAuth } from './Components/Auth/RequireAdminAuth';
+import { withCacheBust } from './lib/utils.js';
 import { Amplify } from 'aws-amplify';
 import useUserStore from './zustand/user.store';
 import useFeatureFlagsStore from './zustand/featureFlags.store';
@@ -90,7 +91,11 @@ export default function App() {
     const fetchFeatureFlags = async () => {
       setLoading(true);
       try {
-        const response = await fetch('https://groov-api.com/feature-flags.json');
+        // Cache-bust: feature-flags.json is served with no Cache-Control, so a
+        // browser that cached an older copy (before a flag like v2_sensor_tables
+        // was added) keeps reading stale flags and renders the wrong UI. This is
+        // the gate for the whole V2 UI, so it matters most of all the fetches.
+        const response = await fetch(withCacheBust('https://groov-api.com/feature-flags.json'));
         if (!response.ok) {
           throw new Error(`Failed to fetch feature flags: ${response.status}`);
         }
