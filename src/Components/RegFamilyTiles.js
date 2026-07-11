@@ -46,7 +46,7 @@ export default function RegFamilyTiles() {
     { image: '/Other-family.png', family: 'Other' },
     // Two-component systems collapse into a single "Dual" bucket on the backend
     // (R2 family index v2/indexes/dual.json). No dedicated artwork yet, so reuse Other.
-    { image: '/Other-family.png', family: 'Dual', label: 'Two-Component' },
+    { image: '/TCS-family.png', family: 'Dual', label: 'Two-Component' },
   ];
 
   // Display label overrides where the backend category name isn't the friendliest UI label.
