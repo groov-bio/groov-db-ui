@@ -9,7 +9,6 @@ jest.mock('@aws-amplify/ui-react/styles.css', () => ({}), { virtual: true });
 
 import { Auth } from 'aws-amplify';
 import { renderWithProviders, screen } from '../../test-utils';
-import useFeatureFlagsStore from '../../zustand/featureFlags.store';
 import NavigationBar from '../../Components/NavigationBar.js';
 
 function getHamburgerIcon(container) {
@@ -22,7 +21,6 @@ describe('NavigationBar', () => {
   });
 
   afterEach(() => {
-    useFeatureFlagsStore.setState({ flags: {} });
     jest.clearAllMocks();
   });
 
@@ -94,17 +92,10 @@ describe('NavigationBar', () => {
     expect(citingLink).toHaveAttribute('href', '/about/cite');
   });
 
-  test('mobile About submenu excludes "What\'s new in V2" by default, and includes it when the flag is on', async () => {
-    const { container, user, unmount } = renderWithProviders(<NavigationBar />);
+  test('mobile About submenu includes "What\'s new in V2" linking to /about/v2', async () => {
+    const { container, user } = renderWithProviders(<NavigationBar />);
     await user.click(getHamburgerIcon(container));
     await user.click(screen.getAllByText('About')[1]);
-    expect(screen.queryByText("What's new in V2")).not.toBeInTheDocument();
-    unmount();
-
-    useFeatureFlagsStore.setState({ flags: { v2_sensor_page: { local: true } } });
-    const rendered = renderWithProviders(<NavigationBar />);
-    await rendered.user.click(getHamburgerIcon(rendered.container));
-    await rendered.user.click(screen.getAllByText('About')[1]);
     const v2Link = screen.getByText("What's new in V2").closest('a');
     expect(v2Link).toHaveAttribute('href', '/about/v2');
   });

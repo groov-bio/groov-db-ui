@@ -1,8 +1,6 @@
-import React from 'react';
 import { renderWithProviders, screen, waitFor } from '../../test-utils';
 import Search from '../../Components/Search';
 import useSearchStore from '../../zustand/search.store.js';
-import useFeatureFlagsStore from '../../zustand/featureFlags.store.js';
 
 describe('Search', () => {
   beforeEach(() => {
@@ -11,71 +9,26 @@ describe('Search', () => {
       data: [],
       rawData: [],
     });
-    useFeatureFlagsStore.setState({ flags: {}, loading: false, error: null });
   });
 
   afterEach(() => {
     jest.restoreAllMocks();
   });
 
-  test('shows the loading state and a disabled combobox until feature flags resolve', () => {
-    // No fetch is stubbed and flags are never seeded, so the component's
-    // effect (which waits on flagsReady/flagsError) never fires a fetch.
-    global.fetch = jest.fn();
+  test('fetches the v2 index on mount and shows a disabled "Loading..." combobox until it resolves', () => {
+    // A never-resolving fetch keeps the store's `data` empty, so the field
+    // stays in its loading state.
+    global.fetch = jest.fn(() => new Promise(() => {}));
     renderWithProviders(<Search />);
 
     expect(screen.getByLabelText('Loading...')).toBeInTheDocument();
     expect(screen.getByRole('combobox')).toBeDisabled();
-    expect(global.fetch).not.toHaveBeenCalled();
-  });
-
-  test('V1 path: fetches the legacy index and lists a ligand/alias/family match linking to /entry/:family/:uniprot', async () => {
-    // v2_sensor_page explicitly off -> legacy branch; flags are "ready"
-    // because Object.keys(flags).length > 0.
-    useFeatureFlagsStore.getState().setFlags({
-      v2_sensor_page: { local: false },
-    });
-
-    const mockIndex = {
-      Q82H41: {
-        alias: 'AvaR1',
-        family: 'TetR',
-        ligands: ['Avenolide'],
-        ligandCount: 1,
-      },
-      stats: { ligands: 12, regulators: 8 },
-    };
-
-    global.fetch = jest.fn(() =>
-      Promise.resolve({ ok: true, json: () => Promise.resolve(mockIndex) })
-    );
-
-    const { user } = renderWithProviders(<Search />);
-
-    await waitFor(() => expect(global.fetch).toHaveBeenCalled());
     expect(global.fetch.mock.calls[0][0]).toContain(
-      'https://groov-api.com/index.json'
-    );
-
-    // Wait for the field to become enabled once labels are populated.
-    await waitFor(() =>
-      expect(screen.getByRole('combobox')).not.toBeDisabled()
-    );
-
-    await user.type(screen.getByRole('combobox'), 'Avenolide');
-
-    const option = await screen.findByText('Avenolide (AvaR1/TetR)');
-    expect(option.closest('a')).toHaveAttribute(
-      'href',
-      '/entry/TetR/Q82H41'
+      'https://groov-api.com/v2/index.json'
     );
   });
 
-  test('V2 path: fetches the v2 index and lists a GRV-id result linking to /sensor/:id', async () => {
-    useFeatureFlagsStore.getState().setFlags({
-      v2_sensor_page: { local: true },
-    });
-
+  test('lists a GRV-id / ligand result linking to /sensor/:id once the index loads', async () => {
     const mockV2Index = {
       stats: { ligands: 20, regulators: 15 },
       sensors: [
@@ -99,6 +52,7 @@ describe('Search', () => {
       'https://groov-api.com/v2/index.json'
     );
 
+    // Field becomes enabled once labels are populated from the index.
     await waitFor(() =>
       expect(screen.getByRole('combobox')).not.toBeDisabled()
     );
@@ -109,5 +63,29 @@ describe('Search', () => {
       'GRV-T00001 — Avenolide (AvaR1/TetR)'
     );
     expect(option.closest('a')).toHaveAttribute('href', '/sensor/GRV-T00001');
+  });
+
+  test('keeps a ligand-less sensor reachable, linking to /sensor/:id', async () => {
+    const mockV2Index = {
+      stats: { ligands: 1, regulators: 1 },
+      sensors: [
+        { id: 'GRV-T00002', alias: 'RbsR', category: 'LacI', ligands: [] },
+      ],
+    };
+
+    global.fetch = jest.fn(() =>
+      Promise.resolve({ ok: true, json: () => Promise.resolve(mockV2Index) })
+    );
+
+    const { user } = renderWithProviders(<Search />);
+
+    await waitFor(() =>
+      expect(screen.getByRole('combobox')).not.toBeDisabled()
+    );
+
+    await user.type(screen.getByRole('combobox'), 'RbsR');
+
+    const option = await screen.findByText('GRV-T00002 — RbsR (LacI)');
+    expect(option.closest('a')).toHaveAttribute('href', '/sensor/GRV-T00002');
   });
 });
