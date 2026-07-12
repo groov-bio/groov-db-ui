@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate, Navigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import {
   Container,
   Typography,
@@ -11,7 +11,6 @@ import {
 
 import useSensorStore from '../../zustand/sensor.store';
 import useUserStore from '../../zustand/user.store';
-import useFeatureFlagsStore, { useFeatureFlag } from '../../zustand/featureFlags.store';
 import SensorPageV2View from './SensorPageV2View';
 
 /**
@@ -44,9 +43,6 @@ export default function SensorPageV2() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const v2Enabled = useFeatureFlag('v2_sensor_page');
-  const flagsLoading = useFeatureFlagsStore((s) => s.loading);
-  const flagsReady = useFeatureFlagsStore((s) => Object.keys(s.flags).length > 0);
   const sensorData = useSensorStore((s) => s.v2SensorData[id]);
   const setV2SensorData = useSensorStore((s) => s.setV2SensorData);
   const currentUser = useUserStore((s) => s.user);
@@ -72,14 +68,6 @@ export default function SensorPageV2() {
       .then((data) => setV2SensorData(id, data))
       .catch((err) => setFetchError(err.message));
   }, [id, sensorData, setV2SensorData]);
-
-  if (flagsLoading || !flagsReady) {
-    return null;
-  }
-
-  if (!v2Enabled) {
-    return <Navigate to="/" replace />;
-  }
 
   if (fetchError) {
     return (

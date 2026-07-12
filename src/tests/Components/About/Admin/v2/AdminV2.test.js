@@ -9,9 +9,8 @@ if (typeof global.TextEncoder === 'undefined') {
   global.TextDecoder = TextDecoder;
 }
 
-import { renderWithProviders, screen, waitFor } from '../../../../../test-utils';
+import { renderWithProviders, screen } from '../../../../../test-utils';
 import useUserStore from '../../../../../zustand/user.store';
-import useFeatureFlagsStore from '../../../../../zustand/featureFlags.store';
 const AdminV2 = require('../../../../../Components/About/Admin/v2/AdminV2').default;
 
 function makeUser() {
@@ -28,28 +27,16 @@ describe('AdminV2', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     useUserStore.setState({ user: null });
-    useFeatureFlagsStore.setState({ flags: {}, loading: false, error: null });
   });
 
   afterEach(() => jest.restoreAllMocks());
 
-  test('renders the V2 header and a warning when v2_api is off, staying in the loading state with no user', () => {
+  test('renders the V2 header and stays in the loading state when there is no user', () => {
     renderWithProviders(<AdminV2 />);
     expect(screen.getByText('Administrator page (V2)')).toBeInTheDocument();
-    expect(screen.getByText(/is off — approve\/reject calls will fail/i)).toBeInTheDocument();
     // With no user in the store, the data-loading effect returns early, so
     // submissions/processed stay null and the page never leaves the spinner.
     expect(screen.getByRole('progressbar')).toBeInTheDocument();
-  });
-
-  test('does not show the v2_api warning once the flag is enabled', () => {
-    useFeatureFlagsStore.setState({
-      flags: { v2_api: { local: true, prod: true } },
-      loading: false,
-      error: null,
-    });
-    renderWithProviders(<AdminV2 />);
-    expect(screen.queryByText(/is off — approve\/reject calls will fail/i)).not.toBeInTheDocument();
   });
 
   test('with a signed-in user and mocked fetch, loads submissions/processed and renders their rows', async () => {

@@ -1,22 +1,18 @@
-// RegFamilyTiles always mounts SensorTable (or SensorTableV2, behind a flag)
-// as part of its main content area. SensorTable pulls in SensorPage ->
-// DNAbinding -> @mui/x-data-grid, a very heavy dependency chain: under jsdom
-// it triggers `ReferenceError: TextEncoder is not defined` (an internal
-// @mui/x-internals hashing helper calls `new TextEncoder()` at module scope,
-// and jsdom doesn't provide TextEncoder globally) and, even once that's
-// polyfilled, real DataGrid rendering in jsdom is extremely slow/unstable
-// (no real layout, ResizeObserver only stubbed) and made the suite hang.
-// RegFamilyTiles' own behavior (family sidebar, tiles, "Add a sensor",
-// download button) doesn't depend on SensorTable's internals, so stub both
-// table implementations out here rather than paying that cost.
-jest.mock('../../Components/SensorTable.js', () => function MockSensorTable() {
-  return null;
-});
+// RegFamilyTiles mounts SensorTableV2 as part of its main content area, which
+// pulls in SensorPage -> DNAbinding -> @mui/x-data-grid, a very heavy
+// dependency chain: under jsdom it triggers `ReferenceError: TextEncoder is
+// not defined` (an internal @mui/x-internals hashing helper calls
+// `new TextEncoder()` at module scope, and jsdom doesn't provide TextEncoder
+// globally) and, even once that's polyfilled, real DataGrid rendering in jsdom
+// is extremely slow/unstable (no real layout, ResizeObserver only stubbed) and
+// made the suite hang. RegFamilyTiles' own behavior (family sidebar, tiles,
+// "Add a sensor", download button) doesn't depend on the table's internals, so
+// stub it out here rather than paying that cost.
 jest.mock('../../Components/Sensor_Components/SensorTableV2.js', () => function MockSensorTableV2() {
   return null;
 });
 
-import { renderWithProviders, screen, waitFor } from '../../test-utils';
+import { renderWithProviders, screen } from '../../test-utils';
 import RegFamilyTiles from '../../Components/RegFamilyTiles.js';
 
 describe('RegFamilyTiles', () => {
@@ -59,11 +55,11 @@ describe('RegFamilyTiles', () => {
     expect(addSensorLink).toHaveAttribute('href', '/addSensor');
   });
 
-  test('renders the download-all-sensors button, which becomes enabled once data loads', async () => {
+  test('renders the download-all-sensors button, enabled and ready to click', () => {
     const { container } = renderWithProviders(<RegFamilyTiles />);
     const button = container.querySelector('#download-all-sensors-button');
     expect(button).toBeInTheDocument();
-    await waitFor(() => expect(button).toBeEnabled());
+    expect(button).toBeEnabled();
     expect(button).toHaveTextContent('Download All Sensors');
   });
 });
