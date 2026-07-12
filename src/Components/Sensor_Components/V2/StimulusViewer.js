@@ -2,13 +2,39 @@ import React, { useState, useEffect, useMemo } from 'react';
 import SmilesDrawer from 'smiles-drawer';
 import {
   Box,
-  Grid,
   Typography,
   Paper,
   Link,
   Pagination,
   Stack,
 } from '@mui/material';
+
+/**
+ * One evidence row: a fixed-width, right-aligned label with a blue separator
+ * (matching MetadataTable) and a flex:1 value that wraps instead of overflowing.
+ * The previous Grid size={5}/size={6} + ml layout clipped long values (e.g.
+ * "Surface plasmon resonance") off the right edge of the card on mobile.
+ */
+function EvidenceRow({ label, children }) {
+  return (
+    <Box sx={{ display: 'flex', alignItems: 'baseline', mt: 1 }}>
+      <Box
+        sx={{
+          width: { xs: '92px', sm: '120px' },
+          flexShrink: 0,
+          pr: '15px',
+          borderRight: '2px solid #0084ff',
+          textAlign: 'right',
+        }}
+      >
+        <Typography component="span" sx={{ fontSize: { xs: 14, sm: 16 } }}>
+          <b>{label}</b>
+        </Typography>
+      </Box>
+      <Box sx={{ pl: 2, flex: 1, minWidth: 0 }}>{children}</Box>
+    </Box>
+  );
+}
 
 /**
  * Renders v2-format stimulus data for a single protein.
@@ -171,94 +197,64 @@ export default function StimulusViewer({ stimulus, canvasId }) {
 
       {/* Evidence details */}
       {evidence && (
-        <Grid container>
-          <Grid size={12} mt={1}>
-            <Grid container>
-              <Grid size={5} textAlign="right">
+        <Box>
+          <EvidenceRow label="Reference">
+            {evidence.doi ? (
+              <Link
+                href={`https://doi.org/${evidence.doi}`}
+                target="_blank"
+                sx={{ textDecoration: 'none' }}
+              >
                 <Typography
                   component="span"
-                  sx={{
-                    fontSize: { xs: 14, sm: 16 },
-                    paddingRight: '15px',
-                    borderRight: '2px solid #0084ff',
-                  }}
+                  sx={{ fontSize: { xs: 14, sm: 16 }, wordBreak: 'break-word' }}
                 >
-                  <b>Reference</b>
+                  {evidence.ref_figure || evidence.doi}
                 </Typography>
-              </Grid>
-              <Grid size={6} textAlign="left" ml="15px">
-                {evidence.doi ? (
-                  <Link
-                    href={`https://doi.org/${evidence.doi}`}
-                    target="_blank"
-                    sx={{ textDecoration: 'none' }}
-                  >
-                    <Typography component="span" sx={{ fontSize: { xs: 14, sm: 16 } }}>
-                      {evidence.ref_figure || evidence.doi}
-                    </Typography>
-                  </Link>
-                ) : (
-                  <Typography component="span" sx={{ fontSize: { xs: 14, sm: 16 } }}>
-                    {evidence.ref_figure || 'N/A'}
-                  </Typography>
-                )}
-              </Grid>
-            </Grid>
-          </Grid>
+              </Link>
+            ) : (
+              <Typography
+                component="span"
+                sx={{ fontSize: { xs: 14, sm: 16 }, wordBreak: 'break-word' }}
+              >
+                {evidence.ref_figure || 'N/A'}
+              </Typography>
+            )}
+          </EvidenceRow>
 
-          <Grid size={12} mt={1}>
-            <Grid container>
-              <Grid size={5} textAlign="right">
-                <Typography
-                  component="span"
-                  sx={{
-                    fontSize: { xs: 14, sm: 16 },
-                    paddingRight: '15px',
-                    borderRight: '2px solid #0084ff',
-                  }}
-                >
-                  <b>Method</b>
-                </Typography>
-              </Grid>
-              <Grid size={6} textAlign="left" ml="15px">
-                <Link
-                  href="https://www.groov.bio/about/about-groovdb"
-                  sx={{ textDecoration: 'none' }}
-                >
-                  <Typography component="span" sx={{ fontSize: { xs: 14, sm: 16 } }}>
-                    {Array.isArray(evidence.method)
-                      ? evidence.method.join(', ')
-                      : evidence.method || 'N/A'}
-                  </Typography>
-                </Link>
-              </Grid>
-            </Grid>
-          </Grid>
+          <EvidenceRow label="Method">
+            <Link
+              href="https://www.groov.bio/about/about-groovdb"
+              sx={{ textDecoration: 'none' }}
+            >
+              <Typography
+                component="span"
+                sx={{ fontSize: { xs: 14, sm: 16 }, wordBreak: 'break-word' }}
+              >
+                {Array.isArray(evidence.method)
+                  ? evidence.method.join(', ')
+                  : evidence.method || 'N/A'}
+              </Typography>
+            </Link>
+          </EvidenceRow>
 
           {evidence.kd !== null && evidence.kd !== undefined && (
-            <Grid size={12} mt={1}>
-              <Grid container>
-                <Grid size={5} textAlign="right">
-                  <Typography
-                    component="span"
-                    sx={{
-                      fontSize: { xs: 14, sm: 16 },
-                      paddingRight: '15px',
-                      borderRight: '2px solid #0084ff',
-                    }}
-                  >
-                    <b>K<sub>d</sub></b>
-                  </Typography>
-                </Grid>
-                <Grid size={6} textAlign="left" ml="15px">
-                  <Typography component="span" sx={{ fontSize: { xs: 14, sm: 16 } }}>
-                    {evidence.kd}
-                  </Typography>
-                </Grid>
-              </Grid>
-            </Grid>
+            <EvidenceRow
+              label={
+                <>
+                  K<sub>d</sub>
+                </>
+              }
+            >
+              <Typography
+                component="span"
+                sx={{ fontSize: { xs: 14, sm: 16 }, wordBreak: 'break-word' }}
+              >
+                {evidence.kd}
+              </Typography>
+            </EvidenceRow>
           )}
-        </Grid>
+        </Box>
       )}
     </Box>
   );
