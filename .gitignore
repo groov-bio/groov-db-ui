@@ -1,5 +1,6 @@
 node_modules
 build
+coverage
 
 scripts/keys.json
 scripts/*.csv
@@ -16,7 +17,6 @@ TODO.md
 .env.development
 .env.production
 .env.*
-cypress/screenshots/**
 
 grv_v2_docs
 .claude
