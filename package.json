@@ -5,8 +5,9 @@
   "description": "GroovDB is a database of genetic biosensors.",
   "main": "index.js",
   "scripts": {
-    "cy:open": "npx cypress open",
-    "cy:run": "npx cypress run",
+    "test": "react-scripts test",
+    "test:ci": "cross-env CI=true react-scripts test",
+    "test:coverage": "cross-env CI=true react-scripts test --coverage",
     "start": "cross-env GENERATE_SOURCEMAP=false react-scripts start",
     "build": "cross-env react-scripts build",
     "build:fast": "cross-env GENERATE_SOURCEMAP=false DISABLE_ESLINT_PLUGIN=true react-scripts build",
@@ -62,10 +63,12 @@
     "@babel/core": "^7.18.2",
     "@babel/preset-env": "^7.18.2",
     "@babel/preset-react": "^7.17.12",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^14.3.1",
+    "@testing-library/user-event": "^14.6.1",
     "aws-sdk": "^2.1361.0",
     "babel-loader": "^8.2.5",
     "css-loader": "^6.7.1",
-    "cypress": "^14.4.0",
     "html-webpack-plugin": "^5.5.0",
     "style-loader": "^3.3.1",
     "wait-on": "^8.0.3",
@@ -77,6 +80,44 @@
     "presets": [
       "@babel/preset-env",
       "@babel/preset-react"
+    ]
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "^aws-amplify$": "<rootDir>/config/testMocks/awsAmplify.js",
+      "^@aws-amplify/ui-react/styles\\.css$": "<rootDir>/config/testMocks/emptyModule.js",
+      "^@aws-amplify/ui-react$": "<rootDir>/config/testMocks/amplifyUi.js",
+      "^react-konva$": "<rootDir>/config/testMocks/reactKonva.js",
+      "^konva$": "<rootDir>/config/testMocks/emptyModule.js",
+      "^logojs-react$": "<rootDir>/config/testMocks/logojs.js",
+      "^@marsidev/react-turnstile$": "<rootDir>/config/testMocks/turnstile.js",
+      "^molstar$": "<rootDir>/config/testMocks/emptyModule.js",
+      "^molstar/(.*)$": "<rootDir>/config/testMocks/emptyModule.js",
+      "^litemol$": "<rootDir>/config/testMocks/emptyModule.js",
+      "^litemol/(.*)$": "<rootDir>/config/testMocks/emptyModule.js",
+      "^smiles-drawer$": "<rootDir>/config/testMocks/emptyModule.js",
+      "^biomsa$": "<rootDir>/config/testMocks/emptyModule.js",
+      "^citation-js$": "<rootDir>/config/testMocks/emptyModule.js",
+      "^@nightingale-elements/(.*)$": "<rootDir>/config/testMocks/emptyModule.js"
+    },
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}",
+      "!src/**/*.test.{js,jsx}",
+      "!src/index.js",
+      "!src/setupTests.js",
+      "!src/test-utils.js",
+      "!src/aws-exports.js",
+      "!src/reportWebVitals.js"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "<rootDir>/config/testMocks/",
+      "<rootDir>/src/css/"
+    ],
+    "coverageReporters": [
+      "text-summary",
+      "lcov",
+      "html"
     ]
   },
   "browserslist": {

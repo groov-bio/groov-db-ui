@@ -39,11 +39,12 @@ export default function MetadataTable({ tableData }) {
         <Grid size={{ xs: 12, sm: 6 }} key={index} mb={1}>
           <Box sx={{ display: 'flex', alignItems: 'baseline' }}>
             {/* Fixed-width label box — border is on the Box so the separator
-                always lands at the same x position regardless of label length */}
+                always lands at the same x position regardless of label length.
+                Narrower on xs so cramped phones leave more room for the value. */}
             <Box sx={{
-              width: '180px',
+              width: { xs: '124px', sm: '180px' },
               flexShrink: 0,
-              paddingRight: '15px',
+              paddingRight: { xs: '10px', sm: '15px' },
               borderRight: '2px solid #0084ff',
               textAlign: 'right',
             }}>
@@ -53,7 +54,7 @@ export default function MetadataTable({ tableData }) {
             </Box>
 
             {/* Value: flex: 1 + minWidth: 0 lets long text wrap without overflow */}
-            <Box sx={{ pl: 2, flex: 1, minWidth: 0 }}>
+            <Box sx={{ pl: { xs: 1.5, sm: 2 }, flex: 1, minWidth: 0 }}>
               {tableData[key].link ? (
                 tableData[key].link.url ===
                 'https://www.genome.jp/dbget-bin/www_bget?null' ? (
