@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import useSearchStore from '../zustand/search.store.js';
 import { withCacheBust } from '../lib/utils.js';
+import { STATIC_BASE } from '../lib/config';
 
 import {
   Autocomplete,
@@ -38,7 +39,7 @@ export default function Search() {
     // Only fetch if the data isn't already loaded in the zustand store
     if (labels.length > 0) return;
 
-    fetch(withCacheBust('https://groov-api.com/v2/index.json'), {
+    fetch(withCacheBust(`${STATIC_BASE}/v2/index.json`), {
       headers: { Accept: 'application/json' },
     })
       .then((res) => res.json())

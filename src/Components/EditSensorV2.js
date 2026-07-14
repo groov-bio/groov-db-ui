@@ -10,6 +10,7 @@ import useUserStore from '../zustand/user.store';
 import useSensorStore from '../zustand/sensor.store';
 import { editSensorV2 } from '../lib/api/v2Admin';
 import ProteinEditSection from './editSensorV2/ProteinEditSection';
+import { STATIC_BASE } from '../lib/config';
 
 // Same mapping as SensorPageV2.js — keep in sync.
 const ID_PREFIX_TO_CATEGORY = {
@@ -99,7 +100,7 @@ export default function EditSensorV2() {
     }
 
     let cancelled = false;
-    const url = `https://groov-api.com/v2/sensors/${categorySegment}/${id}.json`;
+    const url = `${STATIC_BASE}/v2/sensors/${categorySegment}/${id}.json`;
     const MAX_ATTEMPTS = 3;
     const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 

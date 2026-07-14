@@ -112,7 +112,10 @@ export default function NavigationBar(props) {
   };
 
   const handleSignIn = async () => {
-    await signIn();
+    // In prod this redirects to the Hosted UI and never returns here. In
+    // local-auth mode (REACT_APP_LOCAL_AUTH=true) it resolves in-place, so
+    // pass setUser through so the navbar reflects the session immediately.
+    await signIn(setUser);
     setAvatarOpen(false);
   };
 

@@ -12,6 +12,7 @@ import {
 import useSensorStore from '../../zustand/sensor.store';
 import useUserStore from '../../zustand/user.store';
 import SensorPageV2View from './SensorPageV2View';
+import { STATIC_BASE } from '../../lib/config';
 
 /**
  * Maps the category prefix letter in a GRV ID to the API URL segment.
@@ -58,7 +59,7 @@ export default function SensorPageV2() {
       return;
     }
 
-    fetch(`https://groov-api.com/v2/sensors/${category}/${id}.json`, {
+    fetch(`${STATIC_BASE}/v2/sensors/${category}/${id}.json`, {
       headers: { Accept: 'application/json' },
     })
       .then((res) => {

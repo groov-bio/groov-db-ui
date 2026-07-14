@@ -15,8 +15,9 @@ import { getValidToken } from '../../utils/auth';
 
 import { v2_initialValues, createEmptyProtein } from '../../lib/constants/v2_form/initialValues';
 import v2_validationSchema from '../../lib/constants/v2_form/validationSchema';
+import { API_BASE } from '../../lib/config';
 
-const V2_API_BASE = 'https://api.groov.bio';
+const V2_API_BASE = API_BASE;
 
 // Joins fig_type ("Figure" / "Supplementary Figure" / "Table" / "Supplementary Table")
 // and ref_figure ("3" / "S5" / "2A") into the canonical "Figure 3" / "Figure S3" / "Table S5" form
