@@ -49,7 +49,7 @@ export default function SensorPageV2View({
       <Stack spacing={3}>
         <Paper
           sx={{
-            p: 3,
+            p: { xs: 2, sm: 3 },
             borderRadius: 2,
             background:
               'linear-gradient(135deg, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.05) 100%)',
@@ -58,9 +58,9 @@ export default function SensorPageV2View({
           <Box
             sx={{
               display: 'flex',
+              flexDirection: { xs: 'column', sm: 'row' },
               justifyContent: 'space-between',
               alignItems: 'flex-start',
-              flexWrap: 'wrap',
               gap: 2,
             }}
           >
@@ -120,17 +120,19 @@ export default function SensorPageV2View({
             </Box>
 
             {!hideEditButton && (
-              <Box>
+              <Box sx={{ width: { xs: '100%', sm: 'auto' }, flexShrink: 0 }}>
                 <Button
                   variant="contained"
                   size="large"
                   startIcon={<EditIcon />}
                   onClick={onEdit}
                   sx={{
+                    width: { xs: '100%', sm: 'auto' },
                     borderRadius: 2,
                     px: { xs: 2, sm: 3 },
                     py: { xs: 0.6, sm: 0.9 },
                     fontSize: { xs: '0.7rem', sm: '0.9rem' },
+                    whiteSpace: 'nowrap',
                   }}
                 >
                   Edit Sensor

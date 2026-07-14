@@ -1,18 +1,14 @@
 import React from 'react';
 import { Box, Typography, Link, Stack } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
-import { useFeatureFlag } from '../zustand/featureFlags.store.js';
 
 /**
  * Publication + "what's new" callout for the home page.
  *
  * Rendered inline within the home page content (previously a fixed overlay in
- * the top-right corner, which overlapped the hero on smaller screens). The V2
- * link is gated behind the v2_sensor_page feature flag.
+ * the top-right corner, which overlapped the hero on smaller screens).
  */
 const NARBanner = () => {
-  const showV2Page = useFeatureFlag('v2_sensor_page');
-
   return (
     <Box
       sx={{
@@ -35,7 +31,7 @@ const NARBanner = () => {
             fontWeight: 400,
           }}
         >
-          Now published in{' '}
+          Published in{' '}
           <Link
             href="https://doi.org/10.1093/nar/gkaf1074"
             target="_blank"
@@ -47,22 +43,20 @@ const NARBanner = () => {
           </Link>
         </Typography>
 
-        {showV2Page && (
-          <Typography
-            variant="body2"
-            sx={{ fontSize: { xs: '0.75rem', sm: '0.85rem' }, fontWeight: 400 }}
+        <Typography
+          variant="body2"
+          sx={{ fontSize: { xs: '0.75rem', sm: '0.85rem' }, fontWeight: 400 }}
+        >
+          ✨{' '}
+          <Link
+            component={RouterLink}
+            to="/about/v2"
+            underline="hover"
+            color="primary"
           >
-            ✨{' '}
-            <Link
-              component={RouterLink}
-              to="/about/v2"
-              underline="hover"
-              color="primary"
-            >
-              See what&apos;s new in groovDB V2
-            </Link>
-          </Typography>
-        )}
+            See what&apos;s new in groovDB V2
+          </Link>
+        </Typography>
       </Stack>
     </Box>
   );

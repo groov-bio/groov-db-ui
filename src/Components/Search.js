@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import useSearchStore from '../zustand/search.store.js';
-import useFeatureFlagsStore, {
-  useFeatureFlag,
-} from '../zustand/featureFlags.store.js';
+import { withCacheBust } from '../lib/utils.js';
 
 import {
   Autocomplete,
@@ -31,116 +29,24 @@ export default function Search() {
   //Update stats in zustand store
   const setStats = useSearchStore((context) => context.setStats);
   const setData = useSearchStore((context) => context.setData);
-  const setRawData = useSearchStore((context) => context.setRawData);
   //State used to hold labels for dropdown
   const labels = useSearchStore((context) => context.data);
 
-  // The V2 sensor page lives at /sensor/:id (GRV id); when enabled the search
-  // must point there instead of the legacy /entry/:family/:uniprot pages.
-  const v2Enabled = useFeatureFlag('v2_sensor_page');
-  const flagsReady = useFeatureFlagsStore(
-    (s) => Object.keys(s.flags).length > 0
-  );
-  const flagsError = useFeatureFlagsStore((s) => s.error);
-
-  // Fetch data on initial load
+  // The V2 sensor page lives at /sensor/:id (GRV id); search links point there.
+  // Fetch the V2 index once on initial load.
   useEffect(() => {
-    // Wait until feature flags resolve so we fetch the correct index shape.
-    // If the flag fetch failed, fall back to the legacy (V1) index rather
-    // than blocking the home-page search indefinitely.
-    if (!flagsReady && !flagsError) return;
     // Only fetch if the data isn't already loaded in the zustand store
     if (labels.length > 0) return;
 
-    if (v2Enabled) {
-      fetch('https://groov-api.com/v2/index.json', {
-        headers: { Accept: 'application/json' },
-      })
-        .then((res) => res.json())
-        .then((indexData) => {
-          setData(generateV2Labels(indexData.sensors || []));
-          setStats(indexData.stats);
-        });
-    } else {
-      fetch('https://groov-api.com/index.json', {
-        headers: { Accept: 'application/json' },
-      })
-        .then((res) => res.json())
-        .then((indexData) => {
-          const processedData = processIndexData(indexData);
-          setData(generateLabels(processedData));
-          setRawData(processedData);
-          setStats(indexData.stats);
-        });
-    }
-  }, [flagsReady, flagsError, v2Enabled]);
-
-  // Process raw index data to match the old API format
-  const processIndexData = (indexData) => {
-    try {
-      if (!indexData || typeof indexData !== 'object') {
-        throw new Error('Invalid index data format.');
-      }
-
-      const uniqueLigandsSet = new Set();
-      const uniqueRegulatorsSet = new Set();
-      const result = {};
-
-      Object.entries(indexData).forEach(([sensorId, sensor]) => {
-        if (typeof sensor !== 'object' || !sensor.alias) {
-          return;
-        }
-
-        if (sensor.alias) {
-          uniqueRegulatorsSet.add(sensor.alias);
-        }
-
-        if (sensor.ligands && Array.isArray(sensor.ligands)) {
-          sensor.ligands.forEach((ligand) => uniqueLigandsSet.add(ligand));
-        }
-
-        result[sensorId] = {
-          uniprot: sensorId || '',
-          alias: sensor.alias || '',
-          family: sensor.family || '',
-          ligands: sensor.ligands || [],
-          ligandCount: sensor.ligandCount || 0,
-        };
+    fetch(withCacheBust('https://groov-api.com/v2/index.json'), {
+      headers: { Accept: 'application/json' },
+    })
+      .then((res) => res.json())
+      .then((indexData) => {
+        setData(generateV2Labels(indexData.sensors || []));
+        setStats(indexData.stats);
       });
-
-      result['stats'] = {
-        ligands: uniqueLigandsSet.size,
-        regulators: uniqueRegulatorsSet.size,
-        sensorCount: Object.keys(result).length,
-      };
-
-      return result;
-    } catch (err) {
-      console.error('Data processing error:', err);
-      return { stats: { ligands: 0, regulators: 0, sensorCount: 0 } };
-    }
-  };
-
-  //Function to create labels which are used by Autocomplete component
-  //Generating these in a particular Array format based on what the component expects
-  //Returns Array
-  const generateLabels = (data) => {
-    let tempLabels = [];
-
-    Object.entries(data).map(([key, value]) => {
-      if (key !== 'stats') {
-        for (let i = 0; i < value.ligands.length; i++) {
-          let temp = `${value.ligands[i]} (${value.alias}/${value.family})`;
-          tempLabels.push({
-            label: temp,
-            link: `/entry/${value.family}/${value.uniprot}`,
-          });
-        }
-      }
-    });
-
-    return tempLabels;
-  };
+  }, [labels.length, setData, setStats]);
 
   // Build Autocomplete labels from the V2 index shape ({ stats, sensors: [...] }).
   // Each sensor carries its GRV id, so links target the V2 route /sensor/:id.

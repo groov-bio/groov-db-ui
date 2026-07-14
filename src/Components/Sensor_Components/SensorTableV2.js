@@ -4,7 +4,7 @@ import { Box, Grid, Skeleton, Link as MuiLink } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 
 import useV2SensorTableStore from '../../zustand/v2SensorTable.store.js';
-import { getFirstTwoWords } from '../../lib/utils.js';
+import { getFirstTwoWords, withCacheBust } from '../../lib/utils.js';
 
 const UNIPROT_COLUMN = {
   field: 'uniprot_id',
@@ -51,7 +51,7 @@ export default function SensorTableV2({ family }) {
     const url = isAllSensors
       ? 'https://groov-api.com/v2/index.json'
       : `https://groov-api.com/v2/indexes/${family.toLowerCase()}.json`;
-    fetchTable(storeKey, url);
+    fetchTable(storeKey, withCacheBust(url));
   }, [storeKey, isAllSensors, fetchTable]);
 
   const rows = useMemo(() => {

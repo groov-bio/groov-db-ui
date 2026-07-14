@@ -6,14 +6,12 @@ import CloseIcon from '@mui/icons-material/Close';
 import CookieConsent, { Cookies, getCookieConsentValue } from 'react-cookie-consent';
 import NavigationBar from './Components/NavigationBar.js';
 import AddSensor from './Components/addSensor/AddSensor.js';
-import EditSensor from './Components/EditSensor.js';
 import EditSensorV2 from './Components/EditSensorV2.js';
 import Home from './Components/Home.js';
 import RegFamilyTiles from './Components/RegFamilyTiles.js';
-import SensorPage from './Components/Sensor_Components/SensorPage.js';
 import SensorPageV2 from './Components/Sensor_Components/SensorPageV2.js';
 import Account from './Components/About/Account/Account.js';
-import Admin from './Components/About/Admin/Admin.js';
+import AdminV2 from './Components/About/Admin/v2/AdminV2.js';
 import About from './Components/About/About.js';
 import Tools from './Components/Tools.js';
 import { Routes, Route } from 'react-router-dom';
@@ -24,7 +22,6 @@ import { RequireAuth } from './Components/Auth/RequireAuth';
 import { RequireAdminAuth } from './Components/Auth/RequireAdminAuth';
 import { Amplify } from 'aws-amplify';
 import useUserStore from './zustand/user.store';
-import useFeatureFlagsStore from './zustand/featureFlags.store';
 import awsConfig from './aws-exports.js';
 import { checkAuthStatus } from './utils/auth.js';
 
@@ -67,7 +64,6 @@ export default function App() {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const setUser = useUserStore((context) => context.setUser);
-  const { setFlags, setLoading, setError } = useFeatureFlagsStore();
   const [showBanner, setShowBanner] = useState(
     getCookieConsentValue('groov-cookie-consent') === undefined
   );
@@ -84,28 +80,6 @@ export default function App() {
 
     checkAuth();
   }, [setUser]);
-
-  // Fetch feature flags on app initialization
-  useEffect(() => {
-    const fetchFeatureFlags = async () => {
-      setLoading(true);
-      try {
-        const response = await fetch('https://groov-api.com/feature-flags.json');
-        if (!response.ok) {
-          throw new Error(`Failed to fetch feature flags: ${response.status}`);
-        }
-        const flags = await response.json();
-        setFlags(flags);
-      } catch (err) {
-        console.error('Error fetching feature flags:', err);
-        setError(err.message);
-        // Set empty object as fallback so app continues to work
-        setFlags({});
-      }
-    };
-
-    fetchFeatureFlags();
-  }, [setFlags, setLoading, setError]);
 
   useEffect(() => {
     if (getCookieConsentValue('groov-cookie-consent') === 'true') {
@@ -138,7 +112,6 @@ export default function App() {
               <Route path="/home" element={<Home />} />
               <Route path="/" element={<Home />} />
               <Route path="/database/*" element={<RegFamilyTiles />} />
-              <Route path="/entry/:family/:uniprotID" element={<SensorPage />} />
               <Route path="/sensor/:id" element={<SensorPageV2 />} />
               <Route path="/account" element={<Account />} />
               <Route path="/account/" element={<Account />} />
@@ -146,7 +119,7 @@ export default function App() {
                 path="/admin"
                 element={
                   <RequireAdminAuth>
-                    <Admin />
+                    <AdminV2 />
                   </RequireAdminAuth>
                 }
               />
@@ -165,14 +138,6 @@ export default function App() {
                 element={
                   <RequireAuth>
                     <EditSensorV2 />
-                  </RequireAuth>
-                }
-              />
-              <Route
-                path="/editSensor/:family/:sensorID"
-                element={
-                  <RequireAuth>
-                    <EditSensor />
                   </RequireAuth>
                 }
               />

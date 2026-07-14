@@ -44,11 +44,10 @@ export default function GroovDBV2() {
       </Stack>
 
       <Typography sx={{ fontSize: { xs: 14, sm: 16, md: 18 } }}>
-        Over 2026 we rebuilt groov<sup>DB</sup> from the data model up. V2 keeps
-        everything you already rely on — free, open, and community-editable — but
-        reorganizes how sensors are described so the database can capture the
-        biology more faithfully and grow into new sensor types. Here&apos;s a
-        tour of what changed and why it matters for you.
+        Over 2026 we've introduced substantial updates to groov<sup>DB</sup>. 
+        The focus of V2 was to expand the types of data groov<sup>DB</sup> is able to accept, with the overall goal of
+        accurately documenting important features of all prokaryotic genetic sensors.
+        Here&apos;s a tour of what changed.
       </Typography>
 
       <Paper
@@ -78,18 +77,26 @@ export default function GroovDBV2() {
         </Typography>
       </Paper>
 
-      <Section title="Sensors, not just proteins" id="v2-sensor-model">
+      <Section title="We now accept Two Component Systems" id="v2-sensor-model">
         The biggest change is conceptual. V1 organized the database around a
         single protein and its interactions. V2 is organized around the{' '}
         <b>sensor</b>, which can contain <b>one or more proteins</b> working
-        together. That shift lets us represent multi-component systems properly
+        together. That shift lets us accomodate multi-protein or RNA systems
         and sets the foundation for sensor types beyond single transcription
         factors — sensors are now typed as <i>One Component</i>,{' '}
         <i>Two Component</i>, or <i>Riboswitch</i>.
       </Section>
 
-      <Section title="Richer, more precise data" id="v2-richer-data">
-        Each sensor now carries more of the detail researchers asked for:
+      <Section title="You can suggest edits for any sensor" id="v2-edit">
+        Catch something wrong with a sensor entry? You can now suggest edits to 
+        any ligand interaction, DNA interaction, or reference. Click the "Edit Sensor"
+        box at the top right of any sensor page. This also allows 
+        users to add additional references to any sensor. To submit edits, users
+        must be logged in.
+      </Section>
+
+      <Section title="More precise data" id="v2-richer-data">
+        Each sensor now carries more detail:
         <ul>
           <li>
             <b>New stimulus types.</b> Alongside small-molecule ligands, sensors
@@ -102,39 +109,21 @@ export default function GroovDBV2() {
             <sub>d</sub>) where reported.
           </li>
           <li>
-            <b>Signal transduction mechanism</b> and protein <b>mutations</b> are
-            now first-class fields.
-          </li>
-          <li>
-            <b>Better cross-references.</b> Entries are enriched with UniProt,
-            RefSeq, KEGG, and PDB identifiers so you can jump straight to the
-            source.
-          </li>
-          <li>
-            Evidence citations now accept <i>Supplementary</i> figures and
-            tables, and DOIs are validated on entry.
+            <b>Mutant sensors</b> are
+            now accepted.
           </li>
         </ul>
-      </Section>
-
-      <Section title="More families, more categories" id="v2-families">
-        We expanded the regulator families and categories groov<sup>DB</sup>{' '}
-        recognizes (TetR, LysR, AraC, MarR, LacI, GntR, LuxR, IclR, and more), so
-        submissions map onto the family that actually fits.
       </Section>
 
       <Section title="Redesigned sensor pages and tables" id="v2-pages">
         The individual sensor page and the browse/all-sensors tables were rebuilt
         to present the multi-protein model clearly, with per-protein stimuli,
-        operators, structures, and genetic context. This is the part of V2 that
-        is live for everyone today.
+        operators, structures, and genetic context.
       </Section>
 
-      <Section title="A rebuilt submission and editing experience" id="v2-contribute">
+      <Section title="A rebuilt submission experience" id="v2-contribute">
         Contributing is smoother end to end. The <b>add-sensor form</b> was
-        rebuilt around the new sensor-with-proteins shape, and there&apos;s now a
-        full <b>edit workflow</b> — including a <b>diff viewer</b> that shows
-        reviewers exactly what changed before an update is approved. Behind the
+        rebuilt around the new sensor-with-proteins shape. Behind the
         scenes, submissions are automatically enriched (sequence, structures,
         operon context) from the UniProt ID you provide.
       </Section>
