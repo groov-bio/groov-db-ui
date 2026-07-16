@@ -35,7 +35,10 @@ if [ -f "$SHARED_ENV" ]; then
   . "$SHARED_ENV"
   set +a
 else
-  echo "docker-entrypoint: WARNING $SHARED_ENV not found after ${WAIT_SECONDS}s — starting with prod API base fallback"
+  echo "docker-entrypoint: ERROR $SHARED_ENV not found after ${WAIT_SECONDS}s — floci-init did not finish provisioning." >&2
+  echo "docker-entrypoint: refusing to start with the prod API base fallback (this image is local-only)." >&2
+  echo "docker-entrypoint: check 'docker compose logs floci-init' for the failure." >&2
+  exit 1
 fi
 
 exec "$@"

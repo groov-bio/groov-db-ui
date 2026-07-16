@@ -9,6 +9,7 @@
     "test:ci": "cross-env CI=true react-scripts test",
     "test:coverage": "cross-env CI=true react-scripts test --coverage",
     "start": "cross-env GENERATE_SOURCEMAP=false react-scripts start",
+    "prebuild": "node scripts/checkNoLocalAuth.js",
     "build": "cross-env react-scripts build",
     "build:fast": "cross-env GENERATE_SOURCEMAP=false DISABLE_ESLINT_PLUGIN=true react-scripts build",
     "prettier:fix": "prettier --write --ignore-path ./.prettierignore --config ./.prettierrc \"**/*.js\" \"**/*.yml\" \"**/*.md\" \"**/*.json\""

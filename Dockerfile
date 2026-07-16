@@ -6,14 +6,18 @@ FROM node:20-bullseye
 
 WORKDIR /app
 
-# Fast Refresh over a Docker bind mount needs polling — inotify events from
-# the host filesystem don't reliably cross into the container (especially
-# on macOS/Docker Desktop's virtualized filesystem). .env.development also
-# sets these for belt-and-suspenders; kept here too as an image-level
-# default in case compose overrides env_file.
-ENV CHOKIDAR_USEPOLLING=true
-ENV WATCHPACK_POLLING=true
-ENV WDS_SOCKET_PORT=3000
+# File-change polling (CHOKIDAR_USEPOLLING / WATCHPACK_POLLING) used to be
+# required here because Fast Refresh over a Docker bind mount can't rely on
+# inotify events crossing the host<->container boundary (especially on
+# macOS/Docker Desktop's virtualized filesystem). The stack now uses
+# `docker compose watch` for container-side file sync instead of a raw bind
+# mount, which delivers real filesystem events inside the container, so
+# polling is no longer needed and has been removed.
+#
+# WDS_SOCKET_PORT=0 tells the webpack-dev-server client to infer the HMR
+# websocket port from window.location instead of hardcoding one — correct
+# here since the container's port 3000 is published as host 3000:3000.
+ENV WDS_SOCKET_PORT=0
 
 # Install deps at build/image time so `npm ci` doesn't need to run on every
 # container start. The compose stack bind-mounts this repo over /app at
