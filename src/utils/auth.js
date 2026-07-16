@@ -1,5 +1,5 @@
 import { Auth } from 'aws-amplify';
-import { LOCAL_AUTH, COGNITO_ENDPOINT, COGNITO_CLIENT_ID } from '../lib/config';
+import { LOCAL_AUTH, LOCAL_AUTH_USER, COGNITO_ENDPOINT, COGNITO_CLIENT_ID } from '../lib/config';
 
 // ---------------------------------------------------------------------------
 // Local-auth (dev-only) internals. Everything in this block is unreachable
@@ -8,12 +8,13 @@ import { LOCAL_AUTH, COGNITO_ENDPOINT, COGNITO_CLIENT_ID } from '../lib/config';
 // of each export is untouched/byte-identical to the pre-existing Amplify
 // implementation.
 //
-// Local dev seeded admin (single source of truth, matches the Floci
-// provisioner): admin@groov.local / GroovLocal1!, group "Admin".
+// Local dev seeded users (single source of truth = the Floci provisioner):
+// admin@groov.local (group "Admin") and user@groov.local (no group), both
+// with password GroovLocal1!. Which identity the auto-sign-in shim uses is
+// LOCAL_AUTH_USER (REACT_APP_LOCAL_AUTH_USER, default admin@groov.local).
 // ---------------------------------------------------------------------------
 
-const LOCAL_ADMIN_USERNAME = 'admin@groov.local';
-const LOCAL_ADMIN_PASSWORD = 'GroovLocal1!';
+const LOCAL_SEED_PASSWORD = 'GroovLocal1!';
 const LOCAL_TOKENS_KEY = 'groov_local_auth_tokens';
 
 function base64UrlDecode(segment) {
@@ -138,8 +139,8 @@ function buildLocalUserData(tokens) {
 
 async function localSignIn(setUser) {
   const result = await cognitoInitiateAuth('USER_PASSWORD_AUTH', {
-    USERNAME: LOCAL_ADMIN_USERNAME,
-    PASSWORD: LOCAL_ADMIN_PASSWORD,
+    USERNAME: LOCAL_AUTH_USER,
+    PASSWORD: LOCAL_SEED_PASSWORD,
   });
 
   const tokens = {

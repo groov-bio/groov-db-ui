@@ -38,3 +38,11 @@ export const COGNITO_CLIENT_ID =
   process.env.REACT_APP_COGNITO_CLIENT_ID || '2lhdpnuct7nfirl2q8fkq8i2ie';
 export const COGNITO_ENDPOINT = process.env.REACT_APP_COGNITO_ENDPOINT || '';
 
+// Which seeded local user the auto-sign-in shim (src/utils/auth.js)
+// authenticates as. Both seeds share password GroovLocal1!. Defaults to the
+// seeded admin; the API repo's `floci/dev.sh --user` sets
+// REACT_APP_LOCAL_AUTH_USER=user@groov.local to sign in as the non-admin seed
+// instead. Only read on the LOCAL_AUTH path — no prod equivalent.
+export const LOCAL_AUTH_USER =
+  process.env.REACT_APP_LOCAL_AUTH_USER || 'admin@groov.local';
+
