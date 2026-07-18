@@ -38,7 +38,11 @@ export default function AboutGroovDB() {
         <Link href="https://simondoelsnitz.com" target="_blank" id="simon-url">
           Simon d'Oelsnitz
         </Link>{' '}
-        and Joshua D. Love.
+        and{' '}
+        <Link href="https://jlove.dev" target="_blank" id="jlove-url">
+          Joshua D. Love
+        </Link>
+        .
       </Typography>
 
       <Typography

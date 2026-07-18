@@ -40,6 +40,7 @@ import useSensorStore from '../../zustand/sensor.store.js';
 import useUserStore from '../../zustand/user.store.js';
 
 import { getFirstTwoWords } from '../../lib/utils.js';
+import { getIdToken } from '../../utils/auth.js';
 
 export default function SensorPage({ isAdmin, user, family: propFamily, uniprotID: propUniprotID }) {
   
@@ -85,9 +86,7 @@ export default function SensorPage({ isAdmin, user, family: propFamily, uniprotI
           {
             headers: {
               Accept: 'application/json',
-              Authorization: isAdmin
-                ? user.cognitoUser.getSignInUserSession().getIdToken().getJwtToken()
-                : null,
+              Authorization: isAdmin ? getIdToken(user) : null,
             },
           }
         )

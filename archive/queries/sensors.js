@@ -1,10 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
+import { STATIC_BASE } from '../lib/config';
 
 export const useAllSensors = () => {
   return useQuery({
     queryKey: ['allSensors'],
     queryFn: async () => {
-      const response = await fetch('https://groov-api.com/all-sensors.json', {
+      const response = await fetch(`${STATIC_BASE}/all-sensors.json`, {
         headers: {
           Accept: 'application/json',
         },

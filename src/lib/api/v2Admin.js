@@ -2,19 +2,20 @@
  * Thin wrappers for the V2 admin endpoints documented in
  * grv_v2_docs/status/v2-api-changes-updated.md.
  *
- * Base URL is fixed — local + prod both hit api.groov.bio. Feature flags decide
- * what the UI renders, not which API to talk to.
+ * Base URL is env-driven (REACT_APP_API_BASE, fallback https://api.groov.bio)
+ * so local dev can point this at the Floci-emulated API Gateway. Feature
+ * flags decide what the UI renders, not which API to talk to.
  */
 
-const V2_API_BASE = 'https://api.groov.bio';
+import { API_BASE, STATIC_BASE } from '../config';
+import { getIdToken } from '../../utils/auth';
+
+const V2_API_BASE = API_BASE;
 
 function authHeaders(user) {
   return {
     Accept: 'application/json',
-    Authorization: user.cognitoUser
-      .getSignInUserSession()
-      .getIdToken()
-      .getJwtToken(),
+    Authorization: getIdToken(user),
   };
 }
 
@@ -187,7 +188,7 @@ export async function lookupDoiV2(user, doi) {
  *   uniprot_id, organism_name, category, ligands[] } ] }
  */
 export async function fetchPublishedSensorsV2() {
-  const res = await fetch(`https://groov-api.com/v2/index.json?t=${Date.now()}`, {
+  const res = await fetch(`${STATIC_BASE}/v2/index.json?t=${Date.now()}`, {
     cache: 'no-store',
   });
   if (!res.ok) {

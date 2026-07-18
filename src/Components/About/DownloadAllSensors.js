@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button, CircularProgress } from '@mui/material';
 import DownloadIcon from '@mui/icons-material/Download';
 import { withCacheBust } from '../../lib/utils.js';
+import { STATIC_BASE } from '../../lib/config';
 
 export default function DownloadAllSensors() {
   const [isDownloading, setIsDownloading] = useState(false);
@@ -10,7 +11,7 @@ export default function DownloadAllSensors() {
     try {
       setIsDownloading(true);
 
-      const response = await fetch(withCacheBust('https://groov-api.com/v2/all-sensors.json'));
+      const response = await fetch(withCacheBust(`${STATIC_BASE}/v2/all-sensors.json`));
       const dataToDownload = await response.json();
 
       // Create a blob from the data

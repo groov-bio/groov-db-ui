@@ -5,6 +5,7 @@ import { DataGrid } from '@mui/x-data-grid';
 
 import useV2SensorTableStore from '../../zustand/v2SensorTable.store.js';
 import { getFirstTwoWords, withCacheBust } from '../../lib/utils.js';
+import { STATIC_BASE } from '../../lib/config';
 
 const UNIPROT_COLUMN = {
   field: 'uniprot_id',
@@ -49,8 +50,8 @@ export default function SensorTableV2({ family }) {
 
   useEffect(() => {
     const url = isAllSensors
-      ? 'https://groov-api.com/v2/index.json'
-      : `https://groov-api.com/v2/indexes/${family.toLowerCase()}.json`;
+      ? `${STATIC_BASE}/v2/index.json`
+      : `${STATIC_BASE}/v2/indexes/${family.toLowerCase()}.json`;
     fetchTable(storeKey, withCacheBust(url));
   }, [storeKey, isAllSensors, fetchTable]);
 

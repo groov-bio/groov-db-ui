@@ -34,7 +34,7 @@ import DeleteAccount from './DeleteAccount';
 import ForgotPassword from './ForgotPassword';
 import { Amplify } from 'aws-amplify';
 import awsConfig from '../../../aws-exports';
-import { checkAuthStatus, signOutUser } from '../../../utils/auth';
+import { checkAuthStatus, signIn, signOutUser } from '../../../utils/auth';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 Amplify.configure(awsConfig);
@@ -94,10 +94,15 @@ export default function Account() {
     checkStatus();
   }, [location.search, setUser, navigate]);
 
-  // Handle sign-in if not authenticated
+  // Handle sign-in if not authenticated. Routed through the utils/auth.js
+  // seam: in prod this is still Auth.federatedSignIn() (redirects to Hosted
+  // UI, so the line after `await` never runs there); when
+  // REACT_APP_LOCAL_AUTH=true it performs the local InitiateAuth call
+  // instead and resolves in-place, so we refresh the user store right after.
   const handleSignIn = async () => {
     try {
-      await Auth.federatedSignIn();
+      await signIn(setUser);
+      await checkAuthStatus(setUser);
     } catch (error) {
       setAuthError('Failed to initiate sign in. Please try again.');
     }

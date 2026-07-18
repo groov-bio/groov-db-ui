@@ -4,6 +4,10 @@
 
 The web interface for [GroovDB](https://groov.bio) - a comprehensive database of genetic biosensors for synthetic biology applications.
 
+> **Local development:** this UI runs as part of the single-command, fully-offline
+> Floci emulation stack. See **`groov-db-api/LOCAL_DEV.md`** (the sibling repo) for
+> setup — the compose file, provisioning, and env contract all live there.
+
 ## About GroovDB
 
 GroovDB is a free, open-source, and community-editable database for transcription factor biosensors and their properties. Genetic biosensors are integral to synthetic biology, particularly ligand-inducible prokaryotic transcription factors used in high-throughput screening, dynamic feedback regulation, multilayer logic gates, and diagnostic applications.

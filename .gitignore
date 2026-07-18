@@ -14,9 +14,12 @@ TODO.md
 # Environment files
 .env
 .env.local
-.env.development
 .env.production
 .env.*
+# .env.development is intentionally committed: it only carries non-secret
+# local-dev defaults (localhost endpoints, feature gate) for the
+# docker-compose local-emulation setup — no real credentials.
+!.env.development
 
 grv_v2_docs
 .claude
