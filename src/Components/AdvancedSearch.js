@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import useSearchStore from '../zustand/search.store.js';
+import { API_BASE } from '../lib/config';
 import {
   Box,
   TextField,
@@ -32,7 +33,6 @@ export default function AdvancedSearch() {
   const [configExpanded, setConfigExpanded] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
 
-  const rawData = useSearchStore((state) => state.rawData);
   const isDataLoaded = useSearchStore((state) => state.data.length > 0);
 
   // For responsive design
@@ -51,7 +51,7 @@ export default function AdvancedSearch() {
     setHasSearched(true);
 
     try {
-      const response = await fetch('https://api.groov.bio/ligandSearch', {
+      const response = await fetch(`${API_BASE}/v2/ligandSearch`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -69,21 +69,18 @@ export default function AdvancedSearch() {
 
       const data = await response.json();
 
-      // Format results
+      // The V2 ligandSearch API returns each hit's GRV sensor id, ligand id,
+      // name and similarity score, so results map straight to the V2 sensor
+      // page (/sensor/:grvId) — no client-side lookup needed.
       if (data.results && data.results.length > 0) {
-        const formattedResults = data.results.map((result) => {
-          const family = rawData[result.sensorId].family;
-          const uniprot = rawData[result.sensorId].uniprot;
-
-          return {
-            sensorId: result.sensorId,
-            ligandId: result.ligandId,
-            name: result.name || result.ligandId,
-            similarity: result.similarity,
-            link: `/entry/${family}/${uniprot}`,
-            label: `${result.name || result.ligandId}`,
-          };
-        });
+        const formattedResults = data.results.map((result) => ({
+          sensorId: result.sensorId,
+          ligandId: result.ligandId,
+          name: result.name || result.ligandId,
+          similarity: result.similarity,
+          link: `/sensor/${result.sensorId}`,
+          label: `${result.name || result.ligandId}`,
+        }));
 
         setSearchResults(formattedResults);
 
@@ -289,7 +286,7 @@ export default function AdvancedSearch() {
                   secondary={
                     <>
                       <Typography component="span" variant="body2">
-                        Uniprot ID: {result.sensorId}
+                        Sensor ID: {result.sensorId}
                       </Typography>
                       <br />
                       <Typography
