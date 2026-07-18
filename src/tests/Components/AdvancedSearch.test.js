@@ -24,19 +24,12 @@ describe('AdvancedSearch', () => {
     expect(screen.getByRole('button', { name: /Search/i })).toBeDisabled();
   });
 
-  test('running a search renders results linking back to /entry/:family/:uniprot using rawData', async () => {
+  test('running a search renders results linking to the V2 sensor page /sensor/:id', async () => {
     useSearchStore.setState({
-      data: [{ label: 'Avenolide (AvaR1/TetR)', link: '/entry/TetR/Q82H41' }],
-      rawData: {
-        Q82H41: {
-          uniprot: 'Q82H41',
-          alias: 'AvaR1',
-          family: 'TetR',
-          ligands: ['Avenolide'],
-        },
-      },
+      data: [{ label: 'GRV-T00001 — Avenolide (AvaR1/TetR)', link: '/sensor/GRV-T00001' }],
     });
 
+    // The V2 API returns GRV sensor ids directly — no rawData join needed.
     global.fetch = jest.fn(() =>
       Promise.resolve({
         ok: true,
@@ -44,7 +37,7 @@ describe('AdvancedSearch', () => {
           Promise.resolve({
             results: [
               {
-                sensorId: 'Q82H41',
+                sensorId: 'GRV-T00001',
                 ligandId: 'lig-1',
                 name: 'Avenolide',
                 similarity: 0.87,
@@ -63,24 +56,21 @@ describe('AdvancedSearch', () => {
 
     expect(await screen.findByText('Results (1)')).toBeInTheDocument();
     expect(screen.getByText('Avenolide')).toBeInTheDocument();
-    expect(screen.getByText('Uniprot ID: Q82H41')).toBeInTheDocument();
+    expect(screen.getByText('Sensor ID: GRV-T00001')).toBeInTheDocument();
     expect(screen.getByText('Similarity Score: 87%')).toBeInTheDocument();
 
     const resultLink = screen.getByText('Avenolide').closest('a');
-    expect(resultLink).toHaveAttribute('href', '/entry/TetR/Q82H41');
+    expect(resultLink).toHaveAttribute('href', '/sensor/GRV-T00001');
 
     expect(global.fetch).toHaveBeenCalledWith(
-      'https://api.groov.bio/ligandSearch',
+      expect.stringContaining('/v2/ligandSearch'),
       expect.objectContaining({ method: 'POST' })
     );
   });
 
   test('shows a "no matching results" message when the API returns an empty result set', async () => {
     useSearchStore.setState({
-      data: [{ label: 'Avenolide (AvaR1/TetR)', link: '/entry/TetR/Q82H41' }],
-      rawData: {
-        Q82H41: { uniprot: 'Q82H41', alias: 'AvaR1', family: 'TetR' },
-      },
+      data: [{ label: 'GRV-T00001 — Avenolide (AvaR1/TetR)', link: '/sensor/GRV-T00001' }],
     });
 
     global.fetch = jest.fn(() =>
